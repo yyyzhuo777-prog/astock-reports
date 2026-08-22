@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1f2f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>A股短线交易研究报告｜8月21日收盘复盘</title>
+  <style>
+    /* TOC & Navigation */
+    .toc-toggle{position:fixed;bottom:24px;left:24px;width:42px;height:42px;border-radius:50%;background:#2563a8;color:#fff;border:none;font-size:18px;cursor:pointer;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}
+    .toc-panel{position:fixed;top:0;left:-280px;width:270px;height:100%;background:#0f1f2f;color:#c7d1df;z-index:999;transition:left .25s ease;overflow-y:auto;padding:20px 16px;box-shadow:2px 0 15px rgba(0,0,0,.3)}
+    .toc-panel.open{left:0}
+    .toc-panel h3{margin:0 0 16px;font-size:15px;color:#58a6ff;border-bottom:1px solid #30363d;padding-bottom:8px}
+    .toc-panel a{display:block;padding:8px 10px;color:#c9d1d9;text-decoration:none;font-size:13px;border-radius:6px;margin:2px 0;transition:background .15s}
+    .toc-panel a:hover{background:rgba(88,166,255,.1);color:#58a6ff}
+    .toc-panel .toc-divider{margin:12px 0 8px;padding:4px 10px;font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:1px}
+    .toc-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:998;display:none}
+    .toc-overlay.show{display:block}
+    .nav-back{position:fixed;top:12px;right:12px;padding:6px 12px;background:rgba(15,31,47,.85);color:#58a6ff;text-decoration:none;font-size:12px;border-radius:6px;z-index:100;backdrop-filter:blur(8px);border:1px solid rgba(88,166,255,.2)}
+    .nav-back:hover{background:rgba(88,166,255,.15)}
+    @media(min-width:860px){.toc-panel{left:-300px;width:290px}}
+  </style>
+  <style>
+    :root{--ink:#15202b;--muted:#5c6675;--line:#d7dde6;--paper:#f6f8fb;--panel:#fff;--red:#c93636;--green:#16845f;--blue:#2563a8;--gold:#a56b00;--violet:#6c4bb8;--shadow:0 10px 30px rgba(22,34,51,.08)}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.58}
+    .topbar{background:#0f1f2f;color:#f9fbff;border-bottom:5px solid #c94444}
+    .wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    .hero{padding:30px 0 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}
+    h1{margin:0 0 8px;font-size:34px;line-height:1.16}
+    .subtitle{margin:0;color:#c7d1df;font-size:15px}
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .badge{border:1px solid rgba(255,255,255,.26);border-radius:6px;padding:6px 9px;font-size:13px;color:#eef4ff;white-space:nowrap}
+    .warning{margin-top:14px;padding:10px 12px;border-radius:6px;background:#fff2cf;color:#5c3d00;border:1px solid #e5c77d;font-size:14px}
+    main{padding:24px 0 38px}
+    section{margin:20px 0;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+    h2{margin:0 0 16px;font-size:22px;line-height:1.25}
+    h3{margin:18px 0 10px;font-size:17px}
+    .grid{display:grid;gap:14px}
+    .grid.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .metric{padding:15px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe}
+    .metric .label{color:var(--muted);font-size:13px;margin-bottom:5px}
+    .metric .value{font-size:24px;font-weight:750;line-height:1.2}
+    .positive{color:var(--red)}
+    .negative{color:var(--green)}
+    .neutral{color:var(--blue)}
+    .muted{color:var(--muted)}
+    .list{margin:0;padding-left:20px}
+    .list li{margin:8px 0}
+    table{width:100%;border-collapse:collapse;font-size:14px;overflow-wrap:anywhere}
+    th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{color:#344054;background:#f1f4f8;font-weight:700}
+    .stock-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .stock-card{border:1px solid var(--line);border-radius:8px;background:#fff;padding:16px}
+    .stock-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+    .stock-title{font-weight:800;font-size:18px;line-height:1.25}
+    .score{min-width:68px;text-align:center;border-radius:7px;padding:7px 8px;background:#10243a;color:#fff;font-weight:800;font-size:20px}
+    .score.high{background:var(--red)}
+    .score.mid{background:var(--blue)}
+    .score.low{background:var(--muted)}
+    .score.danger{background:var(--green)}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+    .tag{border-radius:5px;background:#eef3f9;color:#32445a;padding:3px 7px;font-size:12px}
+    .plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+    .plan div{border-left:3px solid var(--blue);padding:6px 8px;background:#f7f9fc;border-radius:4px;min-height:48px}
+    .plan .stop{border-left-color:var(--green)}
+    .plan .target{border-left-color:var(--red)}
+    .bar{height:8px;border-radius:999px;background:#e6ebf2;overflow:hidden;margin-top:6px}
+    .bar span{display:block;height:100%}
+    .bar .mom{background:linear-gradient(90deg,#2563a8,#5b8fd9)}
+    .bar .cap{background:linear-gradient(90deg,#c94444,#e87c7c)}
+    .bar .liq{background:linear-gradient(90deg,#a56b00,#d4a84b)}
+    .bar .sec{background:linear-gradient(90deg,#6c4bb8,#a18bdb)}
+    .bar .cat{background:linear-gradient(90deg,#16845f,#4db893)}
+    .bar .qual{background:linear-gradient(90deg,#333,#777)}
+    .chain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .chain-step{padding:12px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe}
+    .footer-note{color:var(--muted);font-size:13px;margin-top:18px}
+    .pool-label{display:inline-block;padding:3px 10px;border-radius:4px;font-size:13px;font-weight:700;margin-right:6px}
+    .pool-a{background:#fde8e8;color:var(--red)}
+    .pool-b{background:#e8f0fe;color:var(--blue)}
+    .pool-c{background:#e8f5e9;color:var(--green)}
+    a{color:var(--blue)}
+    @media(max-width:860px){
+      .hero,.grid.metrics,.grid.two,.stock-grid,.plan,.chain{grid-template-columns:1fr}
+      .badge-row{justify-content:flex-start}
+      h1{font-size:27px}
+      section{padding:17px}
+      table{font-size:13px}
+      th,td{padding:8px 6px}
+    }
+    @media print{
+      .topbar{background:#fff;color:#000;border-bottom:3px solid #000}
+      section{box-shadow:none;break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap hero">
+      <div>
+        <h1>A股短线交易研究报告｜收盘复盘</h1>
+        <p class="subtitle">公开行情 + 主力资金 + 板块情绪 + 消息催化 + 产业链拆解 + 分组交易计划</p>
+        <div class="warning">⚠️ 成交缩量至1.88万亿（-2001亿），2505涨/2862跌，个股跌多涨少。资金高度集中在通信/CPO+贵金属两条主线，非主线方向赚钱效应极差。涨停54家，封板率75%，炸板18家。连板晋级率25%，昨日涨停今日溢价-0.47%，短线情绪偏弱。</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">📅 2026-08-21 周五</span>
+        <span class="badge">📊 收盘复盘</span>
+        <span class="badge">💰 成交1.88万亿</span>
+        <span class="badge">📡 数据状态：在线</span>
+        <span class="badge" id="genTime">⏱ 生成于 20:30</span>
+      </div>
+    </div>
+  </header>
+  <a class="nav-back" href="index.html">← 返回导航</a>
+  <div class="toc-overlay" id="tocOverlay"></div>
+  <div class="toc-panel" id="tocPanel">
+    <h3>📑 报告目录</h3>
+    <a href="#sec-highlight">📌 最重要事项</a>
+    <a href="#sec-sentiment">📊 市场情绪仪表盘</a>
+    <a href="#sec-lhb">🐉 龙虎榜·机构动向</a>
+    <a href="#sec-sector">🔥 主线板块与资金热度</a>
+    <a href="#sec-chain">🔗 产业链深挖</a>
+    <a href="#sec-plan">💡 分组交易计划</a>
+    <a href="#sec-cards">📋 标的深研卡片</a>
+    <a href="#sec-news">📰 消息与催化剂</a>
+    <a href="#sec-health">📡 数据健康度</a>
+    <a href="#sec-calendar">📅 下周关键日历</a>
+  </div>
+
+  <main class="wrap">
+
+    <details style="margin:16px 0;border:1px solid #d4a84b;border-radius:8px;background:#fffbe6;overflow:hidden">
+      <summary style="padding:12px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#5c3d00;list-style:none;display:flex;align-items:center;gap:6px">
+        <span style="font-size:18px">⚡</span> 30秒速览 · 点击展开核心结论
+      </summary>
+      <div style="padding:0 14px 14px;font-size:14px;line-height:1.7;color:#3d2e00">
+        <p><strong>1. 市场状态：存量博弈。</strong>指数微涨但2844股下跌，赚钱效应极差。</p>
+        <p><strong>2. 绝对主线：CPO/通信。</strong>三板块合计净流入290亿，中际旭创H1净利+241.7%验证景气度。</p>
+        <p><strong>3. 第二主线：贵金属。</strong>黄金净流入67.84亿，金价破4600美元，连续两天强化。</p>
+        <p><strong>4. 预启动信号：锂矿。</strong>碳酸锂15.5万/吨月涨17%，但扩散度待确认。</p>
+        <p><strong>5. 回避：创新药。</strong>医药板块净流出76.5亿，mRNA一日游。</p>
+        <p><strong>6. 关键变量：8/28杰克逊霍尔央行年会。</strong>决定黄金和美元方向。</p>
+      </div>
+    </details>
+
+    <!-- 1. 今日最重要 -->
+    <section id="sec-highlight">
+      <h2>📌 周一（8/25）最重要事项</h2>
+      <ul class="list">
+        <li><strong>市场状态：存量博弈、资金高度集中。</strong>指数涨但2844股下跌，赚钱效应集中在通信/CPO（净流入100亿+）和贵金属（净流入67亿）两条线，其他方向几乎没有持续性。</li>
+        <li><strong>通信/CPO是绝对资金主线。</strong>CPO净流入100.34亿，光模块净流入102.16亿，通信设备净流入84.57亿——仅这三条合计近290亿。中际旭创一只股净流入36亿居全场第一。中际旭创H1净利+241.7%验证了景气度。</li>
+        <li><strong>贵金属是第二主线且连续第二天强化。</strong>黄金概念净流入67.84亿，3日/5日增仓转正。金价突破4600美元。但山东黄金RSI=100极度超买，白银股（湖南白银/白银有色）已进入情绪加速区，短线不宜追高。</li>
+        <li><strong>锂矿出现"板块预启动信号"。</strong>碳酸锂站上15.5万/吨，8月涨17%。融捷股份涨停，赣锋+5.56%。但板块扩散度尚需确认。</li>
+        <li><strong>创新药被资金反向否决。</strong>医药生物板块净流出76.5亿，哈药股份/哈三联一字跌停，mRNA概念一日游，短期回避。</li>
+        <li><strong>关键变量：8/28杰克逊霍尔央行年会。</strong>沃什首秀演讲，距9月FOMC仅18天，决定黄金和美元方向。</li>
+      </ul>
+    </section>
+
+    <!-- 2. 市场情绪仪表盘 -->
+    <section id="sec-sentiment">
+      <h2>📊 市场情绪仪表盘</h2>
+      <div class="grid metrics">
+        <div class="metric">
+          <div class="label">市场情绪</div>
+          <div class="value neutral">存量博弈</div>
+        </div>
+        <div class="metric">
+          <div class="label">情绪分</div>
+          <div class="value negative">48/100</div>
+        </div>
+        <div class="metric">
+          <div class="label">上涨 / 下跌</div>
+          <div class="value"><span class="positive">2505</span> / <span class="negative">2862</span></div>
+        </div>
+        <div class="metric">
+          <div class="label">涨停 / 跌停</div>
+          <div class="value"><span class="positive">54</span> / <span class="negative">14</span></div>
+        </div>
+        <div class="metric">
+          <div class="label">全市场主力净流入</div>
+          <div class="value positive">+167.16亿</div>
+        </div>
+        <div class="metric">
+          <div class="label">上涨占比</div>
+          <div class="value negative">46.3%</div>
+        </div>
+        <div class="metric">
+          <div class="label">封板率</div>
+          <div class="value negative">75%</div>
+        </div>
+        <div class="metric">
+          <div class="label">连板晋级率</div>
+          <div class="value negative">25%</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <table>
+          <thead><tr><th>指数</th><th>收盘</th><th>涨跌幅</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>上证指数</td><td>3905.20</td><td class="positive">+0.04%</td><td>平盘线挣扎</td></tr>
+            <tr><td>深证成指</td><td>14094.17</td><td class="positive">+0.87%</td><td>强于沪指</td></tr>
+            <tr><td>创业板指</td><td>3545.58</td><td class="positive">+1.43%</td><td>最强指数</td></tr>
+            <tr><td>科创50</td><td>1653.56</td><td class="positive">+0.04%</td><td>跟随沪指</td></tr>
+            <tr><td>北证50</td><td>1075.38</td><td class="negative">-0.57%</td><td>独立走弱</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2.5 龙虎榜·机构动向（增强版新增） -->
+    <section id="sec-lhb">
+      <h2>🐉 龙虎榜·机构动向 <span style="font-size:13px;color:#2563a8;background:#e8f0fe;padding:2px 8px;border-radius:4px;margin-left:8px">多源验证</span></h2>
+      <p class="muted">数据来源：<a href="https://caifuhao.eastmoney.com/news/20260821181427115099050" target="_blank">东方财富·游资龙虎榜</a>、<a href="https://36kr.com/newsflashes/3949140259454080" target="_blank">36氪·机构龙虎榜</a>、<a href="https://www.cls.cn/detail/2460655" target="_blank">财联社</a></p>
+
+      <h3>🏦 机构席位动向</h3>
+      <p>33只个股出现机构身影，<strong>18只净买入、15只净卖出</strong>。机构资金方向是短线最重要的验证信号之一。</p>
+      <table>
+        <thead><tr><th>方向</th><th>标的</th><th>净买入/卖出</th><th>解读</th></tr></thead>
+        <tbody>
+          <tr><td class="positive"><strong>机构净买TOP3</strong></td><td>山东黄金</td><td class="positive">+4.39亿</td><td>贵金属龙头获机构大举建仓，验证黄金主线真实性</td></tr>
+          <tr><td></td><td>沃森生物</td><td class="positive">+1.75亿</td><td>医药分歧中机构逆势加仓，看好mRNA长期逻辑</td></tr>
+          <tr><td></td><td>誉衡药业</td><td class="positive">+1.69亿</td><td>中药+创新药，机构低位布局</td></tr>
+          <tr><td class="negative"><strong>机构净卖TOP3</strong></td><td>键凯科技</td><td class="negative">-0.98亿</td><td>20cm涨停日机构反向卖出，典型的"机构卖在涨停"</td></tr>
+          <tr><td></td><td>华大智造</td><td class="negative">-0.88亿</td><td>基因测序热度退潮，机构获利了结</td></tr>
+          <tr><td></td><td>中瓷电子</td><td class="negative">-0.44亿</td><td>6天3板后机构兑现，注意高位承接力</td></tr>
+        </tbody>
+      </table>
+
+      <h3>🔥 知名游资动向</h3>
+      <table>
+        <thead><tr><th>游资</th><th>买入</th><th>卖出</th><th>信号解读</th></tr></thead>
+        <tbody>
+          <tr><td><strong>量化打板</strong></td><td>星网锐捷9482万、深科达5104万、博汇股份4546万、键凯科技3210万、天洋新材2498万</td><td>沃森生物-9229万、盛达资源-4334万、华大智造-5101万</td><td>量化重点加仓通信硬件（星网锐捷/深科达），兑现医药（沃森/华大）</td></tr>
+          <tr><td><strong>深南东路</strong></td><td>誉衡药业2.97亿</td><td>—</td><td>大游资重注医药低位票</td></tr>
+          <tr><td><strong>紫阳东路</strong></td><td>天洋新材1.06亿</td><td>通鼎互联-1.51亿</td><td>加仓CPO龙头，兑现通信中位票</td></tr>
+          <tr><td><strong>小鳄鱼</strong></td><td>中瓷电子1.15亿</td><td>—</td><td>知名游资逆势加仓，看好电子元器件</td></tr>
+          <tr><td><strong>章盟主</strong></td><td>北陆药业2445万、肯特股份1462万</td><td>宇环数控-1245万</td><td>布局20cm创业板弹性票</td></tr>
+          <tr><td><strong>葛卫东</strong></td><td>哈药股份6196万</td><td>—</td><td>逆势接刀医药，高风险博弈</td></tr>
+          <tr><td><strong>方胖</strong></td><td>华大智造8836万、康希诺8376万</td><td>—</td><td>医药+基因测序双线布局</td></tr>
+          <tr><td><strong>宁波桑田路</strong></td><td>康希诺1.12亿</td><td>—</td><td>大举押注mRNA疫苗概念</td></tr>
+          <tr><td><strong>拉萨天团</strong></td><td>通达股份1.30亿</td><td>—</td><td>军工/电缆方向</td></tr>
+        </tbody>
+      </table>
+
+      <h3>💡 龙虎榜核心结论</h3>
+      <ul class="list">
+        <li><strong>机构用真金白银投票的方向：贵金属（山东黄金+4.39亿）。</strong>这是最硬的验证信号——机构不会在涨停板上乱买，他们选了黄金龙头。</li>
+        <li><strong>量化打板资金明确转向通信硬件。</strong>星网锐捷/深科达/博汇股份获量化加仓，同时兑现医药（沃森/华大/康希诺），说明量化也认为医药一日游、通信才是持续方向。</li>
+        <li><strong>医药内部分化极端。</strong>机构净卖键凯科技（涨停日反向卖出），但深南东路大举买入誉衡药业、葛卫东逆势接刀哈药股份。游资和机构在医药方向完全对立——<strong>跟机构不跟游资</strong>，医药整体仍应回避。</li>
+        <li><strong>通信/CPO方向获得机构和量化双重确认。</strong>天洋新材获紫阳东路1.06亿加仓，星网锐捷获量化打板9482万——这是"真主线"的信号。</li>
+        <li><strong>章盟主布局创业板20cm弹性票</strong>（北陆药业/肯特股份），说明大游资看好创业板补涨逻辑。</li>
+      </ul>
+    </section>
+
+    <!-- 3. 主线板块与资金热度 -->
+    <section id="sec-sector">
+      <h2>🔥 主线板块与资金热度</h2>
+      <p class="muted">数据来源：<a href="http://m.toutiao.com/group/7676401887322653184/" target="_blank" rel="noopener noreferrer">金融界·8/21题材主力净流入排行</a>，<a href="http://m.toutiao.com/group/7676385186635956763/" target="_blank" rel="noopener noreferrer">小蜉蝣·复盘笔记</a></p>
+      <table>
+        <thead><tr><th>板块</th><th>类型</th><th>涨跌幅</th><th>主力净流入</th><th>核心个股</th><th>热度</th><th>持续性判断</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>CPO概念</strong></td>
+            <td>概念</td>
+            <td class="positive">+2.06%</td>
+            <td class="positive">+100.34亿</td>
+            <td>中际旭创+36亿、新易盛+25亿</td>
+            <td><div class="bar"><span class="cap" style="width:98%"></span></div></td>
+            <td>资金绝对主线，H1业绩验证，产能紧缺至2028年</td>
+          </tr>
+          <tr>
+            <td><strong>光模块</strong></td>
+            <td>概念</td>
+            <td class="positive">+2.51%</td>
+            <td class="positive">+102.16亿</td>
+            <td>中际旭创、新易盛</td>
+            <td><div class="bar"><span class="cap" style="width:96%"></span></div></td>
+            <td>800G放量+1.6T加速导入+CPO量产</td>
+          </tr>
+          <tr>
+            <td><strong>通信设备</strong></td>
+            <td>行业</td>
+            <td class="positive">+2.94%</td>
+            <td class="positive">+84.57亿</td>
+            <td>星网锐捷涨停、共进股份</td>
+            <td><div class="bar"><span class="sec" style="width:90%"></span></div></td>
+            <td>扩散明显，5G+算力硬件多点开花</td>
+          </tr>
+          <tr>
+            <td><strong>黄金概念</strong></td>
+            <td>概念</td>
+            <td class="positive">+2.46%</td>
+            <td class="positive">+67.84亿</td>
+            <td>湖南白银+11亿、紫金+9亿</td>
+            <td><div class="bar"><span class="sec" style="width:85%"></span></div></td>
+            <td>连续第二天强化，3日/5日增仓转正</td>
+          </tr>
+          <tr>
+            <td><strong>贵金属（行业）</strong></td>
+            <td>行业</td>
+            <td class="positive">+5.34%</td>
+            <td class="positive">+22.65亿</td>
+            <td>赤峰+7.22%、湖南白银涨停</td>
+            <td><div class="bar"><span class="sec" style="width:82%"></span></div></td>
+            <td>金价破4600，央行连续21月增持</td>
+          </tr>
+          <tr>
+            <td><strong>PCB</strong></td>
+            <td>概念</td>
+            <td class="positive">~+5%</td>
+            <td class="positive">+62.48亿</td>
+            <td>生益科技+10亿、沪电+7.71亿</td>
+            <td><div class="bar"><span class="mom" style="width:78%"></span></div></td>
+            <td>算力链扩散，AI服务器上游材料</td>
+          </tr>
+          <tr>
+            <td><strong>国产芯片</strong></td>
+            <td>概念</td>
+            <td class="positive">~+3%</td>
+            <td class="positive">+53.41亿</td>
+            <td>士兰微+11.48亿逼近涨停</td>
+            <td><div class="bar"><span class="mom" style="width:72%"></span></div></td>
+            <td>存储芯片受隔夜美光/海力士利好</td>
+          </tr>
+          <tr>
+            <td><strong>锂矿概念</strong></td>
+            <td>概念</td>
+            <td class="positive">~+4.5%</td>
+            <td class="positive">+38.54亿</td>
+            <td>融捷股份涨停、赣锋+5.56%</td>
+            <td><div class="bar"><span class="cat" style="width:68%"></span></div></td>
+            <td>碳酸锂15.5万/吨，板块预启动信号</td>
+          </tr>
+          <tr>
+            <td><strong>能源金属</strong></td>
+            <td>行业</td>
+            <td class="positive">+4.51%</td>
+            <td>—</td>
+            <td>赣锋锂业+5.56%、天齐锂业+5.11%</td>
+            <td><div class="bar"><span class="cat" style="width:65%"></span></div></td>
+            <td>供给收缩+库存15周连降</td>
+          </tr>
+          <tr>
+            <td><strong>创新药</strong></td>
+            <td>概念</td>
+            <td class="negative">-3.71%</td>
+            <td class="negative">医药板块-76.5亿</td>
+            <td>哈药股份/哈三联一字跌停</td>
+            <td><div class="bar"><span style="width:15%;background:#999"></span></div></td>
+            <td>mRNA一日游，资金集体出逃</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>板块资金优先级</h3>
+      <ul class="list">
+        <li><strong>A档（核心主线）：</strong>通信/CPO、贵金属/黄金</li>
+        <li><strong>B档（趋势延续）：</strong>锂矿及锂电产业链、国产芯片/存储</li>
+        <li><strong>C档（局部回流）：</strong>机器人、固态电池、LED/MicroLED</li>
+        <li><strong>回避：</strong>创新药、农业、AI应用、未扩散的跨境支付</li>
+      </ul>
+    </section>
+
+    <!-- 4. 产业链深挖 -->
+    <section id="sec-chain">
+      <h2>🔗 产业链深挖</h2>
+
+      <h3>CPO / 光通信 / 算力硬件</h3>
+      <div class="chain">
+        <div class="chain-step"><strong>上游</strong><br>光芯片、DSP、PCB、高速连接器、散热与电源模块</div>
+        <div class="chain-step"><strong>中游</strong><br>光模块（中际旭创/新易盛）、AI服务器、交换机、IDC建设与运维</div>
+        <div class="chain-step"><strong>下游</strong><br>大模型训练、云厂商资本开支（北美四大H1合计超1500亿美元）、企业AI应用落地</div>
+      </div>
+      <p class="muted"><strong>核心催化：</strong>中际旭创H1净利136.5亿/+241.7%。金元证券判断产能紧缺至2027-2028年。浙商证券预计2030年CPO/NPO市场规模390亿美元+。北美AI资本开支不减，800G放量+1.6T加速导入+CPO量产三重驱动。</p>
+
+      <h3>贵金属 / 黄金</h3>
+      <div class="chain">
+        <div class="chain-step"><strong>上游</strong><br>矿山资源、勘探开发、冶炼产能和能源成本；央行购金（中国连续21月增持，7月+64万盎司）</div>
+        <div class="chain-step"><strong>中游</strong><br>金铜冶炼、加工材、资源并购和库存管理；黄金ETF（SPDR持仓1034吨）</div>
+        <div class="chain-step"><strong>下游</strong><br>避险配置、投资、工业用金；美40万亿债务→美元信用折价→黄金货币属性重估</div>
+      </div>
+      <p class="muted"><strong>核心催化：</strong>美财政部变相QE（长债回购翻倍）→长端收益率下降→美元跌破98→现货黄金破4600美元。瑞银年底4600/2027H1→5400；花旗→5000-6000；财通三季度→4900。全球央行Q2净购289吨同比+62%。8/28杰克逊霍尔年会是短期最大变量。</p>
+
+      <h3>锂矿 / 碳酸锂</h3>
+      <div class="chain">
+        <div class="chain-step"><strong>上游</strong><br>锂辉石/盐湖提锂（赣锋/天齐）；8-9月集中停产检修（减产量~9000吨）</div>
+        <div class="chain-step"><strong>中游</strong><br>碳酸锂加工、正极材料；库存连续15周下降</div>
+        <div class="chain-step"><strong>下游</strong><br>动力电池（8月排产环比+8.73%）、储能增量、2026世界动力电池大会9/3-4宜宾</div>
+      </div>
+      <p class="muted"><strong>核心催化：</strong>碳酸锂主力合约站上15.5万/吨，8月累计涨超17%。供给收缩（检修减产）+需求改善（排产+8.73%）=供需拐点信号增强。板块尚处于预启动阶段，扩散度待确认。</p>
+
+      <h3>3D打印</h3>
+      <div class="chain">
+        <div class="chain-step"><strong>上游</strong><br>金属/高分子粉末材料；激光器、振镜</div>
+        <div class="chain-step"><strong>中游</strong><br>3D打印设备；散热模组（南风股份HVAC+3D打印散热）</div>
+        <div class="chain-step"><strong>下游</strong><br>航空航天、医疗、汽车、消费电子；产量同比+52.3%验证渗透加速</div>
+      </div>
+      <p class="muted"><strong>核心催化：</strong>国家统计局数据3D打印产量同比+52.3%，产业渗透进入加速期。周末消息面明确，南风股份+12.53%、银禧科技+9.84%已率先反应。周一竞价是验证持续性的关键。</p>
+    </section>
+
+    <!-- 5. 分组交易建议 -->
+    <section id="sec-plan">
+      <h2>💡 分组交易计划</h2>
+      <p style="margin-bottom:16px;">
+        <span class="pool-label pool-a">A池 · 主线龙头进攻</span>
+        <span class="pool-label pool-b">B池 · 趋势延续观察</span>
+        <span class="pool-label pool-c">C池 · 风险回避/只看不做</span>
+      </p>
+      <div style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>标的</th><th>分组</th><th>主线</th><th>评分</th><th>涨跌幅</th><th>主力净流入</th><th>触发条件</th><th>买入区 → 止损</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>新易盛</strong><br><span class="muted">300502</span></td>
+            <td><span class="pool-label pool-a">A</span></td>
+            <td>CPO弹性</td>
+            <td>82</td>
+            <td class="positive">+6.76%</td>
+            <td class="positive">+25.29亿</td>
+            <td>站稳440，量能维持20亿+</td>
+            <td>435-445 → 414</td>
+          </tr>
+          <tr>
+            <td><strong>南风股份</strong><br><span class="muted">300004</span></td>
+            <td><span class="pool-label pool-a">A</span></td>
+            <td>3D打印散热</td>
+            <td>78</td>
+            <td class="positive">+12.53%</td>
+            <td class="neutral">板块热度高</td>
+            <td>竞价不低开超3%，站稳9.5</td>
+            <td>9.3-9.6 → 8.5</td>
+          </tr>
+          <tr>
+            <td><strong>中际旭创</strong><br><span class="muted">300308</span></td>
+            <td><span class="pool-label pool-a">A</span></td>
+            <td>CPO绝对龙头</td>
+            <td>75</td>
+            <td class="positive">+4.29%</td>
+            <td class="positive">+35.95亿</td>
+            <td>站稳920，CPO板块资金持续</td>
+            <td>925-945 → 900</td>
+          </tr>
+          <tr>
+            <td><strong>赤峰黄金</strong><br><span class="muted">600988</span></td>
+            <td><span class="pool-label pool-b">B</span></td>
+            <td>贵金属龙头</td>
+            <td>72</td>
+            <td class="positive">+7.22%</td>
+            <td class="positive">大幅净流入</td>
+            <td>等RSI回落至70以下，回踩46-47.5</td>
+            <td>46.0-47.5 → 40.8</td>
+          </tr>
+          <tr>
+            <td><strong>湖南白银</strong><br><span class="muted">002716</span></td>
+            <td><span class="pool-label pool-b">B</span></td>
+            <td>白银弹性</td>
+            <td>70</td>
+            <td class="positive">+10.03%</td>
+            <td class="positive">+10.56亿</td>
+            <td>竞价高开不超3%，不破10.0</td>
+            <td>10.0-10.4 → 9.4</td>
+          </tr>
+          <tr>
+            <td><strong>赣锋锂业</strong><br><span class="muted">002460</span></td>
+            <td><span class="pool-label pool-b">B</span></td>
+            <td>锂矿龙头</td>
+            <td>68</td>
+            <td class="positive">+5.56%</td>
+            <td class="positive">板块+38.54亿</td>
+            <td>碳酸锂站稳15万，回踩53.3企稳</td>
+            <td>53.0-54.5 → 50.7</td>
+          </tr>
+          <tr>
+            <td><strong>宜安科技</strong><br><span class="muted">300328</span></td>
+            <td><span class="pool-label pool-b">B</span></td>
+            <td>3D打印+液态金属</td>
+            <td>65</td>
+            <td class="positive">+2.63%</td>
+            <td class="neutral">换手9.31%活跃</td>
+            <td>站稳MA5=15.0，量能8亿+</td>
+            <td>15.0-15.6 → 14.5</td>
+          </tr>
+          <tr>
+            <td><strong>银禧科技</strong><br><span class="muted">300221</span></td>
+            <td><span class="pool-label pool-b">B</span></td>
+            <td>3D打印材料</td>
+            <td>63</td>
+            <td class="positive">+9.84%</td>
+            <td class="neutral">换手8.32%</td>
+            <td>确认MA60=14.1支撑</td>
+            <td>13.8-14.4 → 12.7</td>
+          </tr>
+          <tr>
+            <td><strong>山东黄金</strong><br><span class="muted">600547</span></td>
+            <td><span class="pool-label pool-c">C</span></td>
+            <td>贵金属</td>
+            <td>30</td>
+            <td class="positive">+4.96%</td>
+            <td class="positive">+4.90亿</td>
+            <td>RSI6=100极度超买，不追</td>
+            <td>不主动开仓</td>
+          </tr>
+          <tr>
+            <td><strong>创新药板块</strong><br><span class="muted">整体</span></td>
+            <td><span class="pool-label pool-c">C</span></td>
+            <td>医药</td>
+            <td>20</td>
+            <td class="negative">-3.71%</td>
+            <td class="negative">板块-76.5亿</td>
+            <td>资金集体出逃，等修复</td>
+            <td>不主动开仓</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- 6. 标的深研卡片 -->
+    <section id="sec-cards">
+      <h2>📋 标的深研卡片</h2>
+      <div class="stock-grid">
+
+        <!-- 新易盛 -->
+        <article class="stock-card">
+          <div class="stock-head">
+            <div>
+              <div class="stock-title">新易盛 <span class="muted">300502</span></div>
+              <div class="tags"><span class="tag">CPO</span><span class="tag">光模块</span><span class="tag">AI算力</span><span class="tag">创业板</span></div>
+            </div>
+            <div class="score high">82</div>
+          </div>
+          <p><strong>核心逻辑：</strong>CPO弹性核心标的。受益于中际旭创H1净利+241.7%验证行业景气度，周五+6.76%放量突破，主力净流入25.29亿。均线多头排列，RSI6=54.94处于健康区间。市值5544亿，流动性充沛。</p>
+          <div class="plan">
+            <div><strong>✅ 触发</strong><br>CPO板块资金排名保持前列，站稳440上方，量能维持20亿+</div>
+            <div><strong>买入/观察区</strong><br>435 - 445</div>
+            <div class="stop"><strong>🛑 止损/失效</strong><br>414（跌破MA20清仓）</div>
+            <div class="target"><strong>🎯 止盈与仓位</strong><br>465 / 490 分批兑现<br>单票 10%-20%，总进攻仓不超40%</div>
+          </div>
+          <h3>评分拆解</h3>
+          <div><span class="muted">动量 76</span><div class="bar"><span class="mom" style="width:76%"></span></div></div>
+          <div><span class="muted">资金 92</span><div class="bar"><span class="cap" style="width:92%"></span></div></div>
+          <div><span class="muted">流动性 85</span><div class="bar"><span class="liq" style="width:85%"></span></div></div>
+          <div><span class="muted">板块 95</span><div class="bar"><span class="sec" style="width:95%"></span></div></div>
+          <div><span class="muted">催化 82</span><div class="bar"><span class="cat" style="width:82%"></span></div></div>
+          <div><span class="muted">质量 88</span><div class="bar"><span class="qual" style="width:88%"></span></div></div>
+          <h3>风险点</h3>
+          <ul class="list"><li>CPO量产节奏可能不及预期</li><li>北美AI资本开支增速若放缓将影响估值</li><li>隔夜海外波动（纳指-1%）需关注传导</li></ul>
+        </article>
+
+        <!-- 南风股份 -->
+        <article class="stock-card">
+          <div class="stock-head">
+            <div>
+              <div class="stock-title">南风股份 <span class="muted">300004</span></div>
+              <div class="tags"><span class="tag">3D打印散热</span><span class="tag">核电HVAC</span><span class="tag">创业板</span><span class="tag">国企</span></div>
+            </div>
+            <div class="score high">78</div>
+          </div>
+          <p><strong>核心逻辑：</strong>3D打印散热概念+核电HVAC龙头。周末产量+52.3%催化明确，周五一度冲20cm涨停（最高10.54），收9.88/+12.53%。均线多头排列，MACD金叉，趋势买入信号。市值仅47亿弹性极大。</p>
+          <div class="plan">
+            <div><strong>✅ 触发</strong><br>周一竞价不低开超3%，开盘30分钟站稳9.5上方</div>
+            <div><strong>买入/观察区</strong><br>9.3 - 9.6</div>
+            <div class="stop"><strong>🛑 止损/失效</strong><br>8.5（跌破MA5=8.94减半，破8.5清仓）</div>
+            <div class="target"><strong>🎯 止盈与仓位</strong><br>10.5 / 11.2 分批兑现<br>单票不超3成，总仓不超6成</div>
+          </div>
+          <h3>评分拆解</h3>
+          <div><span class="muted">动量 88</span><div class="bar"><span class="mom" style="width:88%"></span></div></div>
+          <div><span class="muted">资金 72</span><div class="bar"><span class="cap" style="width:72%"></span></div></div>
+          <div><span class="muted">流动性 70</span><div class="bar"><span class="liq" style="width:70%"></span></div></div>
+          <div><span class="muted">板块 78</span><div class="bar"><span class="sec" style="width:78%"></span></div></div>
+          <div><span class="muted">催化 92</span><div class="bar"><span class="cat" style="width:92%"></span></div></div>
+          <div><span class="muted">质量 55</span><div class="bar"><span class="qual" style="width:55%"></span></div></div>
+          <h3>风险点</h3>
+          <ul class="list"><li>3D打印营收占比仅1.17%，概念炒作成分大</li><li>周五振幅22.32%（10.54→收9.88），上方套牢盘重</li><li>换手19.62%极高，触发"换手过热"风险标记</li></ul>
+        </article>
+
+        <!-- 中际旭创 -->
+        <article class="stock-card">
+          <div class="stock-head">
+            <div>
+              <div class="stock-title">中际旭创 <span class="muted">300308</span></div>
+              <div class="tags"><span class="tag">CPO</span><span class="tag">光模块</span><span class="tag">AI算力龙头</span><span class="tag">创业板</span></div>
+            </div>
+            <div class="score high">75</div>
+          </div>
+          <p><strong>核心逻辑：</strong>CPO/光模块绝对龙头，万亿市值。H1净利136.5亿/+241.7%验证景气度碾压级。周五+4.29%，主力净流入35.95亿居全场第一。RSI6=54.72健康。产能紧缺态势预计延续至2027-2028年。</p>
+          <div class="plan">
+            <div><strong>✅ 触发</strong><br>CPO板块资金持续排在前列，站稳920上方</div>
+            <div><strong>买入/观察区</strong><br>925 - 945</div>
+            <div class="stop"><strong>🛑 止损/失效</strong><br>900（跌破MA10=921减半，破900清仓）</div>
+            <div class="target"><strong>🎯 止盈与仓位</strong><br>980 / 1020 分批兑现<br>单票 10%-20%</div>
+          </div>
+          <h3>评分拆解</h3>
+          <div><span class="muted">动量 68</span><div class="bar"><span class="mom" style="width:68%"></span></div></div>
+          <div><span class="muted">资金 95</span><div class="bar"><span class="cap" style="width:95%"></span></div></div>
+          <div><span class="muted">流动性 90</span><div class="bar"><span class="liq" style="width:90%"></span></div></div>
+          <div><span class="muted">板块 96</span><div class="bar"><span class="sec" style="width:96%"></span></div></div>
+          <div><span class="muted">催化 85</span><div class="bar"><span class="cat" style="width:85%"></span></div></div>
+          <div><span class="muted">质量 92</span><div class="bar"><span class="qual" style="width:92%"></span></div></div>
+          <h3>风险点</h3>
+          <ul class="list"><li>万亿市值弹性有限，涨幅空间相对小</li><li>均线混合排列，需确认方向</li><li>海外AI资本开支节奏变化</li></ul>
+        </article>
+
+        <!-- 赤峰黄金 -->
+        <article class="stock-card">
+          <div class="stock-head">
+            <div>
+              <div class="stock-title">赤峰黄金 <span class="muted">600988</span></div>
+              <div class="tags"><span class="tag">贵金属</span><span class="tag">黄金成长股</span><span class="tag">海外矿</span></div>
+            </div>
+            <div class="score mid">72</div>
+          </div>
+          <p><strong>核心逻辑：</strong>黄金板块成长龙头，国内+老挝+加纳多金矿布局，量价齐升。年内+60%，周五+7.22%逼近年内新高。均线多头排列。<strong>但RSI6=100极度超买，不宜追高，等回踩46-47.5。</strong></p>
+          <div class="plan">
+            <div><strong>✅ 触发</strong><br>回踩46-47.5企稳，RSI回落至70以下</div>
+            <div><strong>买入/观察区</strong><br>46.0 - 47.5（等回调）</div>
+            <div class="stop"><strong>🛑 止损/失效</strong><br>40.8（跌破MA20清仓）</div>
+            <div class="target"><strong>🎯 止盈与仓位</strong><br>52.0 / 55.0 分批兑现<br>单票 10%-15%</div>
+          </div>
+          <h3>评分拆解</h3>
+          <div><span class="muted">动量 90</span><div class="bar"><span class="mom" style="width:90%"></span></div></div>
+          <div><span class="muted">资金 78</span><div class="bar"><span class="cap" style="width:78%"></span></div></div>
+          <div><span class="muted">流动性 80</span><div class="bar"><span class="liq" style="width:80%"></span></div></div>
+          <div><span class="muted">板块 92</span><div class="bar"><span class="sec" style="width:92%"></span></div></div>
+          <div><span class="muted">催化 88</span><div class="bar"><span class="cat" style="width:88%"></span></div></div>
+          <div><span class="muted">质量 85</span><div class="bar"><span class="qual" style="width:85%"></span></div></div>
+          <h3>风险点</h3>
+          <ul class="list"><li>RSI6=100极度超买，短线随时剧烈回调</li><li>8/28杰克逊霍尔前金价波动加大</li><li>海外矿产出受地缘和政策风险影响</li></ul>
+        </article>
+
+        <!-- 湖南白银 -->
+        <article class="stock-card">
+          <div class="stock-head">
+            <div>
+              <div class="stock-title">湖南白银 <span class="muted">002716</span></div>
+              <div class="tags"><span class="tag">白银</span><span class="tag">贵金属</span><span class="tag">中国白银第一股</span></div>
+            </div>
+            <div class="score mid">70</div>
+          </div>
+          <p><strong>核心逻辑：</strong>A股白银纯度最高标的。银价创新高+中报净利+170.34%双催化涨停。主力净流入10.56亿，资金市值比3.59%（全场最高之一）。但涨停日换手18.29%，已进入情绪加速区。</p>
+          <div class="plan">
+            <div><strong>✅ 触发</strong><br>周一竞价高开不超3%，开盘30分钟不破10.0</div>
+            <div><strong>买入/观察区</strong><br>10.0 - 10.4（竞价确认后）</div>
+            <div class="stop"><strong>🛑 止损/失效</strong><br>9.4（跌破周五低点清仓）</div>
+            <div class="target"><strong>🎯 止盈与仓位</strong><br>11.5 / 12.5 分批兑现<br>单票不超2成</div>
+          </div>
+          <h3>评分拆解</h3>
+          <div><span class="muted">动量 88</span><div class="bar"><span class="mom" style="width:88%"></span></div></div>
+          <div><span class="muted">资金 82</span><div class="bar"><span class="cap" style="width:82%"></span></div></div>
+          <div><span class="muted">流动性 75</span><div class="bar"><span class="liq" style="width:75%"></span></div></div>
+          <div><span class="muted">板块 88</span><div class="bar"><span class="sec" style="width:88%"></span></div></div>
+          <div><span class="muted">催化 78</span><div class="bar"><span class="cat" style="width:78%"></span></div></div>
+          <div><span class="muted">质量 48</span><div class="bar"><span class="qual" style="width:48%"></span></div></div>
+          <h3>风险点</h3>
+          <ul class="list"><li>经营现金流-13.77亿，基本面有瑕疵</li><li>PE约66倍偏高，估值已反映较多预期</li><li>换手18.29%过热，触发"换手过热"风险标记</li><li>白银弹性大但波动也大，追高风险显著</li></ul>
+        </article>
+
+        <!-- 赣锋锂业 -->
+        <article class="stock-card">
+          <div class="stock-head">
+            <div>
+              <div class="stock-title">赣锋锂业 <span class="muted">002460</span></div>
+              <div class="tags"><span class="tag">锂矿龙头</span><span class="tag">碳酸锂</span><span class="tag">固态电池</span></div>
+            </div>
+            <div class="score mid">68</div>
+          </div>
+          <p><strong>核心逻辑：</strong>锂矿绝对龙头。碳酸锂站上15.5万/吨，8月涨17%。供给收缩（集中停产检修~9000吨）+库存连续15周下降+下游排产环比+8.73%。周五+5.56%，RSI6=56.88健康。板块处于预启动阶段。</p>
+          <div class="plan">
+            <div><strong>✅ 触发</strong><br>碳酸锂主力合约站稳15万上方，股价回踩53.3企稳</div>
+            <div><strong>买入/观察区</strong><br>53.0 - 54.5</div>
+            <div class="stop"><strong>🛑 止损/失效</strong><br>50.7（跌破MA60清仓）</div>
+            <div class="target"><strong>🎯 止盈与仓位</strong><br>56.0 / 58.0 分批兑现<br>单票 8%-15%，确认后再加</div>
+          </div>
+          <h3>评分拆解</h3>
+          <div><span class="muted">动量 62</span><div class="bar"><span class="mom" style="width:62%"></span></div></div>
+          <div><span class="muted">资金 65</span><div class="bar"><span class="cap" style="width:65%"></span></div></div>
+          <div><span class="muted">流动性 82</span><div class="bar"><span class="liq" style="width:82%"></span></div></div>
+          <div><span class="muted">板块 70</span><div class="bar"><span class="sec" style="width:70%"></span></div></div>
+          <div><span class="muted">催化 75</span><div class="bar"><span class="cat" style="width:75%"></span></div></div>
+          <div><span class="muted">质量 85</span><div class="bar"><span class="qual" style="width:85%"></span></div></div>
+          <h3>风险点</h3>
+          <ul class="list"><li>锂价反弹持续性待验证</li><li>均线混合排列，方向未完全确认</li><li>板块扩散度不足，若扩散失败则回落风险大</li></ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 7. 消息与催化剂 -->
+    <section id="sec-news">
+      <h2>📰 消息与催化剂</h2>
+      <table>
+        <thead><tr><th>标题</th><th>来源</th><th>影响板块</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><a href="http://news.cnr.cn/native/gd/20260821/t20260821_527785876.shtml" target="_blank" rel="noopener noreferrer">美财政部扩大长债回购规模，现货黄金突破4600美元</a></td>
+            <td>央广网</td>
+            <td>贵金属</td>
+          </tr>
+          <tr>
+            <td><a href="https://3w.huanqiu.com/a/17e059/4Ssyh86VSuW" target="_blank" rel="noopener noreferrer">美国联邦债务首破40万亿美元，金饰克价月涨超100元</a></td>
+            <td>新华社</td>
+            <td>贵金属</td>
+          </tr>
+          <tr>
+            <td>中国央行连续21个月增持黄金，7月+64万盎司创近两年新高</td>
+            <td>世界黄金协会</td>
+            <td>贵金属</td>
+          </tr>
+          <tr>
+            <td><a href="http://m.toutiao.com/group/7676320035125150223/" target="_blank" rel="noopener noreferrer">3D打印产量同比+52.3%，产业渗透进入加速期</a></td>
+            <td>21世纪经济报道</td>
+            <td>3D打印</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.jiemian.com/article/14960901.html" target="_blank" rel="noopener noreferrer">中际旭创H1净利136.5亿/+241.7%，CPO量产验证</a></td>
+            <td>界面新闻</td>
+            <td>CPO/算力</td>
+          </tr>
+          <tr>
+            <td><a href="https://m.jiemian.com/article/14964051.html" target="_blank" rel="noopener noreferrer">产能紧缺至2027-2028年，通信行业维持强于大市评级</a></td>
+            <td>金元证券/界面</td>
+            <td>通信/CPO</td>
+          </tr>
+          <tr>
+            <td><a href="http://m.toutiao.com/group/7676301231978988078/" target="_blank" rel="noopener noreferrer">碳酸锂站上15.5万/吨，8月累计涨幅超17%</a></td>
+            <td>华尔街见闻</td>
+            <td>锂矿</td>
+          </tr>
+          <tr>
+            <td>杰克逊霍尔央行年会8/28开幕，沃什首秀距9月FOMC仅18天</td>
+            <td>堪萨斯城联储</td>
+            <td>全市场</td>
+          </tr>
+          <tr>
+            <td>2026世界动力电池大会9/3-4宜宾举办</td>
+            <td>行业消息</td>
+            <td>电池/锂矿</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 8. 数据健康度 -->
+    <section id="sec-health">
+      <h2>📡 数据健康度</h2>
+      <div class="grid metrics">
+        <div class="metric"><div class="label">数据状态</div><div class="value neutral">在线</div></div>
+        <div class="metric"><div class="label">行情数据</div><div class="value positive">腾讯行情</div></div>
+        <div class="metric"><div class="label">资金流向</div><div class="value positive">金融界/交易所</div></div>
+        <div class="metric"><div class="label">样本回放</div><div class="value positive">否</div></div>
+      </div>
+      <table style="margin-top:12px;">
+        <thead><tr><th>数据项</th><th>来源</th><th>状态</th><th>交叉验证</th></tr></thead>
+        <tbody>
+          <tr><td>指数行情</td><td>东方财富/财联社/金融界</td><td>✅ 3源一致</td><td>上证3905.20/深成14094.17/创业板3545.58 三源吻合</td></tr>
+          <tr><td>涨停/跌停/封板率</td><td>财联社+东方财富+金融界</td><td>✅ 3源一致</td><td>涨停54家/跌停14家/封板率72-75%/晋级率25%</td></tr>
+          <tr><td>板块资金流向</td><td>金融界+东方财富+同花顺</td><td>✅ 3源一致</td><td>通信设备+88.93亿/元件+46.84亿/有色+44.43亿 排名一致</td></tr>
+          <tr><td>龙虎榜·机构</td><td>36氪+东方财富+第一财经</td><td>✅ 3源一致</td><td>机构净买山东黄金+4.39亿/净卖键凯科技-0.98亿</td></tr>
+          <tr><td>龙虎榜·游资</td><td>东方财富·游资龙虎榜</td><td>✅ 在线</td><td>12家知名游资买卖明细</td></tr>
+          <tr><td>连板梯队/晋级率</td><td>财联社+微博复盘+东方财富</td><td>✅ 3源一致</td><td>最高3板/11只连板/晋级率25%</td></tr>
+          <tr><td>消息催化</td><td>央广网/新华社/界面/华尔街见闻</td><td>✅ 权威源</td><td>黄金4600/中际旭创H1/+52.3% 3D打印</td></tr>
+          <tr><td>外围市场</td><td>search_web</td><td>✅ 在线</td><td>美股/美债/黄金/汇率/原油</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px;font-size:13px;color:#2563a8"><strong>🔍 数据交叉验证规则：</strong>关键数据（涨停数/封板率/板块资金/龙虎榜）至少2个权威源确认。单一来源数据标注"待确认"。</p>
+    </section>
+
+    <!-- 下周关注 -->
+    <section id="sec-calendar">
+      <h2>📅 下周关键日历</h2>
+      <table>
+        <thead><tr><th>日期</th><th>事件</th><th>影响</th></tr></thead>
+        <tbody>
+          <tr><td><strong>8/25 周一</strong></td><td>3D打印概念竞价验证；贵金属消化获利盘</td><td>主线确认/分化</td></tr>
+          <tr><td><strong>8/26 周二</strong></td><td>美国7月新屋销售数据</td><td>美元/黄金</td></tr>
+          <tr><td><strong>8/27 周三</strong></td><td>美国二季度GDP修正值</td><td>全市场风险偏好</td></tr>
+          <tr><td><strong>8/28 周四</strong></td><td>⚠️ 杰克逊霍尔沃什首秀演讲</td><td><strong>本周最大变量</strong></td></tr>
+          <tr><td><strong>8/29 周五</strong></td><td>美国7月PCE物价指数</td><td>美联储降息预期</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="footer-note">本报告基于公开行情数据与联网搜索结果生成，仅供研究复盘与交易计划辅助，不构成收益承诺或个性化投资建议。数据来源：腾讯行情、stock-data-skill CLI、金融界、央广网、新华社、界面新闻、21世纪经济报道、华尔街见闻、世界黄金协会。</p>
+  </main>
+<button class="toc-toggle" id="tocToggle" title="目录">☰</button>
+<script>
+(function(){
+  var panel=document.getElementById('tocPanel'),overlay=document.getElementById('tocOverlay'),btn=document.getElementById('tocToggle');
+  function toggle(){panel.classList.toggle('open');overlay.classList.toggle('show')}
+  btn.addEventListener('click',toggle);
+  overlay.addEventListener('click',toggle);
+  panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggle()})});
+
+  // 滚动目录高亮
+  var links=panel.querySelectorAll('a[href^="#"]');
+  var sections=[];
+  links.forEach(function(a){
+    var id=a.getAttribute('href').slice(1);
+    var el=document.getElementById(id);
+    if(el) sections.push({el:el,link:a});
+  });
+  function onScroll(){
+    var scrollY=window.scrollY+80;
+    var current=null;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i].el.offsetTop<=scrollY) current=sections[i];
+    }
+    links.forEach(function(a){a.style.background='';a.style.color='#c9d1d9'});
+    if(current){
+      current.link.style.background='rgba(88,166,255,.15)';
+      current.link.style.color='#58a6ff';
+    }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
