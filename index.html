@@ -217,7 +217,12 @@
 <div class="status-bar">
   <div class="status-dot"></div>
   <span>系统就绪</span>
-  <span style="margin-left:auto" id="updateTime"></span>
+  <span style="margin-left:auto">🕐 <span id="updateTime"></span></span>
+</div>
+
+
+<div id="refreshHint" style="display:none;text-align:center;padding:8px;margin-bottom:12px;background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.2);border-radius:6px;font-size:12px;color:var(--accent)">
+  🔄 下拉刷新获取最新报告
 </div>
 
 <!-- 今日速览 -->
@@ -442,47 +447,123 @@ function render() {
   });
   document.getElementById("quickScroll").innerHTML = quickHTML;
 
-  // 历史报告（全部，按日期倒序）
+  // 历史报告（按周折叠）
   const sortedReports = [...cfg.reports].sort((a, b) => b.date.localeCompare(a.date));
-  let gridHTML = "";
+
+  // 按周分组
+  function getWeekLabel(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const date = new Date(y, m - 1, d);
+    const dayOfYear = Math.floor((date - new Date(y, 0, 0)) / 86400000);
+    const weekNum = Math.ceil(dayOfYear / 7);
+    return y + " 第" + weekNum + "周";
+  }
+
+  // 获取周一日期
+  function getMonday(dateStr) {
+    const [y, m, d] = dateStr.split("-").map(Number);
+    const date = new Date(y, m - 1, d);
+    const day = date.getDay() || 7;
+    const mon = new Date(date);
+    mon.setDate(d - day + 1);
+    return (mon.getMonth()+1) + "/" + mon.getDate();
+  }
+
+  let weeks = {};
   sortedReports.forEach(r => {
-    const wd = getWeekday(r.date);
-    const future = isFuture(r.date);
-    const today = isToday(r.date);
-    let dateLabel = `${r.date}`;
-    if (today) dateLabel += " (今天)";
+    const wk = getWeekLabel(r.date);
+    if (!weeks[wk]) weeks[wk] = { label: wk, monday: getMonday(r.date), reports: [] };
+    weeks[wk].reports.push(r);
+  });
 
-    const renderLink = (session, icon, defaultTime) => {
-      const data = r[session];
-      if (data && data.file) {
-        return `<a class="report-link" href="${data.file}" target="_blank">
-          <div>${icon}<div class="time">${data.time || defaultTime}</div></div>
+  let gridHTML = "";
+  Object.keys(weeks).forEach((wk, idx) => {
+    const week = weeks[wk];
+    const isOpen = idx === 0; // 第一周默认展开
+
+    let weekContent = "";
+    week.reports.forEach(r => {
+      const wd = getWeekday(r.date);
+      const future = isFuture(r.date);
+      const today = isToday(r.date);
+      let dateLabel = r.date.slice(5); // MM-DD
+      if (today) dateLabel += " (今天)";
+
+      const renderLink = (session, icon, defaultTime) => {
+        const data = r[session];
+        if (data && data.file) {
+          return `<a class="report-link" href="${data.file}" target="_blank">
+            <div>${icon}<div class="time">${data.time || defaultTime}</div></div>
+          </a>`;
+        }
+        return `<a class="report-link disabled" href="#">
+          <div>${icon}<div class="time">${future ? "待生成" : "—"}</div></div>
         </a>`;
-      }
-      return `<a class="report-link disabled" href="#">
-        <div>${icon}<div class="time">${future ? "待生成" : "—"}</div></div>
-      </a>`;
-    };
+      };
 
+      weekContent += `
+        <div class="date-group" style="margin:4px 0">
+          <div class="date-header" style="font-size:13px;padding:6px 10px">
+            📅 ${dateLabel} <span class="weekday">${wd}</span>
+          </div>
+          <div class="report-links">
+            ${renderLink("morning", "🌅", "08:00")}
+            ${renderLink("noon", "☀️", "11:45")}
+            ${renderLink("evening", "🌙", "20:30")}
+          </div>
+        </div>`;
+    });
+
+    const reportCount = week.reports.filter(r => r.evening?.file || r.noon?.file || r.morning?.file).length;
     gridHTML += `
-      <div class="date-group">
-        <div class="date-header">
-          📅 ${dateLabel} <span class="weekday">${wd}</span>
-        </div>
-        <div class="report-links">
-          ${renderLink("morning", "🌅", "08:00")}
-          ${renderLink("noon", "☀️", "11:45")}
-          ${renderLink("evening", "🌙", "20:30")}
-        </div>
-      </div>`;
+      <details ${isOpen ? 'open' : ''} style="margin-bottom:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <summary style="padding:10px 12px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;background:rgba(88,166,255,0.04);list-style:none;display:flex;align-items:center;gap:8px;user-select:none">
+          <span style="font-size:12px;transition:transform 0.2s">${isOpen ? '▼' : '▶'}</span>
+          📅 ${week.label}（${week.monday}起）
+          <span style="margin-left:auto;font-size:11px;color:var(--text2);font-weight:400">${reportCount}份报告</span>
+        </summary>
+        <div style="padding:4px 6px 6px">${weekContent}</div>
+      </details>`;
   });
   document.getElementById("reportGrid").innerHTML = gridHTML;
+
+  // 折叠箭头旋转
+  document.querySelectorAll('#reportGrid details').forEach(function(det){
+    det.addEventListener('toggle', function(){
+      var arrow = this.querySelector('summary span:first-child');
+      arrow.textContent = this.open ? '▼' : '▶';
+    });
+  });
 }
 
 // 回到顶部按钮
 window.addEventListener("scroll", function() {
   document.getElementById("backTop").classList.toggle("show", window.scrollY > 300);
 });
+
+
+// 刷新提示：页面可见时检测是否需要刷新
+(function(){
+  var hint = document.getElementById('refreshHint');
+  var lastCheck = Date.now();
+  // 页面从后台恢复时显示刷新提示
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && Date.now() - lastCheck > 300000) { // 5分钟后回到页面
+      hint.style.display = 'block';
+      setTimeout(function(){ hint.style.display = 'none'; }, 5000);
+    }
+    lastCheck = Date.now();
+  });
+  // 顶部下拉检测（简易版）
+  var startY = 0;
+  document.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(window.scrollY === 0 && e.touches[0].clientY - startY > 60){
+      hint.style.display = 'block';
+      setTimeout(function(){ hint.style.display = 'none'; }, 3000);
+    }
+  }, {passive:true});
+})();
 
 // 初始化
 render();

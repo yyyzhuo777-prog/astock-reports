@@ -111,6 +111,7 @@
         <span class="badge">📊 收盘复盘</span>
         <span class="badge">💰 成交1.88万亿</span>
         <span class="badge">📡 数据状态：在线</span>
+        <span class="badge" id="genTime">⏱ 生成于 20:30</span>
       </div>
     </div>
   </header>
@@ -130,6 +131,20 @@
   </div>
 
   <main class="wrap">
+
+    <details style="margin:16px 0;border:1px solid #d4a84b;border-radius:8px;background:#fffbe6;overflow:hidden">
+      <summary style="padding:12px 14px;font-size:15px;font-weight:700;cursor:pointer;color:#5c3d00;list-style:none;display:flex;align-items:center;gap:6px">
+        <span style="font-size:18px">⚡</span> 30秒速览 · 点击展开核心结论
+      </summary>
+      <div style="padding:0 14px 14px;font-size:14px;line-height:1.7;color:#3d2e00">
+        <p><strong>1. 市场状态：存量博弈。</strong>指数微涨但2844股下跌，赚钱效应极差。</p>
+        <p><strong>2. 绝对主线：CPO/通信。</strong>三板块合计净流入290亿，中际旭创H1净利+241.7%验证景气度。</p>
+        <p><strong>3. 第二主线：贵金属。</strong>黄金净流入67.84亿，金价破4600美元，连续两天强化。</p>
+        <p><strong>4. 预启动信号：锂矿。</strong>碳酸锂15.5万/吨月涨17%，但扩散度待确认。</p>
+        <p><strong>5. 回避：创新药。</strong>医药板块净流出76.5亿，mRNA一日游。</p>
+        <p><strong>6. 关键变量：8/28杰克逊霍尔央行年会。</strong>决定黄金和美元方向。</p>
+      </div>
+    </details>
 
     <!-- 1. 今日最重要 -->
     <section id="sec-highlight">
@@ -729,6 +744,29 @@
   btn.addEventListener('click',toggle);
   overlay.addEventListener('click',toggle);
   panel.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggle()})});
+
+  // 滚动目录高亮
+  var links=panel.querySelectorAll('a[href^="#"]');
+  var sections=[];
+  links.forEach(function(a){
+    var id=a.getAttribute('href').slice(1);
+    var el=document.getElementById(id);
+    if(el) sections.push({el:el,link:a});
+  });
+  function onScroll(){
+    var scrollY=window.scrollY+80;
+    var current=null;
+    for(var i=0;i<sections.length;i++){
+      if(sections[i].el.offsetTop<=scrollY) current=sections[i];
+    }
+    links.forEach(function(a){a.style.background='';a.style.color='#c9d1d9'});
+    if(current){
+      current.link.style.background='rgba(88,166,255,.15)';
+      current.link.style.color='#58a6ff';
+    }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
 })();
 </script>
 </body>
