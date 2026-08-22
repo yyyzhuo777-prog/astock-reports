@@ -213,34 +213,6 @@
   .search-box input::placeholder { color: var(--text2); }
   .search-box .search-icon { color: var(--text2); font-size: 14px; }
 
-  /* === 周度汇总卡片 === */
-  .weekly-summary {
-    background: linear-gradient(135deg, rgba(88,166,255,0.06), rgba(188,140,255,0.06));
-    border: 1px solid rgba(88,166,255,0.15);
-    border-radius: 10px; padding: 14px 16px; margin-bottom: 16px;
-  }
-  .weekly-summary-title {
-    font-size: 14px; font-weight: 600; color: var(--accent);
-    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
-  }
-  .weekly-summary-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
-  }
-  .ws-item {
-    padding: 8px 10px; background: rgba(0,0,0,0.2);
-    border-radius: 6px; border: 1px solid rgba(255,255,255,0.04);
-  }
-  .ws-label { font-size: 11px; color: var(--text2); margin-bottom: 2px; }
-  .ws-value { font-size: 14px; font-weight: 600; }
-  .ws-themes {
-    margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px;
-  }
-  .ws-theme-tag {
-    font-size: 11px; padding: 3px 8px; border-radius: 4px;
-    background: rgba(248,81,73,0.1); color: var(--red);
-    border: 1px solid rgba(248,81,73,0.2);
-  }
-
   /* === 待生成占位动画 === */
   .pending-dot {
     display: inline-block; width: 6px; height: 6px;
@@ -318,9 +290,6 @@
   <div class="snapshot-grid" id="snapshotGrid"></div>
   <div class="snapshot-tags" id="snapshotTags"></div>
 </div>
-
-<!-- 周度汇总 -->
-<div class="weekly-summary" id="weeklySummary" style="display:none"></div>
 
 <!-- 最近报告快链 -->
 <div class="section">
@@ -416,30 +385,28 @@
 // ============================================================
 const REPORT_CONFIG = {
   lastUpdated: "2026-08-22",
-  snapshot: {
-    dateStr: "8/21",
-    year: 2026, month: 8, day: 21,
-    data: {
-      shIndex: { value: "3905", change: "+0.04%", up: true },
-      cyIndex: { value: "3546", change: "+1.43%", up: true },
-      volume: "1.88万亿",
-      limitUp: "54", limitDown: "14",
-      emotion: "48/100", sealRate: "75%"
-    },
-    tags: [
-      { text: "🔥 CPO/通信", hot: true },
-      { text: "🔥 贵金属", hot: true },
-      { text: "💎 锂矿", hot: false },
-      { text: "🤖 机器人", hot: false },
-      { text: "🔋 固态电池", hot: false }
-    ]
-  },
   reports: [
     {
       date: "2026-08-21",
       morning: { file: "report-0821-morning.html", time: "08:00", summary: "美联储鹰派 · Moderna映射 · 沪八条+央行投放" },
       noon: { file: "report-0821-noon.html", time: "12:00", summary: "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨" },
-      evening: { file: "report-0821-v2.html", time: "20:30", summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的" }
+      evening: {
+        file: "report-0821-v2.html", time: "20:30", summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的",
+        snap: {
+          shIndex: { value: "3905", change: "+0.04%", up: true },
+          cyIndex: { value: "3546", change: "+1.43%", up: true },
+          volume: "1.88万亿",
+          limitUp: "54", limitDown: "14",
+          emotion: "48/100", sealRate: "75%",
+          tags: [
+            { text: "🔥 CPO/通信", hot: true },
+            { text: "🔥 贵金属", hot: true },
+            { text: "💎 锂矿", hot: false },
+            { text: "🤖 机器人", hot: false },
+            { text: "🔋 固态电池", hot: false }
+          ]
+        }
+      }
     },
     {
       date: "2026-08-24",
@@ -492,12 +459,83 @@ function render() {
   // 更新时间
   document.getElementById("updateTime").textContent = "更新：" + cfg.lastUpdated;
 
-  // 今日速览
-  const snap = cfg.snapshot;
-  const weekday = getWeekday(`${snap.year}-${String(snap.month).padStart(2,"0")}-${String(snap.day).padStart(2,"0")}`);
-  document.getElementById("snapshotDate").textContent = `${snap.dateStr} ${weekday} 收盘`;
+  // 今日速览：根据当前时间显示当天对应时段（盘前/午盘/盘后）报告的数据
+  renderSnapshot();
 
-  const d = snap.data;
+  // 最近报告快链
+  renderQuickScroll();
+
+  // 月筛选器
+  renderMonthFilter();
+
+  // 历史报告
+  renderReportGrid();
+}
+
+// ============================================================
+// 今日速览（按当前时间动态选择当天对应时段报告）
+// ============================================================
+function renderSnapshot() {
+  const area = document.getElementById("snapshotArea");
+  const now = new Date();
+  const todayStr = now.getFullYear() + "-" +
+    String(now.getMonth() + 1).padStart(2, "0") + "-" +
+    String(now.getDate()).padStart(2, "0");
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+
+  // 当前时段判断：盘前报告约8:00，午盘约12:00，盘后约20:30
+  let curSession = "morning";
+  if (nowMin >= 12 * 60) curSession = "noon";
+  if (nowMin >= 20 * 60 + 30) curSession = "evening";
+
+  // 优先找今天的报告
+  let todayReport = REPORT_CONFIG.reports.find(r => r.date === todayStr);
+
+  // 选取速览数据：当前时段 → 当天更早时段 → 最近有快照的报告
+  const sessions = ["evening", "noon", "morning"];
+  const sessionOrder = curSession === "evening" ? ["evening", "noon", "morning"]
+    : curSession === "noon" ? ["noon", "morning", "evening"]
+    : ["morning", "noon", "evening"];
+
+  let chosen = null;   // {report, sessionKey, snap}
+  const pickFrom = (report) => {
+    for (const k of sessionOrder) {
+      const s = report[k];
+      if (s && s.snap) return { report, sessionKey: k, snap: s };
+    }
+    return null;
+  };
+
+  if (todayReport) {
+    chosen = pickFrom(todayReport);
+  }
+  // 今天没有 → 找最近有快照的报告
+  if (!chosen) {
+    const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
+    for (const r of dated) {
+      chosen = pickFrom(r);
+      if (chosen) break;
+    }
+  }
+
+  const sessionLabel = { morning: "盘前", noon: "午盘", evening: "盘后" };
+
+  if (!chosen) {
+    // 没有任何速览数据
+    document.getElementById("snapshotDate").textContent = "暂无数据";
+    document.getElementById("snapshotGrid").innerHTML =
+      '<div style="grid-column:1/-1;text-align:center;color:var(--text2);font-size:13px;padding:8px 0">等待报告生成</div>';
+    document.getElementById("snapshotTags").innerHTML = "";
+    return;
+  }
+
+  const snap = chosen.snap;
+  const rdate = chosen.report.date;
+  const weekday = getWeekday(rdate);
+  document.getElementById("snapshotDate").textContent =
+    `${formatDateShort(rdate)} ${weekday} ${sessionLabel[chosen.sessionKey]}`;
+
+  const d = snap;
   document.getElementById("snapshotGrid").innerHTML = `
     <div class="snap-item">
       <div class="snap-label">上证</div>
@@ -525,21 +563,9 @@ function render() {
     </div>
   `;
 
-  document.getElementById("snapshotTags").innerHTML = snap.tags.map(t =>
+  document.getElementById("snapshotTags").innerHTML = (d.tags || []).map(t =>
     `<span class="snap-tag${t.hot ? ' hot' : ''}">${t.text}</span>`
   ).join("");
-
-  // 周度汇总
-  renderWeeklySummary();
-
-  // 最近报告快链
-  renderQuickScroll();
-
-  // 月筛选器
-  renderMonthFilter();
-
-  // 历史报告
-  renderReportGrid();
 }
 
 // ============================================================
@@ -718,47 +744,6 @@ function renderReportGrid() {
       arrow.textContent = this.open ? '▼' : '▶';
     });
   });
-}
-
-// ============================================================
-// 周度汇总
-// ============================================================
-function renderWeeklySummary() {
-  const completedReports = REPORT_CONFIG.reports.filter(r => r.evening?.file);
-  if (completedReports.length === 0) {
-    document.getElementById("weeklySummary").style.display = "none";
-    return;
-  }
-
-  // 用最新一份盘后报告的数据
-  const latest = completedReports[0];
-  const snap = REPORT_CONFIG.snapshot;
-
-  document.getElementById("weeklySummary").style.display = "block";
-  document.getElementById("weeklySummary").innerHTML = `
-    <div class="weekly-summary-title">📊 本周概览 · ${formatDateShort(latest.date)} ${getWeekday(latest.date)}</div>
-    <div class="weekly-summary-grid">
-      <div class="ws-item">
-        <div class="ws-label">情绪评分</div>
-        <div class="ws-value" style="color:var(--orange)">${snap.data.emotion}</div>
-      </div>
-      <div class="ws-item">
-        <div class="ws-label">成交量</div>
-        <div class="ws-value" style="color:var(--accent)">${snap.data.volume}</div>
-      </div>
-      <div class="ws-item">
-        <div class="ws-label">涨停 / 跌停</div>
-        <div class="ws-value"><span class="snap-up">${snap.data.limitUp}</span> / <span class="snap-down">${snap.data.limitDown}</span></div>
-      </div>
-      <div class="ws-item">
-        <div class="ws-label">封板率</div>
-        <div class="ws-value" style="color:var(--green)">${snap.data.sealRate}</div>
-      </div>
-    </div>
-    <div class="ws-themes">
-      ${snap.tags.map(t => `<span class="ws-theme-tag">${t.text}</span>`).join("")}
-    </div>
-  `;
 }
 
 // ============================================================
