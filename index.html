@@ -501,7 +501,7 @@ function renderSnapshot() {
   const pickFrom = (report) => {
     for (const k of sessionOrder) {
       const s = report[k];
-      if (s && s.snap) return { report, sessionKey: k, snap: s };
+      if (s && s.snap) return { report, sessionKey: k, snap: s.snap };
     }
     return null;
   };
