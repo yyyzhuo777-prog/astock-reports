@@ -327,9 +327,9 @@ const REPORT_CONFIG = {
   reports: [
     {
       date: "2026-08-21",
-      morning: null,
-      noon: null,
-      evening: { file: "report-0821-v2.html", time: "20:30", summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 含龙虎榜+机构动向" }
+      morning: { file: "report-0821-morning.html", time: "08:00", summary: "美联储鹰派 · Moderna映射 · 沪八条+央行投放" },
+      noon: { file: "report-0821-noon.html", time: "12:00", summary: "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨" },
+      evening: { file: "report-0821-v2.html", time: "20:30", summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的" }
     },
     {
       date: "2026-08-24",
@@ -558,16 +558,4 @@ window.addEventListener("scroll", function() {
   var startY = 0;
   document.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
   document.addEventListener('touchmove', function(e){
-    if(window.scrollY === 0 && e.touches[0].clientY - startY > 60){
-      hint.style.display = 'block';
-      setTimeout(function(){ hint.style.display = 'none'; }, 3000);
-    }
-  }, {passive:true});
-})();
-
-// 初始化
-render();
-</script>
-
-</body>
-</html>
+   
