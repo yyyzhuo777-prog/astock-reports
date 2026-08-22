@@ -1,0 +1,17 @@
+{
+  "name": "A股每日资讯",
+  "short_name": "A股资讯",
+  "description": "短线复盘 · 盘前/午盘/盘后 · 自动更新",
+  "start_url": "/s/KP-2vET-mXA/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#161b22",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230d1117'/><text x='50' y='68' text-anchor='middle' font-size='50'>📊</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
