@@ -9,7 +9,6 @@
 <meta name="apple-mobile-web-app-title" content="A股资讯">
 <link rel="manifest" href="manifest.json">
 <title>A股每日资讯</title>
-<!-- v=1787409998 -->
 <style>
   :root {
     --bg: #0d1117;
@@ -181,6 +180,13 @@
   .report-link:hover { background: rgba(88,166,255,0.08); }
   .report-link.disabled { color: var(--text2); opacity: 0.4; pointer-events: none; }
   .report-link .time { font-size: 11px; color: var(--text2); display: block; margin-top: 2px; }
+
+  /* === 数据源分组 === */
+  .source-category { margin-bottom: 14px; }
+  .source-category-title {
+    font-size: 12px; font-weight: 600; color: var(--text2);
+    margin-bottom: 6px; padding-left: 4px; text-transform: uppercase; letter-spacing: 1px;
+  }
   .quick-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
   .quick-link {
     display: flex; align-items: center; gap: 8px; padding: 10px 12px;
@@ -192,6 +198,84 @@
   .quick-link .icon { font-size: 16px; }
   .quick-link .name { font-weight: 500; }
   .quick-link .desc { font-size: 11px; color: var(--text2); }
+
+  /* === 搜索框 === */
+  .search-box {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  .search-box input {
+    flex: 1; background: transparent; border: none;
+    color: var(--text); font-size: 14px; outline: none;
+  }
+  .search-box input::placeholder { color: var(--text2); }
+  .search-box .search-icon { color: var(--text2); font-size: 14px; }
+
+  /* === 周度汇总卡片 === */
+  .weekly-summary {
+    background: linear-gradient(135deg, rgba(88,166,255,0.06), rgba(188,140,255,0.06));
+    border: 1px solid rgba(88,166,255,0.15);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 16px;
+  }
+  .weekly-summary-title {
+    font-size: 14px; font-weight: 600; color: var(--accent);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .weekly-summary-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+  }
+  .ws-item {
+    padding: 8px 10px; background: rgba(0,0,0,0.2);
+    border-radius: 6px; border: 1px solid rgba(255,255,255,0.04);
+  }
+  .ws-label { font-size: 11px; color: var(--text2); margin-bottom: 2px; }
+  .ws-value { font-size: 14px; font-weight: 600; }
+  .ws-themes {
+    margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .ws-theme-tag {
+    font-size: 11px; padding: 3px 8px; border-radius: 4px;
+    background: rgba(248,81,73,0.1); color: var(--red);
+    border: 1px solid rgba(248,81,73,0.2);
+  }
+
+  /* === 待生成占位动画 === */
+  .pending-dot {
+    display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--accent);
+    margin: 0 2px; animation: dotPulse 1.4s infinite ease-in-out;
+  }
+  .pending-dot:nth-child(2) { animation-delay: 0.2s; }
+  .pending-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotPulse {
+    0%, 80%, 100% { transform: scale(0.4); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+  .pending-text {
+    font-size: 11px; color: var(--text2);
+    display: flex; align-items: center; justify-content: center; gap: 2px;
+  }
+
+  /* === 月筛选器 === */
+  .month-filter {
+    display: flex; gap: 6px; overflow-x: auto;
+    padding-bottom: 6px; margin-bottom: 10px;
+    scrollbar-width: none;
+  }
+  .month-filter::-webkit-scrollbar { display: none; }
+  .month-btn {
+    flex: 0 0 auto; padding: 4px 12px; border-radius: 14px;
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    background: var(--card); color: var(--text2);
+    border: 1px solid var(--border); transition: all 0.15s;
+  }
+  .month-btn.active {
+    background: rgba(88,166,255,0.15); color: var(--accent);
+    border-color: var(--accent);
+  }
+
   .footer {
     text-align: center; padding: 16px 0; font-size: 11px;
     color: var(--text2); border-top: 1px solid var(--border); margin-top: 20px;
@@ -221,7 +305,6 @@
   <span style="margin-left:auto">🕐 <span id="updateTime"></span></span>
 </div>
 
-
 <div id="refreshHint" style="display:none;text-align:center;padding:8px;margin-bottom:12px;background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.2);border-radius:6px;font-size:12px;color:var(--accent)">
   🔄 下拉刷新获取最新报告
 </div>
@@ -236,6 +319,9 @@
   <div class="snapshot-tags" id="snapshotTags"></div>
 </div>
 
+<!-- 周度汇总 -->
+<div class="weekly-summary" id="weeklySummary" style="display:none"></div>
+
 <!-- 最近报告快链 -->
 <div class="section">
   <div class="section-title">📋 最近报告</div>
@@ -245,45 +331,74 @@
 <!-- 全部报告 -->
 <div class="section">
   <div class="section-title">📅 历史报告</div>
+  <!-- 月筛选 -->
+  <div class="month-filter" id="monthFilter"></div>
+  <!-- 搜索 -->
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="reportSearch" placeholder="搜索日期、主线、板块...">
+  </div>
   <div class="report-grid" id="reportGrid"></div>
 </div>
 
-<!-- 常用数据源 -->
+<!-- 常用数据源（按用途分组） -->
 <div class="section">
   <div class="section-title">🔗 常用数据源</div>
-  <div class="quick-links">
-    <a class="quick-link" href="https://www.cls.cn/" target="_blank">
-      <span class="icon">📰</span>
-      <div><div class="name">财联社</div><div class="desc">快讯·复盘·电报</div></div>
-    </a>
-    <a class="quick-link" href="https://www.10jqka.com.cn/" target="_blank">
-      <span class="icon">📈</span>
-      <div><div class="name">同花顺</div><div class="desc">行情·概念·资金</div></div>
-    </a>
-    <a class="quick-link" href="https://guba.eastmoney.com/" target="_blank">
-      <span class="icon">💬</span>
-      <div><div class="name">东方财富股吧</div><div class="desc">情绪·资金·龙虎榜</div></div>
-    </a>
-    <a class="quick-link" href="https://www.iwencai.com/" target="_blank">
-      <span class="icon">🔍</span>
-      <div><div class="name">i问财</div><div class="desc">自然语言选股</div></div>
-    </a>
-    <a class="quick-link" href="https://www.kpl.com/" target="_blank">
-      <span class="icon">🎯</span>
-      <div><div class="name">开盘啦</div><div class="desc">涨停·封板率·情绪</div></div>
-    </a>
-    <a class="quick-link" href="https://www.jygc8.com/" target="_blank">
-      <span class="icon">🧠</span>
-      <div><div class="name">韭研公社</div><div class="desc">题材逻辑·研报</div></div>
-    </a>
-    <a class="quick-link" href="https://data.eastmoney.com/bkzj/hy.html" target="_blank">
-      <span class="icon">💰</span>
-      <div><div class="name">东财板块资金</div><div class="desc">主力净流入排名</div></div>
-    </a>
-    <a class="quick-link" href="https://data.eastmoney.com/stock/lhb.html" target="_blank">
-      <span class="icon">🐉</span>
-      <div><div class="name">龙虎榜</div><div class="desc">游资·机构席位</div></div>
-    </a>
+
+  <div class="source-category">
+    <div class="source-category-title">📈 行情数据</div>
+    <div class="quick-links">
+      <a class="quick-link" href="https://www.10jqka.com.cn/" target="_blank">
+        <span class="icon">📈</span>
+        <div><div class="name">同花顺</div><div class="desc">行情·概念·资金</div></div>
+      </a>
+      <a class="quick-link" href="https://data.eastmoney.com/bkzj/hy.html" target="_blank">
+        <span class="icon">💰</span>
+        <div><div class="name">东财板块资金</div><div class="desc">主力净流入排名</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="source-category">
+    <div class="source-category-title">📰 资讯与消息</div>
+    <div class="quick-links">
+      <a class="quick-link" href="https://www.cls.cn/" target="_blank">
+        <span class="icon">📰</span>
+        <div><div class="name">财联社</div><div class="desc">快讯·复盘·电报</div></div>
+      </a>
+      <a class="quick-link" href="https://www.jygc8.com/" target="_blank">
+        <span class="icon">🧠</span>
+        <div><div class="name">韭研公社</div><div class="desc">题材逻辑·研报</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="source-category">
+    <div class="source-category-title">🎯 短线情绪工具</div>
+    <div class="quick-links">
+      <a class="quick-link" href="https://www.kpl.com/" target="_blank">
+        <span class="icon">🎯</span>
+        <div><div class="name">开盘啦</div><div class="desc">涨停·封板率·情绪</div></div>
+      </a>
+      <a class="quick-link" href="https://data.eastmoney.com/stock/lhb.html" target="_blank">
+        <span class="icon">🐉</span>
+        <div><div class="name">龙虎榜</div><div class="desc">游资·机构席位</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="source-category">
+    <div class="source-category-title">🔍 选股与社区</div>
+    <div class="quick-links">
+      <a class="quick-link" href="https://www.iwencai.com/" target="_blank">
+        <span class="icon">🔍</span>
+        <div><div class="name">i问财</div><div class="desc">自然语言选股</div></div>
+      </a>
+      <a class="quick-link" href="https://guba.eastmoney.com/" target="_blank">
+        <span class="icon">💬</span>
+        <div><div class="name">东方财富股吧</div><div class="desc">情绪·资金·龙虎榜</div></div>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -302,18 +417,14 @@
 const REPORT_CONFIG = {
   lastUpdated: "2026-08-22",
   snapshot: {
-    dateStr: "8/21",           // MM/D格式
-    year: 2026,
-    month: 8,                  // 1-12
-    day: 21,
+    dateStr: "8/21",
+    year: 2026, month: 8, day: 21,
     data: {
       shIndex: { value: "3905", change: "+0.04%", up: true },
       cyIndex: { value: "3546", change: "+1.43%", up: true },
       volume: "1.88万亿",
-      limitUp: "54",
-      limitDown: "14",
-      emotion: "48/100",
-      sealRate: "75%"
+      limitUp: "54", limitDown: "14",
+      emotion: "48/100", sealRate: "75%"
     },
     tags: [
       { text: "🔥 CPO/通信", hot: true },
@@ -323,8 +434,6 @@ const REPORT_CONFIG = {
       { text: "🔋 固态电池", hot: false }
     ]
   },
-  // 报告列表：只需填 date 和每个时段的 file（有报告填文件名，无报告填null）
-  // 星期几由JS根据date自动计算，永远不会出错
   reports: [
     {
       date: "2026-08-21",
@@ -334,9 +443,7 @@ const REPORT_CONFIG = {
     },
     {
       date: "2026-08-24",
-      morning: null,
-      noon: null,
-      evening: null
+      morning: null, noon: null, evening: null
     }
   ]
 };
@@ -369,6 +476,12 @@ function isToday(dateStr) {
   const [y, m, d] = dateStr.split("-").map(Number);
   return y === today.getFullYear() && m === today.getMonth() + 1 && d === today.getDate();
 }
+
+// ============================================================
+// 全局状态
+// ============================================================
+let currentMonthFilter = "all";
+let currentSearchQuery = "";
 
 // ============================================================
 // 渲染页面
@@ -416,8 +529,24 @@ function render() {
     `<span class="snap-tag${t.hot ? ' hot' : ''}">${t.text}</span>`
   ).join("");
 
-  // 最近报告快链（最近2条）
-  const recentReports = cfg.reports.slice(0, 2);
+  // 周度汇总
+  renderWeeklySummary();
+
+  // 最近报告快链
+  renderQuickScroll();
+
+  // 月筛选器
+  renderMonthFilter();
+
+  // 历史报告
+  renderReportGrid();
+}
+
+// ============================================================
+// 最近报告快链
+// ============================================================
+function renderQuickScroll() {
+  const recentReports = REPORT_CONFIG.reports.slice(0, 3);
   let quickHTML = "";
   recentReports.forEach(r => {
     const short = formatDateShort(r.date);
@@ -442,14 +571,62 @@ function render() {
       quickHTML += `
         <div class="${cls}">
           <div class="qc-date">${short} ${wd}</div>
-          <div class="qc-info">待生成...</div>
+          <div class="pending-text"><span class="pending-dot"></span><span class="pending-dot"></span><span class="pending-dot"></span></div>
+          <div class="qc-info" style="margin-top:4px">等待开盘</div>
         </div>`;
     }
   });
   document.getElementById("quickScroll").innerHTML = quickHTML;
+}
 
-  // 历史报告（按周折叠）
-  const sortedReports = [...cfg.reports].sort((a, b) => b.date.localeCompare(a.date));
+// ============================================================
+// 月筛选器
+// ============================================================
+function renderMonthFilter() {
+  const months = new Set();
+  REPORT_CONFIG.reports.forEach(r => {
+    const m = parseInt(r.date.split("-")[1]);
+    months.add(m);
+  });
+  const sorted = [...months].sort((a, b) => b - a);
+
+  let html = `<div class="month-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">全部</div>`;
+  sorted.forEach(m => {
+    html += `<div class="month-btn ${currentMonthFilter == m ? 'active' : ''}" data-month="${m}">${m}月</div>`;
+  });
+  document.getElementById("monthFilter").innerHTML = html;
+
+  // 绑定事件
+  document.querySelectorAll('.month-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      currentMonthFilter = this.dataset.month === 'all' ? 'all' : parseInt(this.dataset.month);
+      document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      renderReportGrid();
+    });
+  });
+}
+
+// ============================================================
+// 历史报告网格（含搜索+筛选）
+// ============================================================
+function renderReportGrid() {
+  let reports = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
+
+  // 月筛选
+  if (currentMonthFilter !== 'all') {
+    reports = reports.filter(r => parseInt(r.date.split("-")[1]) === currentMonthFilter);
+  }
+
+  // 搜索
+  if (currentSearchQuery) {
+    const q = currentSearchQuery.toLowerCase();
+    reports = reports.filter(r => {
+      const dateStr = r.date + " " + getWeekday(r.date);
+      const summaries = [r.morning?.summary, r.noon?.summary, r.evening?.summary].filter(Boolean).join(" ").toLowerCase();
+      return dateStr.toLowerCase().includes(q) || summaries.includes(q) || formatDateShort(r.date).includes(q);
+    });
+  }
 
   // 按周分组
   function getWeekLabel(dateStr) {
@@ -460,7 +637,6 @@ function render() {
     return y + " 第" + weekNum + "周";
   }
 
-  // 获取周一日期
   function getMonday(dateStr) {
     const [y, m, d] = dateStr.split("-").map(Number);
     const date = new Date(y, m - 1, d);
@@ -471,23 +647,27 @@ function render() {
   }
 
   let weeks = {};
-  sortedReports.forEach(r => {
+  reports.forEach(r => {
     const wk = getWeekLabel(r.date);
     if (!weeks[wk]) weeks[wk] = { label: wk, monday: getMonday(r.date), reports: [] };
     weeks[wk].reports.push(r);
   });
 
   let gridHTML = "";
+  if (reports.length === 0) {
+    gridHTML = '<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">没有找到匹配的报告</div>';
+  }
+
   Object.keys(weeks).forEach((wk, idx) => {
     const week = weeks[wk];
-    const isOpen = idx === 0; // 第一周默认展开
+    const isOpen = idx === 0;
 
     let weekContent = "";
     week.reports.forEach(r => {
       const wd = getWeekday(r.date);
       const future = isFuture(r.date);
       const today = isToday(r.date);
-      let dateLabel = r.date.slice(5); // MM-DD
+      let dateLabel = r.date.slice(5);
       if (today) dateLabel += " (今天)";
 
       const renderLink = (session, icon, defaultTime) => {
@@ -497,9 +677,12 @@ function render() {
             <div>${icon}<div class="time">${data.time || defaultTime}</div></div>
           </a>`;
         }
-        return `<a class="report-link disabled" href="#">
-          <div>${icon}<div class="time">${future ? "待生成" : "—"}</div></div>
-        </a>`;
+        if (future) {
+          return `<a class="report-link disabled" href="#">
+            <div>${icon}<div class="time pending-text" style="flex-direction:column;gap:1px"><span class="pending-dot" style="width:4px;height:4px"></span></div></div>
+          </a>`;
+        }
+        return `<a class="report-link disabled" href="#"><div>${icon}<div class="time">—</div></div></a>`;
       };
 
       weekContent += `
@@ -528,7 +711,7 @@ function render() {
   });
   document.getElementById("reportGrid").innerHTML = gridHTML;
 
-  // 折叠箭头旋转
+  // 折叠箭头
   document.querySelectorAll('#reportGrid details').forEach(function(det){
     det.addEventListener('toggle', function(){
       var arrow = this.querySelector('summary span:first-child');
@@ -537,36 +720,88 @@ function render() {
   });
 }
 
-// 回到顶部按钮
+// ============================================================
+// 周度汇总
+// ============================================================
+function renderWeeklySummary() {
+  const completedReports = REPORT_CONFIG.reports.filter(r => r.evening?.file);
+  if (completedReports.length === 0) {
+    document.getElementById("weeklySummary").style.display = "none";
+    return;
+  }
+
+  // 用最新一份盘后报告的数据
+  const latest = completedReports[0];
+  const snap = REPORT_CONFIG.snapshot;
+
+  document.getElementById("weeklySummary").style.display = "block";
+  document.getElementById("weeklySummary").innerHTML = `
+    <div class="weekly-summary-title">📊 本周概览 · ${formatDateShort(latest.date)} ${getWeekday(latest.date)}</div>
+    <div class="weekly-summary-grid">
+      <div class="ws-item">
+        <div class="ws-label">情绪评分</div>
+        <div class="ws-value" style="color:var(--orange)">${snap.data.emotion}</div>
+      </div>
+      <div class="ws-item">
+        <div class="ws-label">成交量</div>
+        <div class="ws-value" style="color:var(--accent)">${snap.data.volume}</div>
+      </div>
+      <div class="ws-item">
+        <div class="ws-label">涨停 / 跌停</div>
+        <div class="ws-value"><span class="snap-up">${snap.data.limitUp}</span> / <span class="snap-down">${snap.data.limitDown}</span></div>
+      </div>
+      <div class="ws-item">
+        <div class="ws-label">封板率</div>
+        <div class="ws-value" style="color:var(--green)">${snap.data.sealRate}</div>
+      </div>
+    </div>
+    <div class="ws-themes">
+      ${snap.tags.map(t => `<span class="ws-theme-tag">${t.text}</span>`).join("")}
+    </div>
+  `;
+}
+
+// ============================================================
+// 搜索绑定
+// ============================================================
+document.getElementById("reportSearch").addEventListener("input", function() {
+  currentSearchQuery = this.value.trim();
+  renderReportGrid();
+});
+
+// ============================================================
+// 回到顶部
+// ============================================================
 window.addEventListener("scroll", function() {
   document.getElementById("backTop").classList.toggle("show", window.scrollY > 300);
 });
 
-
-// 刷新提示：页面可见时检测是否需要刷新
+// ============================================================
+// 刷新提示（实际触发reload）
+// ============================================================
 (function(){
   var hint = document.getElementById('refreshHint');
   var lastCheck = Date.now();
-  // 页面从后台恢复时显示刷新提示
   document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && Date.now() - lastCheck > 300000) { // 5分钟后回到页面
+    if(!document.hidden && Date.now() - lastCheck > 300000) {
       hint.style.display = 'block';
-      setTimeout(function(){ hint.style.display = 'none'; }, 5000);
+      hint.innerHTML = '🔄 <a href="javascript:location.reload()" style="color:var(--accent);text-decoration:underline">点击刷新</a>获取最新报告';
+      setTimeout(function(){ hint.style.display = 'none'; }, 8000);
     }
     lastCheck = Date.now();
   });
-  // 顶部下拉检测（简易版）
   var startY = 0;
   document.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
   document.addEventListener('touchmove', function(e){
-    if(window.scrollY === 0 && e.touches[0].clientY - startY > 60){
-      hint.style.display = 'block';
-      setTimeout(function(){ hint.style.display = 'none'; }, 3000);
+    if(window.scrollY === 0 && e.touches[0].clientY - startY > 80){
+      location.reload();
     }
   }, {passive:true});
 })();
 
+// ============================================================
 // 初始化
+// ============================================================
 render();
 </script>
 

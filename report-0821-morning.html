@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0f1f2f">
+  <meta name="theme-color" content="#0d1117">
   <title>A股盘前研报｜8月21日 周五</title>
   <style>
     :root{--ink:#15202b;--muted:#5c6675;--line:#d7dde6;--paper:#f6f8fb;--panel:#fff;--red:#c93636;--green:#16845f;--blue:#2563a8;--gold:#a56b00;--violet:#6c4bb8;--shadow:0 10px 30px rgba(22,34,51,.08)}
@@ -57,6 +57,48 @@
       section{padding:17px}
       table{font-size:13px}
     }
+  </style>
+  <!-- Dark theme override -->
+  <style>
+    :root{--ink:#c9d1d9;--muted:#8b949e;--line:#30363d;--paper:#0d1117;--panel:#161b22;--red:#f85149;--green:#3fb950;--blue:#58a6ff;--gold:#d29922;--violet:#bc8cff;--shadow:0 4px 12px rgba(0,0,0,.3)}
+    body{color:#c9d1d9;background:#0d1117}
+    .topbar{background:#161b22;border-bottom:3px solid #f85149}
+    .subtitle{color:#8b949e}
+    .warning{background:rgba(210,153,34,.08);color:#d29922;border-color:rgba(210,153,34,.25)}
+    .badge{border-color:rgba(255,255,255,.12);color:#c9d1d9}
+    section{background:#161b22;border-color:#30363d;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    h1,h2,h3{color:#c9d1d9}
+    .metric{background:#0d1117;border-color:#30363d}
+    .metric .label{color:#8b949e}
+    th{color:#c9d1d9;background:#1c2530}
+    td{color:#c9d1d9}
+    .stock-card{background:#161b22;border-color:#30363d}
+    .stock-head{border-bottom-color:#30363d}
+    .stock-title{color:#c9d1d9}
+    .tag{background:#1c2530;color:#8b949e}
+    .plan div{background:#0d1117;border-left-color:#58a6ff}
+    .plan .stop{border-left-color:#3fb950}
+    .plan .target{border-left-color:#f85149}
+    .bar{background:#21262d}
+    .chain-step{background:#0d1117;border-color:#30363d}
+    .muted{color:#8b949e!important}
+    .footer-note{color:#8b949e}
+    .pool-a{background:rgba(248,81,73,.1);color:#f85149}
+    .pool-b{background:rgba(88,166,255,.1);color:#58a6ff}
+    .pool-c{background:rgba(59,185,80,.1);color:#3fb950}
+    a{color:#58a6ff}
+    #sec-risk{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.25)!important}
+    #sec-risk h2,#sec-risk li,#sec-risk p{color:#d29922!important}
+    .toc-panel{background:#161b22}
+    .toc-toggle{background:#58a6ff}
+    .nav-back{background:rgba(22,27,34,.9);border-color:rgba(88,166,255,.2)}
+    details[style*="fffbe6"]{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.2)!important}
+    details[style*="fffbe6"] summary{color:#d29922!important}
+    details[style*="fffbe6"] div{color:#c9d1d9!important}
+  </style>
+  <!-- Reading progress bar -->
+  <style>
+    .reading-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,#58a6ff,#bc8cff);z-index:9999;transition:width 60ms linear;pointer-events:none}
   </style>
 </head>
 <body>
@@ -323,5 +365,11 @@
       </p>
     </div>
   </main>
+<script>
+(function(){
+  var bar=document.getElementById("readingProgress");
+  if(bar){window.addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=h>0?Math.min(100,(window.scrollY/h*100)).toFixed(1)+"%":"0%"},{passive:true})}
+})();
+</script>
 </body>
 </html>

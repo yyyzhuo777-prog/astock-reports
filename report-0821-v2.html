@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0f1f2f">
+  <meta name="theme-color" content="#0d1117">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>A股短线交易研究报告｜8月21日收盘复盘</title>
@@ -97,8 +97,51 @@
       section{box-shadow:none;break-inside:avoid}
     }
   </style>
+  <!-- Dark theme override -->
+  <style>
+    :root{--ink:#c9d1d9;--muted:#8b949e;--line:#30363d;--paper:#0d1117;--panel:#161b22;--red:#f85149;--green:#3fb950;--blue:#58a6ff;--gold:#d29922;--violet:#bc8cff;--shadow:0 4px 12px rgba(0,0,0,.3)}
+    body{color:#c9d1d9;background:#0d1117}
+    .topbar{background:#161b22;border-bottom:3px solid #f85149}
+    .subtitle{color:#8b949e}
+    .warning{background:rgba(210,153,34,.08);color:#d29922;border-color:rgba(210,153,34,.25)}
+    .badge{border-color:rgba(255,255,255,.12);color:#c9d1d9}
+    section{background:#161b22;border-color:#30363d;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    h1,h2,h3{color:#c9d1d9}
+    .metric{background:#0d1117;border-color:#30363d}
+    .metric .label{color:#8b949e}
+    th{color:#c9d1d9;background:#1c2530}
+    td{color:#c9d1d9}
+    .stock-card{background:#161b22;border-color:#30363d}
+    .stock-head{border-bottom-color:#30363d}
+    .stock-title{color:#c9d1d9}
+    .tag{background:#1c2530;color:#8b949e}
+    .plan div{background:#0d1117;border-left-color:#58a6ff}
+    .plan .stop{border-left-color:#3fb950}
+    .plan .target{border-left-color:#f85149}
+    .bar{background:#21262d}
+    .chain-step{background:#0d1117;border-color:#30363d}
+    .muted{color:#8b949e!important}
+    .footer-note{color:#8b949e}
+    .pool-a{background:rgba(248,81,73,.1);color:#f85149}
+    .pool-b{background:rgba(88,166,255,.1);color:#58a6ff}
+    .pool-c{background:rgba(59,185,80,.1);color:#3fb950}
+    a{color:#58a6ff}
+    #sec-risk{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.25)!important}
+    #sec-risk h2,#sec-risk li,#sec-risk p{color:#d29922!important}
+    .toc-panel{background:#161b22}
+    .toc-toggle{background:#58a6ff}
+    .nav-back{background:rgba(22,27,34,.9);border-color:rgba(88,166,255,.2)}
+    details[style*="fffbe6"]{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.2)!important}
+    details[style*="fffbe6"] summary{color:#d29922!important}
+    details[style*="fffbe6"] div{color:#c9d1d9!important}
+  </style>
+  <!-- Reading progress bar -->
+  <style>
+    .reading-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,#58a6ff,#bc8cff);z-index:9999;transition:width 60ms linear;pointer-events:none}
+  </style>
 </head>
 <body>
+  <div class="reading-progress" id="readingProgress"></div>
   <header class="topbar">
     <div class="wrap hero">
       <div>
@@ -685,6 +728,9 @@
     </section>
 
     <p class="footer-note">本报告基于公开行情数据与联网搜索结果生成，仅供研究复盘与交易计划辅助，不构成收益承诺或个性化投资建议。数据来源：腾讯行情、stock-data-skill CLI、金融界、央广网、新华社、界面新闻、21世纪经济报道、华尔街见闻、世界黄金协会。</p>
+
+    <!-- 上/下篇报告导航 -->
+    <nav id="reportPager" style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding:14px 16px;background:#161b22;border:1px solid #30363d;border-radius:8px;font-size:14px"></nav>
   </main>
 <button class="toc-toggle" id="tocToggle" title="目录">☰</button>
 <script>
@@ -717,6 +763,55 @@
   }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
+})();
+</script>
+<!-- Reading progress + Prev/Next pager -->
+<script>
+(function(){
+  // === Reading progress bar ===
+  var bar = document.getElementById('readingProgress');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = h > 0 ? Math.min(100, (window.scrollY / h * 100)).toFixed(1) + '%' : '0%';
+  }, {passive:true});
+
+  // === Prev/Next report navigation ===
+  var allReports = [
+    { date:'2026-08-21', weekday:'周五', sessions:[
+      {type:'盘前', file:'report-0821-morning.html', time:'08:00'},
+      {type:'午盘', file:'report-0821-noon.html', time:'12:00'},
+      {type:'盘后', file:'report-0821-v2.html', time:'20:30'}
+    ]},
+  ];
+  // auto-generate future entries (placeholder)
+  var today = new Date();
+  allReports.forEach(function(r){
+    var d = new Date(r.date + 'T00:00:00');
+    if(d > today) r.available = false; else r.available = true;
+  });
+
+  var currentFile = location.pathname.split('/').pop() || 'report-0821-v2.html';
+  var prev = null, next = null;
+  var found = false;
+  // Forward pass to find next
+  for(var i = allReports.length - 1; i >= 0; i--){
+    var r = allReports[i];
+    for(var j = r.sessions.length - 1; j >= 0; j--){
+      if(found && !next && r.available) next = {file: r.sessions[j].file, label: r.date.slice(5) + ' ' + r.weekday + ' ' + r.sessions[j].type};
+      if(r.sessions[j].file === currentFile) found = true;
+      if(!found) prev = {file: r.sessions[j].file, label: r.date.slice(5) + ' ' + r.weekday + ' ' + r.sessions[j].type};
+    }
+  }
+
+  var pager = document.getElementById('reportPager');
+  var html = '<div>';
+  if(prev) html += '<a href="' + prev.file + '" style="color:#58a6ff;text-decoration:none">← ' + prev.label + '</a>';
+  else html += '<span style="color:#8b949e">已是第一篇</span>';
+  html += '</div><div>';
+  if(next) html += '<a href="' + next.file + '" style="color:#58a6ff;text-decoration:none">' + next.label + ' →</a>';
+  else html += '<span style="color:#8b949e">已是最新</span>';
+  html += '</div>';
+  pager.innerHTML = html;
 })();
 </script>
 </body>
