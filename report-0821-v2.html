@@ -121,7 +121,7 @@
     <h3>📑 报告目录</h3>
     <a href="#sec-highlight">📌 最重要事项</a>
     <a href="#sec-sentiment">📊 市场情绪仪表盘</a>
-    <a href="#sec-lhb">🐉 龙虎榜·机构动向</a>
+    
     <a href="#sec-sector">🔥 主线板块与资金热度</a>
     <a href="#sec-chain">🔗 产业链深挖</a>
     <a href="#sec-plan">💡 分组交易计划</a>
@@ -158,7 +158,32 @@
         <li><strong>创新药被资金反向否决。</strong>医药生物板块净流出76.5亿，哈药股份/哈三联一字跌停，mRNA概念一日游，短期回避。</li>
         <li><strong>关键变量：8/28杰克逊霍尔央行年会。</strong>沃什首秀演讲，距9月FOMC仅18天，决定黄金和美元方向。</li>
       </ul>
-    </section>
+    
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.pool-label');
+  var rows = document.querySelectorAll('#sec-plan table tbody tr');
+  tabs.forEach(function(tab){
+    tab.style.cursor = 'pointer';
+    tab.addEventListener('click', function(){
+      var pool = tab.className.replace('pool-label ','');
+      // 切换active状态
+      tabs.forEach(function(t){ t.style.opacity = '0.5'; });
+      tab.style.opacity = '1';
+      // 筛选行
+      rows.forEach(function(row){
+        var cell = row.querySelector('td:nth-child(2) .pool-label');
+        if(cell && cell.className.indexOf(pool) >= 0){
+          row.style.display = '';
+        } else if(cell) {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
+</section>
 
     <!-- 2. 市场情绪仪表盘 -->
     <section id="sec-sentiment">
@@ -212,49 +237,7 @@
     </section>
 
     <!-- 2.5 龙虎榜·机构动向（增强版新增） -->
-    <section id="sec-lhb">
-      <h2>🐉 龙虎榜·机构动向 <span style="font-size:13px;color:#2563a8;background:#e8f0fe;padding:2px 8px;border-radius:4px;margin-left:8px">多源验证</span></h2>
-      <p class="muted">数据来源：<a href="https://caifuhao.eastmoney.com/news/20260821181427115099050" target="_blank">东方财富·游资龙虎榜</a>、<a href="https://36kr.com/newsflashes/3949140259454080" target="_blank">36氪·机构龙虎榜</a>、<a href="https://www.cls.cn/detail/2460655" target="_blank">财联社</a></p>
-
-      <h3>🏦 机构席位动向</h3>
-      <p>33只个股出现机构身影，<strong>18只净买入、15只净卖出</strong>。机构资金方向是短线最重要的验证信号之一。</p>
-      <table>
-        <thead><tr><th>方向</th><th>标的</th><th>净买入/卖出</th><th>解读</th></tr></thead>
-        <tbody>
-          <tr><td class="positive"><strong>机构净买TOP3</strong></td><td>山东黄金</td><td class="positive">+4.39亿</td><td>贵金属龙头获机构大举建仓，验证黄金主线真实性</td></tr>
-          <tr><td></td><td>沃森生物</td><td class="positive">+1.75亿</td><td>医药分歧中机构逆势加仓，看好mRNA长期逻辑</td></tr>
-          <tr><td></td><td>誉衡药业</td><td class="positive">+1.69亿</td><td>中药+创新药，机构低位布局</td></tr>
-          <tr><td class="negative"><strong>机构净卖TOP3</strong></td><td>键凯科技</td><td class="negative">-0.98亿</td><td>20cm涨停日机构反向卖出，典型的"机构卖在涨停"</td></tr>
-          <tr><td></td><td>华大智造</td><td class="negative">-0.88亿</td><td>基因测序热度退潮，机构获利了结</td></tr>
-          <tr><td></td><td>中瓷电子</td><td class="negative">-0.44亿</td><td>6天3板后机构兑现，注意高位承接力</td></tr>
-        </tbody>
-      </table>
-
-      <h3>🔥 知名游资动向</h3>
-      <table>
-        <thead><tr><th>游资</th><th>买入</th><th>卖出</th><th>信号解读</th></tr></thead>
-        <tbody>
-          <tr><td><strong>量化打板</strong></td><td>星网锐捷9482万、深科达5104万、博汇股份4546万、键凯科技3210万、天洋新材2498万</td><td>沃森生物-9229万、盛达资源-4334万、华大智造-5101万</td><td>量化重点加仓通信硬件（星网锐捷/深科达），兑现医药（沃森/华大）</td></tr>
-          <tr><td><strong>深南东路</strong></td><td>誉衡药业2.97亿</td><td>—</td><td>大游资重注医药低位票</td></tr>
-          <tr><td><strong>紫阳东路</strong></td><td>天洋新材1.06亿</td><td>通鼎互联-1.51亿</td><td>加仓CPO龙头，兑现通信中位票</td></tr>
-          <tr><td><strong>小鳄鱼</strong></td><td>中瓷电子1.15亿</td><td>—</td><td>知名游资逆势加仓，看好电子元器件</td></tr>
-          <tr><td><strong>章盟主</strong></td><td>北陆药业2445万、肯特股份1462万</td><td>宇环数控-1245万</td><td>布局20cm创业板弹性票</td></tr>
-          <tr><td><strong>葛卫东</strong></td><td>哈药股份6196万</td><td>—</td><td>逆势接刀医药，高风险博弈</td></tr>
-          <tr><td><strong>方胖</strong></td><td>华大智造8836万、康希诺8376万</td><td>—</td><td>医药+基因测序双线布局</td></tr>
-          <tr><td><strong>宁波桑田路</strong></td><td>康希诺1.12亿</td><td>—</td><td>大举押注mRNA疫苗概念</td></tr>
-          <tr><td><strong>拉萨天团</strong></td><td>通达股份1.30亿</td><td>—</td><td>军工/电缆方向</td></tr>
-        </tbody>
-      </table>
-
-      <h3>💡 龙虎榜核心结论</h3>
-      <ul class="list">
-        <li><strong>机构用真金白银投票的方向：贵金属（山东黄金+4.39亿）。</strong>这是最硬的验证信号——机构不会在涨停板上乱买，他们选了黄金龙头。</li>
-        <li><strong>量化打板资金明确转向通信硬件。</strong>星网锐捷/深科达/博汇股份获量化加仓，同时兑现医药（沃森/华大/康希诺），说明量化也认为医药一日游、通信才是持续方向。</li>
-        <li><strong>医药内部分化极端。</strong>机构净卖键凯科技（涨停日反向卖出），但深南东路大举买入誉衡药业、葛卫东逆势接刀哈药股份。游资和机构在医药方向完全对立——<strong>跟机构不跟游资</strong>，医药整体仍应回避。</li>
-        <li><strong>通信/CPO方向获得机构和量化双重确认。</strong>天洋新材获紫阳东路1.06亿加仓，星网锐捷获量化打板9482万——这是"真主线"的信号。</li>
-        <li><strong>章盟主布局创业板20cm弹性票</strong>（北陆药业/肯特股份），说明大游资看好创业板补涨逻辑。</li>
-      </ul>
-    </section>
+    
 
     <!-- 3. 主线板块与资金热度 -->
     <section id="sec-sector">
