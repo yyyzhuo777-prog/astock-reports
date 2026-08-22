@@ -558,4 +558,16 @@ window.addEventListener("scroll", function() {
   var startY = 0;
   document.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
   document.addEventListener('touchmove', function(e){
-   
+    if(window.scrollY === 0 && e.touches[0].clientY - startY > 60){
+      hint.style.display = 'block';
+      setTimeout(function(){ hint.style.display = 'none'; }, 3000);
+    }
+  }, {passive:true});
+})();
+
+// 初始化
+render();
+</script>
+
+</body>
+</html>
