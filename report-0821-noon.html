@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1f2f">
+  <title>A股午盘快报｜8月21日 周五</title>
+  <style>
+    :root{--ink:#15202b;--muted:#5c6675;--line:#d7dde6;--paper:#f6f8fb;--panel:#fff;--red:#c93636;--green:#16845f;--blue:#2563a8;--gold:#a56b00;--violet:#6c4bb8;--shadow:0 10px 30px rgba(22,34,51,.08)}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.58}
+    .topbar{background:#0f1f2f;color:#f9fbff;border-bottom:5px solid #2d9cdb}
+    .wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    .hero{padding:30px 0 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}
+    h1{margin:0 0 8px;font-size:34px;line-height:1.16}
+    .subtitle{margin:0;color:#c7d1df;font-size:15px}
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .badge{border:1px solid rgba(255,255,255,.26);border-radius:6px;padding:6px 9px;font-size:13px;color:#eef4ff;white-space:nowrap}
+    .warning{margin-top:14px;padding:10px 12px;border-radius:6px;background:#fff2cf;color:#5c3d00;border:1px solid #e5c77d;font-size:14px}
+    main{padding:24px 0 38px}
+    section{margin:20px 0;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+    h2{margin:0 0 16px;font-size:22px;line-height:1.25}
+    h3{margin:18px 0 10px;font-size:17px}
+    .grid{display:grid;gap:14px}
+    .grid.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .metric{padding:15px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe}
+    .metric .label{color:var(--muted);font-size:13px;margin-bottom:5px}
+    .metric .value{font-size:24px;font-weight:750;line-height:1.2}
+    .positive{color:var(--red)}
+    .negative{color:var(--green)}
+    .neutral{color:var(--blue)}
+    .muted{color:var(--muted)}
+    .list{margin:0;padding-left:20px}
+    .list li{margin:8px 0}
+    table{width:100%;border-collapse:collapse;font-size:14px;overflow-wrap:anywhere}
+    th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{color:#344054;background:#f1f4f8;font-weight:700}
+    .footer-note{color:var(--muted);font-size:13px;margin-top:18px}
+    .nav-back{position:fixed;top:12px;right:12px;padding:6px 12px;background:rgba(15,31,47,.85);color:#58a6ff;text-decoration:none;font-size:12px;border-radius:6px;z-index:100;backdrop-filter:blur(8px);border:1px solid rgba(88,166,255,.2)}
+    .nav-back:hover{background:rgba(88,166,255,.15)}
+    .flow-card{padding:14px;border-radius:8px;border:1px solid var(--line);margin:8px 0}
+    .flow-card.hot{background:#fef3f0;border-color:#f5c6c6}
+    .flow-card.cold{background:#f0f7fe;border-color:#b8d4f0}
+    .divider{margin:16px 0;border:0;border-top:1px solid var(--line)}
+    @media(max-width:860px){
+      .hero,.grid.metrics,.grid.two{grid-template-columns:1fr}
+      .badge-row{justify-content:flex-start}
+      h1{font-size:27px}
+      section{padding:17px}
+      table{font-size:13px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap hero">
+      <div>
+        <h1>A股午盘快报｜8月21日 周五</h1>
+        <p class="subtitle">半日盘面 × 午间数据 × 午后展望 × 操作提示</p>
+        <div class="warning">⚠️ 半日成交1.25万亿（较昨日缩量1179亿），1834涨/3557跌，极致割裂。没买黄金/锂矿/算力的账户今天大概率是绿的。47只涨停/12只跌停，封板率69.1%。指数红、个股绿，典型"赚指数不赚钱"。</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">📅 2026-08-21 周五</span>
+        <span class="badge">☀️ 午盘快报</span>
+        <span class="badge">💰 半日1.25万亿</span>
+        <span class="badge">📡 数据状态：在线</span>
+      </div>
+    </div>
+  </header>
+  <a class="nav-back" href="index.html">← 返回导航</a>
+  <main>
+    <div class="wrap">
+
+      <!-- 半日指数 -->
+      <section id="sec-index">
+        <h2>📊 半日指数概览（截至11:30）</h2>
+        <div class="grid metrics">
+          <div class="metric">
+            <div class="label">上证指数</div>
+            <div class="value neutral">3903.81 <small>+0.00%</small></div>
+            <div class="muted" style="font-size:13px">死守3900平盘线</div>
+          </div>
+          <div class="metric">
+            <div class="label">深证成指</div>
+            <div class="value positive">14061.45 <small>+0.63%</small></div>
+          </div>
+          <div class="metric">
+            <div class="label">创业板指</div>
+            <div class="value positive">3537.98 <small>+1.21%</small></div>
+            <div class="muted" style="font-size:13px">新能源+医药权重拉</div>
+          </div>
+          <div class="metric">
+            <div class="label">科创50</div>
+            <div class="value positive">1654.19 <small>+0.07%</small></div>
+            <div class="muted" style="font-size:13px">微红，半导体闷声</div>
+          </div>
+        </div>
+        <div class="grid metrics" style="margin-top:12px">
+          <div class="metric">
+            <div class="label">半日成交</div>
+            <div class="value neutral">1.25万亿</div>
+            <div class="muted" style="font-size:13px">较昨日缩量1179亿</div>
+          </div>
+          <div class="metric">
+            <div class="label">涨跌家数</div>
+            <div class="value negative">1834涨/3557跌</div>
+            <div class="muted" style="font-size:13px">赚钱效应仅34%</div>
+          </div>
+          <div class="metric">
+            <div class="label">涨停/跌停</div>
+            <div class="value positive">47涨停/12跌停</div>
+          </div>
+          <div class="metric">
+            <div class="label">封板率</div>
+            <div class="value neutral">69.1%</div>
+            <div class="muted" style="font-size:13px">17股炸板</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 盘面核心特征 -->
+      <section id="sec-feature">
+        <h2>🔍 上午盘面核心特征</h2>
+        <div style="padding:14px;border-left:4px solid var(--red);background:#fef8f6;border-radius:6px;margin-bottom:12px">
+          <strong>一句话定性：</strong>"指数美容、个股裸泳"。沪指低开后探3883，资金拉权重回3903。创业板靠新能源+医药权重硬拉+1.21%，但3500只个股绿着。
+        </div>
+        <div class="grid two">
+          <div class="flow-card hot">
+            <h3>🔥 领涨方向</h3>
+            <ul class="list">
+              <li><strong>贵金属</strong>：金价破4540美元映射。深中华A 2连板、湖南白银/白银有色/福达合金涨停</li>
+              <li><strong>锂矿/能源金属</strong>：碳酸锂站上15.6万/吨。融捷股份涨停，大中矿业/盛新锂能涨超6%</li>
+              <li><strong>算力/CPO</strong>：瑞斯康达/星网锐捷涨停，新易盛涨超5%，寒武纪涨超3%。SK海力士CPO论文催化</li>
+              <li><strong>液冷服务器</strong>：飞龙股份/金富科技涨停</li>
+              <li><strong>数字货币</strong>：楚天龙涨停，比特币破73000映射</li>
+              <li><strong>机器人</strong>：哈森股份5天4板领涨，宇环数控/科森科技2连板</li>
+            </ul>
+          </div>
+          <div class="flow-card cold">
+            <h3>💧 领跌方向</h3>
+            <ul class="list">
+              <li><strong>医药生物大退潮</strong>：Moderna盘后-23.5%带崩。哈三联/美诺华跌停，博腾/安科跌超10%，CRO/减肥药崩塌</li>
+              <li><strong>农业种植</strong>：神农种业/秋乐种业/康农种业/登海种业集体下挫，昨日避险资金流出</li>
+              <li><strong>多模态AI/零售/地产</strong>：题材退潮，高位接盘资金撤出</li>
+              <li><strong>房地产</strong>：沪八条兑现，资金不追反撤</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 午间资金数据 -->
+      <section id="sec-fund">
+        <h2>💰 午间资金流向</h2>
+        <table>
+          <tr><th>题材/板块</th><th>净流入(亿)</th><th>方向</th></tr>
+          <tr><td>5G概念</td><td class="positive">+96.67</td><td>居首</td></tr>
+          <tr><td>CPO概念</td><td class="positive">+90.07</td><td>算力硬件回流</td></tr>
+          <tr><td>2026中报预增</td><td class="positive">+85.82</td><td>业绩驱动</td></tr>
+          <tr><td>国产芯片</td><td class="positive">+43.76</td><td>半导体企稳</td></tr>
+          <tr><td>小金属概念</td><td class="positive">+42.78</td><td>贵金属映射</td></tr>
+          <tr><td>医药生物</td><td class="negative">大幅流出</td><td>获利兑现</td></tr>
+          <tr><td>化学制药</td><td class="negative">流出</td><td>CRO退潮</td></tr>
+        </table>
+        <h3>北向资金（早盘）</h3>
+        <p>沪股通净流出约29亿，深股通净流出约7亿，合计净流出约36亿。外资在调仓而非撤退——减持前期科技题材股，逆势加仓黄金贵金属和有色金属。</p>
+        <p><strong>央行操作</strong>：950亿元7天期逆回购（利率1.40%），打破连续10天零投放，释放流动性呵护意图。</p>
+      </section>
+
+      <!-- 连板梯队 -->
+      <section id="sec-ladder">
+        <h2>🪜 午间连板梯队</h2>
+        <table>
+          <tr><th>板数</th><th>个股</th><th>方向</th></tr>
+          <tr><td><strong>3连板</strong></td><td>汉森制药（一字板）</td><td>中药医药</td></tr>
+          <tr><td rowspan="5"><strong>2连板</strong></td><td>键凯科技（20cm一字板）</td><td>化学制药/创新药</td></tr>
+          <tr><td>近岸蛋白（20cm）</td><td>生物制品</td></tr>
+          <tr><td>通鼎互联</td><td>光通信</td></tr>
+          <tr><td>科森科技</td><td>消费电子/机器人</td></tr>
+          <tr><td>深中华A</td><td>贵金属</td></tr>
+          <tr><td><strong>趋势多日板</strong></td><td>天洋新材 8天5板 / 旭光电子 6天4板 / 哈森股份 5天4板</td><td>光通信+机器人</td></tr>
+        </table>
+        <p><strong>晋级率偏弱</strong>：1进2约13%，2进3约33%，整体短线情绪偏弱。昨日涨停79家，今日断板率高。</p>
+      </section>
+
+      <!-- 午后展望 -->
+      <section id="sec-afternoon">
+        <h2>🔮 午后三大看点</h2>
+        <div class="grid" style="gap:12px">
+          <div style="padding:14px;border-left:4px solid var(--blue);background:#f0f7fe;border-radius:6px">
+            <strong>1. 3900能否守住</strong><br>
+            午盘收3903.81。午后若跌破3890且跌停扩到50+，则昨日缩量小红包失效，下看3850。若放量站上3910，短线修复延续。
+          </div>
+          <div style="padding:14px;border-left:4px solid var(--gold);background:#fef9ec;border-radius:6px">
+            <strong>2. 黄金/锂矿是否冲高回落</strong><br>
+            深中华A若开板，说明避险票也开始派发。贵金属/锂矿上午已充分定价利好，午后追高风险大。
+          </div>
+          <div style="padding:14px;border-left:4px solid var(--violet);background:#f5f0fe;border-radius:6px">
+            <strong>3. 周五+期指交割日效应</strong><br>
+            尾盘波动放大概率高。缩量反抽不追，周五控仓过周末是稳妥选择。关注14:30后的异动。
+          </div>
+        </div>
+      </section>
+
+      <!-- 午后操作建议 -->
+      <section id="sec-action">
+        <h2>💡 午后操作提示</h2>
+        <table>
+          <tr><th style="width:25%">方向</th><th>午后策略</th><th>理由</th></tr>
+          <tr><td>贵金属/黄金</td><td>持有观望，不追高</td><td>上午已充分定价，午后若冲高注意减仓</td></tr>
+          <tr><td>锂矿</td><td>观望为主</td><td>碳酸锂逻辑扎实但短线已反应，追高不划算</td></tr>
+          <tr><td>CPO/算力</td><td>观察午后能否维持</td><td>若午后不回落，下周可继续看好</td></tr>
+          <tr><td>医药</td><td>回避</td><td>退潮中，CRO/减肥药继续杀，中药也分化</td></tr>
+          <tr><td>农业</td><td>回避</td><td>资金流出，补跌未完</td></tr>
+          <tr><td>尾盘操作</td><td>控仓过周末</td><td>周五+交割日+消息面不确定，不宜重仓</td></tr>
+        </table>
+        <div style="margin-top:16px;padding:14px;border:2px solid var(--gold);border-radius:8px;background:#fef9ec">
+          <strong>⚠️ 总仓位建议：不超过40%</strong><br>
+          上午的盘面验证了盘前判断——指数红、个股绿、资金高度集中。非主线方向赚钱效应极差。午后以防守为主，控仓过周末。
+        </div>
+      </section>
+
+      <p class="footer-note">
+        📌 本报告基于公开信息整理，数据来源：东方财富、36氪、证券时报、同花顺。不构成投资建议，市场有风险，投资需谨慎。<br>
+        ⏱ 数据截至：2026-08-21 11:30 午间休盘 | A股短线交易研报系统
+      </p>
+    </div>
+  </main>
+</body>
+</html>
