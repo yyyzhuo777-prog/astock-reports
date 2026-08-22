@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>可视化Demo - A股报告图表效果预览</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <style>
+    :root{--red:#c93636;--green:#16845f;--blue:#2563a8;--gold:#a56b00;--muted:#5c6675;--line:#d7dde6;--paper:#f6f8fb;--ink:#15202b}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{color:var(--ink);background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.55;padding:16px}
+    .wrap{max-width:500px;margin:0 auto}
+    h1{font-size:20px;text-align:center;margin-bottom:4px}
+    .sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.04)}
+    .card h2{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+    .card canvas{width:100%!important;max-height:200px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .row2 .card{margin-bottom:0}
+    .demo-tag{display:inline-block;background:#eef3f9;color:var(--blue);font-size:11px;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle}
+    .positive{color:var(--red)}
+    .negative{color:var(--green)}
+    .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:20px;padding:12px 0}
+    @media(max-width:400px){.row2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📊 报告可视化效果预览</h1>
+  <p class="sub">以8/21盘后数据为例，展示图表样式</p>
+
+  <!-- 情绪仪表盘 -->
+  <div class="row2">
+    <div class="card">
+      <h2>🎯 情绪仪表盘</h2>
+      <canvas id="c1"></canvas>
+    </div>
+    <div class="card">
+      <h2>📊 涨跌停</h2>
+      <canvas id="c2"></canvas>
+    </div>
+  </div>
+
+  <!-- 指数涨跌 -->
+  <div class="card">
+    <h2>📈 指数涨跌幅</h2>
+    <canvas id="c3"></canvas>
+  </div>
+
+  <!-- 板块资金 -->
+  <div class="card">
+    <h2>💰 板块主力资金净流入<span class="demo-tag">TOP 8</span></h2>
+    <canvas id="c4" style="max-height:260px!important"></canvas>
+  </div>
+
+  <!-- 连板梯队 + 成交对比 -->
+  <div class="row2">
+    <div class="card">
+      <h2>🔗 连板梯队</h2>
+      <canvas id="c5"></canvas>
+    </div>
+    <div class="card">
+      <h2>📉 成交额</h2>
+      <canvas id="c6"></canvas>
+    </div>
+  </div>
+
+  <div class="footer">Demo预览 · 数据来自8/21实际报告 · 正式报告将嵌入相同图表</div>
+</div>
+
+<script>
+(function(){
+  var R='#c93636',G='#16845f',B='#2563a8',GO='#a56b00';
+  var ff="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif";
+  Chart.defaults.font.family=ff;
+  Chart.defaults.font.size=12;
+
+  // 情绪仪表盘
+  new Chart(document.getElementById('c1'),{
+    type:'doughnut',
+    data:{labels:['情绪48','剩余'],datasets:[{data:[48,52],backgroundColor:[R,'#e8ecf1'],borderWidth:0,circumference:180,rotation:270}]},
+    options:{cutout:'70%',plugins:{legend:{display:false}},responsive:true,maintainAspectRatio:true},
+    plugins:[{afterDraw:function(ch){var c=ch.ctx,w=ch.width,h=ch.height;c.save();c.font='bold 26px '+ff;c.fillStyle=R;c.textAlign='center';c.textBaseline='middle';c.fillText('48',w/2,h*0.56);c.font='11px '+ff;c.fillStyle='#5c6675';c.fillText('偏弱',w/2,h*0.56+20);c.restore()}}]
+  });
+
+  // 涨跌停
+  new Chart(document.getElementById('c2'),{
+    type:'doughnut',
+    data:{labels:['涨停54','炸板18','跌停14'],datasets:[{data:[54,18,14],backgroundColor:[R,GO,G],borderWidth:2,borderColor:'#fff'}]},
+    options:{cutout:'50%',plugins:{legend:{position:'bottom',labels:{padding:8,usePointStyle:true,pointStyleWidth:6,font:{size:10}}},tooltip:{callbacks:{label:function(c){return c.label+': '+c.raw+'家'}}}},responsive:true,maintainAspectRatio:true}
+  });
+
+  // 指数涨跌
+  new Chart(document.getElementById('c3'),{
+    type:'bar',
+    data:{labels:['上证','深成指','创业板','科创50','北证50'],datasets:[{data:[0.04,0.87,1.43,0.04,-0.57],backgroundColor:[R,R,R,R,G],borderRadius:4,barPercentage:0.55}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.raw>0?'+':'')+c.raw+'%'}}}},scales:{x:{grid:{color:'#f0f0f0'},ticks:{callback:function(v){return v+'%'}}},y:{grid:{display:false}}},responsive:true,maintainAspectRatio:true},
+    plugins:[{afterDatasetsDraw:function(ch){var c=ch.ctx;ch.data.datasets[0].data.forEach(function(v,i){var m=ch.getDatasetMeta(0).data[i];c.save();c.font='bold 11px '+ff;c.fillStyle=v>=0?R:G;c.textAlign='left';c.textBaseline='middle';c.fillText((v>0?'+':'')+v+'%',m.x+6,m.y);c.restore()})}}]
+  });
+
+  // 板块资金
+  new Chart(document.getElementById('c4'),{
+    type:'bar',
+    data:{labels:['光模块','CPO概念','通信设备','黄金概念','PCB','国产芯片','锂矿概念','创新药'],datasets:[{data:[102.16,100.34,84.57,67.84,62.48,53.41,38.54,-76.5],backgroundColor:[R,R,R,R,R,R,R,G],borderRadius:4,barPercentage:0.6}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return (c.raw>0?'+':'')+c.raw+'亿'}}}},scales:{x:{grid:{color:'#f0f0f0'},ticks:{callback:function(v){return v+'亿'}}},y:{grid:{display:false}}},responsive:true,maintainAspectRatio:true},
+    plugins:[{afterDatasetsDraw:function(ch){var c=ch.ctx;ch.data.datasets[0].data.forEach(function(v,i){var m=ch.getDatasetMeta(0).data[i];c.save();c.font='bold 11px '+ff;c.fillStyle=v>=0?R:G;c.textAlign=v>=0?'left':'right';c.textBaseline='middle';c.fillText((v>0?'+':'')+v+'亿',m.x+(v>=0?5:-5),m.y);c.restore()})}}]
+  });
+
+  // 连板梯队
+  new Chart(document.getElementById('c5'),{
+    type:'bar',
+    data:{labels:['涨停','炸板','晋级率'],datasets:[{data:[54,18,25],backgroundColor:[R,GO,B],borderRadius:5,barPercentage:0.5}]},
+    options:{plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{display:false,beginAtZero:true}},responsive:true,maintainAspectRatio:true},
+    plugins:[{afterDatasetsDraw:function(ch){var c=ch.ctx;ch.data.datasets[0].data.forEach(function(v,i){var m=ch.getDatasetMeta(0).data[i];c.save();c.font='bold 14px '+ff;c.fillStyle='#15202b';c.textAlign='center';c.textBaseline='bottom';c.fillText(v+(i===2?'%':''),m.x,m.y-4);c.restore()})}}]
+  });
+
+  // 成交额对比
+  new Chart(document.getElementById('c6'),{
+    type:'bar',
+    data:{labels:['8/20','8/21'],datasets:[{data:[2.08,1.88],backgroundColor:[B,'#5b8fd9'],borderRadius:5,barPercentage:0.4}]},
+    options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw+'万亿'}}}},scales:{x:{grid:{display:false}},y:{min:1.5,max:2.3,grid:{color:'#f0f0f0'},ticks:{callback:function(v){return v+'万亿'},font:{size:9}}}},responsive:true,maintainAspectRatio:true},
+    plugins:[{afterDatasetsDraw:function(ch){var c=ch.ctx;ch.data.datasets[0].data.forEach(function(v,i){var m=ch.getDatasetMeta(0).data[i];c.save();c.font='bold 13px '+ff;c.fillStyle='#15202b';c.textAlign='center';c.textBaseline='bottom';c.fillText(v+'万亿',m.x,m.y-4);c.restore()})}}]
+  });
+
+})();
+</script>
+</body>
+</html>
