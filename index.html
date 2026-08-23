@@ -26,13 +26,16 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
     line-height: 1.5;
-    padding: 16px;
-    padding-bottom: 80px;
-    max-width: 720px;
+    width: 100%;
+    max-width: 1280px;
+    min-height: 100vh;
     margin: 0 auto;
+    padding: 16px;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
   }
+  .dashboard-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
   .header {
     text-align: center;
     padding: 20px 0 12px;
@@ -47,11 +50,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .header .subtitle {
-    font-size: 13px;
-    color: var(--text2);
-    margin-top: 4px;
-  }
+  .header .subtitle { font-size: 13px; color: var(--text2); margin-top: 4px; }
   .status-bar {
     display: flex;
     align-items: center;
@@ -65,15 +64,14 @@
     margin-bottom: 12px;
   }
   .status-dot {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--green);
     animation: pulse 2s infinite;
+    flex: 0 0 auto;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes pulse { 0%,100% {opacity:1} 50% {opacity:.4} }
   .snapshot {
     background: linear-gradient(135deg, #1a2332, #161b22);
     border: 1px solid var(--border);
@@ -99,12 +97,40 @@
     align-items: center;
     gap: 6px;
   }
-  .snapshot-date {
-    font-size: 11px;
-    color: var(--text2);
-    font-weight: 400;
-    margin-left: auto;
+  .snapshot-date { font-size: 11px; color: var(--text2); font-weight: 400; margin-left: auto; }
+  .emotion-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 14px 10px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(88,166,255,.12), rgba(188,140,255,.08));
+    border: 1px solid rgba(88,166,255,.25);
+    border-radius: 10px;
   }
+  .emotion-num {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .emotion-num small { font-size: 16px; -webkit-text-fill-color: var(--text2); color: var(--text2); }
+  .emotion-text { font-size: 15px; font-weight: 700; }
+  .emotion-level {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .emotion-level.hot { background: rgba(248,81,73,.15); color: var(--red); }
+  .emotion-level.neutral { background: rgba(210,153,34,.15); color: var(--orange); }
+  .emotion-level.cold { background: rgba(63,185,80,.15); color: var(--green); }
   .snapshot-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -114,9 +140,9 @@
   .snap-item {
     text-align: center;
     padding: 8px 4px;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255,255,255,.03);
     border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,.05);
   }
   .snap-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
   .snap-value { font-size: 15px; font-weight: 700; }
@@ -125,236 +151,318 @@
   .snap-neutral { color: var(--orange); }
   .snapshot-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .snap-tag {
-    font-size: 11px; padding: 3px 8px; border-radius: 4px;
-    background: rgba(88,166,255,0.1); color: var(--accent);
-    border: 1px solid rgba(88,166,255,0.2);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(88,166,255,.1);
+    color: var(--accent);
+    border: 1px solid rgba(88,166,255,.2);
   }
-  .snap-tag.hot {
-    background: rgba(248,81,73,0.1); color: var(--red);
-    border-color: rgba(248,81,73,0.2);
-  }
-  /* 情绪分视觉中心 */
-  .emotion-hero {
-    display: flex; align-items: center; justify-content: center; gap: 14px;
-    padding: 14px 10px; margin-bottom: 12px;
-    background: linear-gradient(135deg, rgba(88,166,255,0.12), rgba(188,140,255,0.08));
-    border: 1px solid rgba(88,166,255,0.25);
-    border-radius: 10px;
-  }
-  .emotion-num {
-    font-size: 42px; font-weight: 800; line-height: 1;
-    background: linear-gradient(135deg, var(--accent), var(--purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    font-variant-numeric: tabular-nums;
-  }
-  .emotion-num small { font-size: 16px; -webkit-text-fill-color: var(--text2); color: var(--text2); }
-  .emotion-text { font-size: 15px; font-weight: 700; }
-  .emotion-text .emotion-level {
-    display: inline-block; margin-top: 4px; padding: 2px 10px;
-    border-radius: 12px; font-size: 12px; font-weight: 600;
-  }
-  .emotion-level.hot { background: rgba(248,81,73,0.15); color: var(--red); }
-  .emotion-level.neutral { background: rgba(210,153,34,0.15); color: var(--orange); }
-  .emotion-level.cold { background: rgba(63,185,80,0.15); color: var(--green); }
-  /* 市场判断 */
+  .snap-tag.hot { background: rgba(248,81,73,.1); color: var(--red); border-color: rgba(248,81,73,.2); }
   .snapshot-judge {
-    font-size: 12px; color: var(--text); line-height: 1.6;
-    padding: 8px 10px; margin-top: 10px;
-    background: rgba(255,255,255,0.03);
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 8px 10px;
+    margin-top: 10px;
+    background: rgba(255,255,255,.03);
     border-left: 3px solid var(--orange);
     border-radius: 0 6px 6px 0;
   }
+  .snapshot-judge:empty { display: none; }
   .snapshot-judge b { color: var(--orange); }
-  /* 查看完整报告 */
   .snapshot-link-row { margin-top: 10px; text-align: center; }
   .snapshot-link-row a {
-    display: inline-block; padding: 7px 16px;
-    background: rgba(88,166,255,0.12); color: var(--accent);
-    border: 1px solid rgba(88,166,255,0.3);
-    border-radius: 18px; font-size: 12px; font-weight: 600;
+    display: inline-block;
+    padding: 7px 16px;
+    background: rgba(88,166,255,.12);
+    color: var(--accent);
+    border: 1px solid rgba(88,166,255,.3);
+    border-radius: 18px;
+    font-size: 12px;
+    font-weight: 600;
     text-decoration: none;
   }
-  .snapshot-link-row a:hover { background: rgba(88,166,255,0.2); }
   .section { margin-bottom: 20px; }
   .section-title {
-    font-size: 15px; font-weight: 600; color: var(--accent);
-    margin-bottom: 10px; padding-left: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-left: 8px;
     border-left: 3px solid var(--accent);
   }
   .quick-scroll {
-    display: flex; gap: 8px; overflow-x: auto;
-    padding-bottom: 8px; -webkit-overflow-scrolling: touch;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
   }
   .quick-scroll::-webkit-scrollbar { display: none; }
   .quick-card {
-    flex: 0 0 auto; min-width: 130px; padding: 10px 12px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; text-decoration: none; color: var(--text);
-    transition: border-color 0.15s;
+    flex: 0 0 auto;
+    min-width: min(82vw, 290px);
+    scroll-snap-align: start;
+    padding: 10px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
   }
-  .quick-card:hover { border-color: var(--accent); }
-  .quick-card .qc-date {
-    font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 4px;
+  .quick-card.active { border-color: rgba(88,166,255,.7); background: rgba(88,166,255,.05); }
+  .quick-card .qc-date { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+  .quick-card .qc-summary { font-size: 11px; color: var(--text2); line-height: 1.45; min-height: 32px; }
+  .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 8px; }
+  .quick-btn {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7px 6px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 11px;
+    background: rgba(255,255,255,.025);
   }
-  .quick-card .qc-info { font-size: 11px; color: var(--text2); line-height: 1.4; }
-  .quick-card.active { border-color: var(--accent); background: rgba(88,166,255,0.05); }
-  .quick-card.disabled { opacity: 0.4; pointer-events: none; }
-  .report-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
-  .date-group {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 6px; overflow: hidden;
-  }
-  .date-header {
-    background: rgba(88,166,255,0.06); padding: 5px 10px;
-    font-size: 13px; font-weight: 600; color: var(--accent);
-    display: flex; align-items: center; gap: 6px;
-  }
-  .date-header .weekday { font-size: 11px; color: var(--text2); font-weight: 400; }
-  .report-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-  .report-link {
-    display: flex; align-items: center; justify-content: center; gap: 4px;
-    padding: 6px 4px; text-decoration: none; color: var(--text);
-    font-size: 12px; text-align: center; transition: background 0.15s;
-    border-right: 1px solid var(--border);
-  }
-  .report-link:last-child { border-right: none; }
-  .report-link:hover { background: rgba(88,166,255,0.08); }
-  .report-link.disabled { color: var(--text2); opacity: 0.4; pointer-events: none; }
-  .report-link .time { font-size: 10px; color: var(--text2); display: block; margin-top: 1px; }
-
-  /* === 明日关注 === */
+  .quick-btn:hover { border-color: var(--accent); background: rgba(88,166,255,.08); }
+  .quick-btn.disabled { opacity: .35; pointer-events: none; }
   .focus-list { display: flex; flex-direction: column; gap: 6px; }
   .focus-item {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: 13px; color: var(--text); line-height: 1.5;
-    padding: 6px 10px; background: rgba(255,255,255,0.03);
-    border-radius: 6px; border-left: 2px solid var(--accent);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+    padding: 6px 10px;
+    background: rgba(255,255,255,.03);
+    border-radius: 6px;
+    border-left: 2px solid var(--accent);
   }
   .focus-item .f-num {
-    flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%;
-    background: rgba(88,166,255,0.15); color: var(--accent);
-    font-size: 11px; font-weight: 700; display: flex;
-    align-items: center; justify-content: center; margin-top: 1px;
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(88,166,255,.15);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
   }
   .focus-empty { font-size: 12px; color: var(--text2); padding: 8px 4px; }
-
-  /* === 交易纪律（独立区） === */
   .discipline-strip {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    font-size: 12px; color: var(--text);
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    font-size: 12px;
+    color: var(--text);
   }
+  .discipline-strip::-webkit-scrollbar { display: none; }
   .discipline-strip span {
-    padding: 4px 10px; border-radius: 6px;
-    background: rgba(255,255,255,0.04);
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(255,255,255,.04);
     border: 1px solid var(--border);
   }
-
-  /* === 数据源分组 === */
-  .source-category { margin-bottom: 14px; }
-  .source-category-title {
-    font-size: 12px; font-weight: 600; color: var(--text2);
-    margin-bottom: 6px; padding-left: 4px; text-transform: uppercase; letter-spacing: 1px;
-  }
-  .quick-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .quick-link {
-    display: flex; align-items: center; gap: 8px; padding: 10px 12px;
-    background: var(--card); border: 1px solid var(--border); border-radius: 6px;
-    text-decoration: none; color: var(--text); font-size: 13px;
-    transition: background 0.15s;
-  }
-  .quick-link:hover { background: rgba(88,166,255,0.06); border-color: var(--accent); }
-  .quick-link .icon { font-size: 16px; }
-  .quick-link .name { font-weight: 500; }
-  .quick-link .desc { font-size: 11px; color: var(--text2); }
-
-  /* === 搜索框 === */
-  .search-box {
-    display: flex; align-items: center; gap: 8px;
-    padding: 8px 12px; background: var(--card);
-    border: 1px solid var(--border); border-radius: 8px;
-    margin-bottom: 12px;
-  }
-  .search-box input {
-    flex: 1; background: transparent; border: none;
-    color: var(--text); font-size: 14px; outline: none;
-  }
-  .search-box input::placeholder { color: var(--text2); }
-  .search-box .search-icon { color: var(--text2); font-size: 14px; }
-
-  /* === 待生成占位动画 === */
-  .pending-dot {
-    display: inline-block; width: 6px; height: 6px;
-    border-radius: 50%; background: var(--accent);
-    margin: 0 2px; animation: dotPulse 1.4s infinite ease-in-out;
-  }
-  .pending-dot:nth-child(2) { animation-delay: 0.2s; }
-  .pending-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes dotPulse {
-    0%, 80%, 100% { transform: scale(0.4); opacity: 0.3; }
-    40% { transform: scale(1); opacity: 1; }
-  }
-  .pending-text {
-    font-size: 11px; color: var(--text2);
-    display: flex; align-items: center; justify-content: center; gap: 2px;
-  }
-
-  /* === 月筛选器 === */
   .month-filter {
-    display: flex; gap: 6px; overflow-x: auto;
-    padding-bottom: 6px; margin-bottom: 10px;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
     scrollbar-width: none;
   }
   .month-filter::-webkit-scrollbar { display: none; }
   .month-btn {
-    flex: 0 0 auto; padding: 4px 12px; border-radius: 14px;
-    font-size: 12px; font-weight: 500; cursor: pointer;
-    background: var(--card); color: var(--text2);
-    border: 1px solid var(--border); transition: all 0.15s;
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--card);
+    color: var(--text2);
+    border: 1px solid var(--border);
   }
-  .month-btn.active {
-    background: rgba(88,166,255,0.15); color: var(--accent);
-    border-color: var(--accent);
+  .month-btn.active { background: rgba(88,166,255,.15); color: var(--accent); border-color: var(--accent); }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
   }
-
+  .search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 16px;
+    outline: none;
+  }
+  .search-box input::placeholder { color: var(--text2); }
+  .report-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  .date-group { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .date-header {
+    background: rgba(88,166,255,.06);
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .date-header .weekday { font-size: 11px; color: var(--text2); font-weight: 400; }
+  .report-links { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .report-link {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 4px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 12px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .report-link:last-child { border-right: none; }
+  .report-link:hover { background: rgba(88,166,255,.08); }
+  .report-link.disabled { color: var(--text2); opacity: .4; pointer-events: none; }
+  .report-link .time { font-size: 10px; color: var(--text2); display: block; margin-top: 1px; }
+  .pending-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: dotPulse 1.4s infinite ease-in-out;
+  }
+  @keyframes dotPulse { 0%,80%,100% {transform:scale(.4);opacity:.3} 40% {transform:scale(1);opacity:1} }
   .footer {
-    text-align: center; padding: 16px 0; font-size: 11px;
-    color: var(--text2); border-top: 1px solid var(--border); margin-top: 20px;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 11px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
   }
+  .footer .schedule-inline { margin-bottom: 6px; color: var(--text); }
   .back-top {
-    position: fixed; bottom: 24px; right: 24px;
-    width: 40px; height: 40px; border-radius: 50%;
-    background: var(--accent); color: #fff; border: none;
-    font-size: 18px; cursor: pointer; opacity: 0;
-    transition: opacity 0.2s; display: flex;
-    align-items: center; justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 100;
+    position: fixed;
+    bottom: calc(20px + env(safe-area-inset-bottom));
+    right: max(16px, env(safe-area-inset-right));
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    z-index: 100;
   }
   .back-top.show { opacity: 1; }
+  @media (max-width: 420px) {
+    body { padding: 12px; padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+    .header { padding-top: 14px; }
+    .emotion-hero { justify-content: flex-start; padding-left: 14px; }
+    .emotion-num { font-size: 38px; }
+    .snapshot { padding: 14px; }
+    .snapshot-grid { gap: 6px; }
+    .snap-value { font-size: 14px; }
+    .quick-card { min-width: min(86vw, 270px); }
+    .status-bar { gap: 6px; padding: 8px 10px; }
+    .footer { padding-left: 4px; padding-right: 4px; }
+  }
 
-  /* ===== 底部信息区（时间轴 + 纪律墙 + 今日重点） ===== */
-  .bottom-meta { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
-  .meta-block {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; padding: 14px 16px;
+  @media (min-width: 720px) {
+    body { padding: 20px; padding-bottom: 88px; }
+    .header h1 { font-size: 24px; }
+    .snapshot { padding: 18px; }
+    .emotion-num { font-size: 46px; }
+    .snap-item { padding: 10px 6px; }
   }
-  .meta-title {
-    font-size: 12px; font-weight: 600; color: var(--text1);
-    margin-bottom: 10px; letter-spacing: 0.3px;
+
+  @media (min-width: 960px) {
+    body { padding: 24px 28px 96px; }
+    .header { padding-top: 14px; margin-bottom: 14px; }
+    .header h1 { font-size: 26px; }
+    .status-bar { margin-bottom: 16px; }
+    .dashboard-grid {
+      grid-template-columns: minmax(0, 1.45fr) minmax(340px, .75fr);
+      column-gap: 20px;
+      row-gap: 14px;
+      align-items: start;
+    }
+    .snapshot { grid-column: 1; grid-row: 1 / span 3; margin-bottom: 0; }
+    .recent-section { grid-column: 2; grid-row: 1; margin-bottom: 0; }
+    .focus-section { grid-column: 2; grid-row: 2; margin-bottom: 0; }
+    .quotes-section { grid-column: 2; grid-row: 3; margin-bottom: 0; }
+    .history-section { grid-column: 1 / -1; margin-top: 4px; }
+    .quick-scroll { flex-direction: column; overflow: visible; padding-bottom: 0; scroll-snap-type: none; }
+    .quick-card { width: 100%; min-width: 0; }
+    .discipline-strip { flex-wrap: wrap; overflow: visible; padding-bottom: 0; scroll-snap-type: none; }
+    .week-days { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 8px; }
+    .week-days .date-group { margin: 0 !important; }
+    .footer { margin-top: 26px; }
   }
-  .schedule-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .schedule-item {
-    display: flex; flex-direction: column; align-items: center; gap: 3px;
-    padding: 8px 6px; border-radius: 8px;
-    background: rgba(88,166,255,0.06); border: 1px solid rgba(88,166,255,0.15);
+
+  @media (max-width: 640px) {
+    .status-bar { flex-wrap: wrap; }
+    .status-bar > span:last-child { width: 100%; margin-left: 16px !important; }
+    .snapshot-judge { font-size: 13px; }
+    .snapshot-link-row a { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
   }
-  .schedule-item .s-icon { font-size: 16px; }
-  .schedule-item b { font-size: 15px; color: var(--accent); font-variant-numeric: tabular-nums; }
-  .schedule-item em { font-style: normal; font-size: 11px; color: var(--text2); }
+
+  @media (max-width: 350px) {
+    .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1200px) {
+    body { padding-left: 32px; padding-right: 32px; }
+    .dashboard-grid { grid-template-columns: minmax(0, 1.6fr) minmax(360px, .8fr); column-gap: 24px; }
+    .snapshot { padding: 22px; }
+    .emotion-hero { min-height: 112px; }
+    .emotion-num { font-size: 50px; }
+    .snapshot-grid { gap: 10px; }
+    .snap-item { padding: 12px 8px; }
+    .snap-label { font-size: 12px; }
+    .snap-value { font-size: 16px; }
+    .week-days { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
 </style>
 </head>
 <body>
-
 <div class="header">
   <h1>📊 A股每日资讯</h1>
   <div class="subtitle"><span id="dataAsOf">短线复盘 · 盘前/午盘/盘后 · 自动更新</span></div>
@@ -366,11 +474,11 @@
   <span style="margin-left:auto">🕐 <span id="nextReport">计算中...</span></span>
 </div>
 
-<div id="refreshHint" style="display:none;text-align:center;padding:8px;margin-bottom:12px;background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.2);border-radius:6px;font-size:12px;color:var(--accent)">
+<div id="refreshHint" style="display:none;text-align:center;padding:8px;margin-bottom:12px;background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);border-radius:6px;font-size:12px;color:var(--accent)">
   🔄 下拉刷新获取最新报告
 </div>
 
-<!-- 今日速览 -->
+<main class="dashboard-grid">
 <div class="snapshot" id="snapshotArea">
   <div class="snapshot-title">
     ⚡ 最新速览
@@ -383,82 +491,80 @@
   <div class="snapshot-link-row" id="snapshotLinkRow"></div>
 </div>
 
-<!-- 最近报告快链 -->
-<div class="section">
+<div class="section recent-section">
   <div class="section-title">📋 最近报告</div>
   <div class="quick-scroll" id="quickScroll"></div>
 </div>
 
-<!-- 明日关注 -->
-<div class="section">
-  <div class="section-title">🎯 明日关注</div>
+<div class="section focus-section">
+  <div class="section-title" id="focusTitle">🎯 下一交易日关注</div>
   <div class="focus-list" id="focusList"><div class="focus-empty">等待报告生成</div></div>
 </div>
 
-<!-- 交易纪律 -->
-<div class="section">
-  <div class="section-title">🛡️ 交易纪律</div>
-  <div class="discipline-strip">
-    <span>仓位 ≤ 50%</span>
-    <span>退潮停手</span>
-    <span>不追高潮</span>
-    <span>红涨绿跌</span>
-  </div>
+<div class="section quotes-section">
+  <div class="section-title">⚡ 短线交易语录</div>
+  <div class="discipline-strip" id="disciplineStrip"></div>
 </div>
 
-<!-- 全部报告 -->
-<div class="section">
+<div class="section history-section">
   <div class="section-title">📅 历史报告</div>
-  <!-- 月筛选 -->
   <div class="month-filter" id="monthFilter"></div>
-  <!-- 搜索 -->
   <div class="search-box">
-    <span class="search-icon">🔍</span>
+    <span>🔍</span>
     <input type="text" id="reportSearch" placeholder="搜索日期、主线、板块...">
   </div>
   <div class="report-grid" id="reportGrid"></div>
 </div>
-
-
-<!-- 底部信息区：交易时间轴 + 页面更新 -->
-<div class="bottom-meta">
-  <div class="meta-block">
-    <div class="meta-title">🕐 每日报告时间</div>
-    <div class="schedule-row">
-      <div class="schedule-item"><span class="s-icon">🌅</span><b>08:15</b><em>盘前</em></div>
-      <div class="schedule-item"><span class="s-icon">☀️</span><b>12:00</b><em>午盘</em></div>
-      <div class="schedule-item"><span class="s-icon">🌙</span><b>20:45</b><em>盘后</em></div>
-    </div>
-  </div>
-</div>
+</main>
 
 <div class="footer">
+  <div class="schedule-inline">自动报告 · 08:15 盘前 · 12:00 午盘 · 20:45 盘后</div>
   A股每日资讯 · AI 自动生成 · 仅供参考，不构成投资建议<br>
   <span id="footerTime">页面更新中...</span><br>
-  💡 iPhone Safari: 点"分享"→"添加到主屏幕" 获得App体验
+  💡 iPhone Safari: 点“分享”→“添加到主屏幕”获得 App 体验
 </div>
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
 // ============================================================
-// 报告数据配置（每次部署时由脚本更新此配置）
-// 日期和星期完全由JS自动计算，杜绝手动填写错误
+// 报告数据配置
+// 规则：日期只存 YYYY-MM-DD；星期由程序算；情绪只存数字；仓位只存数字。
 // ============================================================
-const REPORT_CONFIG = {
+const DEFAULT_REPORT_CONFIG = {
   lastUpdated: "2026-08-23",
+  schedule: [
+    { key: "morning", time: "08:15", min: 8 * 60 + 15, label: "盘前", icon: "🌅" },
+    { key: "noon", time: "12:00", min: 12 * 60, label: "午盘", icon: "☀️" },
+    { key: "evening", time: "20:45", min: 20 * 60 + 45, label: "盘后", icon: "🌙" }
+  ],
+  delayGraceMinutes: 30,
   reports: [
     {
       date: "2026-08-24",
-      morning: null, noon: null, evening: null
+      morning: null,
+      noon: null,
+      evening: null
     },
     {
       date: "2026-08-21",
-      morning: { file: "report-0821-morning.html", time: "08:00", summary: "美联储鹰派 · Moderna映射 · 沪八条+央行投放" },
-      noon: { file: "report-0821-noon.html", time: "12:00", summary: "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨" },
+      morning: {
+        file: "report-0821-morning.html",
+        time: "08:00",
+        summary: "美联储鹰派 · Moderna映射 · 沪八条+央行投放"
+      },
+      noon: {
+        file: "report-0821-noon.html",
+        time: "12:00",
+        summary: "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨"
+      },
       evening: {
-        file: "report-0821-v2.html", time: "20:30", summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的",
+        file: "report-0821-v2.html",
+        time: "20:30",
+        summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的",
         judge: "情绪修复但赚钱效应分化，资金高度集中在CPO/贵金属两条主线，追高性价比一般，关注核心方向持续性。",
+        maxPosition: 30,
+        focusTargetDate: "2026-08-24",
         focus: [
           "CPO/通信前排反馈，是否延续净流入",
           "贵金属消化获利盘后的持续性",
@@ -468,8 +574,10 @@ const REPORT_CONFIG = {
           shIndex: { value: "3905", change: "+0.04%", up: true },
           cyIndex: { value: "3546", change: "+1.43%", up: true },
           volume: "1.88万亿",
-          limitUp: "54", limitDown: "14",
-          emotion: "48/100", sealRate: "75%",
+          limitUp: "54",
+          limitDown: "14",
+          emotion: 48,
+          sealRate: "75%",
           tags: [
             { text: "🔥 CPO/通信", hot: true },
             { text: "🔥 贵金属", hot: true },
@@ -484,411 +592,433 @@ const REPORT_CONFIG = {
 };
 
 // ============================================================
-// 自动计算工具函数
+// 数据加载：优先读取同目录 reports-data.json；失败时回退到内置配置。
+// 日常自动化只需更新 reports-data.json，导航页无需每天改 HTML。
 // ============================================================
+let REPORT_CONFIG = JSON.parse(JSON.stringify(DEFAULT_REPORT_CONFIG));
+const REPORT_DATA_URL = "reports-data.json";
+const AUTO_REFRESH_MS = 2 * 60 * 1000;
+
+function isValidReportConfig(cfg) {
+  return !!(cfg && Array.isArray(cfg.reports) && Array.isArray(cfg.schedule));
+}
+
+async function refreshReportConfig(silent = false) {
+  try {
+    const res = await fetch(`${REPORT_DATA_URL}?v=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const cfg = await res.json();
+    if (!isValidReportConfig(cfg)) throw new Error("invalid report config");
+    REPORT_CONFIG = cfg;
+    if (!silent) render();
+    return true;
+  } catch (err) {
+    if (!silent) render();
+    console.warn("reports-data.json 加载失败，已使用内置配置：", err);
+    return false;
+  }
+}
+
+// ============================================================
+// 时间 / 日期工具：统一按中国市场时区 Asia/Shanghai
+// ============================================================
+const MARKET_TZ = "Asia/Shanghai";
 const WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
 
-function getWeekday(dateStr) {
+function pad2(n) { return String(n).padStart(2, "0"); }
+
+function parseYMD(dateStr) {
   const [y, m, d] = dateStr.split("-").map(Number);
-  const date = new Date(y, m - 1, d);
-  return WEEKDAYS[date.getDay()];
+  return { y, m, d };
+}
+
+function utcDateFromYMD(dateStr) {
+  const { y, m, d } = parseYMD(dateStr);
+  return new Date(Date.UTC(y, m - 1, d));
+}
+
+function formatYMDUTC(date) {
+  return `${date.getUTCFullYear()}-${pad2(date.getUTCMonth() + 1)}-${pad2(date.getUTCDate())}`;
+}
+
+function getWeekday(dateStr) {
+  return WEEKDAYS[utcDateFromYMD(dateStr).getUTCDay()];
 }
 
 function formatDateShort(dateStr) {
-  const [, m, d] = dateStr.split("-");
-  return `${parseInt(m)}/${parseInt(d)}`;
+  const { m, d } = parseYMD(dateStr);
+  return `${m}/${d}`;
 }
 
-function isFuture(dateStr) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const [y, m, d] = dateStr.split("-").map(Number);
-  return new Date(y, m - 1, d) > today;
+function getChinaNow() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: MARKET_TZ,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23"
+  }).formatToParts(new Date());
+  const obj = {};
+  parts.forEach(p => { if (p.type !== "literal") obj[p.type] = p.value; });
+  return {
+    dateStr: `${obj.year}-${obj.month}-${obj.day}`,
+    hour: Number(obj.hour),
+    minute: Number(obj.minute),
+    nowMin: Number(obj.hour) * 60 + Number(obj.minute)
+  };
 }
 
-function isToday(dateStr) {
-  const today = new Date();
-  const [y, m, d] = dateStr.split("-").map(Number);
-  return y === today.getFullYear() && m === today.getMonth() + 1 && d === today.getDate();
+function parseClockToMinutes(clock) {
+  if (!clock || !/^\d{1,2}:\d{2}$/.test(clock)) return null;
+  const [h, m] = clock.split(":").map(Number);
+  return h * 60 + m;
 }
 
-// ============================================================
-// 全局状态
-// ============================================================
-let currentMonthFilter = "all";
-let currentSearchQuery = "";
-
-// ============================================================
-// 渲染页面
-// ============================================================
-function render() {
-  const cfg = REPORT_CONFIG;
-
-  // 页面更新时间（footer）
-  document.getElementById("footerTime").textContent = "页面更新：" + cfg.lastUpdated;
-
-  // 数据截至时间（header 副标题）
-  renderDataAsOf();
-
-  // 下次报告时间（status-bar）
-  renderNextReport();
-
-  // 今日速览：根据当前时间显示当天对应时段（盘前/午盘/盘后）报告的数据
-  renderSnapshot();
-
-  // 最近报告快链
-  renderQuickScroll();
-
-  // 明日关注（独立区块）
-  renderFocus();
-
-  // 月筛选器
-  renderMonthFilter();
-
-  // 历史报告
-  renderReportGrid();
+function isSessionPublished(reportDate, sessionKey, data) {
+  if (!data || !data.file) return false;
+  const now = getChinaNow();
+  if (reportDate < now.dateStr) return true;
+  if (reportDate > now.dateStr) return false;
+  const actualMin = parseClockToMinutes(data.time);
+  if (actualMin !== null) return actualMin <= now.nowMin;
+  const scheduled = REPORT_CONFIG.schedule.find(s => s.key === sessionKey);
+  return !scheduled || scheduled.min <= now.nowMin;
 }
 
-// ============================================================
-// 数据截至时间（从最新一份有快照的报告取）
-// ============================================================
-function renderDataAsOf() {
-  const el = document.getElementById("dataAsOf");
-  const chosen = findLatestSnapshot();
-  if (chosen) {
-    const label = { morning: "盘前", noon: "午盘", evening: "盘后" }[chosen.sessionKey];
-    el.textContent = `${formatDateShort(chosen.report.date)} ${getWeekday(chosen.report.date)} · ${label}数据`;
-  } else {
-    el.textContent = "等待首份报告生成";
-  }
+function isFuture(dateStr) { return dateStr > getChinaNow().dateStr; }
+function isToday(dateStr) { return dateStr === getChinaNow().dateStr; }
+
+function getMondayKey(dateStr) {
+  const d = utcDateFromYMD(dateStr);
+  const day = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() - day + 1);
+  return formatYMDUTC(d);
 }
 
-// ============================================================
-// 下次报告时间（status-bar）
-// ============================================================
-function renderNextReport() {
-  const el = document.getElementById("nextReport");
-  const now = new Date();
-  const nowMin = now.getHours() * 60 + now.getMinutes();
+function getISOWeekInfo(dateStr) {
+  const d = utcDateFromYMD(dateStr);
+  d.setUTCHours(0, 0, 0, 0);
+  const day = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - day);
+  const isoYear = d.getUTCFullYear();
+  const yearStart = new Date(Date.UTC(isoYear, 0, 1));
+  const week = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  return { year: isoYear, week };
+}
 
-  // 报告时间点（分钟）
-  const SESSIONS = [
-    { key: "morning", time: "08:15", min: 8 * 60 + 15, label: "盘前" },
-    { key: "noon", time: "12:00", min: 12 * 60, label: "午盘" },
-    { key: "evening", time: "20:45", min: 20 * 60 + 45, label: "盘后" }
-  ];
-
-  // 找今天的报告日期
-  const todayStr = now.getFullYear() + "-" +
-    String(now.getMonth() + 1).padStart(2, "0") + "-" +
-    String(now.getDate()).padStart(2, "0");
-  const cur = REPORT_CONFIG.reports.find(r => r.date === todayStr);
-
-  // 今天有报告记录（交易日）：找下一个未生成时段
-  if (cur) {
-    for (const s of SESSIONS) {
-      if (cur[s.key]) continue; // 该时段已生成
-      // 该时段未生成：无论到点与否都提示（到点未生成说明正在生成/异常）
-      el.textContent = `下次报告 ${s.time} ${s.label}`;
-      return;
-    }
-    // 今天三个时段都生成了
-    el.textContent = "今日报告已全部更新";
-    return;
-  }
-
-  // 今天不是交易日 → 找下一个 future 交易日
-  const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
-  const future = dated.find(r => isFuture(r.date));
-  if (future) {
-    const d = future.date.slice(5).replace("-", "/");
-    el.textContent = `下次报告 ${d} 08:15 盘前`;
-  } else {
-    el.textContent = "暂无后续报告安排";
-  }
+function getNextConfiguredTradingDate(afterDate) {
+  return REPORT_CONFIG.reports
+    .map(r => r.date)
+    .filter(d => d > afterDate)
+    .sort()[0] || null;
 }
 
 // ============================================================
-// 查找最新一份含快照的报告（盘后→午盘→盘前）
+// 数据查找
 // ============================================================
 function findLatestSnapshot() {
   const sessions = ["evening", "noon", "morning"];
-  const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
+  const today = getChinaNow().dateStr;
+  const dated = REPORT_CONFIG.reports
+    .filter(r => r.date <= today)
+    .sort((a, b) => b.date.localeCompare(a.date));
   for (const r of dated) {
     for (const k of sessions) {
-      if (r[k] && r[k].snap) return { report: r, sessionKey: k, snap: r[k].snap, data: r[k] };
+      const data = r[k];
+      if (data && data.snap && isSessionPublished(r.date, k, data)) {
+        return { report: r, sessionKey: k, snap: data.snap, data };
+      }
+    }
+  }
+  return null;
+}
+
+function findLatestFocus() {
+  const sessions = ["evening", "noon", "morning"];
+  const today = getChinaNow().dateStr;
+  const dated = REPORT_CONFIG.reports
+    .filter(r => r.date <= today)
+    .sort((a, b) => b.date.localeCompare(a.date));
+  for (const r of dated) {
+    for (const k of sessions) {
+      const data = r[k];
+      if (data && Array.isArray(data.focus) && data.focus.length && isSessionPublished(r.date, k, data)) {
+        return { report: r, sessionKey: k, data };
+      }
     }
   }
   return null;
 }
 
 // ============================================================
-// 今日速览（按当前时间动态选择当天对应时段报告）
+// 渲染
 // ============================================================
+let currentMonthFilter = "all";
+let currentSearchQuery = "";
+
+function render() {
+  document.getElementById("footerTime").textContent = "页面更新：" + (REPORT_CONFIG.lastUpdated || "--");
+  renderDataAsOf();
+  renderNextReport();
+  renderSnapshot();
+  renderQuickScroll();
+  renderFocus();
+  renderDiscipline();
+  renderMonthFilter();
+  renderReportGrid();
+}
+
+function renderDataAsOf() {
+  const el = document.getElementById("dataAsOf");
+  const chosen = findLatestSnapshot();
+  if (!chosen) {
+    el.textContent = "等待首份报告生成";
+    return;
+  }
+  const label = { morning: "盘前", noon: "午盘", evening: "盘后" }[chosen.sessionKey];
+  const timeText = chosen.data.time ? ` · 截至 ${chosen.data.time}` : "";
+  el.textContent = `${formatDateShort(chosen.report.date)} ${getWeekday(chosen.report.date)} · ${label}数据${timeText}`;
+}
+
+function renderNextReport() {
+  const el = document.getElementById("nextReport");
+  const now = getChinaNow();
+  const cur = REPORT_CONFIG.reports.find(r => r.date === now.dateStr);
+
+  if (cur) {
+    for (const s of REPORT_CONFIG.schedule) {
+      if (cur[s.key] && cur[s.key].file) continue;
+
+      if (now.nowMin < s.min) {
+        el.textContent = `下次报告 ${s.time} ${s.label}`;
+        return;
+      }
+      if (now.nowMin < s.min + REPORT_CONFIG.delayGraceMinutes) {
+        el.textContent = `${s.label}报告生成中`;
+        return;
+      }
+      el.textContent = `⚠️ ${s.label}报告延迟`;
+      return;
+    }
+    el.textContent = "今日报告已全部更新";
+    return;
+  }
+
+  const future = REPORT_CONFIG.reports
+    .filter(r => r.date > now.dateStr)
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
+
+  if (future) {
+    el.textContent = `下次报告 ${formatDateShort(future.date)} ${getWeekday(future.date)} 08:15 盘前`;
+  } else {
+    el.textContent = "暂无后续报告安排";
+  }
+}
+
 function renderSnapshot() {
-  const area = document.getElementById("snapshotArea");
-  const now = new Date();
-  const todayStr = now.getFullYear() + "-" +
-    String(now.getMonth() + 1).padStart(2, "0") + "-" +
-    String(now.getDate()).padStart(2, "0");
-  const nowMin = now.getHours() * 60 + now.getMinutes();
-
-  // 当前时段判断：盘前报告约8:00，午盘约12:00，盘后约20:30
-  let curSession = "morning";
-  if (nowMin >= 12 * 60) curSession = "noon";
-  if (nowMin >= 20 * 60 + 30) curSession = "evening";
-
-  // 优先找今天的报告
-  let todayReport = REPORT_CONFIG.reports.find(r => r.date === todayStr);
-
-  // 选取速览数据：当前时段 → 当天更早时段 → 最近有快照的报告
-  const sessions = ["evening", "noon", "morning"];
-  const sessionOrder = curSession === "evening" ? ["evening", "noon", "morning"]
-    : curSession === "noon" ? ["noon", "morning", "evening"]
-    : ["morning", "noon", "evening"];
-
-  let chosen = null;   // {report, sessionKey, snap}
-  const pickFrom = (report) => {
-    for (const k of sessionOrder) {
-      const s = report[k];
-      if (s && s.snap) return { report, sessionKey: k, snap: s.snap, data: s };
-    }
-    return null;
-  };
-
-  if (todayReport) {
-    chosen = pickFrom(todayReport);
-  }
-  // 今天没有 → 找最近有快照的报告
+  const chosen = findLatestSnapshot();
   if (!chosen) {
-    const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
-    for (const r of dated) {
-      chosen = pickFrom(r);
-      if (chosen) break;
-    }
-  }
-
-  const sessionLabel = { morning: "盘前", noon: "午盘", evening: "盘后" };
-
-  if (!chosen) {
-    // 没有任何速览数据
     document.getElementById("snapshotDate").textContent = "暂无数据";
     document.getElementById("emotionHero").innerHTML = "";
-    document.getElementById("snapshotGrid").innerHTML =
-      '<div style="grid-column:1/-1;text-align:center;color:var(--text2);font-size:13px;padding:8px 0">等待报告生成</div>';
+    document.getElementById("snapshotGrid").innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text2);font-size:13px;padding:8px 0">等待报告生成</div>';
     document.getElementById("snapshotTags").innerHTML = "";
     document.getElementById("snapshotJudge").innerHTML = "";
     document.getElementById("snapshotLinkRow").innerHTML = "";
     return;
   }
 
-  const snap = chosen.snap;
-  const rdate = chosen.report.date;
-  const weekday = getWeekday(rdate);
-  document.getElementById("snapshotDate").textContent =
-    `${formatDateShort(rdate)} ${weekday} ${sessionLabel[chosen.sessionKey]}`;
+  const sessionLabel = { morning: "盘前", noon: "午盘", evening: "盘后" };
+  const d = chosen.snap;
+  const emotionNum = Number(d.emotion) || 0;
+  const maxPosition = Number(chosen.data.maxPosition ?? d.maxPosition ?? 0);
 
-  const d = snap;
-
-  // 情绪分：第一视觉中心
-  const emotionNum = parseInt(d.emotion) || 0;
   let emoLevel = "neutral", emoDesc = "中性";
   if (emotionNum >= 65) { emoLevel = "hot"; emoDesc = "偏热"; }
   else if (emotionNum < 40) { emoLevel = "cold"; emoDesc = "偏冷"; }
+
+  document.getElementById("snapshotDate").textContent =
+    `${formatDateShort(chosen.report.date)} ${getWeekday(chosen.report.date)} ${sessionLabel[chosen.sessionKey]}`;
+
   document.getElementById("emotionHero").innerHTML = `
-    <div class="emotion-num">${d.emotion}<small>/100</small></div>
+    <div class="emotion-num">${emotionNum}<small>/100</small></div>
     <div class="emotion-text">情绪温度
       <div><span class="emotion-level ${emoLevel}">${emoDesc}</span></div>
     </div>`;
 
-  // 其余指标（涨停/跌停/封板/成交/上证/创业板）
   document.getElementById("snapshotGrid").innerHTML = `
     <div class="snap-item">
       <div class="snap-label">涨停/跌停</div>
-      <div class="snap-value"><span class="snap-up">${d.limitUp}</span> / <span class="snap-down">${d.limitDown}</span></div>
+      <div class="snap-value"><span class="snap-up">${d.limitUp ?? "--"}</span> / <span class="snap-down">${d.limitDown ?? "--"}</span></div>
     </div>
     <div class="snap-item">
       <div class="snap-label">封板率</div>
-      <div class="snap-value snap-up">${d.sealRate}</div>
+      <div class="snap-value snap-neutral">${d.sealRate ?? "--"}</div>
     </div>
     <div class="snap-item">
       <div class="snap-label">成交</div>
-      <div class="snap-value snap-neutral">${d.volume}</div>
+      <div class="snap-value snap-neutral">${d.volume ?? "--"}</div>
     </div>
     <div class="snap-item">
       <div class="snap-label">上证</div>
-      <div class="snap-value ${d.shIndex.up ? 'snap-up' : 'snap-down'}">${d.shIndex.value} <small>${d.shIndex.change}</small></div>
+      <div class="snap-value ${d.shIndex?.up ? 'snap-up' : 'snap-down'}">${d.shIndex?.value ?? "--"} <small>${d.shIndex?.change ?? ""}</small></div>
     </div>
     <div class="snap-item">
       <div class="snap-label">创业板</div>
-      <div class="snap-value ${d.cyIndex.up ? 'snap-up' : 'snap-down'}">${d.cyIndex.value} <small>${d.cyIndex.change}</small></div>
+      <div class="snap-value ${d.cyIndex?.up ? 'snap-up' : 'snap-down'}">${d.cyIndex?.value ?? "--"} <small>${d.cyIndex?.change ?? ""}</small></div>
     </div>
     <div class="snap-item">
-      <div class="snap-label">短线状态</div>
-      <div class="snap-value snap-neutral">${emoDesc}</div>
-    </div>
-  `;
+      <div class="snap-label">仓位上限</div>
+      <div class="snap-value snap-neutral">${maxPosition ? maxPosition + "%" : "--"}</div>
+    </div>`;
 
   document.getElementById("snapshotTags").innerHTML = (d.tags || []).map(t =>
     `<span class="snap-tag${t.hot ? ' hot' : ''}">${t.text}</span>`
   ).join("");
 
-  // 市场判断
-  const judge = chosen.data.judge || "";
-  document.getElementById("snapshotJudge").innerHTML = judge
-    ? `<b>市场判断：</b>${judge}`
+  document.getElementById("snapshotJudge").innerHTML = chosen.data.judge
+    ? `<b>市场判断：</b>${chosen.data.judge}`
     : "";
 
-  // 查看完整报告
-  const file = chosen.data.file;
-  document.getElementById("snapshotLinkRow").innerHTML = file
-    ? `<a href="${file}">查看${sessionLabel[chosen.sessionKey]}完整报告 →</a>`
+  document.getElementById("snapshotLinkRow").innerHTML = chosen.data.file
+    ? `<a href="${chosen.data.file}">查看${sessionLabel[chosen.sessionKey]}完整报告 →</a>`
     : "";
 }
 
-// ============================================================
-// 明日关注：从最近一份含 focus 的报告提取
-// ============================================================
+function renderQuickScroll() {
+  const recentReports = REPORT_CONFIG.reports
+    .filter(r => r.morning?.file || r.noon?.file || r.evening?.file)
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 3);
+
+  const buttons = [
+    { key: "morning", label: "🌅 盘前" },
+    { key: "noon", label: "☀️ 午盘" },
+    { key: "evening", label: "🌙 盘后" }
+  ];
+
+  document.getElementById("quickScroll").innerHTML = recentReports.map(r => {
+    const latest = r.evening || r.noon || r.morning;
+    const actions = buttons.map(b => {
+      const item = r[b.key];
+      return item?.file
+        ? `<a class="quick-btn" href="${item.file}">${b.label}</a>`
+        : `<span class="quick-btn disabled">${b.label}</span>`;
+    }).join("");
+
+    return `
+      <div class="quick-card active">
+        <div class="qc-date">${formatDateShort(r.date)} ${getWeekday(r.date)}</div>
+        <div class="qc-summary">${latest?.summary || ""}</div>
+        <div class="quick-actions">${actions}</div>
+      </div>`;
+  }).join("");
+}
+
 function renderFocus() {
+  const title = document.getElementById("focusTitle");
   const area = document.getElementById("focusList");
-  if (!area) return;
+  const chosen = findLatestFocus();
 
-  const sessions = ["evening", "noon", "morning"];
-  const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
-  let chosen = null;
-  for (const r of dated) {
-    for (const k of sessions) {
-      if (r[k] && r[k].focus) { chosen = r[k]; break; }
-    }
-    if (chosen) break;
-  }
-
-  if (!chosen || !chosen.focus.length) {
+  if (!chosen) {
+    title.textContent = "🎯 下一交易日关注";
     area.innerHTML = '<div class="focus-empty">等待报告生成</div>';
     return;
   }
 
-  area.innerHTML = chosen.focus.map((f, i) =>
+  const targetDate = chosen.data.focusTargetDate || getNextConfiguredTradingDate(chosen.report.date);
+  title.textContent = targetDate
+    ? `🎯 ${formatDateShort(targetDate)} ${getWeekday(targetDate)}关注`
+    : "🎯 下一交易日关注";
+
+  area.innerHTML = chosen.data.focus.map((f, i) =>
     `<div class="focus-item"><span class="f-num">${i + 1}</span><span>${f}</span></div>`
   ).join("");
 }
 
-// ============================================================
-// 最近报告快链
-// ============================================================
-function renderQuickScroll() {
-  // 只展示已生成的报告（跳过未来"等待开盘"占位，它已移到状态栏"下次报告"）
-  const recentReports = REPORT_CONFIG.reports.filter(r =>
-    r.evening?.file || r.noon?.file || r.morning?.file
-  ).slice(0, 3);
-  let quickHTML = "";
-  recentReports.forEach(r => {
-    const short = formatDateShort(r.date);
-    const wd = getWeekday(r.date);
-    const active = (r.evening || r.noon || r.morning);
-    const href = active ? (r.evening?.file || r.noon?.file || r.morning?.file) : "#";
-    const cls = active ? "quick-card active" : "quick-card disabled";
-
-    const report = r.evening || r.noon || r.morning;
-    const sessions = [];
-    if (r.morning) sessions.push("🌅 盘前");
-    if (r.noon) sessions.push("☀️ 午盘");
-    if (r.evening) sessions.push("🌙 盘后");
-    quickHTML += `
-      <a class="${cls}" href="${href}">
-        <div class="qc-date">${short} ${wd}</div>
-        <div class="qc-info">${sessions.join(" ")}<br>${report.summary || ""}</div>
-      </a>`;
-  });
-  document.getElementById("quickScroll").innerHTML = quickHTML;
+function renderDiscipline() {
+  const quotes = [
+    "只做最强，不做跟风",
+    "买在分歧，卖在一致",
+    "看不懂就空仓，做错就止损",
+    "宁可错过，不可做错",
+    "计划交易，交易计划"
+  ];
+  const area = document.getElementById("disciplineStrip");
+  if (!area) return;
+  area.innerHTML = quotes.map(q => `<span>${q}</span>`).join("");
 }
 
-// ============================================================
-// 月筛选器
-// ============================================================
 function renderMonthFilter() {
-  const months = new Set();
-  REPORT_CONFIG.reports.forEach(r => {
-    const m = parseInt(r.date.split("-")[1]);
-    months.add(m);
-  });
+  const months = new Set(REPORT_CONFIG.reports.map(r => Number(r.date.split("-")[1])));
   const sorted = [...months].sort((a, b) => b - a);
 
-  let html = `<div class="month-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">全部</div>`;
+  let html = `<button type="button" class="month-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">全部</button>`;
   sorted.forEach(m => {
-    html += `<div class="month-btn ${currentMonthFilter == m ? 'active' : ''}" data-month="${m}">${m}月</div>`;
+    html += `<button type="button" class="month-btn ${currentMonthFilter == m ? 'active' : ''}" data-month="${m}">${m}月</button>`;
   });
   document.getElementById("monthFilter").innerHTML = html;
 
-  // 绑定事件
-  document.querySelectorAll('.month-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      currentMonthFilter = this.dataset.month === 'all' ? 'all' : parseInt(this.dataset.month);
-      document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
+  document.querySelectorAll(".month-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      currentMonthFilter = this.dataset.month === "all" ? "all" : Number(this.dataset.month);
+      renderMonthFilter();
       renderReportGrid();
     });
   });
 }
 
-// ============================================================
-// 历史报告网格（含搜索+筛选）
-// ============================================================
 function renderReportGrid() {
   let reports = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
 
-  // 月筛选
-  if (currentMonthFilter !== 'all') {
-    reports = reports.filter(r => parseInt(r.date.split("-")[1]) === currentMonthFilter);
+  if (currentMonthFilter !== "all") {
+    reports = reports.filter(r => Number(r.date.split("-")[1]) === currentMonthFilter);
   }
 
-  // 搜索
   if (currentSearchQuery) {
     const q = currentSearchQuery.toLowerCase();
     reports = reports.filter(r => {
-      const dateStr = r.date + " " + getWeekday(r.date);
-      const summaries = [r.morning?.summary, r.noon?.summary, r.evening?.summary].filter(Boolean).join(" ").toLowerCase();
-      return dateStr.toLowerCase().includes(q) || summaries.includes(q) || formatDateShort(r.date).includes(q);
+      const haystack = [
+        r.date,
+        formatDateShort(r.date),
+        getWeekday(r.date),
+        r.morning?.summary,
+        r.noon?.summary,
+        r.evening?.summary
+      ].filter(Boolean).join(" ").toLowerCase();
+      return haystack.includes(q);
     });
   }
 
-  // 按周分组
-  function getWeekLabel(dateStr) {
-    const [y, m, d] = dateStr.split("-").map(Number);
-    const date = new Date(y, m - 1, d);
-    const dayOfYear = Math.floor((date - new Date(y, 0, 0)) / 86400000);
-    const weekNum = Math.ceil(dayOfYear / 7);
-    return y + " 第" + weekNum + "周";
+  if (!reports.length) {
+    document.getElementById("reportGrid").innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">没有找到匹配的报告</div>';
+    return;
   }
 
-  function getMonday(dateStr) {
-    const [y, m, d] = dateStr.split("-").map(Number);
-    const date = new Date(y, m - 1, d);
-    const day = date.getDay() || 7;
-    const mon = new Date(date);
-    mon.setDate(d - day + 1);
-    return (mon.getMonth()+1) + "/" + mon.getDate();
-  }
-
-  let weeks = {};
+  const weeks = new Map();
   reports.forEach(r => {
-    const wk = getWeekLabel(r.date);
-    if (!weeks[wk]) weeks[wk] = { label: wk, monday: getMonday(r.date), reports: [] };
-    weeks[wk].reports.push(r);
+    const mondayKey = getMondayKey(r.date);
+    if (!weeks.has(mondayKey)) {
+      const iso = getISOWeekInfo(r.date);
+      weeks.set(mondayKey, {
+        key: mondayKey,
+        label: `${iso.year} 第${iso.week}周`,
+        monday: formatDateShort(mondayKey),
+        reports: []
+      });
+    }
+    weeks.get(mondayKey).reports.push(r);
   });
 
+  const weekList = [...weeks.values()].sort((a, b) => b.key.localeCompare(a.key));
   let gridHTML = "";
-  if (reports.length === 0) {
-    gridHTML = '<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">没有找到匹配的报告</div>';
-  }
 
-  Object.keys(weeks).forEach((wk, idx) => {
-    const week = weeks[wk];
+  weekList.forEach((week, idx) => {
     const isOpen = idx === 0;
-
     let weekContent = "";
-    week.reports.forEach(r => {
-      const wd = getWeekday(r.date);
+
+    week.reports.sort((a, b) => b.date.localeCompare(a.date)).forEach(r => {
       const future = isFuture(r.date);
       const today = isToday(r.date);
       let dateLabel = r.date.slice(5);
@@ -896,106 +1026,113 @@ function renderReportGrid() {
 
       const renderLink = (session, icon, defaultTime) => {
         const data = r[session];
-        if (data && data.file) {
-          return `<a class="report-link" href="${data.file}" target="_blank">
+        if (data?.file) {
+          return `<a class="report-link" href="${data.file}" target="_blank" rel="noopener">
             <div>${icon}<div class="time">${data.time || defaultTime}</div></div>
           </a>`;
         }
         if (future) {
-          return `<a class="report-link disabled" href="#">
-            <div>${icon}<div class="time pending-text" style="flex-direction:column;gap:1px"><span class="pending-dot" style="width:4px;height:4px"></span></div></div>
-          </a>`;
+          return `<span class="report-link disabled"><div>${icon}<div class="time"><span class="pending-dot"></span></div></div></span>`;
         }
-        return `<a class="report-link disabled" href="#"><div>${icon}<div class="time">—</div></div></a>`;
+        return `<span class="report-link disabled"><div>${icon}<div class="time">—</div></div></span>`;
       };
 
       weekContent += `
         <div class="date-group" style="margin:4px 0">
-          <div class="date-header" style="font-size:13px;padding:6px 10px">
-            📅 ${dateLabel} <span class="weekday">${wd}</span>
-          </div>
+          <div class="date-header">📅 ${dateLabel} <span class="weekday">${getWeekday(r.date)}</span></div>
           <div class="report-links">
-            ${renderLink("morning", "🌅", "08:00")}
-            ${renderLink("noon", "☀️", "11:45")}
-            ${renderLink("evening", "🌙", "20:30")}
+            ${renderLink("morning", "🌅", "08:15")}
+            ${renderLink("noon", "☀️", "12:00")}
+            ${renderLink("evening", "🌙", "20:45")}
           </div>
         </div>`;
     });
 
-    const reportCount = week.reports.filter(r => r.evening?.file || r.noon?.file || r.morning?.file).length;
+    const reportCount = week.reports.reduce((sum, r) =>
+      sum + [r.morning?.file, r.noon?.file, r.evening?.file].filter(Boolean).length, 0
+    );
+
     gridHTML += `
-      <details ${isOpen ? 'open' : ''} style="margin-bottom:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
-        <summary style="padding:10px 12px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;background:rgba(88,166,255,0.04);list-style:none;display:flex;align-items:center;gap:8px;user-select:none">
-          <span style="font-size:12px;transition:transform 0.2s">${isOpen ? '▼' : '▶'}</span>
+      <details ${isOpen ? "open" : ""} style="margin-bottom:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <summary style="padding:10px 12px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;background:rgba(88,166,255,.04);list-style:none;display:flex;align-items:center;gap:8px;user-select:none">
+          <span class="week-arrow" style="font-size:12px">${isOpen ? "▼" : "▶"}</span>
           📅 ${week.label}（${week.monday}起）
           <span style="margin-left:auto;font-size:11px;color:var(--text2);font-weight:400">${reportCount}份报告</span>
         </summary>
-        <div style="padding:4px 6px 6px">${weekContent}</div>
+        <div class="week-days">${weekContent}</div>
       </details>`;
   });
-  document.getElementById("reportGrid").innerHTML = gridHTML;
 
-  // 折叠箭头
-  document.querySelectorAll('#reportGrid details').forEach(function(det){
-    det.addEventListener('toggle', function(){
-      var arrow = this.querySelector('summary span:first-child');
-      arrow.textContent = this.open ? '▼' : '▶';
+  document.getElementById("reportGrid").innerHTML = gridHTML;
+  document.querySelectorAll("#reportGrid details").forEach(det => {
+    det.addEventListener("toggle", function () {
+      const arrow = this.querySelector(".week-arrow");
+      if (arrow) arrow.textContent = this.open ? "▼" : "▶";
     });
   });
 }
 
 // ============================================================
-// 搜索绑定
+// 交互
 // ============================================================
-document.getElementById("reportSearch").addEventListener("input", function() {
+document.getElementById("reportSearch").addEventListener("input", function () {
   currentSearchQuery = this.value.trim();
   renderReportGrid();
 });
 
-// ============================================================
-// 回到顶部
-// ============================================================
-window.addEventListener("scroll", function() {
+window.addEventListener("scroll", function () {
   document.getElementById("backTop").classList.toggle("show", window.scrollY > 300);
 });
 
-// ============================================================
-// 刷新提示（实际触发reload）
-// ============================================================
-(function(){
-  var hint = document.getElementById('refreshHint');
-  var lastCheck = Date.now();
-  document.addEventListener('visibilitychange', function(){
-    if(!document.hidden && Date.now() - lastCheck > 300000) {
-      hint.style.display = 'block';
-      hint.innerHTML = '🔄 <a href="javascript:location.reload()" style="color:var(--accent);text-decoration:underline">点击刷新</a>获取最新报告';
-      setTimeout(function(){ hint.style.display = 'none'; }, 8000);
+(function () {
+  const hint = document.getElementById("refreshHint");
+  let lastCheck = Date.now();
+
+  async function refreshLatest(showHint = false) {
+    const ok = await refreshReportConfig(true);
+    render();
+    if (showHint) {
+      hint.style.display = "block";
+      hint.textContent = ok ? "✅ 已获取最新报告数据" : "⚠️ 暂未获取到新数据，已保留当前内容";
+      setTimeout(() => { hint.style.display = "none"; }, 3000);
     }
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden && Date.now() - lastCheck > 120000) refreshLatest(false);
     lastCheck = Date.now();
   });
-  var startY = 0;
-  document.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
-  document.addEventListener('touchmove', function(e){
-    if(window.scrollY === 0 && e.touches[0].clientY - startY > 80){
-      location.reload();
+
+  let startY = 0;
+  let pullTriggered = false;
+  document.addEventListener("touchstart", e => { startY = e.touches[0].clientY; pullTriggered = false; }, { passive: true });
+  document.addEventListener("touchmove", e => {
+    if (!pullTriggered && window.scrollY === 0 && e.touches[0].clientY - startY > 90) {
+      pullTriggered = true;
+      refreshLatest(true);
     }
-  }, {passive:true});
+  }, { passive: true });
+
+  setInterval(() => refreshLatest(false), AUTO_REFRESH_MS);
 })();
 
-// ============================================================
-// 初始化
-// ============================================================
-render();
+async function initDashboard() {
+  await refreshReportConfig(true);
+  render();
+}
 
-// ============================================================
-// PWA：注册 Service Worker（可安装为 App / 离线可用）
-// ============================================================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js').catch(function () {});
+initDashboard();
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./sw.js").then(function (registration) {
+      registration.update().catch(function () {});
+    }).catch(function () {});
   });
 }
 </script>
-
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"928ed1b9b11f43d4b6e746551c9e4648","r":1}' crossorigin="anonymous"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"b1c37052cca244fca1a2011659a0ad0a","r":1}' crossorigin="anonymous"></script>
 </body>
 </html>
