@@ -159,6 +159,29 @@
     border: 1px solid rgba(88,166,255,.2);
   }
   .snap-tag.hot { background: rgba(248,81,73,.1); color: var(--red); border-color: rgba(248,81,73,.2); }
+  .cycle-bar {
+    display: flex; flex-direction: column; gap: 7px;
+    margin-bottom: 12px; padding: 10px 12px;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px;
+  }
+  .cycle-top { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); flex-wrap: wrap; }
+  .cycle-top b { color: var(--text); }
+  .cycle-badge {
+    font-weight: 700; padding: 2px 10px; border-radius: 12px; font-size: 12px;
+  }
+  .cycle-badge.ice { background: rgba(63,185,80,.15); color: var(--green); }
+  .cycle-badge.warmup { background: rgba(88,166,255,.15); color: var(--accent); }
+  .cycle-badge.ferment { background: rgba(248,81,73,.15); color: var(--red); }
+  .cycle-badge.climax { background: rgba(188,140,255,.2); color: var(--purple); }
+  .cycle-badge.diverge { background: rgba(210,153,34,.15); color: var(--orange); }
+  .cycle-badge.ebb { background: rgba(63,185,80,.15); color: var(--green); }
+  .cycle-chain { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; font-size: 11px; color: var(--text2); }
+  .cycle-emoji { font-size: 15px; }
+  .cycle-emoji.cur { transform: scale(1.25); }
+  .cycle-arrow { color: var(--text2); opacity: .45; font-size: 9px; }
+  .cycle-tip { font-size: 12px; color: var(--text2); line-height: 1.5; border-top: 1px dashed rgba(255,255,255,.1); padding-top: 6px; }
+  .cycle-tip b { color: var(--orange); }
   .snapshot-judge {
     font-size: 12px;
     color: var(--text);
@@ -470,7 +493,7 @@
 
 <div class="status-bar">
   <div class="status-dot"></div>
-  <span>系统正常</span>
+  <span id="todayInfo">计算中...</span>
   <span style="margin-left:auto">🕐 <span id="nextReport">计算中...</span></span>
 </div>
 
@@ -485,6 +508,7 @@
     <span class="snapshot-date" id="snapshotDate"></span>
   </div>
   <div class="emotion-hero" id="emotionHero"></div>
+  <div class="cycle-bar" id="emotionCycle"></div>
   <div class="snapshot-grid" id="snapshotGrid"></div>
   <div class="snapshot-tags" id="snapshotTags"></div>
   <div class="snapshot-judge" id="snapshotJudge"></div>
@@ -758,11 +782,104 @@ function findLatestFocus() {
 let currentMonthFilter = "all";
 let currentSearchQuery = "";
 
+// ============================================================
+// 情绪周期（游资视角）：冰点→回暖→发酵→高潮→分歧→退潮
+// ============================================================
+const CYCLE_STAGES = {
+  ice:     { name: "冰点", emoji: "🧊", tip: "空仓等修复，冰点后是机会；不在恐慌里割肉，等首板试错信号再进" },
+  warmup:  { name: "回暖", emoji: "🌱", tip: "轻仓试错，聚焦最先封板的方向，看次日溢价决定是否加仓" },
+  ferment: { name: "发酵", emoji: "🔥", tip: "主线发酵期，重仓核心龙头，敢做敢拿，不碰杂毛跟风" },
+  climax:  { name: "高潮", emoji: "🎯", tip: "高潮期只做总龙头，不接力杂毛；防天地板，出现分歧先减仓" },
+  diverge: { name: "分歧", emoji: "⚠️", tip: "分歧期去弱留强，看分歧转一致机会；弱转强是买点，缩量退潮是卖点" },
+  ebb:     { name: "退潮", emoji: "📉", tip: "退潮期管住手，空仓为主；等亏钱效应收敛、跌停消失再进场" }
+};
+
+// 提取最近 limit 个交易日已发布时段的情绪分（每天取最新已发布：evening优先）
+function getEmotionHistory(limit = 10) {
+  const now = getChinaNow();
+  const sessions = ["evening", "noon", "morning"];
+  const out = REPORT_CONFIG.reports
+    .filter(r => r.date <= now.dateStr)
+    .sort((a, b) => a.date.localeCompare(b.date))
+    .map(r => {
+      for (const k of sessions) {
+        const data = r[k];
+        if (data && data.snap && typeof data.snap.emotion === "number" && isSessionPublished(r.date, k, data)) {
+          return { date: r.date, emotion: data.snap.emotion };
+        }
+      }
+      return null;
+    })
+    .filter(Boolean);
+  return out.slice(-limit);
+}
+
+// 游资情绪周期判定：结合情绪绝对值 + 前日变化方向
+function judgeCycle(emotion, prev) {
+  const delta = prev ? emotion - prev.emotion : 0;
+  if (emotion >= 65) return "climax";                 // 高位必是高潮/分歧边缘
+  if (emotion >= 55 && delta < 0) return "diverge";   // 高位回落 = 分歧
+  if (emotion < 35) return "ice";                     // 冰点
+  if (emotion < 50) return delta >= 0 ? "warmup" : "ebb"; // 中低位：升=回暖 降=退潮
+  return delta >= 0 ? "ferment" : "diverge";          // 50-65：升=发酵 降=分歧
+}
+
+function renderCycle() {
+  const el = document.getElementById("emotionCycle");
+  if (!el) return;
+  const hist = getEmotionHistory(10);
+  if (!hist.length) { el.innerHTML = ""; return; }
+  const stages = hist.map((h, i) => {
+    const prev = i > 0 ? hist[i - 1] : null;
+    return { date: h.date, emotion: h.emotion, stage: judgeCycle(h.emotion, prev) };
+  });
+  const cur = stages[stages.length - 1];
+  const curStage = CYCLE_STAGES[cur.stage];
+  const chainHtml = stages.map((s, i) => {
+    const isCur = i === stages.length - 1;
+    const st = CYCLE_STAGES[s.stage];
+    const arrow = i < stages.length - 1 ? `<span class="cycle-arrow">→</span>` : "";
+    return `<span class="cycle-emoji${isCur ? " cur" : ""}" title="${formatDateShort(s.date)} ${st.name}(${s.emotion})">${st.emoji}</span>${arrow}`;
+  }).join("");
+  el.innerHTML = `
+    <div class="cycle-top">情绪周期 <b>${curStage.emoji} ${curStage.name}</b>（${cur.emotion}/100）<span style="margin-left:auto;opacity:.7">近${stages.length}个交易日</span></div>
+    <div class="cycle-chain">${chainHtml}</div>
+    <div class="cycle-tip"><b>游资操作：</b>${curStage.tip}</div>`;
+}
+
+// 今天日期 + 休市状态
+function nextTradingDate(fromDate) {
+  const configured = REPORT_CONFIG.reports.map(r => r.date).filter(d => d > fromDate).sort()[0];
+  if (configured) return configured;
+  const d = utcDateFromYMD(fromDate);
+  for (let i = 1; i <= 10; i++) {
+    d.setUTCDate(d.getUTCDate() + 1);
+    const day = d.getUTCDay();
+    if (day !== 0 && day !== 6) return formatYMDUTC(d);
+  }
+  return fromDate;
+}
+
+function renderTodayInfo() {
+  const el = document.getElementById("todayInfo");
+  if (!el) return;
+  const now = getChinaNow();
+  const wd = getWeekday(now.dateStr);
+  if (wd === "周六" || wd === "周日") {
+    const nxt = nextTradingDate(now.dateStr);
+    el.textContent = `📅 ${formatDateShort(now.dateStr)} ${wd} · 休市 · 下个交易日 ${formatDateShort(nxt)} ${getWeekday(nxt)}`;
+  } else {
+    el.textContent = `📅 ${formatDateShort(now.dateStr)} ${wd} · 交易日`;
+  }
+}
+
 function render() {
   document.getElementById("footerTime").textContent = "页面更新：" + (REPORT_CONFIG.lastUpdated || "--");
+  renderTodayInfo();
   renderDataAsOf();
   renderNextReport();
   renderSnapshot();
+  renderCycle();
   renderQuickScroll();
   renderFocus();
   renderDiscipline();
