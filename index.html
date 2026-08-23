@@ -788,6 +788,15 @@ window.addEventListener("scroll", function() {
 // 初始化
 // ============================================================
 render();
+
+// ============================================================
+// PWA：注册 Service Worker（可安装为 App / 离线可用）
+// ============================================================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+}
 </script>
 
 </body>
