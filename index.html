@@ -460,6 +460,25 @@
     .week-days { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
+  /* 手机端居中优化：可居中的元素全部居中（桌面端不受影响） */
+  @media (max-width: 719px) {
+    .status-bar { justify-content: center; text-align: center; }
+    .status-bar > span:last-child { margin-left: 0 !important; }
+    .snapshot-title { justify-content: center; }
+    .snapshot-date { margin-left: 0; }
+    .emotion-hero { justify-content: center; padding-left: 0; }
+    .snapshot-tags { justify-content: center; }
+    .snapshot-judge { text-align: center; }
+    .section-title { text-align: center; padding-left: 0; border-left: none; }
+    .quick-card { text-align: center; }
+    .quick-card .qc-date, .quick-card .qc-summary { text-align: center; }
+    .focus-item { justify-content: center; }
+    .focus-empty { text-align: center; }
+    .discipline-strip { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
+    .month-filter { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
+    .date-header { justify-content: center; }
+  }
+
 </style>
 </head>
 <body>
