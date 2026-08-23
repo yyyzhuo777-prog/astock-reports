@@ -133,6 +133,48 @@
     background: rgba(248,81,73,0.1); color: var(--red);
     border-color: rgba(248,81,73,0.2);
   }
+  /* 情绪分视觉中心 */
+  .emotion-hero {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    padding: 14px 10px; margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(88,166,255,0.12), rgba(188,140,255,0.08));
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 10px;
+  }
+  .emotion-num {
+    font-size: 42px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .emotion-num small { font-size: 16px; -webkit-text-fill-color: var(--text2); color: var(--text2); }
+  .emotion-text { font-size: 15px; font-weight: 700; }
+  .emotion-text .emotion-level {
+    display: inline-block; margin-top: 4px; padding: 2px 10px;
+    border-radius: 12px; font-size: 12px; font-weight: 600;
+  }
+  .emotion-level.hot { background: rgba(248,81,73,0.15); color: var(--red); }
+  .emotion-level.neutral { background: rgba(210,153,34,0.15); color: var(--orange); }
+  .emotion-level.cold { background: rgba(63,185,80,0.15); color: var(--green); }
+  /* 市场判断 */
+  .snapshot-judge {
+    font-size: 12px; color: var(--text); line-height: 1.6;
+    padding: 8px 10px; margin-top: 10px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 6px 6px 0;
+  }
+  .snapshot-judge b { color: var(--orange); }
+  /* 查看完整报告 */
+  .snapshot-link-row { margin-top: 10px; text-align: center; }
+  .snapshot-link-row a {
+    display: inline-block; padding: 7px 16px;
+    background: rgba(88,166,255,0.12); color: var(--accent);
+    border: 1px solid rgba(88,166,255,0.3);
+    border-radius: 18px; font-size: 12px; font-weight: 600;
+    text-decoration: none;
+  }
+  .snapshot-link-row a:hover { background: rgba(88,166,255,0.2); }
   .section { margin-bottom: 20px; }
   .section-title {
     font-size: 15px; font-weight: 600; color: var(--accent);
@@ -158,28 +200,55 @@
   .quick-card .qc-info { font-size: 11px; color: var(--text2); line-height: 1.4; }
   .quick-card.active { border-color: var(--accent); background: rgba(88,166,255,0.05); }
   .quick-card.disabled { opacity: 0.4; pointer-events: none; }
-  .report-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .report-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
   .date-group {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; overflow: hidden;
+    border-radius: 6px; overflow: hidden;
   }
   .date-header {
-    background: rgba(88,166,255,0.06); padding: 8px 12px;
-    font-size: 14px; font-weight: 600; color: var(--accent);
+    background: rgba(88,166,255,0.06); padding: 5px 10px;
+    font-size: 13px; font-weight: 600; color: var(--accent);
     display: flex; align-items: center; gap: 6px;
   }
-  .date-header .weekday { font-size: 12px; color: var(--text2); font-weight: 400; }
+  .date-header .weekday { font-size: 11px; color: var(--text2); font-weight: 400; }
   .report-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
   .report-link {
     display: flex; align-items: center; justify-content: center; gap: 4px;
-    padding: 10px 6px; text-decoration: none; color: var(--text);
-    font-size: 13px; text-align: center; transition: background 0.15s;
-    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 6px 4px; text-decoration: none; color: var(--text);
+    font-size: 12px; text-align: center; transition: background 0.15s;
+    border-right: 1px solid var(--border);
   }
   .report-link:last-child { border-right: none; }
   .report-link:hover { background: rgba(88,166,255,0.08); }
   .report-link.disabled { color: var(--text2); opacity: 0.4; pointer-events: none; }
-  .report-link .time { font-size: 11px; color: var(--text2); display: block; margin-top: 2px; }
+  .report-link .time { font-size: 10px; color: var(--text2); display: block; margin-top: 1px; }
+
+  /* === 明日关注 === */
+  .focus-list { display: flex; flex-direction: column; gap: 6px; }
+  .focus-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13px; color: var(--text); line-height: 1.5;
+    padding: 6px 10px; background: rgba(255,255,255,0.03);
+    border-radius: 6px; border-left: 2px solid var(--accent);
+  }
+  .focus-item .f-num {
+    flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(88,166,255,0.15); color: var(--accent);
+    font-size: 11px; font-weight: 700; display: flex;
+    align-items: center; justify-content: center; margin-top: 1px;
+  }
+  .focus-empty { font-size: 12px; color: var(--text2); padding: 8px 4px; }
+
+  /* === 交易纪律（独立区） === */
+  .discipline-strip {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    font-size: 12px; color: var(--text);
+  }
+  .discipline-strip span {
+    padding: 4px 10px; border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+  }
 
   /* === 数据源分组 === */
   .source-category { margin-bottom: 14px; }
@@ -282,28 +351,19 @@
   .schedule-item .s-icon { font-size: 16px; }
   .schedule-item b { font-size: 15px; color: var(--accent); font-variant-numeric: tabular-nums; }
   .schedule-item em { font-style: normal; font-size: 11px; color: var(--text2); }
-  .discipline-box { display: flex; flex-wrap: wrap; gap: 8px; }
-  .discipline-box span {
-    font-size: 12px; color: var(--text1); padding: 5px 10px;
-    border-radius: 14px; background: rgba(88,166,255,0.07);
-    border: 1px solid rgba(88,166,255,0.18);
-  }
-  .brief-line { font-size: 12.5px; color: var(--text1); line-height: 1.7; }
-  .brief-line b { color: var(--text1); }
-  .brief-empty { font-size: 12px; color: var(--text2); }
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>📊 A股每日资讯</h1>
-  <div class="subtitle">短线复盘 · 盘前/午盘/盘后 · 自动更新</div>
+  <div class="subtitle"><span id="dataAsOf">短线复盘 · 盘前/午盘/盘后 · 自动更新</span></div>
 </div>
 
 <div class="status-bar">
   <div class="status-dot"></div>
-  <span>系统就绪</span>
-  <span style="margin-left:auto">🕐 <span id="updateTime"></span></span>
+  <span>系统正常</span>
+  <span style="margin-left:auto">🕐 <span id="nextReport">计算中...</span></span>
 </div>
 
 <div id="refreshHint" style="display:none;text-align:center;padding:8px;margin-bottom:12px;background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.2);border-radius:6px;font-size:12px;color:var(--accent)">
@@ -316,14 +376,34 @@
     ⚡ 最新速览
     <span class="snapshot-date" id="snapshotDate"></span>
   </div>
+  <div class="emotion-hero" id="emotionHero"></div>
   <div class="snapshot-grid" id="snapshotGrid"></div>
   <div class="snapshot-tags" id="snapshotTags"></div>
+  <div class="snapshot-judge" id="snapshotJudge"></div>
+  <div class="snapshot-link-row" id="snapshotLinkRow"></div>
 </div>
 
 <!-- 最近报告快链 -->
 <div class="section">
   <div class="section-title">📋 最近报告</div>
   <div class="quick-scroll" id="quickScroll"></div>
+</div>
+
+<!-- 明日关注 -->
+<div class="section">
+  <div class="section-title">🎯 明日关注</div>
+  <div class="focus-list" id="focusList"><div class="focus-empty">等待报告生成</div></div>
+</div>
+
+<!-- 交易纪律 -->
+<div class="section">
+  <div class="section-title">🛡️ 交易纪律</div>
+  <div class="discipline-strip">
+    <span>仓位 ≤ 50%</span>
+    <span>退潮停手</span>
+    <span>不追高潮</span>
+    <span>红涨绿跌</span>
+  </div>
 </div>
 
 <!-- 全部报告 -->
@@ -340,7 +420,7 @@
 </div>
 
 
-<!-- 底部信息区：交易时间轴 + 短线纪律 + 今日重点 -->
+<!-- 底部信息区：交易时间轴 + 页面更新 -->
 <div class="bottom-meta">
   <div class="meta-block">
     <div class="meta-title">🕐 每日报告时间</div>
@@ -350,23 +430,11 @@
       <div class="schedule-item"><span class="s-icon">🌙</span><b>20:45</b><em>盘后</em></div>
     </div>
   </div>
-  <div class="meta-block">
-    <div class="meta-title">📌 短线纪律</div>
-    <div class="discipline-box">
-      <span>🔴 红涨绿跌</span>
-      <span>⚠️ 退潮停手</span>
-      <span>🛡️ 仓位上限</span>
-      <span>🎯 只做有交易价值消息</span>
-    </div>
-  </div>
-  <div class="meta-block">
-    <div class="meta-title">🎯 今日重点</div>
-    <div id="briefArea"><div class="brief-empty">等待今日报告生成</div></div>
-  </div>
 </div>
 
 <div class="footer">
   A股每日资讯 · AI 自动生成 · 仅供参考，不构成投资建议<br>
+  <span id="footerTime">页面更新中...</span><br>
   💡 iPhone Safari: 点"分享"→"添加到主屏幕" 获得App体验
 </div>
 
@@ -390,6 +458,12 @@ const REPORT_CONFIG = {
       noon: { file: "report-0821-noon.html", time: "12:00", summary: "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨" },
       evening: {
         file: "report-0821-v2.html", time: "20:30", summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的",
+        judge: "情绪修复但赚钱效应分化，资金高度集中在CPO/贵金属两条主线，追高性价比一般，关注核心方向持续性。",
+        focus: [
+          "CPO/通信前排反馈，是否延续净流入",
+          "贵金属消化获利盘后的持续性",
+          "机器人/固态电池能否回流形成二线机会"
+        ],
         snap: {
           shIndex: { value: "3905", change: "+0.04%", up: true },
           cyIndex: { value: "3546", change: "+1.43%", up: true },
@@ -450,8 +524,14 @@ let currentSearchQuery = "";
 function render() {
   const cfg = REPORT_CONFIG;
 
-  // 更新时间
-  document.getElementById("updateTime").textContent = "更新：" + cfg.lastUpdated;
+  // 页面更新时间（footer）
+  document.getElementById("footerTime").textContent = "页面更新：" + cfg.lastUpdated;
+
+  // 数据截至时间（header 副标题）
+  renderDataAsOf();
+
+  // 下次报告时间（status-bar）
+  renderNextReport();
 
   // 今日速览：根据当前时间显示当天对应时段（盘前/午盘/盘后）报告的数据
   renderSnapshot();
@@ -459,14 +539,87 @@ function render() {
   // 最近报告快链
   renderQuickScroll();
 
-  // 今日重点（底部）
-  renderBrief();
+  // 明日关注（独立区块）
+  renderFocus();
 
   // 月筛选器
   renderMonthFilter();
 
   // 历史报告
   renderReportGrid();
+}
+
+// ============================================================
+// 数据截至时间（从最新一份有快照的报告取）
+// ============================================================
+function renderDataAsOf() {
+  const el = document.getElementById("dataAsOf");
+  const chosen = findLatestSnapshot();
+  if (chosen) {
+    const label = { morning: "盘前", noon: "午盘", evening: "盘后" }[chosen.sessionKey];
+    el.textContent = `${formatDateShort(chosen.report.date)} ${getWeekday(chosen.report.date)} · ${label}数据`;
+  } else {
+    el.textContent = "等待首份报告生成";
+  }
+}
+
+// ============================================================
+// 下次报告时间（status-bar）
+// ============================================================
+function renderNextReport() {
+  const el = document.getElementById("nextReport");
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+
+  // 报告时间点（分钟）
+  const SESSIONS = [
+    { key: "morning", time: "08:15", min: 8 * 60 + 15, label: "盘前" },
+    { key: "noon", time: "12:00", min: 12 * 60, label: "午盘" },
+    { key: "evening", time: "20:45", min: 20 * 60 + 45, label: "盘后" }
+  ];
+
+  // 找今天的报告日期
+  const todayStr = now.getFullYear() + "-" +
+    String(now.getMonth() + 1).padStart(2, "0") + "-" +
+    String(now.getDate()).padStart(2, "0");
+  const cur = REPORT_CONFIG.reports.find(r => r.date === todayStr);
+
+  // 今天有报告记录（交易日）：找下一个未生成时段
+  if (cur) {
+    for (const s of SESSIONS) {
+      if (cur[s.key]) continue; // 该时段已生成
+      // 该时段未生成：无论到点与否都提示（到点未生成说明正在生成/异常）
+      el.textContent = `下次报告 ${s.time} ${s.label}`;
+      return;
+    }
+    // 今天三个时段都生成了
+    el.textContent = "今日报告已全部更新";
+    return;
+  }
+
+  // 今天不是交易日 → 找下一个 future 交易日
+  const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
+  const future = dated.find(r => isFuture(r.date));
+  if (future) {
+    const d = future.date.slice(5).replace("-", "/");
+    el.textContent = `下次报告 ${d} 08:15 盘前`;
+  } else {
+    el.textContent = "暂无后续报告安排";
+  }
+}
+
+// ============================================================
+// 查找最新一份含快照的报告（盘后→午盘→盘前）
+// ============================================================
+function findLatestSnapshot() {
+  const sessions = ["evening", "noon", "morning"];
+  const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
+  for (const r of dated) {
+    for (const k of sessions) {
+      if (r[k] && r[k].snap) return { report: r, sessionKey: k, snap: r[k].snap, data: r[k] };
+    }
+  }
+  return null;
 }
 
 // ============================================================
@@ -498,7 +651,7 @@ function renderSnapshot() {
   const pickFrom = (report) => {
     for (const k of sessionOrder) {
       const s = report[k];
-      if (s && s.snap) return { report, sessionKey: k, snap: s.snap };
+      if (s && s.snap) return { report, sessionKey: k, snap: s.snap, data: s };
     }
     return null;
   };
@@ -520,9 +673,12 @@ function renderSnapshot() {
   if (!chosen) {
     // 没有任何速览数据
     document.getElementById("snapshotDate").textContent = "暂无数据";
+    document.getElementById("emotionHero").innerHTML = "";
     document.getElementById("snapshotGrid").innerHTML =
       '<div style="grid-column:1/-1;text-align:center;color:var(--text2);font-size:13px;padding:8px 0">等待报告生成</div>';
     document.getElementById("snapshotTags").innerHTML = "";
+    document.getElementById("snapshotJudge").innerHTML = "";
+    document.getElementById("snapshotLinkRow").innerHTML = "";
     return;
   }
 
@@ -533,7 +689,32 @@ function renderSnapshot() {
     `${formatDateShort(rdate)} ${weekday} ${sessionLabel[chosen.sessionKey]}`;
 
   const d = snap;
+
+  // 情绪分：第一视觉中心
+  const emotionNum = parseInt(d.emotion) || 0;
+  let emoLevel = "neutral", emoDesc = "中性";
+  if (emotionNum >= 65) { emoLevel = "hot"; emoDesc = "偏热"; }
+  else if (emotionNum < 40) { emoLevel = "cold"; emoDesc = "偏冷"; }
+  document.getElementById("emotionHero").innerHTML = `
+    <div class="emotion-num">${d.emotion}<small>/100</small></div>
+    <div class="emotion-text">情绪温度
+      <div><span class="emotion-level ${emoLevel}">${emoDesc}</span></div>
+    </div>`;
+
+  // 其余指标（涨停/跌停/封板/成交/上证/创业板）
   document.getElementById("snapshotGrid").innerHTML = `
+    <div class="snap-item">
+      <div class="snap-label">涨停/跌停</div>
+      <div class="snap-value"><span class="snap-up">${d.limitUp}</span> / <span class="snap-down">${d.limitDown}</span></div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">封板率</div>
+      <div class="snap-value snap-up">${d.sealRate}</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">成交</div>
+      <div class="snap-value snap-neutral">${d.volume}</div>
+    </div>
     <div class="snap-item">
       <div class="snap-label">上证</div>
       <div class="snap-value ${d.shIndex.up ? 'snap-up' : 'snap-down'}">${d.shIndex.value} <small>${d.shIndex.change}</small></div>
@@ -543,104 +724,81 @@ function renderSnapshot() {
       <div class="snap-value ${d.cyIndex.up ? 'snap-up' : 'snap-down'}">${d.cyIndex.value} <small>${d.cyIndex.change}</small></div>
     </div>
     <div class="snap-item">
-      <div class="snap-label">成交</div>
-      <div class="snap-value snap-neutral">${d.volume}</div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">涨停/跌停</div>
-      <div class="snap-value"><span class="snap-up">${d.limitUp}</span> / <span class="snap-down">${d.limitDown}</span></div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">情绪分</div>
-      <div class="snap-value snap-neutral">${d.emotion}</div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">封板率</div>
-      <div class="snap-value snap-up">${d.sealRate}</div>
+      <div class="snap-label">短线状态</div>
+      <div class="snap-value snap-neutral">${emoDesc}</div>
     </div>
   `;
 
   document.getElementById("snapshotTags").innerHTML = (d.tags || []).map(t =>
     `<span class="snap-tag${t.hot ? ' hot' : ''}">${t.text}</span>`
   ).join("");
+
+  // 市场判断
+  const judge = chosen.data.judge || "";
+  document.getElementById("snapshotJudge").innerHTML = judge
+    ? `<b>市场判断：</b>${judge}`
+    : "";
+
+  // 查看完整报告
+  const file = chosen.data.file;
+  document.getElementById("snapshotLinkRow").innerHTML = file
+    ? `<a href="${file}">查看${sessionLabel[chosen.sessionKey]}完整报告 →</a>`
+    : "";
 }
 
 // ============================================================
-// 今日重点（底部）：从最近一份含快照的报告自动提取核心结论
+// 明日关注：从最近一份含 focus 的报告提取
 // ============================================================
-function renderBrief() {
-  const area = document.getElementById("briefArea");
+function renderFocus() {
+  const area = document.getElementById("focusList");
   if (!area) return;
 
-  // 找最近一份含 snap 的报告（盘后优先，其次午盘/盘前）
   const sessions = ["evening", "noon", "morning"];
   const dated = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
   let chosen = null;
   for (const r of dated) {
     for (const k of sessions) {
-      if (r[k] && r[k].snap) { chosen = { report: r, sessionKey: k, snap: r[k].snap, file: r[k].file }; break; }
+      if (r[k] && r[k].focus) { chosen = r[k]; break; }
     }
     if (chosen) break;
   }
 
-  if (!chosen) {
-    area.innerHTML = '<div class="brief-empty">等待今日报告生成</div>';
+  if (!chosen || !chosen.focus.length) {
+    area.innerHTML = '<div class="focus-empty">等待报告生成</div>';
     return;
   }
 
-  const { report, sessionKey, snap, file } = chosen;
-  const d = snap;
-  const label = { morning: "盘前", noon: "午盘", evening: "盘后" }[sessionKey];
-  const hotTags = (d.tags || []).filter(t => t.hot).map(t => t.text).join(" · ") || "—";
-
-  const emotionNum = parseInt(d.emotion) || 0;
-  let emoDesc = "中性";
-  if (emotionNum >= 65) emoDesc = "偏热";
-  else if (emotionNum < 40) emoDesc = "偏冷";
-
-  const lines = [
-    `📅 ${formatDateShort(report.date)} ${getWeekday(report.date)} ${label} · 情绪 <b style="color:var(--accent)">${d.emotion}（${emoDesc}）</b>`,
-    `🔥 主线：${hotTags}`,
-    `📈 涨停 ${d.limitUp} / 跌停 ${d.limitDown} · 封板率 ${d.sealRate} · 成交 ${d.volume}`
-  ];
-
-  area.innerHTML = lines.map(l => `<div class="brief-line">${l}</div>`).join("") +
-    `<div class="brief-line" style="margin-top:6px"><a href="${file}" style="color:var(--accent);text-decoration:none">→ 查看完整报告</a></div>`;
+  area.innerHTML = chosen.focus.map((f, i) =>
+    `<div class="focus-item"><span class="f-num">${i + 1}</span><span>${f}</span></div>`
+  ).join("");
 }
 
 // ============================================================
 // 最近报告快链
 // ============================================================
 function renderQuickScroll() {
-  const recentReports = REPORT_CONFIG.reports.slice(0, 3);
+  // 只展示已生成的报告（跳过未来"等待开盘"占位，它已移到状态栏"下次报告"）
+  const recentReports = REPORT_CONFIG.reports.filter(r =>
+    r.evening?.file || r.noon?.file || r.morning?.file
+  ).slice(0, 3);
   let quickHTML = "";
   recentReports.forEach(r => {
     const short = formatDateShort(r.date);
     const wd = getWeekday(r.date);
-    const future = isFuture(r.date);
-    const active = !future && (r.evening || r.noon || r.morning);
+    const active = (r.evening || r.noon || r.morning);
     const href = active ? (r.evening?.file || r.noon?.file || r.morning?.file) : "#";
     const cls = active ? "quick-card active" : "quick-card disabled";
 
-    if (active) {
-      const report = r.evening || r.noon || r.morning;
-      const sessions = [];
-      if (r.morning) sessions.push("🌅 盘前");
-      if (r.noon) sessions.push("☀️ 午盘");
-      if (r.evening) sessions.push("🌙 盘后");
-      quickHTML += `
-        <a class="${cls}" href="${href}">
-          <div class="qc-date">${short} ${wd}</div>
-          <div class="qc-info">${sessions.join(" ")}<br>${report.summary || ""}</div>
-        </a>`;
-    } else {
-      quickHTML += `
-        <div class="${cls}">
-          <div class="qc-date">${short} ${wd}</div>
-          <div class="pending-text"><span class="pending-dot"></span><span class="pending-dot"></span><span class="pending-dot"></span></div>
-          <div class="qc-info" style="margin-top:4px">等待开盘</div>
-        </div>`;
-    }
+    const report = r.evening || r.noon || r.morning;
+    const sessions = [];
+    if (r.morning) sessions.push("🌅 盘前");
+    if (r.noon) sessions.push("☀️ 午盘");
+    if (r.evening) sessions.push("🌙 盘后");
+    quickHTML += `
+      <a class="${cls}" href="${href}">
+        <div class="qc-date">${short} ${wd}</div>
+        <div class="qc-info">${sessions.join(" ")}<br>${report.summary || ""}</div>
+      </a>`;
   });
   document.getElementById("quickScroll").innerHTML = quickHTML;
 }
