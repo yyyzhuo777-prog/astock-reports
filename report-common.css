@@ -89,7 +89,7 @@ a{color:#58a6ff;text-decoration:none}
 
 /* ===== 响应式 ===== */
 @media(min-width:768px){
-  body{max-width:860px;padding:24px 32px}
+  body{margin-left:160px;max-width:960px;padding:24px 32px}
   .header h1{font-size:1.6rem}
   .dashboard{grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
   .stat-grid{grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -98,6 +98,16 @@ a{color:#58a6ff;text-decoration:none}
   .section-title{font-size:1.15rem}
   .gauge .val{font-size:1.8rem}
   .row{padding:7px 0;font-size:.88rem}
+}
+
+@media(min-width:1200px){
+  body{max-width:1060px;padding:32px 48px;font-size:1.05rem}
+}
+@media(min-width:1440px){
+  body{max-width:1200px}
+}
+@media(min-width:1800px){
+  body{max-width:1400px}
 }
 @media(max-width:380px){
   html{font-size:14px}
