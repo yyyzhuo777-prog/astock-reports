@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股盘前报告 | 2026-08-24</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:linear-gradient(135deg,#0d1117 0%,#161b22 100%);color:#e6edf3;line-height:1.6;min-height:100vh}
+.container{max-width:520px;margin:0 auto;padding:16px}
+@media(min-width:768px){.container{max-width:860px;padding:24px}}
+header{text-align:center;padding:24px 0;border-bottom:1px solid #30363d}
+h1{font-size:22px;color:#58a6ff;margin-bottom:8px}
+.meta{font-size:13px;color:#8b949e}
+.dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.metric{background:#21262d;border-radius:12px;padding:16px;text-align:center;border:1px solid #30363d}
+.metric .score{font-size:28px;font-weight:700;margin-bottom:4px}
+.metric .label{font-size:12px;color:#8b949e}
+.score-high{color:#f85149}
+.score-mid{color:#d29922}
+.score-low{color:#3fb950}
+.advice-box{background:#21262d;border-radius:12px;padding:16px;margin:16px 0;border-left:4px solid #58a6ff}
+.advice-box h3{font-size:14px;color:#58a6ff;margin-bottom:8px}
+.advice-box p{font-size:14px;color:#e6edf3}
+.section{margin:24px 0}
+.section h2{font-size:16px;color:#58a6ff;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #30363d}
+.sentiment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.sentiment-item{background:#21262d;border-radius:8px;padding:12px;text-align:center}
+.sentiment-item .value{font-size:18px;font-weight:600;color:#e6edf3}
+.sentiment-item .key{font-size:11px;color:#8b949e;margin-top:4px}
+.theme-card{background:#21262d;border-radius:12px;padding:16px;margin:12px 0;border:1px solid #30363d}
+.theme-card h3{font-size:15px;color:#e6edf3;margin-bottom:8px}
+.theme-card .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin-right:6px;margin-bottom:6px}
+.tag-hot{background:#f8514922;color:#f85149;border:1px solid #f85149}
+.tag-warm{background:#d2992222;color:#d29922;border:1px solid #d29922}
+.tag-cold{background:#8b949e22;color:#8b949e;border:1px solid #8b949e}
+.stock-list{margin:12px 0}
+.stock-item{display:flex;justify-content:space-between;align-items:center;background:#21262d;border-radius:8px;padding:10px 14px;margin:8px 0;border:1px solid #30363d}
+.stock-item .name{font-size:14px;font-weight:600;color:#e6edf3}
+.stock-item .code{font-size:12px;color:#8b949e}
+.stock-item .change{font-size:14px;font-weight:600}
+.up{color:#f85149}
+.down{color:#3fb950}
+.risk-box{background:#f8514911;border:1px solid #f8514944;border-radius:12px;padding:16px;margin:16px 0}
+.risk-box h3{color:#f85149;font-size:14px;margin-bottom:8px}
+.risk-box ul{padding-left:20px}
+.risk-box li{font-size:13px;color:#e6edf3;margin:6px 0}
+.news-item{background:#21262d;border-radius:8px;padding:12px;margin:8px 0;border-left:3px solid #58a6ff}
+.news-item .source{font-size:11px;color:#8b949e;margin-top:4px}
+.schedule-table{width:100%;border-collapse:collapse;margin:12px 0}
+.schedule-table td{padding:8px 12px;border-bottom:1px solid #30363d;font-size:13px}
+.schedule-table td:first-child{color:#58a6ff;font-weight:600;width:80px}
+footer{text-align:center;padding:20px 0;margin-top:24px;border-top:1px solid #30363d;font-size:12px;color:#8b949e}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>📋 A股盘前报告</h1>
+<p class="meta">2026年8月24日（周一）· 数据截至 8月21日收盘</p>
+<p class="meta">🤖 AI 自动生成 · 仅供参考</p>
+</header>
+
+<div class="dashboard">
+<div class="metric"><div class="score score-mid">38</div><div class="label">机会评分</div></div>
+<div class="metric"><div class="score score-high">68</div><div class="label">风险评分</div></div>
+<div class="metric"><div class="score score-low">32</div><div class="label">情绪温度</div></div>
+<div class="metric"><div class="score score-mid">45</div><div class="label">资金共识</div></div>
+</div>
+
+<div class="advice-box">
+<h3>📌 综合建议：防守优先，轻仓试错</h3>
+<p><strong>🎯 仓位上限：</strong> ≤ 30%</p>
+<p><strong>📝 核心逻辑：</strong> 缩量+高炸板率=容错率极低，高位股负反馈持续。周末政策利好集中在通信/算力/贵金属，但英伟达财报悬而未决，算力链忌追高。关注低位1进2低吸机会，严控打板仓位。</p>
+</div>
+
+<div class="section">
+<h2>📊 市场情绪</h2>
+<div class="sentiment-grid">
+<div class="sentiment-item"><div class="value">54</div><div class="key">涨停家数</div></div>
+<div class="sentiment-item"><div class="value">15</div><div class="key">跌停家数</div></div>
+<div class="sentiment-item"><div class="value">73%</div><div class="key">封板率</div></div>
+<div class="sentiment-item"><div class="value">3板</div><div class="key">最高连板</div></div>
+<div class="sentiment-item"><div class="value">13.6%</div><div class="key">1进2晋级率</div></div>
+<div class="sentiment-item"><div class="value">1.88万亿</div><div class="key">成交额</div></div>
+</div>
+<div class="advice-box" style="border-left-color:#d29922">
+<h3>💡 情绪诊断</h3>
+<p>• 赚钱效应弱 — 昨涨停今平均溢价 -0.47%</p>
+<p>• 炸板率~70% — 打板容错率极低</p>
+<p>• 资金偏好存量博弈，高低切换明显</p>
+<p>• 量能缩量至1.88万亿，跌破2万亿关口</p>
+<p>• 涨跌比涨2505 : 跌2862 — 指数涨个股跌</p>
+<p>• 高位反馈：哈药股份跌停、传智教育2连跌停</p>
+</div>
+</div>
+
+<div class="section">
+<h2>🔥 主线题材</h2>
+
+<div class="theme-card">
+<h3>① 光通信/CPO/算力硬件 <span class="tag tag-hot">核心主线</span></h3>
+<p><strong>催化逻辑：</strong> 国常会部署新一代通信网建设（基础/空间/国际/融合四张网）；中际旭创中报净利+242%、长飞光纤净利+889%验证高景气；英伟达AI服务器涨价超15%；呼和浩特绿色算力大会签约1361亿。</p>
+<p><strong>核心标的：</strong> 中际旭创 300308（光模块龙头）、通鼎互联 002491（2连板）、旭光电子（6天4板）、天洋新材（8天5板）</p>
+<p><strong>持续性：</strong> ⭐⭐⭐⭐ 政策+业绩双驱动，但周三英伟达财报前忌追高，回踩5日线低吸更优</p>
+</div>
+
+<div class="theme-card">
+<h3>② 贵金属/有色资源 <span class="tag tag-hot">涨价驱动</span></h3>
+<p><strong>催化逻辑：</strong> 现货黄金突破4600美元/盎司创新高；COMEX黄金突破4600；碳酸锂期货企稳站上15.87万/吨；紫金矿业中报净利+68%；美元走弱+避险情绪升温。</p>
+<p><strong>核心标的：</strong> 紫金矿业 601899（有色龙头）、山东黄金（龙虎榜净买王+8.56亿）、湖南白银 000607（首板涨停）、盛达资源 000603（白银矿山）</p>
+<p><strong>持续性：</strong> ⭐⭐⭐⭐ 外围大宗商品走强趋势未变，但跳空高开超3%需防兑现</p>
+</div>
+
+<div class="theme-card">
+<h3>③ 半导体/存储 <span class="tag tag-warm">事件驱动</span></h3>
+<p><strong>催化逻辑：</strong> 长江存储控股科创板IPO获受理（拟募330亿，科创板史上最大）；功率半导体酝酿涨价10%-15%；四部委发文集成电路资产置换收益5年递延纳税；士兰微封单4.83亿居首。</p>
+<p><strong>核心标的：</strong> 士兰微 002048（IDM龙头，涨停）、华润微（功率半导体）、北京君正（存储）、江波龙（存储模组）</p>
+<p><strong>持续性：</strong> ⭐⭐⭐ 涨价逻辑硬，但长存巨无霸IPO短期可能分流资金</p>
+</div>
+
+<div class="theme-card">
+<h3>④ 人形机器人 <span class="tag tag-warm">事件催化</span></h3>
+<p><strong>催化逻辑：</strong> 第二届世界人形机器人运动会开幕（2056台参赛，百米9秒39破人类纪录）；2026世界机器人大会北京举行（8.19-25）；8月26日深圳AI展具身智能机器人博览会。</p>
+<p><strong>核心标的：</strong> 拓斯达（整机）、双环传动（减速器）、鸣志电器（伺服）、科森科技（2连板）</p>
+<p><strong>持续性：</strong> ⭐⭐⭐ 8-10月催化密集，但不追高位整机，关注上游零部件</p>
+</div>
+
+<div class="theme-card">
+<h3>⑤ 医药 <span class="tag tag-cold">⚠ 分化</span></h3>
+<p><strong>催化逻辑：</strong> Moderna mRNA癌症疫苗III期积极（股价+177%）；基药目录调整；前期超跌反弹。但周五已大幅分化，华兰疫苗等跌超10%。</p>
+<p><strong>核心标的：</strong> 汉森制药 002412（3板空间龙）、康希诺（疫苗20cm）、近岸蛋白（mRNA 20cm）</p>
+<p><strong>持续性：</strong> ⭐⭐ 进入淘汰赛，后排标的补跌风险大，仅龙头有溢价</p>
+</div>
+</div>
+
+<div class="section">
+<h2>📌 核心股票</h2>
+<h3 style="font-size:14px;color:#8b949e;margin:12px 0 8px">🏆 人气股 TOP 8（东财/复盘榜）</h3>
+<div class="stock-list">
+<div class="stock-item"><div><span class="name">① 士兰微</span><br><span class="code">002048 · SiC+功率半导体</span></div><div class="change up">涨停 · 封单4.83亿</div></div>
+<div class="stock-item"><div><span class="name">② 宇树科技</span><br><span class="code">688836 · 人形机器人第一股</span></div><div class="change down">-2.12%</div></div>
+<div class="stock-item"><div><span class="name">③ 通鼎互联</span><br><span class="code">002491 · 光通信</span></div><div class="change up">2连板 · 成交72.6亿</div></div>
+<div class="stock-item"><div><span class="name">④ 中际旭创</span><br><span class="code">300308 · AI光模块龙头</span></div><div class="change up">+4.29%</div></div>
+<div class="stock-item"><div><span class="name">⑤ 哈森股份</span><br><span class="code">603626 · 机器人+苹果链</span></div><div class="change up">5天4板</div></div>
+<div class="stock-item"><div><span class="name">⑥ 诺德股份</span><br><span class="code">600110 · 铜箔+固态电池</span></div><div class="change up">涨停</div></div>
+<div class="stock-item"><div><span class="name">⑦ 湖南白银</span><br><span class="code">000607 · 白银龙头</span></div><div class="change up">涨停</div></div>
+<div class="stock-item"><div><span class="name">⑧ 紫金矿业</span><br><span class="code">601899 · 有色矿产龙头</span></div><div class="change up">+4.96%</div></div>
+</div>
+
+<h3 style="font-size:14px;color:#8b949e;margin:16px 0 8px">🔗 连板梯队</h3>
+<div class="stock-list">
+<div class="stock-item"><div><span class="name">🥇 汉森制药</span><br><span class="code">002412 · 3板 · 中药创新药</span></div><div class="change up">一字板 · 冲4板压力大</div></div>
+<div class="stock-item"><div><span class="name">🥈 2板×10</span><br><span class="code">医药5只 · 通信2只 · 机器人2只 · 其他1只</span></div><div class="change">医药最强</div></div>
+<div class="stock-item"><div><span class="name">趋势龙</span><br><span class="code">天洋新材8天5板 · 旭光电子6天4板 · 哈森5天4板</span></div><div class="change">低吸为主</div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>🎯 核心标的 · 操作思路</h2>
+<div class="theme-card">
+<h3>▸ 光通信/CPO</h3>
+<p>• 中际旭创 300308 趋势低吸，回踩5日线</p>
+<p>• 通鼎互联 002491 2进3观察承接</p>
+<p>• 新易盛 300502 弹性标的，分歧低吸</p>
+</div>
+<div class="theme-card">
+<h3>▸ 贵金属/有色</h3>
+<p>• 紫金矿业 601899 大盘龙头，回踩均线低吸</p>
+<p>• 湖南白银 000607 白银弹性标的</p>
+<p>• 盐湖股份 000792 碳酸锂涨价受益</p>
+</div>
+<div class="theme-card">
+<h3>▸ 半导体/存储</h3>
+<p>• 士兰微 002048 涨价+车规认证催化</p>
+<p>• 江波龙 301308 存储模组弹性</p>
+</div>
+<div class="theme-card">
+<h3>▸ 人形机器人</h3>
+<p>• 双环传动 002472 减速器核心零部件</p>
+<p>• 拓斯达 300607 整机+事件催化</p>
+</div>
+</div>
+
+<div class="section">
+<h2>🚫 避雷名单</h2>
+<div class="risk-box">
+<h3>⚠️ 高危标的</h3>
+<ul>
+<li>医药后排标的 — 多只2板周五放量分歧，补跌风险</li>
+<li>农业种植板块 — 资金撤离，神农种业等规避</li>
+<li>蓝盾光电 300862 — 7天涨197%复牌，高开砸盘概率大</li>
+<li>纯高位无业绩股 — 周末利好兑现=周一高开砸盘</li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2>📰 周末重要消息</h2>
+<div class="news-item">
+<p>🏛️ <strong>国常会：</strong>适度超前统筹推进新一代通信网建设，普及智能终端，培育智慧城市/智能制造场景</p>
+<p class="source">来源：国务院常务会议 8/21</p>
+</div>
+<div class="news-item">
+<p>💾 <strong>长存控股IPO获受理：</strong>拟募资330亿，Q1净利333.79亿，全球NAND Flash排名第三、中国第一</p>
+<p class="source">来源：上交所 8/21</p>
+</div>
+<div class="news-item">
+<p>🖥️ <strong>绿色算力大会签约1361亿：</strong>呼和浩特与火山引擎、寒武纪等签约13个项目</p>
+<p class="source">来源：证券时报 8/22</p>
+</div>
+<div class="news-item">
+<p>💰 <strong>黄金突破4600美元：</strong>现货黄金创新高，布油~94美元，COMEX金破4600</p>
+<p class="source">来源：财联社</p>
+</div>
+<div class="news-item">
+<p>🤖 <strong>人形机器人运动会开幕：</strong>百米9秒39破人类纪录，2056台参赛</p>
+<p class="source">来源：央视新闻 8/22</p>
+</div>
+<div class="news-item">
+<p>📊 <strong>促内需贴息扩围：</strong>消费贷贴息上限提至5000元，经办机构扩至400家</p>
+<p class="source">来源：国新办发布会 8/21</p>
+</div>
+<div class="news-item">
+<p>💊 <strong>Moderna mRNA癌症疫苗III期阳性：</strong>股价单日+177%，提振A股医药情绪</p>
+<p class="source">来源：公开市场消息</p>
+</div>
+<div class="news-item">
+<p>📈 <strong>ETF净流入超3600亿：</strong>7月以来股票型ETF资金净流入3676亿，半导体/科创50/通信为主</p>
+<p class="source">来源：Wind数据</p>
+</div>
+<div class="news-item">
+<p>⚠️ <strong>英伟达8/26盘后财报：</strong>Vera Rubin/Grace Blackwell服务器涨价超15%</p>
+<p class="source">来源：Bloomberg</p>
+</div>
+<div class="news-item">
+<p>🔓 <strong>蓝盾光电复牌：</strong>前期5连板，7个交易日涨197%，风险提示公告</p>
+<p class="source">来源：深交所 8/21</p>
+</div>
+</div>
+
+<div class="section">
+<h2>⚠️ 交易风险警告</h2>
+<div class="risk-box">
+<h3>🔴 高位股风险</h3>
+<ul>
+<li>汉森制药3板冲4板：一字缩量加速，获利盘堆积，高开>5%不追</li>
+<li>蓝盾光电复牌：7天+197%，高开冲高回落概率极大</li>
+<li>哈药股份跌停、传智教育2连跌停：前期高位股持续退潮</li>
+<li>医药板块周五大分化：华兰疫苗等多股跌超10%，后排补跌风险大</li>
+</ul>
+</div>
+<div class="risk-box" style="border-color:#d2992244;background:#d2992211">
+<h3 style="color:#d29922">🟡 退潮信号</h3>
+<ul>
+<li>成交额缩量至1.88万亿，跌破2万亿 — 增量资金观望</li>
+<li>炸板率~70%，1进2晋级率仅13.6% — 打板几乎无利可图</li>
+<li>昨涨停今溢价为负（-0.47%）— 追高资金大面积亏损</li>
+<li>连板梯队断层：最高仅3板，无4板标的</li>
+<li>涨跌比2505:2862 — 指数涨但多数个股下跌</li>
+</ul>
+</div>
+<div class="risk-box" style="border-color:#d2992244;background:#d2992211">
+<h3 style="color:#d29922">🟡 本周重大不确定性</h3>
+<ul>
+<li>英伟达8/26盘后财报 — 算力链周一至周三"悬顶"忌追高</li>
+<li>杰克逊霍尔年会8/27-29 — 全球降息预期面临验证</li>
+<li>10Y美债4.73%、30Y 5.27%高位 — 压制成长股估值</li>
+<li>中报披露截止8/31 — 本周最晚披露期，业绩雷与利好并存</li>
+<li>近180亿限售股解禁 — 软通动力30.58亿、真兰仪表29.76亿</li>
+</ul>
+</div>
+</div>
+
+<div class="section">
+<h2>📋 仓位与操作纪律</h2>
+<div class="advice-box">
+<table class="schedule-table">
+<tr><td>总仓位上限</td><td><strong>≤ 30%</strong></td></tr>
+<tr><td>打板仓位</td><td><strong>≤ 10%，单票≤5%</strong></td></tr>
+<tr><td>策略</td><td>防守优先，低位1进2低吸试错</td></tr>
+<tr><td>止损</td><td>放量跌破分时均线 → 无条件离场</td></tr>
+<tr><td>观察点</td><td>开盘30分钟量能+通信板块竞价强度</td></tr>
+<tr><td>进场条件</td><td>量能回升至2万亿+连板高度突破4板</td></tr>
+</table>
+</div>
+</div>
+
+<div class="section">
+<h2>📅 下周关键日程</h2>
+<table class="schedule-table">
+<tr><td>8/24 周一</td><td>华汇智能申购 · 文昌航天论坛</td></tr>
+<tr><td>8/25 周二</td><td>6000亿MLF到期 · 央行操作窗口</td></tr>
+<tr><td>8/26 周三</td><td>英伟达盘后财报 · PCE数据 · 深圳AI展</td></tr>
+<tr><td>8/27-29</td><td>杰克逊霍尔年会 · 数字出版博览会</td></tr>
+<tr><td>8/28</td><td>成品油调价窗口 · 天博智能/洛轴股份申购</td></tr>
+<tr><td>8/28-30</td><td>贵阳数博会</td></tr>
+</table>
+</div>
+
+<footer>
+<p>📊 数据来源：证券时报·数据宝、东方财富、同花顺、Wind、财联社、央视新闻</p>
+<p>⏰ 数据截至：2026年8月21日15:00收盘</p>
+</footer>
+</div>
+</body>
+</html>
