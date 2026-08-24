@@ -529,6 +529,47 @@ function renderHistory(weeks) {
   });
   el.innerHTML = html;
 }
+
+// PWA 安装提示
+(function() {
+  // 已安装则不显示
+  if (window.matchMedia('(display-mode: standalone)').matches) return;
+  if (localStorage.getItem('pwa-dismissed')) return;
+
+  let deferredPrompt;
+  const banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b22;border-top:1px solid #30363d;padding:14px 16px;display:flex;align-items:center;gap:12px;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -4px 20px rgba(0,0,0,.4)';
+  banner.innerHTML = '<div style="flex:1"><div style="color:#c9d1d9;font-size:14px;font-weight:600">📲 安装到主屏幕</div><div style="color:#8b949e;font-size:12px;margin-top:2px">像 App 一样使用，全屏无地址栏</div></div>'
+    + '<button id="install-btn" style="background:#238636;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">安装</button>'
+    + '<button id="dismiss-btn" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
+  document.body.appendChild(banner);
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(() => { banner.style.transform = 'translateY(0)'; }, 1500);
+  });
+
+  document.getElementById('install-btn').addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if (outcome === 'accepted') {
+        banner.style.transform = 'translateY(100%)';
+      }
+    } else {
+      // iOS 没有 beforeinstallprompt，给手动提示
+      banner.innerHTML = '<div style="flex:1;color:#c9d1d9;font-size:13px">点底部分享按钮 → 「添加到主屏幕」</div><button onclick="this.parentElement.remove()" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
+    }
+  });
+
+  document.getElementById('dismiss-btn').addEventListener('click', () => {
+    banner.style.transform = 'translateY(100%)';
+    localStorage.setItem('pwa-dismissed', '1');
+  });
+})();
 </script>
 </body>
 </html>
