@@ -288,9 +288,31 @@
     .emotion-num { font-size: 50px; }
     .week-days { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
+
+/* 搜索框 */
+.search-wrap{margin-bottom:10px}
+.search-wrap input{width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none}
+.search-wrap input:focus{border-color:var(--accent)}
+.search-wrap input::placeholder{color:var(--text2)}
+/* 主题切换 */
+.theme-toggle{position:fixed;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:999;transition:all .3s}
+.theme-toggle:hover{border-color:var(--accent);background:rgba(88,166,255,.1)}
+/* 相对时间 */
+.rel-time{font-size:11px;color:var(--text2);margin-left:6px}
+
+/* 亮色主题 */
+[data-theme="light"]{
+  --bg:#ffffff;--card:#f6f8fa;--border:#d0d7de;--text:#1f2328;--text2:#656d76;
+  --accent:#0969da;--green:#1a7f37;--red:#cf222e;--orange:#9a6700;--purple:#8250df;
+}
+[data-theme="light"] .snapshot{background:linear-gradient(135deg,#f0f4ff,#f6f8fa)}
+[data-theme="light"] .theme-toggle{background:#f6f8fa;border-color:#d0d7de}
+[data-theme="light"] .search-wrap input{background:#f6f8fa;border-color:#d0d7de;color:#1f2328}
 </style>
 </head>
 <body>
+<div class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="切换主题">🌙</div>
+
 <div class="header">
   <h1>📊 A股每日资讯</h1>
   <div class="subtitle" id="header-subtitle">加载中...</div>
@@ -335,7 +357,8 @@
     </div>
   </div>
   <div class="section history-section">
-    <div class="section-title">📅 历史报告</div>
+    <div class="search-wrap"><input type="text" id="history-search" placeholder="🔍 搜索日期，如 8/24、周一..." oninput="filterHistory()"></div>
+<div class="section-title">📅 历史报告</div>
     <div id="history-section">
       <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:8px">
         <div class="sk-block" style="height:42px;border-radius:0"></div>
@@ -509,8 +532,10 @@ function renderHistory(weeks) {
   const el = document.getElementById('history-section');
   let html = '';
   weeks.forEach(w => {
-    const openAttr = w.open ? ' open' : '';
-    const arrow = w.open ? '▼' : '▶';
+    const savedOpen = localStorage.getItem('week_open_' + w.weekLabel);
+    const isOpen = savedOpen !== null ? savedOpen === '1' : (w.open || false);
+    const openAttr = isOpen ? ' open' : '';
+    const arrow = isOpen ? '▼' : '▶';
     let daysHtml = '';
     (w.days || []).forEach(d => {
       const todayBadge = d.today ? ' <span class="weekday">(今天)</span>' : ' <span class="weekday">' + d.weekday + '</span>';
@@ -533,7 +558,64 @@ function renderHistory(weeks) {
       + '<div class="week-days">' + daysHtml + '</div></details>';
   });
   el.innerHTML = html;
+  // Add toggle listeners for localStorage
+  el.querySelectorAll('details').forEach(det => {
+    det.addEventListener('toggle', function() {
+      var label = this.querySelector('summary').textContent;
+      localStorage.setItem('week_open_' + label.trim(), this.open ? '1' : '0');
+    });
+  });
 }
+
+
+// 搜索过滤
+function filterHistory() {
+  var q = document.getElementById('history-search').value.toLowerCase();
+  document.querySelectorAll('#history-section .date-group').forEach(function(g) {
+    var txt = g.textContent.toLowerCase();
+    g.style.display = txt.indexOf(q) >= 0 ? '' : 'none';
+  });
+  // 自动展开有匹配结果的折叠组
+  if (q) {
+    document.querySelectorAll('#history-section details').forEach(function(det) {
+      var visible = det.querySelectorAll('.date-group:not([style*="display: none"])');
+      if (visible.length > 0) det.open = true;
+    });
+  }
+}
+
+// 相对时间
+function relativeTime(dateStr) {
+  if (!dateStr) return '';
+  var d = new Date(dateStr.replace(/\//g, '-') + ' ' + new Date().getFullYear());
+  if (isNaN(d)) return dateStr;
+  var now = new Date();
+  var diff = now - d;
+  var mins = Math.floor(diff / 60000);
+  var hours = Math.floor(diff / 3600000);
+  var days = Math.floor(diff / 86400000);
+  if (mins < 1) return '刚刚';
+  if (mins < 60) return mins + '分钟前';
+  if (hours < 24) return hours + '小时前';
+  if (days < 7) return days + '天前';
+  return dateStr;
+}
+
+// 主题切换
+function toggleTheme() {
+  var cur = localStorage.getItem('theme') || 'dark';
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeToggle').textContent = next === 'dark' ? '🌙' : '☀️';
+}
+(function() {
+  var saved = localStorage.getItem('theme') || 'dark';
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('themeToggle').textContent = '☀️';
+  }
+})();
 
 // PWA 原生安装提示
 (function() {

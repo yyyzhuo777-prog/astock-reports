@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>A股盘前报告 | 2026年8月24日（周一）</title>
 <link rel="stylesheet" href="report-common.css">
 <style>
@@ -28,6 +28,11 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 .back-to-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
 .back-to-top.show{opacity:1;pointer-events:auto}
 .back-to-top:hover{background:#58a6ff;color:#fff}
+
+/* 分享按钮 */
+.share-btn{position:fixed;bottom:72px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
+.share-btn.show{opacity:1;pointer-events:auto}
+.share-btn:hover{background:#58a6ff;color:#fff}
 </style>
 </head>
 <body>
@@ -392,8 +397,19 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 <script>
 window.addEventListener('scroll',function(){
   var btn=document.getElementById('backToTop');
-  if(btn){btn.classList.toggle('show',window.scrollY>300)}
+  if(btn){btn.classList.toggle('show',window.scrollY>300)}var sb=document.getElementById('shareBtn');if(sb){sb.classList.toggle('show',window.scrollY>300)}
 });
+</script>
+<div class="share-btn" id="shareBtn" onclick="shareReport()">🔗</div>
+<script>
+function shareReport(){
+  var url=window.location.href;
+  if(navigator.share){navigator.share({title:document.title,url:url})}
+  else{navigator.clipboard.writeText(url).then(function(){
+    var btn=document.getElementById('shareBtn');
+    btn.textContent='✅';setTimeout(function(){btn.textContent='🔗'},1500)
+  })}
+}
 </script>
 </body>
 </html>
