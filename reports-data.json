@@ -30,7 +30,7 @@
       { "text": "💎 化工超预期", "cls": "" }
     ],
     "judge": "情绪退潮期逼近冰点，算力CPO三巨头蒸发超1552亿，电子板块主力净流出212亿。贵金属+煤炭+银行红利防御线确立，黄金突破4600美元驱动避险主线。汉森制药4板为最高板，明日冲击5板决定短线方向。本周PCE+英伟达财报+杰克逊霍尔密集，防御占优。",
-    "latestLink": "report-0824-v2.html",
+    "latestLink": "report-0824-evening.html",
     "latestLabel": "盘后"
   },
   "reports": [
@@ -41,7 +41,7 @@
       "active": true,
       "morning": "report-0824-morning.html",
       "noon": "report-0824-noon.html",
-      "evening": "report-0824-v2.html"
+      "evening": "report-0824-evening.html"
     }
   ],
   "focus": {
@@ -66,7 +66,7 @@
           "reports": [
             { "icon": "🌅", "time": "08:00", "url": "report-0824-morning.html" },
             { "icon": "☀️", "time": "12:00", "url": "report-0824-noon.html" },
-            { "icon": "🌙", "time": "20:30", "url": "report-0824-v2.html" }
+            { "icon": "🌙", "time": "20:30", "url": "report-0824-evening.html" }
           ]
         }
       ]
