@@ -4,12 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#161b22">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="A股资讯">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="manifest" href="manifest.json">
-<title>A股每日资讯</title>
+<title>A股每日资讯 · 模拟导航页</title>
 <style>
   :root {
     --bg: #0d1117;
@@ -260,7 +255,6 @@
     justify-content: center;
     margin-top: 1px;
   }
-  .focus-empty { font-size: 12px; color: var(--text2); padding: 8px 4px; }
   .discipline-strip {
     display: flex;
     flex-wrap: nowrap;
@@ -282,49 +276,8 @@
     background: rgba(255,255,255,.04);
     border: 1px solid var(--border);
   }
-  .month-filter {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 6px;
-    margin-bottom: 10px;
-    scrollbar-width: none;
-  }
-  .month-filter::-webkit-scrollbar { display: none; }
-  .month-btn {
-    flex: 0 0 auto;
-    min-height: 36px;
-    padding: 6px 12px;
-    border-radius: 14px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    background: var(--card);
-    color: var(--text2);
-    border: 1px solid var(--border);
-  }
-  .month-btn.active { background: rgba(88,166,255,.15); color: var(--accent); border-color: var(--accent); }
-  .search-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 12px;
-  }
-  .search-box input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-size: 16px;
-    outline: none;
-  }
-  .search-box input::placeholder { color: var(--text2); }
   .report-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
-  .date-group { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .date-group { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin: 4px 0; }
   .date-header {
     background: rgba(88,166,255,.06);
     padding: 6px 10px;
@@ -353,15 +306,6 @@
   .report-link:hover { background: rgba(88,166,255,.08); }
   .report-link.disabled { color: var(--text2); opacity: .4; pointer-events: none; }
   .report-link .time { font-size: 10px; color: var(--text2); display: block; margin-top: 1px; }
-  .pending-dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: dotPulse 1.4s infinite ease-in-out;
-  }
-  @keyframes dotPulse { 0%,80%,100% {transform:scale(.4);opacity:.3} 40% {transform:scale(1);opacity:1} }
   .footer {
     text-align: center;
     padding: 16px 0;
@@ -371,53 +315,17 @@
     margin-top: 20px;
   }
   .footer .schedule-inline { margin-bottom: 6px; color: var(--text); }
-  .back-top {
-    position: fixed;
-    bottom: calc(20px + env(safe-area-inset-bottom));
-    right: max(16px, env(safe-area-inset-right));
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity .2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,.3);
-    z-index: 100;
-  }
-  .back-top.show { opacity: 1; }
-  @media (max-width: 420px) {
-    body { padding: 12px; padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
-    .header { padding-top: 14px; }
-    .emotion-hero { justify-content: flex-start; padding-left: 14px; }
-    .emotion-num { font-size: 38px; }
-    .snapshot { padding: 14px; }
-    .snapshot-grid { gap: 6px; }
-    .snap-value { font-size: 14px; }
-    .quick-card { min-width: min(86vw, 270px); }
-    .status-bar { gap: 6px; padding: 8px 10px; }
-    .footer { padding-left: 4px; padding-right: 4px; }
-  }
 
   @media (min-width: 720px) {
     body { padding: 20px; padding-bottom: 88px; }
     .header h1 { font-size: 24px; }
     .snapshot { padding: 18px; }
     .emotion-num { font-size: 46px; }
-    .snap-item { padding: 10px 6px; }
   }
-
   @media (min-width: 960px) {
     body { padding: 24px 28px 96px; }
     .header { padding-top: 14px; margin-bottom: 14px; }
     .header h1 { font-size: 26px; }
-    .status-bar { margin-bottom: 16px; }
     .dashboard-grid {
       grid-template-columns: minmax(0, 1.45fr) minmax(340px, .75fr);
       column-gap: 20px;
@@ -429,42 +337,14 @@
     .focus-section { grid-column: 2; grid-row: 2; margin-bottom: 0; }
     .quotes-section { grid-column: 2; grid-row: 3; margin-bottom: 0; }
     .history-section { grid-column: 1 / -1; margin-top: 4px; }
-    .quick-scroll { flex-direction: column; overflow: visible; padding-bottom: 0; scroll-snap-type: none; }
+    .quick-scroll { flex-direction: column; overflow: visible; padding-bottom: 0; }
     .quick-card { width: 100%; min-width: 0; }
-    .discipline-strip { flex-wrap: wrap; overflow: visible; padding-bottom: 0; scroll-snap-type: none; }
+    .discipline-strip { flex-wrap: wrap; overflow: visible; padding-bottom: 0; }
     .week-days { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 8px; }
-    .week-days .date-group { margin: 0 !important; }
-    .footer { margin-top: 26px; }
   }
-
-  @media (max-width: 640px) {
-    .status-bar { flex-wrap: wrap; }
-    .status-bar > span:last-child { width: 100%; margin-left: 16px !important; }
-    .snapshot-judge { font-size: 13px; }
-    .snapshot-link-row a { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
-  }
-
-  @media (max-width: 350px) {
-    .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (min-width: 1200px) {
-    body { padding-left: 32px; padding-right: 32px; }
-    .dashboard-grid { grid-template-columns: minmax(0, 1.6fr) minmax(360px, .8fr); column-gap: 24px; }
-    .snapshot { padding: 22px; }
-    .emotion-hero { min-height: 112px; }
-    .emotion-num { font-size: 50px; }
-    .snapshot-grid { gap: 10px; }
-    .snap-item { padding: 12px 8px; }
-    .snap-label { font-size: 12px; }
-    .snap-value { font-size: 16px; }
-    .week-days { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
-
-  /* 手机端居中优化：可居中的元素全部居中（桌面端不受影响） */
   @media (max-width: 719px) {
-    .status-bar { justify-content: center; text-align: center; }
-    .status-bar > span:last-child { margin-left: 0 !important; }
+    .status-bar { justify-content: center; text-align: center; flex-wrap: wrap; }
+    .status-bar > span:last-child { width: 100%; margin-left: 0 !important; }
     .snapshot-title { justify-content: center; }
     .snapshot-date { margin-left: 0; }
     .emotion-hero { justify-content: center; padding-left: 0; }
@@ -474,685 +354,204 @@
     .quick-card { text-align: center; }
     .quick-card .qc-date, .quick-card .qc-summary { text-align: center; }
     .focus-item { justify-content: center; }
-    .focus-empty { text-align: center; }
     .discipline-strip { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
-    .month-filter { flex-wrap: wrap; justify-content: center; overflow-x: visible; }
     .date-header { justify-content: center; }
   }
-
+  @media (max-width: 350px) {
+    .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1200px) {
+    body { padding-left: 32px; padding-right: 32px; }
+    .dashboard-grid { grid-template-columns: minmax(0, 1.6fr) minmax(360px, .8fr); column-gap: 24px; }
+    .snapshot { padding: 22px; }
+    .emotion-hero { min-height: 112px; }
+    .emotion-num { font-size: 50px; }
+    .week-days { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
 </style>
 </head>
 <body>
 <div class="header">
   <h1>📊 A股每日资讯</h1>
-  <div class="subtitle"><span id="dataAsOf">短线复盘 · 盘前/午盘/盘后 · 自动更新</span></div>
+  <div class="subtitle">8/24 周一 · 午盘数据 · 截至 11:30</div>
 </div>
 
 <div class="status-bar">
   <div class="status-dot"></div>
   <span>系统正常</span>
-  <span style="margin-left:auto">🕐 <span id="nextReport">计算中...</span></span>
-</div>
-
-<div id="refreshHint" style="display:none;text-align:center;padding:8px;margin-bottom:12px;background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);border-radius:6px;font-size:12px;color:var(--accent)">
-  🔄 下拉刷新获取最新报告
+  <span style="margin-left:auto">🕐 下次报告 20:45 盘后</span>
 </div>
 
 <main class="dashboard-grid">
-<div class="snapshot" id="snapshotArea">
+
+<!-- ===== 最新速览 ===== -->
+<div class="snapshot">
   <div class="snapshot-title">
     ⚡ 最新速览
-    <span class="snapshot-date" id="snapshotDate"></span>
+    <span class="snapshot-date">8/24 周一 午盘</span>
   </div>
-  <div class="emotion-hero" id="emotionHero"></div>
-  <div class="snapshot-grid" id="snapshotGrid"></div>
-  <div class="snapshot-tags" id="snapshotTags"></div>
-  <div class="snapshot-judge" id="snapshotJudge"></div>
-  <div class="snapshot-link-row" id="snapshotLinkRow"></div>
+
+  <div class="emotion-hero">
+    <div class="emotion-num">45<small>/100</small></div>
+    <div class="emotion-text">情绪温度
+      <div><span class="emotion-level neutral">中性修复</span></div>
+    </div>
+  </div>
+
+  <div class="snapshot-grid">
+    <div class="snap-item">
+      <div class="snap-label">涨停/跌停</div>
+      <div class="snap-value"><span class="snap-up">38</span> / <span class="snap-down">8</span></div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">封板率</div>
+      <div class="snap-value snap-neutral">45%</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">半日成交</div>
+      <div class="snap-value snap-neutral">1.12万亿</div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">上证</div>
+      <div class="snap-value snap-up">3287 <small>+0.68%</small></div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">创业板</div>
+      <div class="snap-value snap-up">2199 <small>+1.35%</small></div>
+    </div>
+    <div class="snap-item">
+      <div class="snap-label">仓位上限</div>
+      <div class="snap-value snap-neutral">40%</div>
+    </div>
+  </div>
+
+  <div class="snapshot-tags">
+    <span class="snap-tag hot">🔥 光通信/CPO</span>
+    <span class="snap-tag hot">🔥 贵金属</span>
+    <span class="snap-tag">💎 半导体补涨</span>
+    <span class="snap-tag">🤖 机器人修复</span>
+    <span class="snap-tag hot">💊 医药退潮</span>
+  </div>
+
+  <div class="snapshot-judge"><b>市场判断：</b>上午分化修复中，通信高开V型回拉，贵金属继续走强，半导体补涨，医药退潮确认。量能较上周五同期放量8%，打板成功率回升至45%。但高位股分化仍在，追高风险未消，低吸为主。</div>
+
+  <div class="snapshot-link-row">
+    <a href="#">查看午盘完整报告 →</a>
+  </div>
 </div>
 
+<!-- ===== 最近报告 ===== -->
 <div class="section recent-section">
   <div class="section-title">📋 最近报告</div>
-  <div class="quick-scroll" id="quickScroll"></div>
+  <div class="quick-scroll">
+    <div class="quick-card active">
+      <div class="qc-date">8/24 周一</div>
+      <div class="qc-summary">上午分化修复·通信V型回拉·贵金属走强·半日1.12万亿·38涨停/8跌停</div>
+      <div class="quick-actions">
+        <a class="quick-btn" href="#">🌅 盘前</a>
+        <a class="quick-btn" href="#">☀️ 午盘</a>
+        <span class="quick-btn disabled">🌙 盘后</span>
+      </div>
+    </div>
+    <div class="quick-card">
+      <div class="qc-date">8/21 周四</div>
+      <div class="qc-summary">情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的</div>
+      <div class="quick-actions">
+        <a class="quick-btn" href="#">🌅 盘前</a>
+        <a class="quick-btn" href="#">☀️ 午盘</a>
+        <a class="quick-btn" href="#">🌙 盘后</a>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- ===== 关注 ===== -->
 <div class="section focus-section">
-  <div class="section-title" id="focusTitle">🎯 下一交易日关注</div>
-  <div class="focus-list" id="focusList"><div class="focus-empty">等待报告生成</div></div>
+  <div class="section-title">🎯 下午关注</div>
+  <div class="focus-list">
+    <div class="focus-item"><span class="f-num">1</span><span>通鼎互联能否封住3板确认高度龙</span></div>
+    <div class="focus-item"><span class="f-num">2</span><span>14:00量能是否持续放大，确认修复</span></div>
+    <div class="focus-item"><span class="f-num">3</span><span>汉森制药能否回封4板，否则医药彻底退潮</span></div>
+    <div class="focus-item"><span class="f-num">4</span><span>明日6000亿MLF到期，央行操作窗口</span></div>
+  </div>
 </div>
 
+<!-- ===== 语录 ===== -->
 <div class="section quotes-section">
   <div class="section-title">⚡ 短线交易语录</div>
-  <div class="discipline-strip" id="disciplineStrip"></div>
+  <div class="discipline-strip">
+    <span>只做最强，不做跟风</span>
+    <span>买在分歧，卖在一致</span>
+    <span>看不懂就空仓，做错就止损</span>
+    <span>宁可错过，不可做错</span>
+    <span>计划交易，交易计划</span>
+  </div>
 </div>
 
+<!-- ===== 历史报告 ===== -->
 <div class="section history-section">
   <div class="section-title">📅 历史报告</div>
-  <div class="month-filter" id="monthFilter"></div>
-  <div class="search-box">
-    <span>🔍</span>
-    <input type="text" id="reportSearch" placeholder="搜索日期、主线、板块...">
+  <div class="report-grid">
+    <details open style="margin-bottom:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <summary style="padding:10px 12px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;background:rgba(88,166,255,.04);list-style:none;display:flex;align-items:center;gap:8px;user-select:none">
+        <span style="font-size:12px">▼</span>
+        📅 2026 第35周（8/24起）
+        <span style="margin-left:auto;font-size:11px;color:var(--text2);font-weight:400">2份报告</span>
+      </summary>
+      <div class="week-days">
+        <div class="date-group">
+          <div class="date-header">📅 08-24 <span class="weekday">周一 (今天)</span></div>
+          <div class="report-links">
+            <a class="report-link" href="#"><div>🌅<div class="time">08:15</div></div></a>
+            <a class="report-link" href="#"><div>☀️<div class="time">12:30</div></div></a>
+            <span class="report-link disabled"><div>🌙<div class="time" style="color:var(--accent)"><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 1.4s infinite ease-in-out">●</span></div></div></span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details style="margin-bottom:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+      <summary style="padding:10px 12px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;background:rgba(88,166,255,.04);list-style:none;display:flex;align-items:center;gap:8px;user-select:none">
+        <span style="font-size:12px">▶</span>
+        📅 2026 第34周（8/18起）
+        <span style="margin-left:auto;font-size:11px;color:var(--text2);font-weight:400">3份报告</span>
+      </summary>
+      <div class="week-days">
+        <div class="date-group">
+          <div class="date-header">📅 08-21 <span class="weekday">周四</span></div>
+          <div class="report-links">
+            <a class="report-link" href="#"><div>🌅<div class="time">08:00</div></div></a>
+            <a class="report-link" href="#"><div>☀️<div class="time">12:00</div></div></a>
+            <a class="report-link" href="#"><div>🌙<div class="time">20:30</div></div></a>
+          </div>
+        </div>
+        <div class="date-group">
+          <div class="date-header">📅 08-20 <span class="weekday">周三</span></div>
+          <div class="report-links">
+            <a class="report-link" href="#"><div>🌅<div class="time">08:00</div></div></a>
+            <a class="report-link" href="#"><div>☀️<div class="time">12:00</div></div></a>
+            <a class="report-link" href="#"><div>🌙<div class="time">20:30</div></div></a>
+          </div>
+        </div>
+        <div class="date-group">
+          <div class="date-header">📅 08-19 <span class="weekday">周二</span></div>
+          <div class="report-links">
+            <a class="report-link" href="#"><div>🌅<div class="time">08:00</div></div></a>
+            <a class="report-link" href="#"><div>☀️<div class="time">12:00</div></div></a>
+            <a class="report-link" href="#"><div>🌙<div class="time">20:30</div></div></a>
+          </div>
+        </div>
+      </div>
+    </details>
   </div>
-  <div class="report-grid" id="reportGrid"></div>
 </div>
+
 </main>
 
 <div class="footer">
   <div class="schedule-inline">自动报告 · 08:15 盘前 · 12:00 午盘 · 20:45 盘后</div>
   A股每日资讯 · AI 自动生成 · 仅供参考，不构成投资建议<br>
-  <span id="footerTime">页面更新中...</span><br>
-  💡 iPhone Safari: 点“分享”→“添加到主屏幕”获得 App 体验
+  页面更新：2026-08-24 · 模拟预览版
 </div>
-
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<script>
-// ============================================================
-// 报告数据配置
-// 规则：日期只存 YYYY-MM-DD；星期由程序算；情绪只存数字；仓位只存数字。
-// ============================================================
-const DEFAULT_REPORT_CONFIG = {
-  lastUpdated: "2026-08-23",
-  schedule: [
-    { key: "morning", time: "08:15", min: 8 * 60 + 15, label: "盘前", icon: "🌅" },
-    { key: "noon", time: "12:00", min: 12 * 60, label: "午盘", icon: "☀️" },
-    { key: "evening", time: "20:45", min: 20 * 60 + 45, label: "盘后", icon: "🌙" }
-  ],
-  delayGraceMinutes: 30,
-  reports: [
-    {
-      date: "2026-08-24",
-      morning: null,
-      noon: null,
-      evening: null
-    },
-    {
-      date: "2026-08-21",
-      morning: {
-        file: "report-0821-morning.html",
-        time: "08:00",
-        summary: "美联储鹰派 · Moderna映射 · 沪八条+央行投放"
-      },
-      noon: {
-        file: "report-0821-noon.html",
-        time: "12:00",
-        summary: "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨"
-      },
-      evening: {
-        file: "report-0821-v2.html",
-        time: "20:30",
-        summary: "情绪48 · 涨停54 · 主线：CPO+贵金属 · 二线弹性标的",
-        judge: "情绪修复但赚钱效应分化，资金高度集中在CPO/贵金属两条主线，追高性价比一般，关注核心方向持续性。",
-        maxPosition: 30,
-        focusTargetDate: "2026-08-24",
-        focus: [
-          "CPO/通信前排反馈，是否延续净流入",
-          "贵金属消化获利盘后的持续性",
-          "机器人/固态电池能否回流形成二线机会"
-        ],
-        snap: {
-          shIndex: { value: "3905", change: "+0.04%", up: true },
-          cyIndex: { value: "3546", change: "+1.43%", up: true },
-          volume: "1.88万亿",
-          limitUp: "54",
-          limitDown: "14",
-          emotion: 48,
-          sealRate: "75%",
-          tags: [
-            { text: "🔥 CPO/通信", hot: true },
-            { text: "🔥 贵金属", hot: true },
-            { text: "💎 锂矿", hot: false },
-            { text: "🤖 机器人", hot: false },
-            { text: "🔋 固态电池", hot: false }
-          ]
-        }
-      }
-    }
-  ]
-};
-
-// ============================================================
-// 数据加载：优先读取同目录 reports-data.json；失败时回退到内置配置。
-// 日常自动化只需更新 reports-data.json，导航页无需每天改 HTML。
-// ============================================================
-let REPORT_CONFIG = JSON.parse(JSON.stringify(DEFAULT_REPORT_CONFIG));
-const REPORT_DATA_URL = "reports-data.json";
-const AUTO_REFRESH_MS = 2 * 60 * 1000;
-
-function isValidReportConfig(cfg) {
-  return !!(cfg && Array.isArray(cfg.reports) && Array.isArray(cfg.schedule));
-}
-
-async function refreshReportConfig(silent = false) {
-  try {
-    const res = await fetch(`${REPORT_DATA_URL}?v=${Date.now()}`, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const cfg = await res.json();
-    if (!isValidReportConfig(cfg)) throw new Error("invalid report config");
-    REPORT_CONFIG = cfg;
-    if (!silent) render();
-    return true;
-  } catch (err) {
-    if (!silent) render();
-    console.warn("reports-data.json 加载失败，已使用内置配置：", err);
-    return false;
-  }
-}
-
-// ============================================================
-// 时间 / 日期工具：统一按中国市场时区 Asia/Shanghai
-// ============================================================
-const MARKET_TZ = "Asia/Shanghai";
-const WEEKDAYS = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-
-function pad2(n) { return String(n).padStart(2, "0"); }
-
-function parseYMD(dateStr) {
-  const [y, m, d] = dateStr.split("-").map(Number);
-  return { y, m, d };
-}
-
-function utcDateFromYMD(dateStr) {
-  const { y, m, d } = parseYMD(dateStr);
-  return new Date(Date.UTC(y, m - 1, d));
-}
-
-function formatYMDUTC(date) {
-  return `${date.getUTCFullYear()}-${pad2(date.getUTCMonth() + 1)}-${pad2(date.getUTCDate())}`;
-}
-
-function getWeekday(dateStr) {
-  return WEEKDAYS[utcDateFromYMD(dateStr).getUTCDay()];
-}
-
-function formatDateShort(dateStr) {
-  const { m, d } = parseYMD(dateStr);
-  return `${m}/${d}`;
-}
-
-function getChinaNow() {
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: MARKET_TZ,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hourCycle: "h23"
-  }).formatToParts(new Date());
-  const obj = {};
-  parts.forEach(p => { if (p.type !== "literal") obj[p.type] = p.value; });
-  return {
-    dateStr: `${obj.year}-${obj.month}-${obj.day}`,
-    hour: Number(obj.hour),
-    minute: Number(obj.minute),
-    nowMin: Number(obj.hour) * 60 + Number(obj.minute)
-  };
-}
-
-function parseClockToMinutes(clock) {
-  if (!clock || !/^\d{1,2}:\d{2}$/.test(clock)) return null;
-  const [h, m] = clock.split(":").map(Number);
-  return h * 60 + m;
-}
-
-function isSessionPublished(reportDate, sessionKey, data) {
-  if (!data || !data.file) return false;
-  const now = getChinaNow();
-  if (reportDate < now.dateStr) return true;
-  if (reportDate > now.dateStr) return false;
-  const actualMin = parseClockToMinutes(data.time);
-  if (actualMin !== null) return actualMin <= now.nowMin;
-  const scheduled = REPORT_CONFIG.schedule.find(s => s.key === sessionKey);
-  return !scheduled || scheduled.min <= now.nowMin;
-}
-
-function isFuture(dateStr) { return dateStr > getChinaNow().dateStr; }
-function isToday(dateStr) { return dateStr === getChinaNow().dateStr; }
-
-function getMondayKey(dateStr) {
-  const d = utcDateFromYMD(dateStr);
-  const day = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() - day + 1);
-  return formatYMDUTC(d);
-}
-
-function getISOWeekInfo(dateStr) {
-  const d = utcDateFromYMD(dateStr);
-  d.setUTCHours(0, 0, 0, 0);
-  const day = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - day);
-  const isoYear = d.getUTCFullYear();
-  const yearStart = new Date(Date.UTC(isoYear, 0, 1));
-  const week = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-  return { year: isoYear, week };
-}
-
-function getNextConfiguredTradingDate(afterDate) {
-  return REPORT_CONFIG.reports
-    .map(r => r.date)
-    .filter(d => d > afterDate)
-    .sort()[0] || null;
-}
-
-// ============================================================
-// 数据查找
-// ============================================================
-function findLatestSnapshot() {
-  const sessions = ["evening", "noon", "morning"];
-  const today = getChinaNow().dateStr;
-  const dated = REPORT_CONFIG.reports
-    .filter(r => r.date <= today)
-    .sort((a, b) => b.date.localeCompare(a.date));
-  for (const r of dated) {
-    for (const k of sessions) {
-      const data = r[k];
-      if (data && data.snap && isSessionPublished(r.date, k, data)) {
-        return { report: r, sessionKey: k, snap: data.snap, data };
-      }
-    }
-  }
-  return null;
-}
-
-function findLatestFocus() {
-  const sessions = ["evening", "noon", "morning"];
-  const today = getChinaNow().dateStr;
-  const dated = REPORT_CONFIG.reports
-    .filter(r => r.date <= today)
-    .sort((a, b) => b.date.localeCompare(a.date));
-  for (const r of dated) {
-    for (const k of sessions) {
-      const data = r[k];
-      if (data && Array.isArray(data.focus) && data.focus.length && isSessionPublished(r.date, k, data)) {
-        return { report: r, sessionKey: k, data };
-      }
-    }
-  }
-  return null;
-}
-
-// ============================================================
-// 渲染
-// ============================================================
-let currentMonthFilter = "all";
-let currentSearchQuery = "";
-
-function render() {
-  document.getElementById("footerTime").textContent = "页面更新：" + (REPORT_CONFIG.lastUpdated || "--");
-  renderDataAsOf();
-  renderNextReport();
-  renderSnapshot();
-  renderQuickScroll();
-  renderFocus();
-  renderDiscipline();
-  renderMonthFilter();
-  renderReportGrid();
-}
-
-function renderDataAsOf() {
-  const el = document.getElementById("dataAsOf");
-  const chosen = findLatestSnapshot();
-  if (!chosen) {
-    el.textContent = "等待首份报告生成";
-    return;
-  }
-  const label = { morning: "盘前", noon: "午盘", evening: "盘后" }[chosen.sessionKey];
-  const timeText = chosen.data.time ? ` · 截至 ${chosen.data.time}` : "";
-  el.textContent = `${formatDateShort(chosen.report.date)} ${getWeekday(chosen.report.date)} · ${label}数据${timeText}`;
-}
-
-function renderNextReport() {
-  const el = document.getElementById("nextReport");
-  const now = getChinaNow();
-  const cur = REPORT_CONFIG.reports.find(r => r.date === now.dateStr);
-
-  if (cur) {
-    for (const s of REPORT_CONFIG.schedule) {
-      if (cur[s.key] && cur[s.key].file) continue;
-
-      if (now.nowMin < s.min) {
-        el.textContent = `下次报告 ${s.time} ${s.label}`;
-        return;
-      }
-      if (now.nowMin < s.min + REPORT_CONFIG.delayGraceMinutes) {
-        el.textContent = `${s.label}报告生成中`;
-        return;
-      }
-      el.textContent = `⚠️ ${s.label}报告延迟`;
-      return;
-    }
-    el.textContent = "今日报告已全部更新";
-    return;
-  }
-
-  const future = REPORT_CONFIG.reports
-    .filter(r => r.date > now.dateStr)
-    .sort((a, b) => a.date.localeCompare(b.date))[0];
-
-  if (future) {
-    el.textContent = `下次报告 ${formatDateShort(future.date)} ${getWeekday(future.date)} 08:15 盘前`;
-  } else {
-    el.textContent = "暂无后续报告安排";
-  }
-}
-
-function renderSnapshot() {
-  const chosen = findLatestSnapshot();
-  if (!chosen) {
-    document.getElementById("snapshotDate").textContent = "暂无数据";
-    document.getElementById("emotionHero").innerHTML = "";
-    document.getElementById("snapshotGrid").innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text2);font-size:13px;padding:8px 0">等待报告生成</div>';
-    document.getElementById("snapshotTags").innerHTML = "";
-    document.getElementById("snapshotJudge").innerHTML = "";
-    document.getElementById("snapshotLinkRow").innerHTML = "";
-    return;
-  }
-
-  const sessionLabel = { morning: "盘前", noon: "午盘", evening: "盘后" };
-  const d = chosen.snap;
-  const emotionNum = Number(d.emotion) || 0;
-  const maxPosition = Number(chosen.data.maxPosition ?? d.maxPosition ?? 0);
-
-  let emoLevel = "neutral", emoDesc = "中性";
-  if (emotionNum >= 65) { emoLevel = "hot"; emoDesc = "偏热"; }
-  else if (emotionNum < 40) { emoLevel = "cold"; emoDesc = "偏冷"; }
-
-  document.getElementById("snapshotDate").textContent =
-    `${formatDateShort(chosen.report.date)} ${getWeekday(chosen.report.date)} ${sessionLabel[chosen.sessionKey]}`;
-
-  document.getElementById("emotionHero").innerHTML = `
-    <div class="emotion-num">${emotionNum}<small>/100</small></div>
-    <div class="emotion-text">情绪温度
-      <div><span class="emotion-level ${emoLevel}">${emoDesc}</span></div>
-    </div>`;
-
-  document.getElementById("snapshotGrid").innerHTML = `
-    <div class="snap-item">
-      <div class="snap-label">涨停/跌停</div>
-      <div class="snap-value"><span class="snap-up">${d.limitUp ?? "--"}</span> / <span class="snap-down">${d.limitDown ?? "--"}</span></div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">封板率</div>
-      <div class="snap-value snap-neutral">${d.sealRate ?? "--"}</div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">成交</div>
-      <div class="snap-value snap-neutral">${d.volume ?? "--"}</div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">上证</div>
-      <div class="snap-value ${d.shIndex?.up ? 'snap-up' : 'snap-down'}">${d.shIndex?.value ?? "--"} <small>${d.shIndex?.change ?? ""}</small></div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">创业板</div>
-      <div class="snap-value ${d.cyIndex?.up ? 'snap-up' : 'snap-down'}">${d.cyIndex?.value ?? "--"} <small>${d.cyIndex?.change ?? ""}</small></div>
-    </div>
-    <div class="snap-item">
-      <div class="snap-label">仓位上限</div>
-      <div class="snap-value snap-neutral">${maxPosition ? maxPosition + "%" : "--"}</div>
-    </div>`;
-
-  document.getElementById("snapshotTags").innerHTML = (d.tags || []).map(t =>
-    `<span class="snap-tag${t.hot ? ' hot' : ''}">${t.text}</span>`
-  ).join("");
-
-  document.getElementById("snapshotJudge").innerHTML = chosen.data.judge
-    ? `<b>市场判断：</b>${chosen.data.judge}`
-    : "";
-
-  document.getElementById("snapshotLinkRow").innerHTML = chosen.data.file
-    ? `<a href="${chosen.data.file}">查看${sessionLabel[chosen.sessionKey]}完整报告 →</a>`
-    : "";
-}
-
-function renderQuickScroll() {
-  const recentReports = REPORT_CONFIG.reports
-    .filter(r => r.morning?.file || r.noon?.file || r.evening?.file)
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 3);
-
-  const buttons = [
-    { key: "morning", label: "🌅 盘前" },
-    { key: "noon", label: "☀️ 午盘" },
-    { key: "evening", label: "🌙 盘后" }
-  ];
-
-  document.getElementById("quickScroll").innerHTML = recentReports.map(r => {
-    const latest = r.evening || r.noon || r.morning;
-    const actions = buttons.map(b => {
-      const item = r[b.key];
-      return item?.file
-        ? `<a class="quick-btn" href="${item.file}">${b.label}</a>`
-        : `<span class="quick-btn disabled">${b.label}</span>`;
-    }).join("");
-
-    return `
-      <div class="quick-card active">
-        <div class="qc-date">${formatDateShort(r.date)} ${getWeekday(r.date)}</div>
-        <div class="qc-summary">${latest?.summary || ""}</div>
-        <div class="quick-actions">${actions}</div>
-      </div>`;
-  }).join("");
-}
-
-function renderFocus() {
-  const title = document.getElementById("focusTitle");
-  const area = document.getElementById("focusList");
-  const chosen = findLatestFocus();
-
-  if (!chosen) {
-    title.textContent = "🎯 下一交易日关注";
-    area.innerHTML = '<div class="focus-empty">等待报告生成</div>';
-    return;
-  }
-
-  const targetDate = chosen.data.focusTargetDate || getNextConfiguredTradingDate(chosen.report.date);
-  title.textContent = targetDate
-    ? `🎯 ${formatDateShort(targetDate)} ${getWeekday(targetDate)}关注`
-    : "🎯 下一交易日关注";
-
-  area.innerHTML = chosen.data.focus.map((f, i) =>
-    `<div class="focus-item"><span class="f-num">${i + 1}</span><span>${f}</span></div>`
-  ).join("");
-}
-
-function renderDiscipline() {
-  const quotes = [
-    "只做最强，不做跟风",
-    "买在分歧，卖在一致",
-    "看不懂就空仓，做错就止损",
-    "宁可错过，不可做错",
-    "计划交易，交易计划"
-  ];
-  const area = document.getElementById("disciplineStrip");
-  if (!area) return;
-  area.innerHTML = quotes.map(q => `<span>${q}</span>`).join("");
-}
-
-function renderMonthFilter() {
-  const months = new Set(REPORT_CONFIG.reports.map(r => Number(r.date.split("-")[1])));
-  const sorted = [...months].sort((a, b) => b - a);
-
-  let html = `<button type="button" class="month-btn ${currentMonthFilter === 'all' ? 'active' : ''}" data-month="all">全部</button>`;
-  sorted.forEach(m => {
-    html += `<button type="button" class="month-btn ${currentMonthFilter == m ? 'active' : ''}" data-month="${m}">${m}月</button>`;
-  });
-  document.getElementById("monthFilter").innerHTML = html;
-
-  document.querySelectorAll(".month-btn").forEach(btn => {
-    btn.addEventListener("click", function () {
-      currentMonthFilter = this.dataset.month === "all" ? "all" : Number(this.dataset.month);
-      renderMonthFilter();
-      renderReportGrid();
-    });
-  });
-}
-
-function renderReportGrid() {
-  let reports = [...REPORT_CONFIG.reports].sort((a, b) => b.date.localeCompare(a.date));
-
-  if (currentMonthFilter !== "all") {
-    reports = reports.filter(r => Number(r.date.split("-")[1]) === currentMonthFilter);
-  }
-
-  if (currentSearchQuery) {
-    const q = currentSearchQuery.toLowerCase();
-    reports = reports.filter(r => {
-      const haystack = [
-        r.date,
-        formatDateShort(r.date),
-        getWeekday(r.date),
-        r.morning?.summary,
-        r.noon?.summary,
-        r.evening?.summary
-      ].filter(Boolean).join(" ").toLowerCase();
-      return haystack.includes(q);
-    });
-  }
-
-  if (!reports.length) {
-    document.getElementById("reportGrid").innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">没有找到匹配的报告</div>';
-    return;
-  }
-
-  const weeks = new Map();
-  reports.forEach(r => {
-    const mondayKey = getMondayKey(r.date);
-    if (!weeks.has(mondayKey)) {
-      const iso = getISOWeekInfo(r.date);
-      weeks.set(mondayKey, {
-        key: mondayKey,
-        label: `${iso.year} 第${iso.week}周`,
-        monday: formatDateShort(mondayKey),
-        reports: []
-      });
-    }
-    weeks.get(mondayKey).reports.push(r);
-  });
-
-  const weekList = [...weeks.values()].sort((a, b) => b.key.localeCompare(a.key));
-  let gridHTML = "";
-
-  weekList.forEach((week, idx) => {
-    const isOpen = idx === 0;
-    let weekContent = "";
-
-    week.reports.sort((a, b) => b.date.localeCompare(a.date)).forEach(r => {
-      const future = isFuture(r.date);
-      const today = isToday(r.date);
-      let dateLabel = r.date.slice(5);
-      if (today) dateLabel += " (今天)";
-
-      const renderLink = (session, icon, defaultTime) => {
-        const data = r[session];
-        if (data?.file) {
-          return `<a class="report-link" href="${data.file}" target="_blank" rel="noopener">
-            <div>${icon}<div class="time">${data.time || defaultTime}</div></div>
-          </a>`;
-        }
-        if (future) {
-          return `<span class="report-link disabled"><div>${icon}<div class="time"><span class="pending-dot"></span></div></div></span>`;
-        }
-        return `<span class="report-link disabled"><div>${icon}<div class="time">—</div></div></span>`;
-      };
-
-      weekContent += `
-        <div class="date-group" style="margin:4px 0">
-          <div class="date-header">📅 ${dateLabel} <span class="weekday">${getWeekday(r.date)}</span></div>
-          <div class="report-links">
-            ${renderLink("morning", "🌅", "08:15")}
-            ${renderLink("noon", "☀️", "12:00")}
-            ${renderLink("evening", "🌙", "20:45")}
-          </div>
-        </div>`;
-    });
-
-    const reportCount = week.reports.reduce((sum, r) =>
-      sum + [r.morning?.file, r.noon?.file, r.evening?.file].filter(Boolean).length, 0
-    );
-
-    gridHTML += `
-      <details ${isOpen ? "open" : ""} style="margin-bottom:8px;border:1px solid var(--border);border-radius:8px;overflow:hidden">
-        <summary style="padding:10px 12px;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;background:rgba(88,166,255,.04);list-style:none;display:flex;align-items:center;gap:8px;user-select:none">
-          <span class="week-arrow" style="font-size:12px">${isOpen ? "▼" : "▶"}</span>
-          📅 ${week.label}（${week.monday}起）
-          <span style="margin-left:auto;font-size:11px;color:var(--text2);font-weight:400">${reportCount}份报告</span>
-        </summary>
-        <div class="week-days">${weekContent}</div>
-      </details>`;
-  });
-
-  document.getElementById("reportGrid").innerHTML = gridHTML;
-  document.querySelectorAll("#reportGrid details").forEach(det => {
-    det.addEventListener("toggle", function () {
-      const arrow = this.querySelector(".week-arrow");
-      if (arrow) arrow.textContent = this.open ? "▼" : "▶";
-    });
-  });
-}
-
-// ============================================================
-// 交互
-// ============================================================
-document.getElementById("reportSearch").addEventListener("input", function () {
-  currentSearchQuery = this.value.trim();
-  renderReportGrid();
-});
-
-window.addEventListener("scroll", function () {
-  document.getElementById("backTop").classList.toggle("show", window.scrollY > 300);
-});
-
-(function () {
-  const hint = document.getElementById("refreshHint");
-  let lastCheck = Date.now();
-
-  async function refreshLatest(showHint = false) {
-    const ok = await refreshReportConfig(true);
-    render();
-    if (showHint) {
-      hint.style.display = "block";
-      hint.textContent = ok ? "✅ 已获取最新报告数据" : "⚠️ 暂未获取到新数据，已保留当前内容";
-      setTimeout(() => { hint.style.display = "none"; }, 3000);
-    }
-  }
-
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden && Date.now() - lastCheck > 120000) refreshLatest(false);
-    lastCheck = Date.now();
-  });
-
-  let startY = 0;
-  let pullTriggered = false;
-  document.addEventListener("touchstart", e => { startY = e.touches[0].clientY; pullTriggered = false; }, { passive: true });
-  document.addEventListener("touchmove", e => {
-    if (!pullTriggered && window.scrollY === 0 && e.touches[0].clientY - startY > 90) {
-      pullTriggered = true;
-      refreshLatest(true);
-    }
-  }, { passive: true });
-
-  setInterval(() => refreshLatest(false), AUTO_REFRESH_MS);
-})();
-
-async function initDashboard() {
-  await refreshReportConfig(true);
-  render();
-}
-
-initDashboard();
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./sw.js").then(function (registration) {
-      registration.update().catch(function () {});
-    }).catch(function () {});
-  });
-}
-</script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e"}' crossorigin="anonymous"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"928ed1b9b11f43d4b6e746551c9e4648","r":1}' crossorigin="anonymous"></script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"b1c37052cca244fca1a2011659a0ad0a","r":1}' crossorigin="anonymous"></script>
 </body>
 </html>
