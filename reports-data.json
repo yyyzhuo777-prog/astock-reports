@@ -1,11 +1,11 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-24T20:55",
-    "nextTime": "明日 08:00",
-    "nextLabel": "盘前"
+    "lastUpdated": "2026-08-25T08:00",
+    "nextTime": "今日 12:00",
+    "nextLabel": "午盘"
   },
   "header": {
-    "subtitle": "8/24 周一 · 盘后数据 · 截至 15:00"
+    "subtitle": "8/25 周二 · 盘前数据 · 截至 08:00"
   },
   "snapshot": {
     "date": "8/24 周一 盘后",
@@ -17,52 +17,71 @@
     "metrics": [
       { "label": "涨停/跌停", "html": "<span class=\"snap-up\">46</span> / <span class=\"snap-down\">11</span>" },
       { "label": "封板率", "value": "74%", "cls": "snap-up" },
-      { "label": "全天成交", "value": "2.01万亿", "cls": "snap-neutral" },
+      { "label": "全天成交", "value": "2.02万亿", "cls": "snap-neutral" },
       { "label": "上证", "value": "3882", "suffix": "-0.59%", "cls": "snap-down" },
       { "label": "创业板", "value": "3432", "suffix": "-3.21%", "cls": "snap-down" },
-      { "label": "仓位上限", "value": "20%", "cls": "snap-down" }
+      { "label": "仓位上限", "value": "≤20%", "cls": "snap-down" }
     ],
     "tags": [
       { "text": "🔥 贵金属/黄金", "cls": "hot" },
       { "text": "🔥 煤炭红利", "cls": "hot" },
       { "text": "💊 算力崩塌", "cls": "hot" },
-      { "text": "🤖 银行新高", "cls": "" },
-      { "text": "💎 化工超预期", "cls": "" }
+      { "text": "📡 6G政策三箭齐发", "cls": "" },
+      { "text": "💎 医药4板空间龙", "cls": "" }
     ],
-    "judge": "情绪退潮期逼近冰点，算力CPO三巨头蒸发超1552亿，电子板块主力净流出212亿。贵金属+煤炭+银行红利防御线确立，黄金突破4600美元驱动避险主线。汉森制药4板为最高板，明日冲击5板决定短线方向。本周PCE+英伟达财报+杰克逊霍尔密集，防御占优。",
+    "judge": "情绪退潮期逼近冰点，外围科技股全面杀跌（纳指七连阴+费半暴跌4%），黄金突破4660美元创阶段新高。贵金属+煤炭+银行红利防御线确立，6G政策密集催化或成结构性亮点。汉森制药4板冲击5板决定短线方向，英伟达8/27财报+PCE+杰克逊霍尔三大变量未落地前防御占优。",
     "latestLink": "report-0824-evening.html",
     "latestLabel": "盘后"
   },
   "reports": [
     {
+      "date": "8/25",
+      "weekday": "周二",
+      "summary": "情绪22·退潮期·外围科技暴跌·黄金4660新高·6G政策·仓位≤20%",
+      "active": true,
+      "morning": "report-0825-morning.html",
+      "noon": "pending",
+      "evening": "pending"
+    },
+    {
       "date": "8/24",
       "weekday": "周一",
       "summary": "情绪25·退潮期·算力崩塌·贵金属避险·煤炭红利·46涨停/11跌停",
-      "active": true,
+      "active": false,
       "morning": "report-0824-morning.html",
       "noon": "report-0824-noon.html",
       "evening": "report-0824-evening.html"
     }
   ],
   "focus": {
-    "title": "明日关注（8/25）",
+    "title": "今日关注（8/25）",
     "items": [
-      "算力硬件恐慌释放后能否企稳（英伟达8/27财报是关键锚点）",
-      "黄金/煤炭/贵金属持续性，是否形成新避险主线",
-      "汉森制药能否冲5板破局，决定短线情绪方向",
-      "本周三PCE→周四英伟达财报→周五杰克逊霍尔，防御占优"
+      "外围科技暴跌映射：算力/存储/光模块开盘承压确定性强，严禁抄底",
+      "黄金突破4660美元新高：贵金属能否延续，深中华A/湖南白银2连板晋级",
+      "6G政策三箭齐发：国资委+工信部+国常会密集催化，关注开盘承接力度",
+      "汉森制药冲5板：医药主线能否坐实的关键，断板则修复存疑"
     ]
   },
   "history": [
     {
       "weekLabel": "2026 第35周（8/24起）",
-      "count": "3份报告",
+      "count": "4份报告",
       "open": true,
       "days": [
         {
+          "date": "08-25",
+          "weekday": "周二",
+          "today": true,
+          "reports": [
+            { "icon": "🌅", "time": "08:00", "url": "report-0825-morning.html" },
+            { "icon": "☀️", "time": "12:00", "pending": true },
+            { "icon": "🌙", "time": "20:30", "pending": true }
+          ]
+        },
+        {
           "date": "08-24",
           "weekday": "周一",
-          "today": true,
+          "today": false,
           "reports": [
             { "icon": "🌅", "time": "08:00", "url": "report-0824-morning.html" },
             { "icon": "☀️", "time": "12:00", "url": "report-0824-noon.html" },
@@ -74,6 +93,6 @@
   ],
   "footer": {
     "schedule": "自动报告 · 08:00 盘前 · 12:00 午盘 · 20:30 盘后",
-    "updated": "2026-08-24"
+    "updated": "2026-08-25"
   }
 }
