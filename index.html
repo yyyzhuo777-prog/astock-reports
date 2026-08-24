@@ -350,11 +350,33 @@ document.addEventListener('visibilitychange', () => {
 
 function calcNextReport() {
   const now = new Date();
+  const day = now.getDay(); // 0=Sun, 6=Sat
   const t = now.getHours() * 60 + now.getMinutes();
+
+  // 周末：下次报告是下周一 08:00
+  if (day === 0 || day === 6) {
+    const daysUntilMon = day === 6 ? 2 : 1;
+    const d = new Date(now);
+    d.setDate(d.getDate() + daysUntilMon);
+    return { time: (d.getMonth()+1) + '/' + d.getDate() + ' 08:00', label: '盘前（周一）' };
+  }
+
+  // 工作日：根据当前时间判断
   if (t < 8 * 60) return { time: '08:00', label: '盘前' };
   if (t < 12 * 60) return { time: '12:00', label: '午盘' };
   if (t < 20 * 60 + 30) return { time: '20:30', label: '盘后' };
-  return { time: '明日 08:00', label: '盘前' };
+
+  // 今日报告全部结束
+  if (day === 5) {
+    // 周五 → 下周一
+    const d = new Date(now);
+    d.setDate(d.getDate() + 3);
+    return { time: (d.getMonth()+1) + '/' + d.getDate() + ' 08:00', label: '盘前（周一）' };
+  }
+  // 周一至周四 → 明天 08:00
+  const d = new Date(now);
+  d.setDate(d.getDate() + 1);
+  return { time: (d.getMonth()+1) + '/' + d.getDate() + ' 08:00', label: '盘前' };
 }
 
 function render(D) {

@@ -4,75 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>A股盘后复盘 | 2026年8月24日（周一）</title>
+<link rel="stylesheet" href="report-common.css">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html{font-size:15px}
-  body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65;padding:12px;max-width:520px;margin:0 auto}
-  @media(min-width:768px){
-    body{max-width:860px;padding:24px 32px}
-    .header h1{font-size:1.6rem}
-    .dashboard{grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
-    .stat-grid{grid-template-columns:1fr 1fr 1fr;gap:10px}
-    .stat-item .num{font-size:1.3rem}
-    .card{padding:16px 20px}
-    .section-title{font-size:1.15rem}
-    .gauge .val{font-size:1.8rem}
-    .row{padding:7px 0;font-size:.88rem}
-  }
-  a{color:#58a6ff;text-decoration:none}
-  .header{text-align:center;padding:20px 0 12px;border-bottom:1px solid #21262d}
-  .header h1{font-size:1.35rem;color:#e6edf3;font-weight:700;letter-spacing:.5px}
-  .header .date{font-size:.82rem;color:#8b949e;margin-top:4px}
-  .header .badge{display:inline-block;background:#1f6feb22;color:#58a6ff;font-size:.72rem;padding:2px 10px;border-radius:20px;border:1px solid #1f6feb44;margin-top:8px}
-  .dashboard{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
-  .gauge{background:#1c2530;border-radius:10px;padding:12px 10px;text-align:center;border:1px solid #30363d}
-  .gauge .val{font-size:1.6rem;font-weight:800;line-height:1.2}
-  .gauge .label{font-size:.72rem;color:#8b949e;margin-top:2px}
-  .gauge .bar{height:5px;border-radius:3px;background:#21262d;margin-top:6px;overflow:hidden}
-  .gauge .bar-fill{height:100%;border-radius:3px;transition:width .6s}
-  .risk-low{color:#3fb950}.bar-risk-low{background:#3fb950}
-  .risk-mid{color:#d29922}.bar-risk-mid{background:#d29922}
-  .risk-high{color:#f85149}.bar-risk-high{background:#f85149}
-  .neutral{color:#58a6ff}.bar-neutral{background:#58a6ff}
+  /* 盘后特有样式 */
   .vs-tag{font-size:.6rem;color:#8b949e;margin-left:2px}
-  .advice-box{background:#1c2530;border:1px solid #30363d;border-radius:10px;padding:12px 14px;margin:10px 0;font-size:.85rem;line-height:1.7}
-  .advice-box strong{color:#e6edf3}
-  .section{margin:18px 0 10px}
-  .section-title{font-size:1.05rem;font-weight:700;color:#e6edf3;padding:6px 0;border-bottom:2px solid #30363d;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-  .card{background:#1c2530;border:1px solid #30363d;border-radius:10px;padding:12px 14px;margin-bottom:10px}
-  .card-title{font-size:.92rem;font-weight:700;color:#e6edf3;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-  .card-title .tag{font-size:.65rem;padding:1px 6px;border-radius:3px;font-weight:500}
-  .tag-hot{background:#f8514922;color:#f85149;border:1px solid #f8514944}
-  .tag-new{background:#3fb95022;color:#3fb950;border:1px solid #3fb95044}
-  .tag-warn{background:#d2992222;color:#d29922;border:1px solid #d2992244}
-  .tag-info{background:#58a6ff22;color:#58a6ff;border:1px solid #58a6ff44}
   .tag-up{background:#3fb95022;color:#3fb950;border:1px solid #3fb95044}
   .tag-down{background:#f8514922;color:#f85149;border:1px solid #f8514944}
-  .row{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:1px solid #21262d;font-size:.84rem}
-  .row:last-child{border-bottom:none}
-  .row .name{color:#e6edf3;font-weight:600;min-width:72px}
-  .row .code{color:#8b949e;font-size:.75rem}
-  .row .right{text-align:right;flex-shrink:0;margin-left:8px}
-  .up{color:#f85149}.down{color:#3fb950}.mid{color:#58a6ff}
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:8px 0}
-  .stat-item{text-align:center;background:#0d1117;border-radius:6px;padding:8px 4px}
-  .stat-item .num{font-size:1.1rem;font-weight:800}
-  .stat-item .desc{font-size:.68rem;color:#8b949e;margin-top:2px}
-  .theme-block{margin-bottom:8px}
-  .theme-block .theme-logic{font-size:.8rem;color:#8b949e;margin:2px 0 4px}
-  .theme-stocks{font-size:.82rem;color:#c9d1d9;padding-left:8px}
-  .theme-stocks span{color:#58a6ff}
-  .msg-list{list-style:none;padding:0}
-  .msg-list li{font-size:.82rem;padding:6px 0;border-bottom:1px solid #21262d;line-height:1.6}
-  .msg-list li:last-child{border-bottom:none}
-  .msg-list .src{font-size:.68rem;color:#8b949e;display:block;margin-top:2px}
-  .warn-card{background:#f8514910;border:1px solid #f8514933;border-radius:10px;padding:12px 14px;margin-bottom:10px}
-  .warn-card .warn-title{color:#f85149;font-weight:700;font-size:.88rem;margin-bottom:6px}
-  .warn-card ul{padding-left:16px;font-size:.82rem}
-  .warn-card li{padding:3px 0;line-height:1.6}
-  .footer{text-align:center;padding:20px 0 10px;border-top:1px solid #21262d;margin-top:18px}
-  .footer p{font-size:.72rem;color:#484f58;line-height:1.6}
-  .divider{height:1px;background:#21262d;margin:12px 0}
+  /* Timeline */
   .timeline{border-left:2px solid #30363d;padding-left:12px;margin:8px 0}
   .timeline-item{position:relative;padding:4px 0 8px;font-size:.82rem}
   .timeline-item::before{content:'';position:absolute;left:-16px;top:8px;width:8px;height:8px;border-radius:50%;background:#58a6ff;border:2px solid #0d1117}
@@ -81,11 +19,6 @@
   .timeline-item.red::before{background:#f85149}
   .timeline-item.green::before{background:#3fb950}
   .timeline-item.yellow::before{background:#d29922}
-  @media(max-width:380px){
-    html{font-size:14px}
-    .dashboard{gap:6px}
-    .stat-grid{gap:4px}
-  }
 </style>
 </head>
 <body>
@@ -466,6 +399,7 @@
   <p style="margin-top:8px;color:#f85149">⚠️ 免责声明：本报告由AI根据公开信息自动生成，仅供学习参考，不构成任何投资建议。股市有风险，入市需谨慎。</p>
   <p style="margin-top:6px">🤖 clawbot evening report v2.0</p>
   <p style="margin-top:10px"><a href="index.html" style="display:inline-block;padding:8px 20px;background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid rgba(88,166,255,.3);border-radius:18px;font-size:.82rem;font-weight:600;text-decoration:none">← 返回导航页</a></p>
+  <p style="margin-top:8px"><a href="report-0824-morning.html" style="display:inline-block;padding:8px 20px;background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid rgba(88,166,255,.3);border-radius:18px;font-size:.82rem;font-weight:600;text-decoration:none">← 盘前报告</a></p>
 </div>
 
 </body>
