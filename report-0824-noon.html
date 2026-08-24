@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>A股午盘快报｜8月24日 周一</title>
+  <style>
+    :root{--ink:#c9d1d9;--muted:#8b949e;--line:#30363d;--paper:#0d1117;--panel:#161b22;--red:#f85149;--green:#3fb950;--blue:#58a6ff;--gold:#d29922;--violet:#bc8cff;--shadow:0 4px 12px rgba(0,0,0,.3)}
+    *{box-sizing:border-box}
+    body{margin:0;color:#c9d1d9;background:#0d1117;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.58}
+    .topbar{background:#161b22;border-bottom:3px solid #f85149}
+    .wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    .hero{padding:30px 0 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}
+    h1{margin:0 0 8px;font-size:34px;line-height:1.16;color:#c9d1d9}
+    .subtitle{margin:0;color:#8b949e;font-size:15px}
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .badge{border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:6px 9px;font-size:13px;color:#c9d1d9;white-space:nowrap}
+    .warning{margin-top:14px;padding:10px 12px;border-radius:6px;background:rgba(210,153,34,.08);color:#d29922;border:1px solid rgba(210,153,34,.25);font-size:14px}
+    main{padding:24px 0 38px}
+    section{margin:20px 0;padding:22px;background:#161b22;border:1px solid #30363d;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    h2{margin:0 0 16px;font-size:22px;line-height:1.25;color:#c9d1d9}
+    h3{margin:18px 0 10px;font-size:17px;color:#c9d1d9}
+    .grid{display:grid;gap:14px}
+    .grid.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .metric{padding:15px;border:1px solid #30363d;border-radius:8px;background:#0d1117}
+    .metric .label{color:#8b949e;font-size:13px;margin-bottom:5px}
+    .metric .value{font-size:24px;font-weight:750;line-height:1.2}
+    .positive{color:var(--red)}
+    .negative{color:var(--green)}
+    .neutral{color:var(--blue)}
+    .muted{color:#8b949e!important}
+    .list{margin:0;padding-left:20px}
+    .list li{margin:8px 0}
+    table{width:100%;border-collapse:collapse;font-size:14px;overflow-wrap:anywhere}
+    th,td{padding:10px 9px;border-bottom:1px solid #30363d;text-align:left;vertical-align:top}
+    th{color:#c9d1d9;background:#1c2530;font-weight:700}
+    td{color:#c9d1d9}
+    .footer-note{color:#8b949e;font-size:13px;margin-top:18px}
+    .nav-back{position:fixed;top:12px;right:12px;padding:6px 12px;background:rgba(22,27,34,.9);color:#58a6ff;text-decoration:none;font-size:12px;border-radius:6px;z-index:100;backdrop-filter:blur(8px);border:1px solid rgba(88,166,255,.2)}
+    .nav-back:hover{background:rgba(88,166,255,.15)}
+    .flow-card{padding:14px;border-radius:8px;border:1px solid #30363d;margin:8px 0;background:#1c2530;color:#c9d1d9}
+    .flow-card.hot{border-color:#f85149}
+    .flow-card.cold{border-color:#58a6ff}
+    .flow-card h3{color:#c9d1d9!important}
+    .divider{margin:16px 0;border:0;border-top:1px solid #30363d}
+    .stock-card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;margin:12px 0}
+    .stock-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #30363d;padding-bottom:10px;margin-bottom:10px}
+    .stock-title{color:#c9d1d9;font-size:16px;font-weight:700}
+    .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;background:#1c2530;color:#8b949e;margin-right:6px}
+    .plan div{background:#0d1117;border-left:3px solid #58a6ff;padding:10px 12px;margin:8px 0;border-radius:0 6px 6px 0;font-size:14px}
+    .plan .stop{border-left-color:#3fb950}
+    .plan .target{border-left-color:#f85149}
+    .bar{height:6px;border-radius:3px;background:#21262d;overflow:hidden;margin-top:6px}
+    .bar-fill{height:100%;border-radius:3px}
+    #sec-risk{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.25)!important}
+    #sec-risk h2,#sec-risk li,#sec-risk p{color:#d29922!important}
+    .toc-panel{position:fixed;left:0;top:50%;transform:translateY(-50%);background:#161b22;border:1px solid #30363d;border-radius:0 8px 8px 0;padding:12px 8px;z-index:99;transition:transform .3s;font-size:12px}
+    .toc-panel a{display:block;color:#8b949e;text-decoration:none;padding:4px 8px;border-radius:4px;white-space:nowrap}
+    .toc-panel a:hover,.toc-panel a.active{color:#58a6ff;background:rgba(88,166,255,.1)}
+    .toc-toggle{display:none;position:fixed;left:8px;bottom:20px;width:40px;height:40px;border-radius:50%;background:#58a6ff;color:#fff;border:none;font-size:18px;z-index:100;cursor:pointer}
+    details{margin:10px 0;border:1px solid #30363d;border-radius:6px;overflow:hidden}
+    details summary{padding:10px 14px;background:#1c2530;cursor:pointer;color:#c9d1d9;font-weight:600}
+    details[open] summary{border-bottom:1px solid #30363d}
+    details>div{padding:12px 14px}
+    .reading-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,#58a6ff,#bc8cff);z-index:9999;transition:width 60ms linear;pointer-events:none}
+    a{color:#58a6ff}
+    @media(max-width:860px){
+      .hero,.grid.metrics,.grid.two{grid-template-columns:1fr}
+      .badge-row{justify-content:flex-start}
+      h1{font-size:27px}
+      section{padding:17px}
+      table{font-size:13px}
+      .toc-panel{display:none}
+    }
+    @media(min-width:768px){
+      .wrap{max-width:860px}
+      section{padding:24px 32px}
+      .toc-panel{display:block}
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="topbar">
+    <div class="wrap hero">
+      <div>
+        <h1>A股午盘快报｜8月24日 周一</h1>
+        <p class="subtitle">半日盘面 × 午间数据 × 午后展望 × 操作提示</p>
+        <div class="warning">⚠️ 半日成交1.37万亿（较上周五放量1177亿），1137涨/4297跌，赚钱效应仅21%。创业板暴跌3.5%、科创50跌3.26%，算力硬件集体崩塌（中际旭创-7.77%、天孚通信-8.89%）。黄金/煤炭/农业防御扛旗，但独木难支。41涨停/9跌停，高位科技股核按钮频发，退潮信号明确。</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">📅 2026-08-24 周一</span>
+        <span class="badge">☀️ 午盘快报</span>
+        <span class="badge">💰 半日1.37万亿</span>
+        <span class="badge">📡 数据状态：在线</span>
+      </div>
+    </div>
+  </header>
+  <a class="nav-back" href="index.html">← 返回导航</a>
+
+  <!-- TOC -->
+  <nav class="toc-panel" id="tocPanel">
+    <a href="#sec-index">📊 指数概览</a>
+    <a href="#sec-feature">🔍 盘面特征</a>
+    <a href="#sec-flow">💰 资金流向</a>
+    <a href="#sec-sectors">🔥 主线题材</a>
+    <a href="#sec-stocks">📌 核心股票</a>
+    <a href="#sec-news">📰 重要消息</a>
+    <a href="#sec-strategy">💡 午后策略</a>
+    <a href="#sec-risk">⚠️ 风险警告</a>
+  </nav>
+
+  <main>
+    <div class="wrap">
+
+      <!-- 30秒速览 -->
+      <section id="sec-quick">
+        <details open>
+          <summary>⚡ 30秒速览（点击展开/折叠）</summary>
+          <div>
+            <ol style="margin:0;padding-left:20px;line-height:2">
+              <li>🟢 <strong>创业板-3.5%、科创50-3.26%</strong>，算力硬件全面崩塌，中际旭创/天孚通信/新易盛跌超7%</li>
+              <li>🔴 <strong>黄金突破4650美元</strong>创新高，深中华A 3连板，白银有色涨停，避险主线最强</li>
+              <li>🔴 <strong>煤炭/农业防御扛旗</strong>：上海能源/美锦能源/登海种业/天山生物涨停</li>
+              <li>🟢 <strong>电子板块半日净流出212亿</strong>，兆易创新被净卖出24亿，科技股资金大出逃</li>
+              <li>🟡 <strong>半日放量1177亿至1.37万亿</strong>，放量杀跌=恐慌性抛售，非健康信号</li>
+              <li>⚠️ <strong>4300股下跌+退潮信号明确</strong>：高位科技核按钮频发，午后不宜追涨，防守为主</li>
+            </ol>
+          </div>
+        </details>
+      </section>
+
+      <!-- 半日指数 -->
+      <section id="sec-index">
+        <h2>📊 半日指数概览（截至11:30）</h2>
+        <div class="grid metrics">
+          <div class="metric">
+            <div class="label">上证指数</div>
+            <div class="value negative">3877.30 <small>-0.71%</small></div>
+            <div class="muted" style="font-size:13px">低开后持续走弱</div>
+          </div>
+          <div class="metric">
+            <div class="label">深证成指</div>
+            <div class="value negative">13750.12 <small>-2.44%</small></div>
+            <div class="muted" style="font-size:13px">权重拖累明显</div>
+          </div>
+          <div class="metric">
+            <div class="label">创业板指</div>
+            <div class="value negative">3421.50 <small>-3.50%</small></div>
+            <div class="muted" style="font-size:13px">算力权重暴跌</div>
+          </div>
+          <div class="metric">
+            <div class="label">科创50</div>
+            <div class="value negative">1599.65 <small>-3.26%</small></div>
+            <div class="muted" style="font-size:13px">宇树科技-9.81%</div>
+          </div>
+        </div>
+        <div class="grid metrics" style="margin-top:12px">
+          <div class="metric">
+            <div class="label">半日成交</div>
+            <div class="value neutral">1.37万亿</div>
+            <div class="muted" style="font-size:13px">较上周五放量1177亿</div>
+          </div>
+          <div class="metric">
+            <div class="label">涨跌家数</div>
+            <div class="value negative">1137涨/4297跌</div>
+            <div class="muted" style="font-size:13px">赚钱效应仅21%</div>
+          </div>
+          <div class="metric">
+            <div class="label">涨停/跌停</div>
+            <div class="value neutral">41涨停/9跌停</div>
+          </div>
+          <div class="metric">
+            <div class="label">北证50</div>
+            <div class="value negative">-1.05%</div>
+            <div class="muted" style="font-size:13px">跟随走弱</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 盘面核心特征 -->
+      <section id="sec-feature">
+        <h2>🔍 上午盘面核心特征</h2>
+        <div style="padding:14px;border-left:4px solid var(--green);background:#1c2530;border-radius:6px;margin-bottom:12px">
+          <strong>一句话定性：</strong>"放量杀跌、科技核按钮、防御扛旗"。上周五缩量平盘是假象，今天才是真跌。算力权重集体崩塌拖累双创指数跌超3%，黄金/煤炭/农业逆势涨停但无法扭转市场悲观情绪。放量1177亿到1.37万亿=恐慌性抛售出逃。
+        </div>
+        <div class="grid two">
+          <div class="flow-card hot">
+            <h3>🔴 逆势领涨方向</h3>
+            <ul class="list">
+              <li><strong>贵金属/黄金</strong>：现货黄金突破4650美元创3个月新高，银行积存金克价破1000元。深中华A 3连板，白银有色涨停，湖南白银+8.54%，盛达资源+6.88%</li>
+              <li><strong>煤炭</strong>：焦煤期货涨超2%触及1600元/吨创近2年新高。上海能源涨停，美锦能源涨停，新集能源+7.92%</li>
+              <li><strong>农林牧渔</strong>：厄尔尼诺+粮食安全主题。登海种业涨停，天山生物涨停</li>
+              <li><strong>固态电池</strong>：首项国际标准IEC立项催化。天力锂能/上海洗霸/金龙羽涨停</li>
+              <li><strong>数字货币</strong>：延续上周强势。楚天龙/东信和平涨停</li>
+              <li><strong>锂矿</strong>：碳酸锂期货涨近4%站上16.2万/吨。融捷股份2连板</li>
+            </ul>
+          </div>
+          <div class="flow-card cold">
+            <h3>🟢 暴跌方向</h3>
+            <ul class="list">
+              <li><strong>算力硬件/CPO全面崩塌</strong>：共进股份跌停，天孚通信-8.89%，中际旭创-7.77%，新易盛-7.52%，长电科技-6.05%。英伟达财报前资金避险出逃</li>
+              <li><strong>半导体</strong>：兆易创新-6.70%（半日净卖出24亿），寒武纪-6.67%，士兰微持平</li>
+              <li><strong>人形机器人</strong>：宇树科技-9.81%跌破2500亿市值，较上市首日回撤超44%</li>
+              <li><strong>港股科技</strong>：阿里巴巴-9.76%（800亿配售稀释），腾讯-3.76%，小米-4.07%</li>
+              <li><strong>医药CRO</strong>：延续退潮，美诺华-9.08%</li>
+              <li><strong>玻璃纤维</strong>：中国巨石-6.49%，板块需求预期恶化</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 资金流向 -->
+      <section id="sec-flow">
+        <h2>💰 板块资金流向（半日）</h2>
+        <h3>🔴 主力净流入板块TOP5</h3>
+        <table>
+          <tr><th>板块</th><th>主力净流入</th><th>板块涨跌</th><th>逻辑</th></tr>
+          <tr><td>小金属概念</td><td class="positive">+15.76亿</td><td class="positive">+2%+</td><td>黄金/白银避险驱动</td></tr>
+          <tr><td>高股息精选</td><td class="positive">+12.69亿</td><td class="positive">+1.5%+</td><td>煤炭/银行防御配置</td></tr>
+          <tr><td>金属铜</td><td class="positive">+10.02亿</td><td class="positive">+0.24%</td><td>工业金属反弹</td></tr>
+          <tr><td>黄金概念</td><td class="positive">+9.24亿</td><td class="positive">+2.8%+</td><td>金价突破4650美元</td></tr>
+          <tr><td>金属锌</td><td class="positive">+8.86亿</td><td class="positive">+1%+</td><td>有色板块联动</td></tr>
+        </table>
+        <h3>🟢 主力净流出板块</h3>
+        <table>
+          <tr><th>板块</th><th>主力净流出</th><th>板块涨跌</th><th>逻辑</th></tr>
+          <tr><td>电子</td><td class="negative">-212亿</td><td class="negative">-3%+</td><td>半导体/算力硬件集体出逃</td></tr>
+          <tr><td>半导体</td><td class="negative">大幅流出</td><td class="negative">-3%+</td><td>兆易创新单股被卖24亿</td></tr>
+          <tr><td>通信</td><td class="negative">大幅流出</td><td class="negative">-3%+</td><td>CPO/光模块全线调整</td></tr>
+        </table>
+        <h3>📌 个股资金异动TOP10（半日）</h3>
+        <table>
+          <tr><th>股票</th><th>资金净流</th><th>涨跌</th><th>备注</th></tr>
+          <tr><td>圣阳股份</td><td class="positive">+4.90亿</td><td class="positive">+9.98%涨停</td><td>主力净买入第一</td></tr>
+          <tr><td>盈新发展</td><td class="positive">+4.29亿</td><td class="positive">上涨</td><td>地产+文旅</td></tr>
+          <tr><td>中国石化</td><td class="positive">+4.10亿</td><td class="neutral">微涨</td><td>权重防御</td></tr>
+          <tr><td>风范股份</td><td class="positive">+3.37亿</td><td class="positive">上涨</td><td>电力设备</td></tr>
+          <tr><td>洛阳钼业</td><td class="positive">+3.14亿</td><td class="positive">上涨</td><td>有色龙头</td></tr>
+          <tr style="border-top:2px solid #30363d"><td>兆易创新</td><td class="negative">-24亿</td><td class="negative">-6.70%</td><td>半日净卖出第一</td></tr>
+          <tr><td>中际旭创</td><td class="negative">大幅流出</td><td class="negative">-7.77%</td><td>光模块龙头崩塌</td></tr>
+          <tr><td>天孚通信</td><td class="negative">大幅流出</td><td class="negative">-8.89%</td><td>CPO方向领跌</td></tr>
+          <tr><td>新易盛</td><td class="negative">大幅流出</td><td class="negative">-7.52%</td><td>海外光模块出逃</td></tr>
+        </table>
+      </section>
+
+      <!-- 主线题材 -->
+      <section id="sec-sectors">
+        <h2>🔥 主线题材研判</h2>
+        <div class="grid two">
+          <div class="stock-card">
+            <div class="stock-head">
+              <span class="stock-title">🥇 贵金属/黄金（最强主线）</span>
+              <span class="tag positive">避险</span>
+            </div>
+            <p>📌 <strong>逻辑</strong>：现货黄金突破4650美元创3个月新高，国内银行积存金克价破1000元。美国财政部扩大长债回购→美元走弱→黄金受益。全球央行Q2净购金289吨同比+62%，45%央行计划增持黄金创纪录。</p>
+            <p>🔥 <strong>核心标的</strong>：深中华A（3连板情绪龙头）、白银有色（涨停）、湖南白银（+8.54%弹性最大）、盛达资源（+6.88%）、招金黄金（+5.92%）</p>
+            <p>⚠️ <strong>风险</strong>：已连涨3周累计+11%，短线超买；高盛目标4800-5500但需警惕获利回吐</p>
+            <p>💡 <strong>判断</strong>：趋势主线，但3连板深中华A高位风险大，关注回踩低吸湖南白银/盛达资源等弹性标的</p>
+          </div>
+          <div class="stock-card">
+            <div class="stock-head">
+              <span class="stock-title">🥈 煤炭/高股息（防御主线）</span>
+              <span class="tag positive">防御</span>
+            </div>
+            <p>📌 <strong>逻辑</strong>：焦煤期货涨超2%触及1600元/吨创近2年新高。煤炭十五五规划明确2030年大型矿占比87%，落后产能退出。上半年煤企报喜比例近七成。</p>
+            <p>🔥 <strong>核心标的</strong>：上海能源（涨停）、美锦能源（涨停+9.89%）、新集能源（+7.92%）</p>
+            <p>⚠️ <strong>风险</strong>：能源价格高企对经济基本面有压制作用</p>
+            <p>💡 <strong>判断</strong>：弱势市防御首选，但追高性价比一般，适合已持仓者锁仓</p>
+          </div>
+          <div class="stock-card">
+            <div class="stock-head">
+              <span class="stock-title">🥉 固态电池（事件驱动）</span>
+              <span class="tag">催化</span>
+            </div>
+            <p>📌 <strong>逻辑</strong>：我国提出的国际标准提案在IEC成功立项，是固态电池领域全球首个国际标准。碳酸锂期货涨近4%站上16.2万/吨。</p>
+            <p>🔥 <strong>核心标的</strong>：天力锂能（涨停）、上海洗霸（涨停）、金龙羽（涨停）、融捷股份（2连板）</p>
+            <p>⚠️ <strong>风险</strong>：产业化进度仍远，题材炒作持续性待验证</p>
+            <p>💡 <strong>判断</strong>：事件催化一日游概率大，追高需谨慎</p>
+          </div>
+          <div class="stock-card">
+            <div class="stock-head">
+              <span class="stock-title">💧 算力硬件/CPO（暴跌方向）</span>
+              <span class="tag negative">退潮</span>
+            </div>
+            <p>📌 <strong>逻辑</strong>：英伟达8/27财报前资金避险出逃+AI服务器涨价15%引发下游利润率担忧+美债10Y 4.73%高估值压制。</p>
+            <p>🟢 <strong>暴跌标的</strong>：天孚通信-8.89%、中际旭创-7.77%、新易盛-7.52%、寒武纪-6.67%、兆易创新-6.70%</p>
+            <p>⚠️ <strong>风险</strong>：英伟达财报不及预期则可能进一步杀跌；即使超预期，高位兑现压力也大</p>
+            <p>💡 <strong>判断</strong>：退潮明确，不接飞刀！等英伟达财报落地+放量止跌信号再考虑低吸</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 核心股票 -->
+      <section id="sec-stocks">
+        <h2>📌 核心股票（人气+焦点）</h2>
+        
+        <h3>🔥 人气股焦点</h3>
+        <table>
+          <tr><th>股票</th><th>涨跌</th><th>市场地位</th><th>操作思路</th></tr>
+          <tr>
+            <td><strong>宇树科技</strong><br><span class="muted">688836 科创板</span></td>
+            <td class="negative">-9.81%</td>
+            <td>人形机器人第一股，盘前人气断层第一（680万热度）</td>
+            <td>较上市首日回撤超44%，市值跌破2500亿。短期不接飞刀，等企稳信号</td>
+          </tr>
+          <tr>
+            <td><strong>深中华A</strong><br><span class="muted">000017</span></td>
+            <td class="positive">+9.99%涨停</td>
+            <td>黄金概念情绪龙头，3连板</td>
+            <td>高位加速板，封单2.48亿。追高风险极大，隔日观察溢价</td>
+          </tr>
+          <tr>
+            <td><strong>中际旭创</strong><br><span class="muted">300308 创业板</span></td>
+            <td class="negative">-7.77%</td>
+            <td>光模块龙头，上半年净利+241.7%</td>
+            <td>业绩炸裂但股价崩塌，英伟达财报前恐慌。等869→800支撑区间</td>
+          </tr>
+          <tr>
+            <td><strong>湖南白银</strong><br><span class="muted">002716 主板</span></td>
+            <td class="positive">+8.54%</td>
+            <td>白银第一股，黄金概念弹性标的</td>
+            <td>换手率19.85%，成交额51.71亿。金价趋势向上可回踩关注</td>
+          </tr>
+        </table>
+
+        <h3>📌 核心股分组</h3>
+        <div class="stock-card">
+          <div class="stock-head">
+            <span class="stock-title">黄金方向：白银有色（601212）</span>
+            <span class="tag positive">+10.02%涨停</span>
+          </div>
+          <p>📌 <strong>结论</strong>：黄金避险主线核心标的，涨停封板强势</p>
+          <p>🔥 <strong>炒点</strong>：国内唯一白银主业A股上市公司，金价突破4650美元+央行购金潮</p>
+          <p>⚠️ <strong>风险</strong>：已连涨多日，短期获利盘堆积；金价回调则承压</p>
+          <p>📊 <strong>盘面</strong>：涨停，封单量较大</p>
+          <p>💡 <strong>建议</strong>：已涨停不追，等回踩5日线看支撑再低吸</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">
+            <span class="stock-title">煤炭方向：美锦能源（000723）</span>
+            <span class="tag positive">+9.89%涨停</span>
+          </div>
+          <p>📌 <strong>结论</strong>：煤炭+氢能双题材，焦煤期货新高催化涨停</p>
+          <p>🔥 <strong>炒点</strong>：焦煤期货涨至1600元/吨创近2年新高，煤炭十五五规划利好</p>
+          <p>⚠️ <strong>风险</strong>：传统能源估值天花板，高位追入性价比差</p>
+          <p>📊 <strong>盘面</strong>：涨停，主力资金净流入2.33亿</p>
+          <p>💡 <strong>建议</strong>：防御品种已到位，不追高。弱势市已持仓者可持有</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">
+            <span class="stock-title">农业方向：登海种业（002014）</span>
+            <span class="tag positive">+10.04%涨停</span>
+          </div>
+          <p>📌 <strong>结论</strong>：转基因玉米龙头，粮食安全+厄尔尼诺催化</p>
+          <p>🔥 <strong>炒点</strong>：全国小麦收购突破9000万吨+厄尔尼诺或成最强+多国粮食出口管制</p>
+          <p>⚠️ <strong>风险</strong>：题材驱动为主，持续性取决于后续政策</p>
+          <p>📊 <strong>盘面</strong>：涨停，转基因板块+1.69%</p>
+          <p>💡 <strong>建议</strong>：关注转基因政策后续落地节奏，隔日能否晋级是关键</p>
+        </div>
+      </section>
+
+      <!-- 重要消息 -->
+      <section id="sec-news">
+        <h2>📰 午间重要消息</h2>
+        <div class="flow-card hot">
+          <h3>🔴 利多消息</h3>
+          <ul class="list">
+            <li><strong>黄金突破4650美元创新高</strong>：美国财政部扩大长债回购→美元走弱+地缘风险（伊朗/霍尔木兹海峡）→避险需求爆棚 [来源：财联社/界面新闻]</li>
+            <li><strong>固态电池首项国际标准IEC立项</strong>：中国提案，全球车企将有统一标尺 [来源：央视新闻]</li>
+            <li><strong>碳酸锂期货涨近4%</strong>：站上16.2万/吨，自8月3日低点反弹超14% [来源：证券时报]</li>
+            <li><strong>财政部：下半年将及时谋划增量政策</strong>：专项债还剩2万多亿待发行 [来源：财联社]</li>
+            <li><strong>国务院国资委：加快培养可控核聚变人才</strong>：推进"聚变+AI"融合创新 [来源：财联社]</li>
+            <li><strong>特斯拉Cybercab或本月向公众推出</strong>：首先在德州奥斯汀 [来源：证券时报]</li>
+          </ul>
+        </div>
+        <div class="flow-card cold">
+          <h3>🟢 利空消息</h3>
+          <ul class="list">
+            <li><strong>英伟达AI服务器涨价15%+</strong>：下游科技巨头利润率被双向挤压，引发AI投资可持续性担忧 [来源：同花顺]</li>
+            <li><strong>阿里配售800亿港元新股</strong>：100%投AI，但港股-9.76%用脚投票（稀释+美股已跌8.57%） [来源：科创板日报]</li>
+            <li><strong>伊朗威胁封锁霍尔木兹海峡</strong>：布伦特逼近95美元，通胀+降息空间受限 [来源：财联社]</li>
+            <li><strong>美加贸易摩擦升级</strong>：美对加拿大商品加征50%关税，加方宣布报复 [来源：财联社]</li>
+            <li><strong>中兴通讯上半年净利-45.57%</strong>、蓝思科技净利-49.52% [来源：财联社]</li>
+            <li><strong>巴拿马运河因厄尔尼诺限制通行</strong>：全球航运成本承压 [来源：财联社]</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 午后策略 -->
+      <section id="sec-strategy">
+        <h2>💡 午后策略展望</h2>
+        <div style="padding:14px;border-left:4px solid var(--gold);background:#1c2530;border-radius:6px;margin-bottom:12px">
+          <strong>🎯 综合判断：</strong>退潮防守格局，不追涨、不抄底、不接飞刀。下午大概率延续弱势震荡，关注3850支撑。仓位上限建议30%。
+        </div>
+        <div class="plan">
+          <div>
+            <strong>方向一：贵金属/黄金（回踩低吸）</strong><br>
+            趋势最确定的主线，但短线已超买。午后若黄金股回踩2-3%可轻仓低吸湖南白银/盛达资源，止损设在前低。
+          </div>
+          <div class="stop">
+            <strong>方向二：煤炭/高股息（防守配置）</strong><br>
+            弱势市防御首选。已持仓者继续持有，无仓位不建议午后追入。
+          </div>
+          <div class="target">
+            <strong>⛔ 回避方向：算力硬件/CPO</strong><br>
+            退潮信号明确，不接飞刀。等8/27英伟达财报落地+出现放量止跌信号后再考虑。
+          </div>
+        </div>
+        <h3>🔑 午后关键观察点</h3>
+        <ul class="list">
+          <li>13:00-13:30看算力硬件能否止跌企稳（中际旭创/天孚通信是否继续杀跌）</li>
+          <li>上证3850点支撑力度（跌破则进一步下行至3820）</li>
+          <li>黄金板块午后是否出现获利回吐（深中华A能否维持涨停封单）</li>
+          <li>半日成交已达1.37万亿，全天若超2.8万亿则为恐慌量</li>
+        </ul>
+      </section>
+
+      <!-- 风险警告 -->
+      <section id="sec-risk">
+        <h2>⚠️ 交易风险警告</h2>
+        <ul class="list">
+          <li>🔴 <strong>退潮信号明确</strong>：4300股下跌+高位科技核按钮频发+炸板率上升，赚钱效应极差</li>
+          <li>🔴 <strong>放量杀跌</strong>：半日放量1177亿至1.37万亿，放量下跌=恐慌性出逃，非健康信号</li>
+          <li>🔴 <strong>英伟达财报倒计时</strong>：8/27（周三）财报，算力硬件方向存在巨大不确定性</li>
+          <li>🟡 <strong>地缘风险升级</strong>：伊朗威胁封锁霍尔木兹海峡，油价若继续走高将压制全球风险偏好</li>
+          <li>🟡 <strong>美债高位压制</strong>：10Y 4.73%，30Y 5.3%，全球成长股估值持续承压</li>
+          <li>🟡 <strong>阿里巴巴配售冲击</strong>：800亿港元配售创港股上市以来首次，科技股情绪承压</li>
+        </ul>
+        <div style="padding:14px;border-left:4px solid var(--red);background:#1c2530;border-radius:6px;margin-top:12px">
+          <strong>⚠️ 操作纪律：</strong>当前退潮周期，严格控仓30%以下。高位科技股逢高减仓，不做逆势抄底。等市场出现明确放量止跌信号（如大阳线+量能萎缩至1.5万亿以下）再考虑加仓。
+        </div>
+      </section>
+
+      <p class="footer-note">
+        ⏰ 生成时间：2026-08-24 12:30 | 数据截至11:30午间收盘<br>
+        📡 数据来源：腾讯行情(stock-data-skill)、财联社、界面新闻、每经新闻、证券时报、同花顺<br>
+        ⚠️ 仅供研究参考，不构成投资建议。市场有风险，投资需谨慎。
+      </p>
+    </div>
+  </main>
+
+  <script>
+    // Reading progress
+    window.addEventListener('scroll',()=>{
+      const h=document.documentElement;
+      const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+      document.getElementById('readingProgress').style.width=pct+'%';
+    });
+    // TOC highlight
+    const tocLinks=document.querySelectorAll('.toc-panel a');
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          tocLinks.forEach(l=>l.classList.remove('active'));
+          const link=document.querySelector('.toc-panel a[href="#'+e.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{threshold:0.3});
+    document.querySelectorAll('section[id]').forEach(s=>observer.observe(s));
+  </script>
+</body>
+</html>
