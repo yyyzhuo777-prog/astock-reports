@@ -33,9 +33,81 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 .share-btn{position:fixed;bottom:72px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
 .share-btn.show{opacity:1;pointer-events:auto}
 .share-btn:hover{background:#58a6ff;color:#fff}
+
+.toc-toggle:active{transform:scale(0.9)}
+.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
+.toc-overlay.active{opacity:1;pointer-events:auto}
+.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.97);border-right:1px solid #30363d;z-index:1003;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;padding:20px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.toc-sidebar.open{transform:translateX(0)}
+.toc-sidebar .toc-header{padding:12px 16px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid #21262d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
+.toc-sidebar a{display:block;padding:8px 16px;color:#8b949e;text-decoration:none;font-size:0.82rem;border-left:2px solid transparent;transition:all .2s}
+.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
+.toc-sidebar a.active{color:#58a6ff;border-left-color:#58a6ff;background:rgba(56,139,253,0.08)}
+@media(min-width:1200px){
+  .toc-toggle{display:none}
+  .toc-overlay{display:none}
+  body{margin-left:220px}
+  .toc-sidebar{transform:translateX(0);border-right:1px solid #21262d}
+}
+
+
+.toc-toggle:active{transform:scale(0.9)}
+.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
+.toc-overlay.active{opacity:1;pointer-events:auto}
+.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.97);border-right:1px solid #30363d;z-index:1003;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;padding:20px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.toc-sidebar.open{transform:translateX(0)}
+.toc-sidebar .toc-header{padding:12px 16px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid #21262d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
+.toc-sidebar a{display:block;padding:8px 16px;color:#8b949e;text-decoration:none;font-size:0.82rem;border-left:2px solid transparent;transition:all .2s}
+.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
+.toc-sidebar a.active{color:#58a6ff;border-left-color:#58a6ff;background:rgba(56,139,253,0.08)}
+@media(min-width:1200px){
+  .toc-toggle{display:none}
+  .toc-overlay{display:none}
+  body{margin-left:220px}
+  .toc-sidebar{transform:translateX(0);border-right:1px solid #21262d}
+}
+
+/* === TOC 左侧目录 === */
+.toc-toggle{position:fixed;left:12px;bottom:70px;z-index:1001;width:40px;height:40px;border-radius:50%;background:rgba(13,17,23,0.9);border:1px solid #30363d;color:#e6edf3;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .2s}
+.toc-toggle:active{transform:scale(0.9)}
+.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
+.toc-overlay.active{opacity:1;pointer-events:auto}
+.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.97);border-right:1px solid #30363d;z-index:1003;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;padding:20px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.toc-sidebar.open{transform:translateX(0)}
+.toc-sidebar .toc-header{padding:12px 16px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid #21262d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
+.toc-sidebar a{display:block;padding:8px 16px;color:#8b949e;text-decoration:none;font-size:0.82rem;border-left:2px solid transparent;transition:all .2s}
+.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
+.toc-sidebar a.active{color:#58a6ff;border-left-color:#58a6ff;background:rgba(56,139,253,0.08)}
+@media(min-width:1200px){
+  .toc-toggle{display:none}
+  .toc-overlay{display:none}
+  body{margin-left:220px}
+  .toc-sidebar{transform:translateX(0);border-right:1px solid #21262d}
+}
 </style>
 </head>
 <body>
+<!-- TOC 左侧目录 -->
+<div class="toc-toggle" id="tocToggle">☰</div>
+<div class="toc-overlay" id="tocOverlay"></div>
+<nav class="toc-sidebar" id="tocSidebar">
+  <div class="toc-header"><span>📑 目录导航</span><button class="toc-close" id="tocClose">✕</button></div>
+    <a href="#sec-gauge" data-target="sec-gauge">📊 综合评分</a>
+    <a href="#sec-0" data-target="sec-0">📊 市场情绪</a>
+    <a href="#sec-1" data-target="sec-1">🔥 主线题材</a>
+    <a href="#sec-2" data-target="sec-2">📌 核心股票</a>
+    <a href="#sec-3" data-target="sec-3">📰 重要消息</a>
+    <a href="#sec-4" data-target="sec-4">⚠️ 风险警告</a>
+    <a href="#sec-5" data-target="sec-5">📅 关键日程</a>
+</nav>
+
+
+
+
+
 
 <!-- ===== 头部 ===== -->
 <div class="header">
@@ -46,7 +118,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 
 <!-- ===== 评分仪表盘 ===== -->
 <div class="dashboard">
-  <div class="gauge">
+  <div class="gauge" id="sec-gauge">
     <div class="val risk-high">25</div>
     <div class="label">机会评分 /100</div>
     <div class="bar"><div class="bar-fill bar-risk-high" data-width="25"></div></div>
@@ -75,7 +147,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 模块一：市场情绪 ===== -->
-<div class="section">
+<div class="section" id="sec-0">
   <div class="section-title">📊 市场情绪</div>
   
   <div class="stat-grid">
@@ -119,7 +191,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 模块二：主线题材 ===== -->
-<div class="section">
+<div class="section" id="sec-1">
   <div class="section-title">🔥 主线题材</div>
 
   <!-- 主线1 -->
@@ -189,7 +261,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 模块三：核心股票 ===== -->
-<div class="section">
+<div class="section" id="sec-2">
   <div class="section-title">📌 核心股票</div>
 
   <!-- 人气榜 -->
@@ -284,7 +356,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 消息面 ===== -->
-<div class="section">
+<div class="section" id="sec-3">
   <div class="section-title">📰 今日重要消息</div>
   <div class="card">
     <ul class="msg-list">
@@ -309,7 +381,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 模块四：交易风险警告 ===== -->
-<div class="section">
+<div class="section" id="sec-4">
   <div class="section-title">⚠️ 交易风险警告</div>
   
   <div class="warn-card">
@@ -357,7 +429,7 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 明日关键日程 ===== -->
-<div class="section">
+<div class="section" id="sec-5">
   <div class="section-title">📅 明日关键日程</div>
   <div class="card">
     <div class="row"><span>8/25 周二</span><span class="up">中证电池指数发布 · 6000亿MLF到期窗口</span></div>
@@ -411,5 +483,86 @@ function shareReport(){
   })}
 }
 </script>
+<script>
+(function(){
+  // Toggle
+  var toggle=document.getElementById('tocToggle');
+  var sidebar=document.getElementById('tocSidebar');
+  var overlay=document.getElementById('tocOverlay');
+  var closeBtn=document.getElementById('tocClose');
+  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
+  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
+  toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
+  closeBtn.addEventListener('click',closeToc);
+  overlay.addEventListener('click',closeToc);
+  // Click link -> scroll + close
+  sidebar.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){closeToc()});
+  });
+  // Active tracking
+  var links=sidebar.querySelectorAll('a[data-target]');
+  var sections=[];
+  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
+  function updateActive(){
+    var st=window.scrollY+100;
+    var cur=null;
+    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
+    links.forEach(function(a){a.classList.remove('active')});
+    if(cur)cur.link.classList.add('active');
+  }
+  window.addEventListener('scroll',updateActive,{passive:true});
+  updateActive();
+})();
+</script>
+<script>
+(function(){
+  var toggle=document.getElementById('tocToggle');
+  var sidebar=document.getElementById('tocSidebar');
+  var overlay=document.getElementById('tocOverlay');
+  var closeBtn=document.getElementById('tocClose');
+  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
+  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
+  if(toggle)toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
+  if(closeBtn)closeBtn.addEventListener('click',closeToc);
+  if(overlay)overlay.addEventListener('click',closeToc);
+  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeToc()})});
+  var links=sidebar.querySelectorAll('a[data-target]');
+  var sections=[];
+  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
+  function updateActive(){
+    var st=window.scrollY+100;
+    var cur=null;
+    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
+    links.forEach(function(a){a.classList.remove('active')});
+    if(cur)cur.link.classList.add('active');
+  }
+  window.addEventListener('scroll',updateActive,{passive:true});
+  updateActive();
+})();</script>
+<script>
+(function(){
+  var toggle=document.getElementById('tocToggle');
+  var sidebar=document.getElementById('tocSidebar');
+  var overlay=document.getElementById('tocOverlay');
+  var closeBtn=document.getElementById('tocClose');
+  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
+  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
+  if(toggle)toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
+  if(closeBtn)closeBtn.addEventListener('click',closeToc);
+  if(overlay)overlay.addEventListener('click',closeToc);
+  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeToc()})});
+  var links=sidebar.querySelectorAll('a[data-target]');
+  var sections=[];
+  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
+  function updateActive(){
+    var st=window.scrollY+100;
+    var cur=null;
+    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
+    links.forEach(function(a){a.classList.remove('active')});
+    if(cur)cur.link.classList.add('active');
+  }
+  window.addEventListener('scroll',updateActive,{passive:true});
+  updateActive();
+})();</script>
 </body>
 </html>
