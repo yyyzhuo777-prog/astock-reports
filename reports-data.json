@@ -27,50 +27,6 @@
   "reports": [
     {
       "date": "2026-08-24",
-      "noon": {
-        "file": "report-0824-noon.html",
-        "time": "12:30",
-        "summary": "半日1.37万亿放量杀跌·创业板-3.5%·算力崩塌·黄金避险扛旗·41涨停/4300跌",
-        "snap": {
-          "shIndex": {
-            "value": "3877",
-            "change": "-0.71%",
-            "up": false
-          },
-          "cyIndex": {
-            "value": "3422",
-            "change": "-3.50%",
-            "up": false
-          },
-          "volume": "1.37万亿(半日)",
-          "limitUp": "41",
-          "limitDown": "9",
-          "emotion": 28,
-          "sealRate": "72%",
-          "tags": [
-            {
-              "text": "🔥 黄金/贵金属",
-              "hot": true
-            },
-            {
-              "text": "🔥 煤炭",
-              "hot": true
-            },
-            {
-              "text": "💎 固态电池",
-              "hot": false
-            },
-            {
-              "text": "💀 算力硬件",
-              "hot": false
-            },
-            {
-              "text": "💀 半导体",
-              "hot": false
-            }
-          ]
-        }
-      },
       "evening": {
         "file": "report-0824-noon.html",
         "time": "15:00",
@@ -178,11 +134,6 @@
     },
     {
       "date": "2026-08-21",
-      "noon": {
-        "file": "report-0821-noon.html",
-        "time": "12:00",
-        "summary": "半日1.25万亿 · 47涨停 · 贵金属+锂矿领涨"
-      },
       "evening": {
         "file": "report-0821-v2.html",
         "time": "20:30",
