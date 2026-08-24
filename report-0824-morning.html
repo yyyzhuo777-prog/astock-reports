@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>A股盘前研报｜8月24日 周一</title>
+  <style>
+    :root{--ink:#15202b;--muted:#5c6675;--line:#d7dde6;--paper:#f6f8fb;--panel:#fff;--red:#c93636;--green:#16845f;--blue:#2563a8;--gold:#a56b00;--violet:#6c4bb8;--shadow:0 10px 30px rgba(22,34,51,.08)}
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--ink);background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.58}
+    .topbar{background:#0f1f2f;color:#f9fbff;border-bottom:5px solid #e8a820}
+    .wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    .hero{padding:30px 0 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}
+    h1{margin:0 0 8px;font-size:34px;line-height:1.16}
+    .subtitle{margin:0;color:#c7d1df;font-size:15px}
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+    .badge{border:1px solid rgba(255,255,255,.26);border-radius:6px;padding:6px 9px;font-size:13px;color:#eef4ff;white-space:nowrap}
+    .warning{margin-top:14px;padding:10px 12px;border-radius:6px;background:#fff2cf;color:#5c3d00;border:1px solid #e5c77d;font-size:14px}
+    main{padding:24px 0 38px}
+    section{margin:20px 0;padding:22px;background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+    h2{margin:0 0 16px;font-size:22px;line-height:1.25}
+    h3{margin:18px 0 10px;font-size:17px}
+    .grid{display:grid;gap:14px}
+    .grid.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .metric{padding:15px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe}
+    .metric .label{color:var(--muted);font-size:13px;margin-bottom:5px}
+    .metric .value{font-size:24px;font-weight:750;line-height:1.2}
+    .positive{color:var(--red)}
+    .negative{color:var(--green)}
+    .neutral{color:var(--blue)}
+    .muted{color:var(--muted)}
+    .list{margin:0;padding-left:20px}
+    .list li{margin:8px 0}
+    table{width:100%;border-collapse:collapse;font-size:14px;overflow-wrap:anywhere}
+    th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+    th{color:#344054;background:#f1f4f8;font-weight:700}
+    .footer-note{color:var(--muted);font-size:13px;margin-top:18px}
+    .nav-back{position:fixed;top:12px;right:12px;padding:6px 12px;background:rgba(15,31,47,.85);color:#58a6ff;text-decoration:none;font-size:12px;border-radius:6px;z-index:100;backdrop-filter:blur(8px);border:1px solid rgba(88,166,255,.2)}
+    .nav-back:hover{background:rgba(88,166,255,.15)}
+    .signal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .signal-card{padding:14px;border-radius:8px;border:1px solid var(--line)}
+    .signal-card.bull{background:#fef3f0;border-color:#f5c6c6}
+    .signal-card.bear{background:#f0f7fe;border-color:#b8d4f0}
+    .signal-card h4{margin:0 0 8px;font-size:15px}
+    .signal-card ul{margin:0;padding-left:16px;font-size:14px}
+    .signal-card li{margin:4px 0}
+    .priority-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700;margin-right:4px}
+    .p-high{background:#fde8e8;color:var(--red)}
+    .p-mid{background:#e8f0fe;color:var(--blue)}
+    .p-low{background:#e8f5e9;color:var(--green)}
+    .stock-card{padding:14px;border:1px solid var(--line);border-radius:8px;margin:10px 0;background:var(--panel)}
+    .stock-head{font-size:16px;font-weight:700;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+    .stock-code{color:var(--muted);font-size:13px;font-weight:400;margin-left:6px}
+    .stock-tag{display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;background:#f0f0f0;color:#666;margin-right:4px}
+    .gauge{text-align:center;padding:20px 0}
+    .gauge-score{font-size:52px;font-weight:900;line-height:1}
+    .gauge-label{font-size:15px;margin-top:6px}
+    .toc-panel{position:fixed;left:0;top:50%;transform:translateY(-50%);background:#161b22;border:1px solid #30363d;border-radius:0 8px 8px 0;padding:10px 6px;z-index:99;font-size:12px;transition:transform .3s}
+    .toc-panel a{display:block;color:#8b949e;text-decoration:none;padding:4px 8px;border-radius:4px;white-space:nowrap}
+    .toc-panel a:hover,.toc-panel a.active{color:#58a6ff;background:rgba(88,166,255,.1)}
+    .toc-toggle{position:fixed;left:0;top:50%;transform:translateY(-50%);background:#58a6ff;color:#fff;border:none;padding:8px 4px;border-radius:0 4px 4px 0;cursor:pointer;z-index:100;font-size:10px;writing-mode:vertical-rl}
+    @media(max-width:860px){
+      .hero,.grid.metrics,.grid.two,.signal-grid{grid-template-columns:1fr}
+      .badge-row{justify-content:flex-start}
+      h1{font-size:27px}
+      section{padding:17px}
+      table{font-size:13px}
+      .toc-panel{display:none}
+    }
+    @media(min-width:768px){
+      .wrap{max-width:860px}
+      section{padding:28px 32px}
+      .grid.metrics{grid-template-columns:repeat(4,1fr)}
+      h1{font-size:36px}
+      h2{font-size:24px}
+    }
+  </style>
+  <!-- Dark theme override -->
+  <style>
+    :root{--ink:#c9d1d9;--muted:#8b949e;--line:#30363d;--paper:#0d1117;--panel:#161b22;--red:#f85149;--green:#3fb950;--blue:#58a6ff;--gold:#d29922;--violet:#bc8cff;--shadow:0 4px 12px rgba(0,0,0,.3)}
+    body{color:#c9d1d9;background:#0d1117}
+    .topbar{background:#161b22;border-bottom:3px solid #f85149}
+    .subtitle{color:#8b949e}
+    .warning{background:rgba(210,153,34,.08);color:#d29922;border-color:rgba(210,153,34,.25)}
+    .badge{border-color:rgba(255,255,255,.12);color:#c9d1d9}
+    section{background:#161b22;border-color:#30363d;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+    h1,h2,h3{color:#c9d1d9}
+    .metric{background:#0d1117;border-color:#30363d}
+    .metric .label{color:#8b949e}
+    th{color:#c9d1d9;background:#1c2530}
+    td{color:#c9d1d9}
+    .stock-card{background:#161b22;border-color:#30363d}
+    .stock-head{border-bottom-color:#30363d}
+    .stock-code{color:#8b949e}
+    .stock-tag{background:#1c2530;color:#8b949e}
+    .muted{color:#8b949e!important}
+    .footer-note{color:#8b949e}
+    a{color:#58a6ff}
+    #sec-risk{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.25)!important}
+    #sec-risk h2,#sec-risk li,#sec-risk p{color:#d29922!important}
+    .signal-card.bull{background:#1c2530!important;border-color:#f85149!important;color:#c9d1d9!important}
+    .signal-card.bear{background:#1c2530!important;border-color:#58a6ff!important;color:#c9d1d9!important}
+    .signal-card h4{color:#c9d1d9!important}
+    div[style*="fef8f6"]{background:#1c2530!important;color:#e6edf3!important}
+    div[style*="fef9ec"]{background:#1c2530!important;color:#e6edf3!important}
+    div[style*="f0f7fe"]{background:#1c2530!important;color:#e6edf3!important}
+    div[style*="f5f0fe"]{background:#1c2530!important;color:#e6edf3!important}
+    div[style*="fbfcfe"]{background:#1c2530!important;color:#e6edf3!important}
+    div[style*="fffbe6"]{background:#1c2530!important;color:#e6edf3!important}
+    div[style*="fef8f6"] strong,div[style*="fef9ec"] strong,div[style*="f0f7fe"] strong,div[style*="f5f0fe"] strong,div[style*="fbfcfe"] strong,div[style*="fffbe6"] strong{color:#e6edf3!important}
+    .priority-tag.p-high,.p-high{background:rgba(248,81,73,.15)!important;color:#f85149!important}
+    .priority-tag.p-mid,.p-mid{background:rgba(88,166,255,.15)!important;color:#58a6ff!important}
+    .priority-tag.p-low,.p-low{background:rgba(59,185,80,.15)!important;color:#3fb950!important}
+    details[style*="fffbe6"]{background:rgba(210,153,34,.06)!important;border-color:rgba(210,153,34,.2)!important}
+    details[style*="fffbe6"] summary{color:#d29922!important}
+    details[style*="fffbe6"] div{color:#c9d1d9!important}
+    .toc-panel{background:#161b22}
+    .toc-toggle{background:#58a6ff}
+    .nav-back{background:rgba(22,27,34,.9);border-color:rgba(88,166,255,.2)}
+  </style>
+  <style>
+    .reading-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,#58a6ff,#bc8cff);z-index:9999;transition:width 60ms linear;pointer-events:none}
+  </style>
+</head>
+<body>
+  <div class="reading-progress" id="readingProgress"></div>
+  <button class="toc-toggle" onclick="document.getElementById('tocPanel').style.display=document.getElementById('tocPanel').style.display==='none'?'block':'none'">目录</button>
+  <nav class="toc-panel" id="tocPanel">
+    <a href="#sec-quick">📋 速览</a>
+    <a href="#sec-key">📌 核心</a>
+    <a href="#sec-overnight">🌍 外盘</a>
+    <a href="#sec-news">📰 消息</a>
+    <a href="#sec-prev">📊 回顾</a>
+    <a href="#sec-main">🔥 主线</a>
+    <a href="#sec-stocks">🎯 个股</a>
+    <a href="#sec-sentiment">📊 情绪</a>
+    <a href="#sec-strategy">💡 策略</a>
+    <a href="#sec-risk">⚠️ 风险</a>
+  </nav>
+  <header class="topbar">
+    <div class="wrap hero">
+      <div>
+        <h1>A股盘前研报｜8月24日 周一</h1>
+        <p class="subtitle">隔夜外围 × 周末催化 × 主线预判 × 核心个股 × 操作策略</p>
+        <div class="warning">⚠️ 核心矛盾：黄金暴涨4600美元+长存IPO+中际旭创+242%+网信五年行动 vs 缩量1.88万亿+连板晋级率25%+Jackson Hole央行年会+期指交割周。利好密集但量能不足，放量方向才是真主线。</div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">📅 2026-08-24 周一</span>
+        <span class="badge">🌅 盘前研报</span>
+        <span class="badge" id="genTime">⏱ 生成于 08:29</span>
+        <span class="badge">📊 前日成交1.88万亿</span>
+      </div>
+    </div>
+  </header>
+  <a class="nav-back" href="index.html">← 返回导航</a>
+  <main>
+    <div class="wrap">
+
+      <!-- 30秒速览 -->
+      <details open style="margin:20px 0;padding:18px;border:1px solid var(--line);border-radius:8px;background:rgba(210,153,34,.06)">
+        <summary style="font-size:18px;font-weight:700;cursor:pointer;color:#d29922">📋 30秒速览 · 核心结论</summary>
+        <div style="padding:12px 0;font-size:15px;line-height:1.8">
+          <strong>① 方向：</strong>大概率高开震荡，<span class="positive">贵金属+CPO/算力</span> 双主线共振最强，缩量环境下看哪个板块先放量<br>
+          <strong>② 催化：</strong>黄金4618美元+中际旭创H1净利+242%+长存IPO 330亿+网信五年行动+英伟达涨价15%，催化密度罕见<br>
+          <strong>③ 情绪：</strong>周五封板率72%、连板晋级率25%、成交1.88万亿创4个月地量，<span class="negative">短线情绪偏弱</span><br>
+          <strong>④ 仓位：</strong><span class="neutral">建议30-40%</span>，只做放量确认的主线方向，不追高开分歧票<br>
+          <strong>⑤ 风险：</strong>本周Jackson Hole央行年会（周四-周五）+周三ETF期权交割+周五A50交割，波动放大<br>
+          <strong>⑥ 关键：</strong>成交额能否回到2万亿以上是核心指标，不到2万亿只做结构性机会
+        </div>
+      </details>
+
+      <!-- 最重要的事 -->
+      <section id="sec-key">
+        <h2>📌 盘前最重要的三件事</h2>
+        <div class="grid" style="gap:12px">
+          <div style="padding:14px;border-left:4px solid var(--red);background:#fef8f6;border-radius:6px">
+            <strong>1. 黄金4618美元+沪金破千元 · 贵金属确定性最高</strong><br>
+            现货黄金站上4600美元，沪金首次突破1000元/克。美财政部扩大长债回购=隐性QE+美元走弱+央行购金+地缘（霍尔木兹海峡）共振。周五贵金属板块已启动（湖南白银/白银有色/盛达资源涨停），周末消息继续强化。今日大概率高开延续，但追高需控仓。
+          </div>
+          <div style="padding:14px;border-left:4px solid var(--red);background:#fef8f6;border-radius:6px">
+            <strong>2. 算力链业绩炸裂 · 中际旭创+242%+长存IPO+英伟达涨价</strong><br>
+            中际旭创H1净利136.51亿+242%，Q2毛利率46.4%创新高，2027年订单指引明确。长存控股IPO获受理（融资330亿，Q1净利333.79亿），存储链超级催化。英伟达AI芯片涨价15%+，国产替代逻辑强化。阿里800亿港元配售全投AI。
+          </div>
+          <div style="padding:14px;border-left:4px solid var(--gold);background:#fef9ec;border-radius:6px">
+            <strong>3. 网信五年行动+六张网 · 政策最硬方向</strong><br>
+            中央网信委印发《促进网信企业高质量发展行动计划（2026-2030年）》，7项行动21条举措，明确加强高端芯片/基础软件/工业软件攻关。叠加发改委"六张网"（算力网/新型电网/通信网）+十五五项目集中开工，科技主线政策逻辑被强化。
+          </div>
+        </div>
+      </section>
+
+      <!-- 隔夜外盘 -->
+      <section id="sec-overnight">
+        <h2>🌍 隔夜外盘全景（8/22周五收盘）</h2>
+        <div class="grid metrics">
+          <div class="metric">
+            <div class="label">道琼斯</div>
+            <div class="value neutral">53277.01</div>
+            <div class="positive" style="font-size:13px">+0.98%（周线-0.85%）</div>
+          </div>
+          <div class="metric">
+            <div class="label">标普500</div>
+            <div class="value neutral">7674.37</div>
+            <div class="positive" style="font-size:13px">+0.43%（周线-1.43%）</div>
+          </div>
+          <div class="metric">
+            <div class="label">纳斯达克</div>
+            <div class="value neutral">26180.45</div>
+            <div class="positive" style="font-size:13px">+0.43%（周线-2.05%）</div>
+          </div>
+          <div class="metric">
+            <div class="label">FTSE A50期货</div>
+            <div class="value positive">+1%</div>
+            <div class="muted" style="font-size:13px">先跌后反弹</div>
+          </div>
+        </div>
+        <h3>关键外盘信号</h3>
+        <table>
+          <tr><th style="width:30%">标的</th><th>表现</th><th>对A股影响</th></tr>
+          <tr><td>现货黄金</td><td class="positive">4618美元（周一亚太+0.31%）</td><td>贵金属板块直接催化，沪金破千元</td></tr>
+          <tr><td>COMEX黄金</td><td class="positive">4662美元（盘中最高4690）</td><td>周涨5.22%月涨13.79%，趋势极强</td></tr>
+          <tr><td>WTI原油</td><td class="negative">86.47美元（-0.68%）</td><td>伊朗局势不确定性，油价偏弱</td></tr>
+          <tr><td>特斯拉</td><td class="positive">+5%+</td><td>新能源车映射</td></tr>
+          <tr><td>英伟达</td><td class="negative">-1%（通知涨价15%+）</td><td>利好国产算力/存储替代链</td></tr>
+          <tr><td>阿里巴巴</td><td class="negative">-8.57%（配售800亿港元）</td><td>短期利空，但100%投AI基建中长期利好</td></tr>
+          <tr><td>网易</td><td class="positive">+6.98%</td><td>游戏/AI应用映射</td></tr>
+          <tr><td>比特币</td><td class="positive">3个月新高（周涨20%+）</td><td>数字货币概念映射</td></tr>
+          <tr><td>10Y美债</td><td class="negative">4.73%（+3bp）</td><td>高利率压制成长股估值</td></tr>
+          <tr><td>人民币在岸</td><td class="positive">6.7205（+34点）</td><td>汇率稳定，外部环境温和</td></tr>
+        </table>
+      </section>
+
+      <!-- 重要消息面 -->
+      <section id="sec-news">
+        <h2>📰 周末重要消息梳理</h2>
+        <div class="grid two">
+          <div>
+            <h3>🔴 利多因素</h3>
+            <ul class="list">
+              <li><strong>黄金4618美元+沪金破千元</strong>：美财政部扩大回购=隐性QE+美元走弱+央行购金 → 贵金属直接催化</li>
+              <li><strong>中际旭创H1净利+242%</strong>：136.51亿，Q2毛利率46.4%创新高，2027年订单明确 → CPO/算力业绩验证</li>
+              <li><strong>长存控股IPO获受理</strong>：融资330亿（科创板最大），Q1净利333.79亿 → 存储链超级催化</li>
+              <li><strong>网信五年行动</strong>：高端芯片/基础软件/工业软件攻关 → 科技主线政策最硬</li>
+              <li><strong>发改委"六张网"</strong>：算力网/新型电网/通信网项目集中开工 → 新基建+电网</li>
+              <li><strong>英伟达AI芯片涨价15%+</strong>：国产算力替代逻辑强化</li>
+              <li><strong>阿里800亿配售全投AI</strong>：大厂AI资本开支持续加码</li>
+              <li><strong>紫金矿业H1净利+68%</strong>：贵金属+有色业绩共振</li>
+              <li><strong>财政贴息升级</strong>：范围扩至信用卡分期，经办机构400家 → 消费链</li>
+              <li><strong>东山精密H1+290%</strong>：追加5亿美元投光芯片/光模块</li>
+              <li><strong>长飞光纤H1+889%</strong>：光纤需求爆发验证</li>
+            </ul>
+          </div>
+          <div>
+            <h3>🟢 利空因素</h3>
+            <ul class="list">
+              <li><strong>缩量至1.88万亿</strong>：创4个多月地量，增量资金未进场，存量博弈</li>
+              <li><strong>连板晋级率25%</strong>：短线情绪偏弱，高位接力困难</li>
+              <li><strong>封板率72%</strong>：资金短线接力意愿不足</li>
+              <li><strong>Jackson Hole央行年会</strong>：周四-周五，沃什首次演讲，外围波动风险</li>
+              <li><strong>期指交割周</strong>：周三ETF期权交割+周五A50交割，历史数据偏弱</li>
+              <li><strong>6000亿MLF周二到期</strong>：流动性考验</li>
+              <li><strong>中报密集披露</strong>：新易盛/立讯精密/万华/美团/比亚迪本周发布，暴雷风险</li>
+              <li><strong>美债收益率4.73%</strong>：高利率压制成长股估值</li>
+              <li><strong>阿里配售800亿港元</strong>：港股科技短期承压</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 昨日盘面回顾 -->
+      <section id="sec-prev">
+        <h2>📊 上周五盘面回顾（8/21）</h2>
+        <div class="grid metrics">
+          <div class="metric">
+            <div class="label">上证指数</div>
+            <div class="value positive">3905.20 <small>+0.04%</small></div>
+          </div>
+          <div class="metric">
+            <div class="label">创业板指</div>
+            <div class="value positive">3545.58 <small>+1.43%</small></div>
+          </div>
+          <div class="metric">
+            <div class="label">成交额</div>
+            <div class="value neutral">1.88万亿</div>
+            <div class="negative" style="font-size:13px">缩量2000亿·4月地量</div>
+          </div>
+          <div class="metric">
+            <div class="label">涨跌家数</div>
+            <div class="value negative">2505↑ / 2862↓</div>
+            <div class="muted" style="font-size:13px">指数红·个股分化</div>
+          </div>
+        </div>
+        <div class="grid metrics" style="margin-top:10px">
+          <div class="metric">
+            <div class="label">涨停</div>
+            <div class="value neutral">54家</div>
+          </div>
+          <div class="metric">
+            <div class="label">跌停</div>
+            <div class="value neutral">14家</div>
+          </div>
+          <div class="metric">
+            <div class="label">封板率</div>
+            <div class="value neutral">72-75%</div>
+          </div>
+          <div class="metric">
+            <div class="label">连板晋级率</div>
+            <div class="value negative">25%</div>
+          </div>
+        </div>
+        <p><strong>盘面特征</strong>：低开高走温和反弹，创业板领涨+1.43%，但超2800只个股下跌。贵金属全线领涨（湖南白银/白银有色/盛达资源涨停），CPO/光通信涨停10只（星网锐捷/瑞斯康达/通鼎互联/中瓷电子等），锂矿活跃（融捷股份涨停）。医药大幅退潮（Moderna盘后-23.5%影响），仅汉森制药3连板+键凯科技/近岸蛋白等2板晋级。</p>
+        <p><strong>情绪判断</strong>：成交缩量至1.88万亿创4个月地量，连板晋级率仅25%，高位股负反馈（哈药跌停、传智教育2连跌停），短线接力退潮期。唯一形成完整涨停潮的主线是CPO/光通信（产业链分层清晰），贵金属为防御性进攻方向。</p>
+      </section>
+
+      <!-- 今日主线预判 -->
+      <section id="sec-main">
+        <h2>🔥 今日主线预判</h2>
+        <table>
+          <tr><th style="width:18%">方向</th><th style="width:12%">优先级</th><th>逻辑与关注标的</th></tr>
+          <tr>
+            <td><strong>🥇 贵金属/黄金</strong></td>
+            <td><span class="priority-tag p-high">★★★★★</span></td>
+            <td><span class="positive">确定性最高</span>。金价4618美元+沪金破千元+美元走弱+地缘+央行购金。周五板块已启动，周末继续强化。<br><strong>标的</strong>：深中华A（2板+黄金珠宝）、湖南白银（涨停）、赤峰黄金、西部黄金、盛达资源、紫金矿业（H1+68%）</td>
+          </tr>
+          <tr>
+            <td><strong>🥈 CPO/光通信/算力</strong></td>
+            <td><span class="priority-tag p-high">★★★★★</span></td>
+            <td><span class="positive">业绩最强验证</span>。中际旭创+242%+长飞+889%+东山+290%+新易盛待披露。周五唯一完整涨停潮主线。长存IPO催化存储链。<br><strong>标的</strong>：通鼎互联（2板+光纤）、星网锐捷（CPO龙头）、中瓷电子（6天3板）、可川科技、新易盛（中报待验证）</td>
+          </tr>
+          <tr>
+            <td><strong>🥉 存储/国产替代</strong></td>
+            <td><span class="priority-tag p-high">★★★★☆</span></td>
+            <td>长存IPO 330亿（Q1净利333亿）+英伟达涨价15%+网信五年行动芯片攻关。国产存储/算力替代逻辑空前强化。<br><strong>标的</strong>：兆易创新（10-20亿回购）、佰维存储、北京君正、江波龙（待确认）</td>
+          </tr>
+          <tr>
+            <td><strong>锂矿/固态电池</strong></td>
+            <td><span class="priority-tag p-mid">★★★☆☆</span></td>
+            <td>碳酸锂期货半月涨16%+固态电池免征消费税+国际标准立项+美股锂矿板块+8%。预期差方向。<br><strong>标的</strong>：融捷股份（涨停）、天齐锂业、赣锋锂业、诺德股份（业绩+242%）</td>
+          </tr>
+          <tr>
+            <td><strong>新型电网</strong></td>
+            <td><span class="priority-tag p-mid">★★★☆☆</span></td>
+            <td>"六张网"+十五五5万亿投资+政策确定性最高。慢牛属性。<br><strong>标的</strong>：精达股份、许继电气、国电南瑞</td>
+          </tr>
+          <tr>
+            <td><strong>人形机器人</strong></td>
+            <td><span class="priority-tag p-low">★★☆☆☆</span></td>
+            <td>具身智能纳入攻关+下周深圳机器人博览会。但短期催化不直接，等回流信号。<br><strong>标的</strong>：宇环数控（2板）、科森科技（2板）</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- 核心股票 -->
+      <section id="sec-stocks">
+        <h2>🎯 核心股票 · 今日重点关注</h2>
+
+        <h3>📊 人气股 · 资金焦点</h3>
+        <div class="stock-card">
+          <div class="stock-head">中际旭创 <span class="stock-code">300308</span> <span class="stock-tag">算力龙头</span> <span class="stock-tag">H1+242%</span></div>
+          <p>📌 <strong>结论</strong>：全球光模块第一，业绩炸裂验证，中长期逻辑最硬<br>
+          🔥 <strong>炒点</strong>：H1净利136.51亿+242%，Q2毛利率46.4%创新高，2027年1.6T/800G订单明确快速增长<br>
+          ⚠️ <strong>风险</strong>：市值大（3000亿+），弹性有限；经营现金流18亿vs净利136亿，应收150亿增长139%<br>
+          📊 <strong>盘面</strong>：周五+4.29%放量，机构持续加仓<br>
+          💡 <strong>建议</strong>：作为板块风向标观察，不追高；若板块放量可低吸</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">星网锐捷 <span class="stock-code">001336</span> <span class="stock-tag">CPO龙头</span> <span class="stock-tag">龙虎榜第一</span></div>
+          <p>📌 <strong>结论</strong>：周五CPO板块日内龙头，辨识度最高<br>
+          🔥 <strong>炒点</strong>：封单2.39亿+机构净买4.03亿+游资净买3.24亿（国泰海通知春路1.98亿），SK海力士CPO论文催化<br>
+          ⚠️ <strong>风险</strong>：首板后能否晋级看开盘量能，高开5%+追入风险大<br>
+          📊 <strong>盘面</strong>：周五涨停，成交活跃<br>
+          💡 <strong>建议</strong>：若小幅高开+快速放量可关注，高开超5%不追</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">通鼎互联 <span class="stock-code">002491</span> <span class="stock-tag">光纤</span> <span class="stock-tag">2连板</span></div>
+          <p>📌 <strong>结论</strong>：光纤题材人气票，2连板承接流畅<br>
+          🔥 <strong>炒点</strong>：保偏光纤需求爆发+光纤量价齐升+预制棒扩产，周五成交72.6亿<br>
+          ⚠️ <strong>风险</strong>：2进3晋级需看量能配合，高位放量滞涨则离场<br>
+          📊 <strong>盘面</strong>：2连板，分时承接强<br>
+          💡 <strong>建议</strong>：关注能否3连板确认趋势，放量晋级可持有</p>
+        </div>
+
+        <h3>🔥 主线一：贵金属/黄金</h3>
+        <div class="stock-card">
+          <div class="stock-head">深中华A <span class="stock-code">000017</span> <span class="stock-tag">黄金珠宝</span> <span class="stock-tag">2连板</span></div>
+          <p>📌 <strong>结论</strong>：黄金涨价+珠宝业务，2连板领涨贵金属板块<br>
+          🔥 <strong>炒点</strong>：金价4618美元+沪金破千元，小盘弹性标的<br>
+          ⚠️ <strong>风险</strong>：2进3看开盘量能，金价短期涨幅大注意回调<br>
+          💡 <strong>建议</strong>：小高开+换手充分可关注，高开超5%等回踩</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">湖南白银 <span class="stock-code">002716</span> <span class="stock-tag">白银</span> <span class="stock-tag">涨停</span></div>
+          <p>📌 <strong>结论</strong>：白银弹性标的，周五涨停<br>
+          🔥 <strong>炒点</strong>：白银逼近70美元，弹性大于黄金<br>
+          ⚠️ <strong>风险</strong>：首板后追高性价比一般<br>
+          💡 <strong>建议</strong>：低吸为主，不追高</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">紫金矿业 <span class="stock-code">601899</span> <span class="stock-tag">贵金属龙头</span> <span class="stock-tag">H1+68%</span></div>
+          <p>📌 <strong>结论</strong>：贵金属+有色龙头，业绩验证<br>
+          🔥 <strong>炒点</strong>：H1净利391.7亿+68%，金价上涨直接受益<br>
+          ⚠️ <strong>风险</strong>：大市值弹性有限<br>
+          💡 <strong>建议</strong>：作为板块风向标，适合配置型资金</p>
+        </div>
+
+        <h3>🔥 主线二：CPO/算力/存储</h3>
+        <div class="stock-card">
+          <div class="stock-head">中瓷电子 <span class="stock-code">003030</span> <span class="stock-tag">光芯片封装</span> <span class="stock-tag">6天3板</span></div>
+          <p>📌 <strong>结论</strong>：光通信上游材料龙头，趋势多日板<br>
+          🔥 <strong>炒点</strong>：氮化铝+光芯片封装缺口+产业链持续景气<br>
+          ⚠️ <strong>风险</strong>：6天3板累积涨幅大，注意分歧<br>
+          💡 <strong>建议</strong>：趋势票回踩均线可低吸，不追高</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">诺德股份 <span class="stock-code">600110</span> <span class="stock-tag">锂电铜箔</span> <span class="stock-tag">业绩+242%</span></div>
+          <p>📌 <strong>结论</strong>：业绩+题材双击，国泰海通多席位联动买入<br>
+          🔥 <strong>炒点</strong>：业绩+242%+锂电铜箔+存储铜箔概念，龙虎榜1.5亿+<br>
+          ⚠️ <strong>风险</strong>：注意高位兑现<br>
+          💡 <strong>建议</strong>：业绩确认型标的，可持有</p>
+        </div>
+        <div class="stock-card">
+          <div class="stock-head">兆易创新 <span class="stock-code">603986</span> <span class="stock-tag">存储芯片</span> <span class="stock-tag">回购10-20亿</span></div>
+          <p>📌 <strong>结论</strong>：国产存储龙头，长存IPO催化+回购<br>
+          🔥 <strong>炒点</strong>：长存IPO 330亿+存储涨价周期+10-20亿回购（已回购1亿）<br>
+          ⚠️ <strong>风险</strong>：存储周期性风险<br>
+          💡 <strong>建议</strong>：存储链核心标的，回调低吸</p>
+        </div>
+
+        <h3>💎 潜力方向：锂矿/固态电池</h3>
+        <div class="stock-card">
+          <div class="stock-head">融捷股份 <span class="stock-code">002192</span> <span class="stock-tag">锂矿</span> <span class="stock-tag">涨停</span></div>
+          <p>📌 <strong>结论</strong>：锂矿超跌反弹，碳酸锂期货半月涨16%<br>
+          🔥 <strong>炒点</strong>：碳酸锂期货156360元/吨+固态电池政策+美股锂矿+8%<br>
+          ⚠️ <strong>风险</strong>：锂价波动大，反弹持续性待验证<br>
+          💡 <strong>建议</strong>：关注板块联动，放量确认再介入</p>
+        </div>
+      </section>
+
+      <!-- 情绪评级 -->
+      <section id="sec-sentiment">
+        <h2>📊 盘前情绪评级</h2>
+        <div class="gauge">
+          <div class="gauge-score" style="color:var(--gold)">谨慎偏多</div>
+          <div class="gauge-label muted">利好密集但量能不足，需要放量确认方向</div>
+        </div>
+        <div class="grid metrics" style="margin-top:16px">
+          <div class="metric" style="text-align:center">
+            <div class="label">机会评分</div>
+            <div class="value positive">60/100</div>
+          </div>
+          <div class="metric" style="text-align:center">
+            <div class="label">风险评分</div>
+            <div class="value negative">55/100</div>
+          </div>
+          <div class="metric" style="text-align:center">
+            <div class="label">情绪温度</div>
+            <div class="value neutral">偏弱</div>
+          </div>
+          <div class="metric" style="text-align:center">
+            <div class="label">资金共识</div>
+            <div class="value neutral">分化</div>
+          </div>
+        </div>
+        <div class="signal-grid">
+          <div class="signal-card bull">
+            <h4>🔴 做多信号</h4>
+            <ul>
+              <li>黄金4618美元+沪金破千元</li>
+              <li>中际旭创+242%+长存IPO+长飞+889%</li>
+              <li>网信五年行动+六张网建设</li>
+              <li>英伟达涨价+阿里800亿投AI</li>
+              <li>美股周五反弹+A50期货+1%</li>
+              <li>人民币稳定+财政贴息升级</li>
+            </ul>
+          </div>
+          <div class="signal-card bear">
+            <h4>🟢 做空信号</h4>
+            <ul>
+              <li>成交1.88万亿创4月地量</li>
+              <li>连板晋级率仅25%·封板率72%</li>
+              <li>Jackson Hole央行年会（周四-周五）</li>
+              <li>周三ETF期权交割+周五A50交割</li>
+              <li>6000亿MLF周二到期</li>
+              <li>中报密集披露期·暴雷风险</li>
+              <li>10Y美债4.73%高位压制</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 操作策略 -->
+      <section id="sec-strategy">
+        <h2>💡 盘前操作策略</h2>
+        <div class="grid two">
+          <div style="padding:14px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe">
+            <h3>🎯 仓位建议</h3>
+            <p><strong>总仓位上限：30-40%</strong></p>
+            <ul class="list">
+              <li>利好密集但缩量→高开分歧概率大</li>
+              <li>放量方向才是真主线，不到2万亿控仓</li>
+              <li>只做贵金属+CPO两条确定性方向</li>
+              <li>Jackson Hole前不宜重仓</li>
+            </ul>
+          </div>
+          <div style="padding:14px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe">
+            <h3>⚠️ 今日风险点</h3>
+            <ul class="list">
+              <li>沪指3880支撑，3930-3960压力</li>
+              <li>高开5%+的板块追高性价比差</li>
+              <li>高位医药股继续退潮，勿抄底</li>
+              <li>6000亿MLF到期+交割周波动</li>
+              <li>中报暴雷：关注今晚新易盛等业绩</li>
+            </ul>
+          </div>
+        </div>
+        <h3>📋 操作清单</h3>
+        <table>
+          <tr><th>方向</th><th>操作</th><th>备注</th></tr>
+          <tr><td>贵金属/黄金</td><td>小高开可低吸，高开5%+不追</td><td>金价强势但涨幅大，控仓</td></tr>
+          <tr><td>CPO/光通信</td><td>核心股高开换手后可关注</td><td>业绩验证最硬，等确认</td></tr>
+          <tr><td>存储/国产替代</td><td>回调低吸为主</td><td>长存IPO催化，中线逻辑</td></tr>
+          <tr><td>锂矿/固态电池</td><td>关注联动，放量再介入</td><td>预期差方向，需确认</td></tr>
+          <tr><td>医药/创新药</td><td>今日回避</td><td>退潮期，勿抄底</td></tr>
+          <tr><td>大市值权重</td><td>观察为主</td><td>缩量环境弹性差</td></tr>
+        </table>
+      </section>
+
+      <!-- 关键时间 -->
+      <section id="sec-time">
+        <h2>📅 今日/本周关键时间节点</h2>
+        <table>
+          <tr><th style="width:25%">时间</th><th>事件</th></tr>
+          <tr><td>09:15-09:25</td><td>集合竞价：观察贵金属/CPO/存储开盘方向</td></tr>
+          <tr><td>09:30-10:00</td><td>开盘半小时：确认量能（能否补量至2万亿+）</td></tr>
+          <tr><td>10:30</td><td>关注高开板块是否兑现还是分歧回落</td></tr>
+          <tr><td>周一全天</td><td>华汇智能申购；文昌航天论坛开幕；钙钛矿光伏大会</td></tr>
+          <tr><td>周二</td><td>6000亿MLF到期；新易盛/立讯精密/万华化学中报</td></tr>
+          <tr><td>周三</td><td>ETF期权交割日；美国核心PCE/GDP</td></tr>
+          <tr><td>周四-周五</td><td>Jackson Hole全球央行年会（沃什首次演讲）</td></tr>
+          <tr><td>周五</td><td>A50股指期货交割日；美团/比亚迪/赣锋锂业中报</td></tr>
+        </table>
+      </section>
+
+      <!-- 交易风险警告 -->
+      <section id="sec-risk">
+        <h2>⚠️ 交易风险警告</h2>
+        <ul class="list">
+          <li><strong>缩量风险</strong>：1.88万亿成交=存量博弈，利好高开低走概率大，追高=接盘</li>
+          <li><strong>情绪退潮</strong>：连板晋级率25%+高位股批量退潮，接力纪律严格止损</li>
+          <li><strong>交割周</strong>：周三期权+周五A50，历史数据显示偏弱，控制隔夜仓</li>
+          <li><strong>Jackson Hole</strong>：沃什首次演讲+核心PCE数据，外围波动传导</li>
+          <li><strong>中报雷</strong>：本周近30家龙头披露，业绩不达预期个股可能闪崩</li>
+          <li><strong>黄金追高</strong>：月涨13.79%后短线获利盘大，注意冲高回落</li>
+          <li><strong>⚠️ 出现以下信号立即停手</strong>：涨停家数骤降<30、炸板率>50%、高位核按钮、成交额跌破1.5万亿</li>
+        </ul>
+      </section>
+
+      <p class="footer-note">
+        📌 本报告基于公开信息整理，数据来源：东方财富、财联社、证券时报、中国证券报、新浪财经。部分云手机APP数据暂缺已用联网搜索交叉验证替代，无法获取字段标"待确认"。不构成投资建议，市场有风险，投资需谨慎。<br>
+        ⏱ 生成时间：2026-08-24 08:29 | A股短线交易研报系统
+      </p>
+    </div>
+  </main>
+<script>
+(function(){
+  // Reading progress bar
+  var bar=document.getElementById("readingProgress");
+  if(bar){window.addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=h>0?Math.min(100,(window.scrollY/h*100)).toFixed(1)+"%":"0%"},{passive:true})}
+  // TOC highlight
+  var tocLinks=document.querySelectorAll('.toc-panel a');
+  var sections=[];
+  tocLinks.forEach(function(a){
+    var id=a.getAttribute('href').slice(1);
+    var sec=document.getElementById(id);
+    if(sec) sections.push({el:sec,link:a});
+  });
+  window.addEventListener('scroll',function(){
+    var pos=window.scrollY+100;
+    var current=null;
+    sections.forEach(function(s){if(s.el.offsetTop<=pos) current=s;});
+    tocLinks.forEach(function(a){a.classList.remove('active')});
+    if(current) current.link.classList.add('active');
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
