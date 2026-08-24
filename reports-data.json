@@ -30,14 +30,82 @@
       "morning": {
         "file": "report-0824-morning.html",
         "time": "08:00",
-        "summary": "黄金4618+中际旭创+242%+长存IPO · 贵金属+CPO双主线 · 缩量1.88万亿控仓30%"
+        "summary": "黄金4618+中际旭创+242%+长存IPO · 贵金属+CPO双主线 · 缩量1.88万亿控仓30%",
+        "snap": {
+          "shIndex": { "value": "3905", "change": "+0.04%", "up": true },
+          "cyIndex": { "value": "3546", "change": "+1.43%", "up": true },
+          "volume": "1.88万亿",
+          "limitUp": "54",
+          "limitDown": "14",
+          "emotion": 48,
+          "sealRate": "75%",
+          "tags": [
+            { "text": "🔥 贵金属", "hot": true },
+            { "text": "🔥 CPO/通信", "hot": true },
+            { "text": "💎 锂矿", "hot": false },
+            { "text": "🤖 机器人", "hot": false },
+            { "text": "🔋 固态电池", "hot": false }
+          ]
+        },
+        "judge": "情绪修复但赚钱效应分化，资金高度集中在贵金属/CPO两条主线，追高性价比一般。",
+        "maxPosition": 30,
+        "focus": [
+          "贵金属消化获利盘后的持续性",
+          "CPO/通信前排反馈，是否延续净流入",
+          "机器人/固态电池能否回流形成二线机会"
+        ],
+        "focusTargetDate": "2026-08-24"
       },
       "noon": {
         "file": "report-0824-noon.html",
         "time": "12:30",
-        "summary": "半日1.37万亿放量杀跌·创业板-3.5%·算力崩塌·黄金避险扛旗·41涨停/4300跌"
+        "summary": "半日1.37万亿放量杀跌·创业板-3.5%·算力崩塌·黄金避险扛旗·41涨停/4300跌",
+        "snap": {
+          "shIndex": { "value": "3877", "change": "-0.71%", "up": false },
+          "cyIndex": { "value": "3422", "change": "-3.50%", "up": false },
+          "volume": "1.37万亿(半日)",
+          "limitUp": "41",
+          "limitDown": "9",
+          "emotion": 28,
+          "sealRate": "72%",
+          "tags": [
+            { "text": "🔥 黄金/贵金属", "hot": true },
+            { "text": "🔥 煤炭", "hot": true },
+            { "text": "💎 固态电池", "hot": false },
+            { "text": "💀 算力硬件", "hot": false },
+            { "text": "💀 半导体", "hot": false }
+          ]
+        }
       },
-      "evening": null
+      "evening": {
+        "file": "report-0824-noon.html",
+        "time": "15:00",
+        "summary": "沪指-0.59%创业板-3.21%·算力崩塌易中天蒸发1552亿·黄金煤炭农业扛旗·48涨停/11跌停·成交2.01万亿",
+        "snap": {
+          "shIndex": { "value": "3882", "change": "-0.59%", "up": false },
+          "cyIndex": { "value": "3432", "change": "-3.21%", "up": false },
+          "volume": "2.01万亿",
+          "limitUp": "48",
+          "limitDown": "11",
+          "emotion": 25,
+          "sealRate": "70%",
+          "tags": [
+            { "text": "🔥 黄金/贵金属", "hot": true },
+            { "text": "🔥 煤炭", "hot": true },
+            { "text": "🌾 农业", "hot": false },
+            { "text": "💀 算力硬件", "hot": false },
+            { "text": "💀 半导体", "hot": false }
+          ]
+        },
+        "judge": "极端分化日，沪强深弱红利强成长弱。易中天三巨头蒸发1552亿，主力净流出电子板块超212亿。资金涌入黄金/煤炭/农业/固态电池等防御+政策方向。赚钱效应仅27%，情绪极度低迷，控仓观望为主。",
+        "maxPosition": 20,
+        "focusTargetDate": "2026-08-25",
+        "focus": [
+          "算力硬件恐慌释放后能否企稳（英伟达财报8/27是关键锚点）",
+          "黄金/煤炭/贵金属持续性，是否形成新的顺周期主线",
+          "固态电池+数字货币能否从脉冲转为持续方向"
+        ]
+      }
     },
     {
       "date": "2026-08-21",
@@ -64,42 +132,19 @@
           "机器人/固态电池能否回流形成二线机会"
         ],
         "snap": {
-          "shIndex": {
-            "value": "3905",
-            "change": "+0.04%",
-            "up": true
-          },
-          "cyIndex": {
-            "value": "3546",
-            "change": "+1.43%",
-            "up": true
-          },
+          "shIndex": { "value": "3905", "change": "+0.04%", "up": true },
+          "cyIndex": { "value": "3546", "change": "+1.43%", "up": true },
           "volume": "1.88万亿",
           "limitUp": "54",
           "limitDown": "14",
           "emotion": 48,
           "sealRate": "75%",
           "tags": [
-            {
-              "text": "🔥 CPO/通信",
-              "hot": true
-            },
-            {
-              "text": "🔥 贵金属",
-              "hot": true
-            },
-            {
-              "text": "💎 锂矿",
-              "hot": false
-            },
-            {
-              "text": "🤖 机器人",
-              "hot": false
-            },
-            {
-              "text": "🔋 固态电池",
-              "hot": false
-            }
+            { "text": "🔥 CPO/通信", "hot": true },
+            { "text": "🔥 贵金属", "hot": true },
+            { "text": "💎 锂矿", "hot": false },
+            { "text": "🤖 机器人", "hot": false },
+            { "text": "🔋 固态电池", "hot": false }
           ]
         }
       }
