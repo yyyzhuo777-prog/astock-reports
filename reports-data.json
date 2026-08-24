@@ -2,6 +2,13 @@
   "lastUpdated": "2026-08-24",
   "schedule": [
     {
+      "key": "morning",
+      "time": "08:00",
+      "min": 480,
+      "label": "盘前",
+      "icon": "🌅"
+    },
+    {
       "key": "noon",
       "time": "12:00",
       "min": 720,
@@ -25,19 +32,42 @@
         "time": "12:30",
         "summary": "半日1.37万亿放量杀跌·创业板-3.5%·算力崩塌·黄金避险扛旗·41涨停/4300跌",
         "snap": {
-          "shIndex": { "value": "3877", "change": "-0.71%", "up": false },
-          "cyIndex": { "value": "3422", "change": "-3.50%", "up": false },
+          "shIndex": {
+            "value": "3877",
+            "change": "-0.71%",
+            "up": false
+          },
+          "cyIndex": {
+            "value": "3422",
+            "change": "-3.50%",
+            "up": false
+          },
           "volume": "1.37万亿(半日)",
           "limitUp": "41",
           "limitDown": "9",
           "emotion": 28,
           "sealRate": "72%",
           "tags": [
-            { "text": "🔥 黄金/贵金属", "hot": true },
-            { "text": "🔥 煤炭", "hot": true },
-            { "text": "💎 固态电池", "hot": false },
-            { "text": "💀 算力硬件", "hot": false },
-            { "text": "💀 半导体", "hot": false }
+            {
+              "text": "🔥 黄金/贵金属",
+              "hot": true
+            },
+            {
+              "text": "🔥 煤炭",
+              "hot": true
+            },
+            {
+              "text": "💎 固态电池",
+              "hot": false
+            },
+            {
+              "text": "💀 算力硬件",
+              "hot": false
+            },
+            {
+              "text": "💀 半导体",
+              "hot": false
+            }
           ]
         }
       },
@@ -46,19 +76,42 @@
         "time": "15:00",
         "summary": "沪指-0.59%创业板-3.21%·算力崩塌易中天蒸发1552亿·黄金煤炭农业扛旗·48涨停/11跌停·成交2.01万亿",
         "snap": {
-          "shIndex": { "value": "3882", "change": "-0.59%", "up": false },
-          "cyIndex": { "value": "3432", "change": "-3.21%", "up": false },
+          "shIndex": {
+            "value": "3882",
+            "change": "-0.59%",
+            "up": false
+          },
+          "cyIndex": {
+            "value": "3432",
+            "change": "-3.21%",
+            "up": false
+          },
           "volume": "2.01万亿",
           "limitUp": "48",
           "limitDown": "11",
           "emotion": 25,
           "sealRate": "70%",
           "tags": [
-            { "text": "🔥 黄金/贵金属", "hot": true },
-            { "text": "🔥 煤炭", "hot": true },
-            { "text": "🌾 农业", "hot": false },
-            { "text": "💀 算力硬件", "hot": false },
-            { "text": "💀 半导体", "hot": false }
+            {
+              "text": "🔥 黄金/贵金属",
+              "hot": true
+            },
+            {
+              "text": "🔥 煤炭",
+              "hot": true
+            },
+            {
+              "text": "🌾 农业",
+              "hot": false
+            },
+            {
+              "text": "💀 算力硬件",
+              "hot": false
+            },
+            {
+              "text": "💀 半导体",
+              "hot": false
+            }
           ]
         },
         "judge": "极端分化日，沪强深弱红利强成长弱。易中天三巨头蒸发1552亿，主力净流出电子板块超212亿。资金涌入黄金/煤炭/农业/固态电池等防御+政策方向。赚钱效应仅27%，情绪极度低迷，控仓观望为主。",
@@ -69,6 +122,58 @@
           "黄金/煤炭/贵金属持续性，是否形成新的顺周期主线",
           "固态电池+数字货币能否从脉冲转为持续方向"
         ]
+      },
+      "morning": {
+        "file": "report-0824-morning.html",
+        "time": "08:00",
+        "summary": "黄金4618+长存IPO+算力签约1361亿 · 通信/贵金属/半导体三主线 · 缩量1.88万亿控仓30%",
+        "snap": {
+          "shIndex": {
+            "value": "3905",
+            "change": "+0.04%",
+            "up": true
+          },
+          "cyIndex": {
+            "value": "3546",
+            "change": "+1.43%",
+            "up": true
+          },
+          "volume": "1.88万亿",
+          "limitUp": "54",
+          "limitDown": "15",
+          "emotion": 38,
+          "sealRate": "73%",
+          "tags": [
+            {
+              "text": "🔥 光通信/CPO",
+              "hot": true
+            },
+            {
+              "text": "🔥 贵金属",
+              "hot": true
+            },
+            {
+              "text": "💎 半导体存储",
+              "hot": false
+            },
+            {
+              "text": "🤖 人形机器人",
+              "hot": false
+            },
+            {
+              "text": "💊 医药分化",
+              "hot": false
+            }
+          ]
+        },
+        "judge": "缩量存量博弈，周末利好集中但量能不足易高开兑现。算力/贵金属双主线有政策+业绩支撑，但英伟达财报前忌追高。低位低吸为主，严控打板仓位。",
+        "maxPosition": 30,
+        "focus": [
+          "光通信/CPO竞价强度，量能是否回升至2万亿",
+          "贵金属跳空高开后持续性，高开超3%防兑现",
+          "半导体存储受长存IPO催化，关注设备材料方向"
+        ],
+        "focusTargetDate": "2026-08-24"
       }
     },
     {
@@ -91,19 +196,42 @@
           "机器人/固态电池能否回流形成二线机会"
         ],
         "snap": {
-          "shIndex": { "value": "3905", "change": "+0.04%", "up": true },
-          "cyIndex": { "value": "3546", "change": "+1.43%", "up": true },
+          "shIndex": {
+            "value": "3905",
+            "change": "+0.04%",
+            "up": true
+          },
+          "cyIndex": {
+            "value": "3546",
+            "change": "+1.43%",
+            "up": true
+          },
           "volume": "1.88万亿",
           "limitUp": "54",
           "limitDown": "14",
           "emotion": 48,
           "sealRate": "75%",
           "tags": [
-            { "text": "🔥 CPO/通信", "hot": true },
-            { "text": "🔥 贵金属", "hot": true },
-            { "text": "💎 锂矿", "hot": false },
-            { "text": "🤖 机器人", "hot": false },
-            { "text": "🔋 固态电池", "hot": false }
+            {
+              "text": "🔥 CPO/通信",
+              "hot": true
+            },
+            {
+              "text": "🔥 贵金属",
+              "hot": true
+            },
+            {
+              "text": "💎 锂矿",
+              "hot": false
+            },
+            {
+              "text": "🤖 机器人",
+              "hot": false
+            },
+            {
+              "text": "🔋 固态电池",
+              "hot": false
+            }
           ]
         }
       }
