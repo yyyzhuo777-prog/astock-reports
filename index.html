@@ -474,7 +474,7 @@ function render(D) {
   const footer = document.getElementById('footer-section');
   footer.innerHTML = '<div class="schedule-inline">' + (D.footer.schedule || '自动报告 · 08:00 盘前 · 12:00 午盘 · 20:30 盘后') + '</div>'
     + 'A股每日资讯 · AI 自动生成 · 仅供参考，不构成投资建议<br>'
-    + '页面更新：' + (D.footer.updated || '');
+    + '页面更新：' + (D.footer.updated || '') + ' <span class="rel-time">(' + relativeTime(D.footer.updated) + ')</span>';
 }
 
 function renderSnapshot(S) {
@@ -491,7 +491,7 @@ function renderSnapshot(S) {
   });
   const linkUrl = S.latestLink || '#';
   const linkLabel = S.latestLabel || '完整报告';
-  el.innerHTML = '<div class="snapshot-title">⚡ 最新速览<span class="snapshot-date">' + (S.date||'') + '</span></div>'
+  el.innerHTML = '<div class="snapshot-title">⚡ 最新速览<span class="snapshot-date">' + (S.date||'') + ' <span class="rel-time">(' + relativeTime(S.date) + ')</span></span></div>'
     + '<div class="emotion-hero"><div class="emotion-num">' + (S.emotion.score||'--') + '<small>/100</small></div>'
     + '<div class="emotion-text">情绪温度<div><span class="emotion-level ' + (S.emotion.levelClass||'neutral') + '">' + (S.emotion.level||'') + '</span></div></div></div>'
     + '<div class="snapshot-grid">' + metricsHtml + '</div>'
@@ -587,10 +587,17 @@ function filterHistory() {
 // 相对时间
 function relativeTime(dateStr) {
   if (!dateStr) return '';
-  var d = new Date(dateStr.replace(/\//g, '-') + ' ' + new Date().getFullYear());
+  var d;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    d = new Date(dateStr + 'T00:00:00+08:00');
+  } else {
+    d = new Date(dateStr.replace(/\//g, '-'));
+    if (isNaN(d)) return dateStr;
+  }
   if (isNaN(d)) return dateStr;
   var now = new Date();
   var diff = now - d;
+  if (diff < 0) return dateStr;
   var mins = Math.floor(diff / 60000);
   var hours = Math.floor(diff / 3600000);
   var days = Math.floor(diff / 86400000);
@@ -598,6 +605,7 @@ function relativeTime(dateStr) {
   if (mins < 60) return mins + '分钟前';
   if (hours < 24) return hours + '小时前';
   if (days < 7) return days + '天前';
+  if (days < 30) return Math.floor(days/7) + '周前';
   return dateStr;
 }
 
