@@ -351,10 +351,10 @@ document.addEventListener('visibilitychange', () => {
 function calcNextReport() {
   const now = new Date();
   const t = now.getHours() * 60 + now.getMinutes();
-  if (t < 8 * 60 + 15) return { time: '08:15', label: '盘前' };
+  if (t < 8 * 60) return { time: '08:00', label: '盘前' };
   if (t < 12 * 60) return { time: '12:00', label: '午盘' };
   if (t < 20 * 60 + 30) return { time: '20:30', label: '盘后' };
-  return { time: '明日 08:15', label: '盘前' };
+  return { time: '明日 08:00', label: '盘前' };
 }
 
 function render(D) {
@@ -379,7 +379,7 @@ function render(D) {
 
   // Footer
   const footer = document.getElementById('footer-section');
-  footer.innerHTML = '<div class="schedule-inline">' + (D.footer.schedule || '自动报告 · 08:15 盘前 · 12:00 午盘 · 20:30 盘后') + '</div>'
+  footer.innerHTML = '<div class="schedule-inline">' + (D.footer.schedule || '自动报告 · 08:00 盘前 · 12:00 午盘 · 20:30 盘后') + '</div>'
     + 'A股每日资讯 · AI 自动生成 · 仅供参考，不构成投资建议<br>'
     + '页面更新：' + (D.footer.updated || '');
 }

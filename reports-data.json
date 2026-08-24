@@ -64,7 +64,7 @@
           "weekday": "周一",
           "today": true,
           "reports": [
-            { "icon": "🌅", "time": "08:15", "url": "report-0824-morning.html" },
+            { "icon": "🌅", "time": "08:00", "url": "report-0824-morning.html" },
             { "icon": "☀️", "time": "12:00", "url": "report-0824-noon.html" },
             { "icon": "🌙", "time": "20:30", "url": "report-0824-v2.html" }
           ]
