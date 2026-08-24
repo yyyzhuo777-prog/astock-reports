@@ -22,7 +22,7 @@ a{color:#58a6ff;text-decoration:none}
 .gauge .val{font-size:1.6rem;font-weight:800;line-height:1.2}
 .gauge .label{font-size:.72rem;color:#8b949e;margin-top:2px}
 .gauge .bar{height:5px;border-radius:3px;background:#21262d;margin-top:6px;overflow:hidden}
-.gauge .bar-fill{height:100%;border-radius:3px;transition:width .6s}
+.gauge .bar-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
 .risk-low{color:#3fb950}.bar-risk-low{background:#3fb950}
 .risk-mid{color:#d29922}.bar-risk-mid{background:#d29922}
 .risk-high{color:#f85149}.bar-risk-high{background:#f85149}
@@ -104,3 +104,23 @@ a{color:#58a6ff;text-decoration:none}
   .dashboard{gap:6px}
   .stat-grid{gap:4px}
 }
+
+/* ===== 骨架屏 Shimmer (导航页) ===== */
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.sk-wrap{padding:16px}
+.sk-block{border-radius:6px;background:linear-gradient(90deg,#1c2530 25%,#252d38 37%,#1c2530 63%);background-size:200% 100%;animation:shimmer 1.6s ease infinite}
+.sk-snap{display:flex;align-items:center;justify-content:center;gap:14px;padding:20px;margin-bottom:12px;background:linear-gradient(135deg,rgba(88,166,255,.06),rgba(188,140,255,.04));border:1px solid rgba(88,166,255,.12);border-radius:10px}
+.sk-circle{width:70px;height:70px;border-radius:50%}
+.sk-col{display:flex;flex-direction:column;gap:8px;align-items:center}
+.sk-row{display:flex;gap:8px;margin-bottom:12px}
+.sk-card{flex:1;height:82px}
+.sk-line{height:14px;margin-bottom:8px}
+.sk-line.w60{width:60%}.sk-line.w80{width:80%}.sk-line.w40{width:40%}
+.sk-date{height:30px;margin-bottom:6px;border-radius:6px}
+.sk-links{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;height:48px;margin-bottom:1px}
+.sk-link{background:#161b22}
+
+/* ===== 重试按钮 (导航页) ===== */
+.retry-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid rgba(88,166,255,.3);border-radius:18px;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:background .2s}
+.retry-btn:hover{background:rgba(88,166,255,.22)}
+.retry-btn:active{transform:scale(.97)}

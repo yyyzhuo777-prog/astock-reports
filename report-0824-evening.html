@@ -35,22 +35,22 @@
   <div class="gauge">
     <div class="val risk-high">25</div>
     <div class="label">情绪评分 /100</div>
-    <div class="bar"><div class="bar-fill bar-risk-high" style="width:25%"></div></div>
+    <div class="bar"><div class="bar-fill bar-risk-high" data-width="25"></div></div>
   </div>
   <div class="gauge">
     <div class="val risk-high">60</div>
     <div class="label">风险评分 /100</div>
-    <div class="bar"><div class="bar-fill bar-risk-high" style="width:60%"></div></div>
+    <div class="bar"><div class="bar-fill bar-risk-high" data-width="60"></div></div>
   </div>
   <div class="gauge">
     <div class="val risk-mid">42</div>
     <div class="label">资金共识度 /100</div>
-    <div class="bar"><div class="bar-fill bar-risk-mid" style="width:42%"></div></div>
+    <div class="bar"><div class="bar-fill bar-risk-mid" data-width="42"></div></div>
   </div>
   <div class="gauge">
     <div class="val risk-mid">74%</div>
     <div class="label">封板率</div>
-    <div class="bar"><div class="bar-fill bar-risk-mid" style="width:74%"></div></div>
+    <div class="bar"><div class="bar-fill bar-risk-mid" data-width="74"></div></div>
   </div>
 </div>
 
@@ -402,5 +402,19 @@
   <p style="margin-top:8px"><a href="report-0824-morning.html" style="display:inline-block;padding:8px 20px;background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid rgba(88,166,255,.3);border-radius:18px;font-size:.82rem;font-weight:600;text-decoration:none">← 盘前报告</a></p>
 </div>
 
+<script>
+// 仪表盘入场动画
+(function(){
+  setTimeout(function(){
+    document.querySelectorAll('.gauge .bar-fill[data-width]').forEach(function(b){b.style.width=b.dataset.width+'%'});
+    document.querySelectorAll('.gauge .val').forEach(function(v){
+      if(v.innerHTML!==v.textContent)return;
+      var t=parseInt(v.textContent);if(isNaN(t))return;v.textContent='0';
+      var s=performance.now();
+      (function a(n){var p=Math.min((n-s)/900,1);var e=1-Math.pow(1-p,3);v.textContent=Math.round(t*e);if(p<1)requestAnimationFrame(a)})(s);
+    });
+  },300);
+})();
+</script>
 </body>
 </html>

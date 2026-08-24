@@ -292,14 +292,28 @@
   <span style="margin-left:auto" id="next-report">🕐 加载中</span>
 </div>
 <main class="dashboard-grid">
-  <div class="snapshot" id="snapshot-section"></div>
+  <div class="snapshot" id="snapshot-section">
+    <!-- 骨架屏 -->
+    <div class="sk-wrap">
+      <div class="sk-snap"><div class="sk-block sk-circle"></div><div class="sk-col"><div class="sk-block sk-line w60"></div><div class="sk-block sk-line w40"></div></div></div>
+      <div class="sk-row"><div class="sk-block sk-card"></div><div class="sk-block sk-card"></div><div class="sk-block sk-card"></div></div>
+      <div class="sk-block sk-line w80"></div>
+      <div class="sk-block sk-line w60"></div>
+    </div>
+  </div>
   <div class="section recent-section">
     <div class="section-title">📋 最近报告</div>
-    <div class="quick-scroll" id="recent-reports"></div>
+    <div class="quick-scroll" id="recent-reports">
+      <div style="display:flex;gap:8px;flex-shrink:0"><div class="sk-block" style="width:260px;height:110px;border-radius:8px"></div><div class="sk-block" style="width:260px;height:110px;border-radius:8px"></div></div>
+    </div>
   </div>
   <div class="section focus-section">
     <div class="section-title" id="focus-title">🎯 今日关注</div>
-    <div class="focus-list" id="focus-list"></div>
+    <div class="focus-list" id="focus-list">
+      <div class="sk-block sk-line w80" style="height:32px;margin-bottom:6px;border-radius:6px"></div>
+      <div class="sk-block sk-line w60" style="height:32px;margin-bottom:6px;border-radius:6px"></div>
+      <div class="sk-block sk-line w80" style="height:32px;border-radius:6px"></div>
+    </div>
   </div>
   <div class="section quotes-section">
     <div class="section-title">⚡ 短线交易语录</div>
@@ -313,7 +327,16 @@
   </div>
   <div class="section history-section">
     <div class="section-title">📅 历史报告</div>
-    <div id="history-section"></div>
+    <div id="history-section">
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:8px">
+        <div class="sk-block" style="height:42px;border-radius:0"></div>
+        <div style="padding:8px"><div class="sk-block sk-date"></div><div class="sk-block sk-links"></div></div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <div class="sk-block" style="height:42px;border-radius:0"></div>
+        <div style="padding:8px"><div class="sk-block sk-date"></div><div class="sk-block sk-links"></div></div>
+      </div>
+    </div>
   </div>
 </main>
 <div class="footer" id="footer-section">
@@ -323,12 +346,28 @@
 
 <script>
 // ===== 数据驱动渲染 =====
-fetch('./reports-data.json?t=' + Date.now())
-  .then(r => r.json())
-  .then(D => render(D))
-  .catch(() => {
-    document.getElementById('header-subtitle').textContent = '数据加载失败，请刷新';
+function loadRetry() {
+  document.getElementById('header-subtitle').textContent = '加载中...';
+  fetch('./reports-data.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(D => render(D))
+    .catch(() => {
+      document.getElementById('header-subtitle').textContent = '数据加载失败';
+      showRetry();
+    });
+}
+function showRetry() {
+  ['snapshot-section','recent-reports','focus-list','history-section'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text2);font-size:13px">数据加载失败</div>';
   });
+  const retryEl = document.createElement('div');
+  retryEl.style.cssText = 'text-align:center;padding:8px 0 16px';
+  retryEl.innerHTML = '<button class="retry-btn" onclick="loadRetry()">🔄 重新加载</button>';
+  const grid = document.querySelector('.dashboard-grid');
+  if (grid && !grid.querySelector('.retry-btn')) grid.parentNode.insertBefore(retryEl, grid.nextSibling);
+}
+loadRetry();
 
 // 自动刷新：2分钟
 setInterval(() => {
