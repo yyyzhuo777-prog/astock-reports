@@ -530,45 +530,71 @@ function renderHistory(weeks) {
   el.innerHTML = html;
 }
 
-// PWA 安装提示
+// PWA 安装提示（兼容 iOS / Android / 桌面浏览器）
 (function() {
-  // 已安装则不显示
+  // 已安装为PWA则不显示
   if (window.matchMedia('(display-mode: standalone)').matches) return;
+  if (window.navigator.standalone === true) return; // iOS standalone
   if (localStorage.getItem('pwa-dismissed')) return;
 
-  let deferredPrompt;
-  const banner = document.createElement('div');
-  banner.id = 'install-banner';
-  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b22;border-top:1px solid #30363d;padding:14px 16px;display:flex;align-items:center;gap:12px;transform:translateY(100%);transition:transform .3s ease;box-shadow:0 -4px 20px rgba(0,0,0,.4)';
-  banner.innerHTML = '<div style="flex:1"><div style="color:#c9d1d9;font-size:14px;font-weight:600">📲 安装到主屏幕</div><div style="color:#8b949e;font-size:12px;margin-top:2px">像 App 一样使用，全屏无地址栏</div></div>'
-    + '<button id="install-btn" style="background:#238636;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">安装</button>'
-    + '<button id="dismiss-btn" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
-  document.body.appendChild(banner);
+  var ua = navigator.userAgent;
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var isAndroid = /Android/.test(ua);
 
-  window.addEventListener('beforeinstallprompt', (e) => {
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();
     deferredPrompt = e;
-    setTimeout(() => { banner.style.transform = 'translateY(0)'; }, 1500);
   });
 
-  document.getElementById('install-btn').addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      if (outcome === 'accepted') {
-        banner.style.transform = 'translateY(100%)';
-      }
-    } else {
-      // iOS 没有 beforeinstallprompt，给手动提示
-      banner.innerHTML = '<div style="flex:1;color:#c9d1d9;font-size:13px">点底部分享按钮 → 「添加到主屏幕」</div><button onclick="this.parentElement.remove()" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
-    }
-  });
+  var banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#161b22;border-top:1px solid #30363d;padding:14px 16px;display:flex;align-items:center;gap:12px;transform:translateY(100%);transition:transform .4s ease;box-shadow:0 -4px 20px rgba(0,0,0,.4)';
 
-  document.getElementById('dismiss-btn').addEventListener('click', () => {
+  if (isIOS) {
+    // iOS：直接显示手动操作指引
+    banner.innerHTML = '<div style="flex:1">'
+      + '<div style="color:#c9d1d9;font-size:14px;font-weight:600">📲 添加到主屏幕</div>'
+      + '<div style="color:#8b949e;font-size:12px;margin-top:4px;line-height:1.5">点底部 <span style="font-size:16px">⬆️</span> 分享按钮 →「添加到主屏幕」</div>'
+      + '</div>'
+      + '<button id="pwa-dismiss" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
+  } else {
+    // Android / 桌面：一键安装
+    banner.innerHTML = '<div style="flex:1">'
+      + '<div style="color:#c9d1d9;font-size:14px;font-weight:600">📲 安装到主屏幕</div>'
+      + '<div style="color:#8b949e;font-size:12px;margin-top:2px">像 App 一样使用，全屏无地址栏</div>'
+      + '</div>'
+      + '<button id="pwa-install" style="background:#238636;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">安装</button>'
+      + '<button id="pwa-dismiss" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
+  }
+  document.body.appendChild(banner);
+
+  // 延迟弹出
+  setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 1500);
+
+  // 关闭按钮
+  document.getElementById('pwa-dismiss').addEventListener('click', function() {
     banner.style.transform = 'translateY(100%)';
     localStorage.setItem('pwa-dismissed', '1');
   });
+
+  // Android 安装按钮
+  var installBtn = document.getElementById('pwa-install');
+  if (installBtn) {
+    installBtn.addEventListener('click', async function() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        var result = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        if (result.outcome === 'accepted') {
+          banner.style.transform = 'translateY(100%)';
+        }
+      } else {
+        // beforeinstallprompt 没触发，提示浏览器菜单
+        banner.innerHTML = '<div style="flex:1;color:#c9d1d9;font-size:13px">点浏览器右上角 ⋮ 菜单 →「安装应用」或「添加到主屏幕」</div>'
+          + '<button onclick="this.parentElement.style.transform=\'translateY(100%)\';localStorage.setItem(\'pwa-dismissed\',\'1\')" style="background:transparent;color:#8b949e;border:none;font-size:18px;padding:4px 8px;cursor:pointer">✕</button>';
+      }
+    });
+  }
 })();
 </script>
 </body>
