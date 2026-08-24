@@ -1,4 +1,4 @@
-const CACHE = 'astock-v20';
+const CACHE = 'astock-v21';
 const CORE = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', (e) => {
