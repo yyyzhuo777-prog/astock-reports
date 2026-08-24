@@ -2,13 +2,6 @@
   "lastUpdated": "2026-08-24",
   "schedule": [
     {
-      "key": "morning",
-      "time": "08:15",
-      "min": 495,
-      "label": "盘前",
-      "icon": "🌅"
-    },
-    {
       "key": "noon",
       "time": "12:00",
       "min": 720,
@@ -27,35 +20,6 @@
   "reports": [
     {
       "date": "2026-08-24",
-      "morning": {
-        "file": "report-0824-morning.html",
-        "time": "08:00",
-        "summary": "黄金4618+中际旭创+242%+长存IPO · 贵金属+CPO双主线 · 缩量1.88万亿控仓30%",
-        "snap": {
-          "shIndex": { "value": "3905", "change": "+0.04%", "up": true },
-          "cyIndex": { "value": "3546", "change": "+1.43%", "up": true },
-          "volume": "1.88万亿",
-          "limitUp": "54",
-          "limitDown": "14",
-          "emotion": 48,
-          "sealRate": "75%",
-          "tags": [
-            { "text": "🔥 贵金属", "hot": true },
-            { "text": "🔥 CPO/通信", "hot": true },
-            { "text": "💎 锂矿", "hot": false },
-            { "text": "🤖 机器人", "hot": false },
-            { "text": "🔋 固态电池", "hot": false }
-          ]
-        },
-        "judge": "情绪修复但赚钱效应分化，资金高度集中在贵金属/CPO两条主线，追高性价比一般。",
-        "maxPosition": 30,
-        "focus": [
-          "贵金属消化获利盘后的持续性",
-          "CPO/通信前排反馈，是否延续净流入",
-          "机器人/固态电池能否回流形成二线机会"
-        ],
-        "focusTargetDate": "2026-08-24"
-      },
       "noon": {
         "file": "report-0824-noon.html",
         "time": "12:30",
@@ -109,11 +73,6 @@
     },
     {
       "date": "2026-08-21",
-      "morning": {
-        "file": "report-0821-morning.html",
-        "time": "08:00",
-        "summary": "美联储鹰派 · Moderna映射 · 沪八条+央行投放"
-      },
       "noon": {
         "file": "report-0821-noon.html",
         "time": "12:00",
