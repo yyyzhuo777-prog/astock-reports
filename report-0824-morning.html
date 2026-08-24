@@ -34,80 +34,29 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 .share-btn.show{opacity:1;pointer-events:auto}
 .share-btn:hover{background:#58a6ff;color:#fff}
 
-.toc-toggle:active{transform:scale(0.9)}
-.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
-.toc-overlay.active{opacity:1;pointer-events:auto}
-.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.97);border-right:1px solid #30363d;z-index:1003;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;padding:20px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.toc-sidebar.open{transform:translateX(0)}
-.toc-sidebar .toc-header{padding:12px 16px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid #21262d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
-.toc-sidebar a{display:block;padding:8px 16px;color:#8b949e;text-decoration:none;font-size:0.82rem;border-left:2px solid transparent;transition:all .2s}
-.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
-.toc-sidebar a.active{color:#58a6ff;border-left-color:#58a6ff;background:rgba(56,139,253,0.08)}
-@media(min-width:1200px){
-  .toc-toggle{display:none}
-  .toc-overlay{display:none}
-  .toc-sidebar{transform:translateX(0);border-right:1px solid #21262d}
-}
-
-
-.toc-toggle:active{transform:scale(0.9)}
-.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
-.toc-overlay.active{opacity:1;pointer-events:auto}
-.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.97);border-right:1px solid #30363d;z-index:1003;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;padding:20px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.toc-sidebar.open{transform:translateX(0)}
-.toc-sidebar .toc-header{padding:12px 16px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid #21262d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
-.toc-sidebar a{display:block;padding:8px 16px;color:#8b949e;text-decoration:none;font-size:0.82rem;border-left:2px solid transparent;transition:all .2s}
-.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
-.toc-sidebar a.active{color:#58a6ff;border-left-color:#58a6ff;background:rgba(56,139,253,0.08)}
-@media(min-width:1200px){
-  .toc-toggle{display:none}
-  .toc-overlay{display:none}
-  .toc-sidebar{transform:translateX(0);border-right:1px solid #21262d}
-}
-
-.toc-toggle:active{transform:scale(0.9)}
-.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
-.toc-overlay.active{opacity:1;pointer-events:auto}
-.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.97);border-right:1px solid #30363d;z-index:1003;transform:translateX(-100%);transition:transform .3s ease;overflow-y:auto;padding:20px 0;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.toc-sidebar.open{transform:translateX(0)}
-.toc-sidebar .toc-header{padding:12px 16px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid #21262d;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
-.toc-sidebar a{display:block;padding:8px 16px;color:#8b949e;text-decoration:none;font-size:0.82rem;border-left:2px solid transparent;transition:all .2s}
-.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
-.toc-sidebar a.active{color:#58a6ff;border-left-color:#58a6ff;background:rgba(56,139,253,0.08)}
-@media(min-width:1200px){
-  .toc-toggle{display:none}
-  .toc-overlay{display:none}
-  .toc-sidebar{transform:translateX(0);border-right:1px solid #21262d}
-}
-
-
 /* === TOC 目录导航 === */
-.toc-toggle{position:fixed;left:12px;bottom:70px;z-index:1001;width:40px;height:40px;border-radius:50%;background:rgba(13,17,23,0.85);border:1px solid #30363d;color:#e6edf3;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .2s}
+.toc-toggle{position:fixed;left:12px;bottom:70px;z-index:1001;width:40px;height:40px;border-radius:50%;background:rgba(13,17,23,0.85);border:1px solid #30363d;color:#e6edf3;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .toc-toggle:active{transform:scale(0.9)}
 .toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:1002;opacity:0;pointer-events:none;transition:opacity .3s}
 .toc-overlay.active{opacity:1;pointer-events:auto}
-.toc-sidebar{position:fixed;left:0;right:0;bottom:0;max-height:60vh;background:rgba(13,17,23,0.92);border-top:1px solid #30363d;border-radius:16px 16px 0 0;z-index:1003;transform:translateY(100%);transition:transform .3s ease;overflow-y:auto;padding:12px 0 20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 -4px 24px rgba(0,0,0,0.3)}
+.toc-sidebar{position:fixed;left:0;right:0;bottom:0;max-height:55vh;background:rgba(13,17,23,0.95);border-top:1px solid #30363d;border-radius:16px 16px 0 0;z-index:1003;transform:translateY(100%);transition:transform .3s ease;overflow-y:auto;padding:12px 0 20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 -4px 24px rgba(0,0,0,0.3)}
 .toc-sidebar.open{transform:translateY(0)}
-.toc-sidebar .toc-header{padding:4px 20px 12px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid rgba(33,38,45,0.5);margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
 .toc-sidebar .toc-handle{width:36px;height:4px;border-radius:2px;background:#30363d;margin:0 auto 8px}
-.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px}
-.toc-sidebar .toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:4px 12px}
-.toc-sidebar a{display:block;padding:10px 12px;color:rgba(139,148,158,0.9);text-decoration:none;font-size:0.78rem;border-radius:8px;border-left:none;text-align:center;transition:all .2s}
+.toc-sidebar .toc-header{padding:4px 20px 12px;font-size:0.85rem;color:#8b949e;border-bottom:1px solid rgba(33,38,45,0.5);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.2rem;cursor:pointer;padding:4px 8px}
+.toc-sidebar a{display:block;padding:10px 20px;color:rgba(139,148,158,0.9);text-decoration:none;font-size:0.82rem;transition:all .15s}
 .toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
 .toc-sidebar a.active{color:#58a6ff;background:rgba(56,139,253,0.1)}
 @media(min-width:1200px){
   .toc-toggle{display:none}
-  .toc-overlay{display:none}
-  .toc-sidebar{left:0;top:0;bottom:0;right:auto;width:200px;max-height:none;border-radius:0;border-top:none;border-right:1px solid rgba(48,54,61,0.4);transform:translateX(-100%);box-shadow:4px 0 24px rgba(0,0,0,0.15)}
-  .toc-sidebar.open{transform:translateX(0)}
+  .toc-overlay{display:none!important}
+  .toc-sidebar{left:0;top:0;bottom:0;right:auto;width:180px;max-height:none;border-radius:0;border-top:none;border-right:1px solid rgba(48,54,61,0.3);transform:translateX(-100%);opacity:0.4;transition:opacity .25s,transform .3s}
+  .toc-sidebar:hover,.toc-sidebar.open{transform:translateX(0);opacity:1}
   .toc-sidebar .toc-handle{display:none}
-  .toc-sidebar .toc-grid{display:block;padding:0}
-  .toc-sidebar a{text-align:left;padding:8px 16px;border-radius:0;border-left:2px solid transparent;font-size:0.82rem}
-  .toc-sidebar a.active{border-left-color:#58a6ff}
+  .toc-sidebar a{padding:7px 14px;font-size:0.78rem}
+  .toc-sidebar a.active{border-left:2px solid #58a6ff}
 }
+
 </style>
 </head>
 <body>
@@ -117,22 +66,16 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 <nav class="toc-sidebar" id="tocSidebar">
   <div class="toc-handle"></div>
   <div class="toc-header"><span>📑 目录</span><button class="toc-close" id="tocClose">✕</button></div>
-  <div class="toc-grid">
+  <div class="toc-links">
     <a href="#sec-gauge" data-target="sec-gauge">📊 综合评分</a>
     <a href="#sec-0" data-target="sec-0">📊 市场情绪</a>
     <a href="#sec-1" data-target="sec-1">🔥 主线题材</a>
     <a href="#sec-2" data-target="sec-2">📌 核心股票</a>
-    <a href="#sec-3" data-target="sec-3">📰 重要消息</a>
-    <a href="#sec-4" data-target="sec-4">⚠️ 风险警告</a>
-    <a href="#sec-5" data-target="sec-5">📅 关键日程</a>
+    <a href="#sec-3" data-target="sec-3">📰 今日重要消息</a>
+    <a href="#sec-4" data-target="sec-4">⚠️ 交易风险警告</a>
+    <a href="#sec-5" data-target="sec-5">📅 明日关键日程</a>
   </div>
 </nav>
-
-
-
-
-
-
 
 
 <!-- ===== 头部 ===== -->
@@ -143,8 +86,8 @@ body{max-width:1000px;padding:32px 48px;font-size:1.05rem}
 </div>
 
 <!-- ===== 评分仪表盘 ===== -->
-<div class="dashboard">
-  <div class="gauge" id="sec-gauge">
+<div class="dashboard" id="sec-gauge">
+  <div class="gauge">
     <div class="val risk-high">25</div>
     <div class="label">机会评分 /100</div>
     <div class="bar"><div class="bar-fill bar-risk-high" data-width="25"></div></div>
@@ -511,141 +454,19 @@ function shareReport(){
 </script>
 <script>
 (function(){
-  // Toggle
-  var toggle=document.getElementById('tocToggle');
-  var sidebar=document.getElementById('tocSidebar');
-  var overlay=document.getElementById('tocOverlay');
-  var closeBtn=document.getElementById('tocClose');
-  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
-  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
-  toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
-  closeBtn.addEventListener('click',closeToc);
-  overlay.addEventListener('click',closeToc);
-  // Click link -> scroll + close
-  sidebar.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){closeToc()});
-  });
-  // Active tracking
-  var links=sidebar.querySelectorAll('a[data-target]');
-  var sections=[];
-  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
-  function updateActive(){
-    var st=window.scrollY+100;
-    var cur=null;
-    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
-    links.forEach(function(a){a.classList.remove('active')});
-    if(cur)cur.link.classList.add('active');
-  }
-  window.addEventListener('scroll',updateActive,{passive:true});
-  updateActive();
+  var t=document.getElementById('tocToggle'),s=document.getElementById('tocSidebar'),o=document.getElementById('tocOverlay'),c=document.getElementById('tocClose');
+  if(!s)return;
+  function op(){s.classList.add('open');o.classList.add('active')}
+  function cl(){s.classList.remove('open');o.classList.remove('active')}
+  if(t)t.onclick=function(){s.classList.contains('open')?cl():op()};
+  if(c)c.onclick=cl;
+  if(o)o.onclick=cl;
+  s.querySelectorAll('a').forEach(function(a){a.onclick=function(){if(innerWidth<1200)cl()}});
+  var ls=s.querySelectorAll('a[data-target]'),ss=[];
+  ls.forEach(function(a){var e=document.getElementById(a.dataset.target);if(e)ss.push({e:e,a:a})});
+  function up(){var y=scrollY+100,cur=null;ss.forEach(function(x){if(x.e.offsetTop<=y)cur=x});ls.forEach(function(a){a.classList.remove('active')});if(cur)cur.a.classList.add('active')}
+  addEventListener('scroll',up,{passive:true});up();
 })();
 </script>
-<script>
-(function(){
-  var toggle=document.getElementById('tocToggle');
-  var sidebar=document.getElementById('tocSidebar');
-  var overlay=document.getElementById('tocOverlay');
-  var closeBtn=document.getElementById('tocClose');
-  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
-  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
-  if(toggle)toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
-  if(closeBtn)closeBtn.addEventListener('click',closeToc);
-  if(overlay)overlay.addEventListener('click',closeToc);
-  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeToc()})});
-  var links=sidebar.querySelectorAll('a[data-target]');
-  var sections=[];
-  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
-  function updateActive(){
-    var st=window.scrollY+100;
-    var cur=null;
-    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
-    links.forEach(function(a){a.classList.remove('active')});
-    if(cur)cur.link.classList.add('active');
-  }
-  window.addEventListener('scroll',updateActive,{passive:true});
-  updateActive();
-})();</script>
-<script>
-(function(){
-  var toggle=document.getElementById('tocToggle');
-  var sidebar=document.getElementById('tocSidebar');
-  var overlay=document.getElementById('tocOverlay');
-  var closeBtn=document.getElementById('tocClose');
-  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
-  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
-  if(toggle)toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
-  if(closeBtn)closeBtn.addEventListener('click',closeToc);
-  if(overlay)overlay.addEventListener('click',closeToc);
-  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeToc()})});
-  var links=sidebar.querySelectorAll('a[data-target]');
-  var sections=[];
-  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
-  function updateActive(){
-    var st=window.scrollY+100;
-    var cur=null;
-    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
-    links.forEach(function(a){a.classList.remove('active')});
-    if(cur)cur.link.classList.add('active');
-  }
-  window.addEventListener('scroll',updateActive,{passive:true});
-  updateActive();
-})();</script>
-<script>
-(function(){
-  var toggle=document.getElementById('tocToggle');
-  var sidebar=document.getElementById('tocSidebar');
-  var overlay=document.getElementById('tocOverlay');
-  var closeBtn=document.getElementById('tocClose');
-  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
-  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
-  if(toggle)toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
-  if(closeBtn)closeBtn.addEventListener('click',closeToc);
-  if(overlay)overlay.addEventListener('click',closeToc);
-  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeToc()})});
-  var links=sidebar.querySelectorAll('a[data-target]');
-  var sections=[];
-  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
-  var scrollTimer;
-  function updateActive(){
-    var st=window.scrollY+100;
-    var cur=null;
-    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
-    links.forEach(function(a){a.classList.remove('active')});
-    if(cur)cur.link.classList.add('active');
-    // Desktop dimming: dim when not scrolling
-    if(window.innerWidth>=1200){
-      sidebar.classList.add('dimmed');
-      clearTimeout(scrollTimer);
-      scrollTimer=setTimeout(function(){sidebar.classList.remove('dimmed')},800);
-    }
-  }
-  window.addEventListener('scroll',updateActive,{passive:true});
-  updateActive();
-})();</script>
-<script>
-(function(){
-  var toggle=document.getElementById('tocToggle');
-  var sidebar=document.getElementById('tocSidebar');
-  var overlay=document.getElementById('tocOverlay');
-  var closeBtn=document.getElementById('tocClose');
-  function openToc(){sidebar.classList.add('open');overlay.classList.add('active')}
-  function closeToc(){sidebar.classList.remove('open');overlay.classList.remove('active')}
-  if(toggle)toggle.addEventListener('click',function(){sidebar.classList.contains('open')?closeToc():openToc()});
-  if(closeBtn)closeBtn.addEventListener('click',closeToc);
-  if(overlay)overlay.addEventListener('click',closeToc);
-  sidebar.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){closeToc()})});
-  var links=sidebar.querySelectorAll('a[data-target]');
-  var sections=[];
-  links.forEach(function(a){var el=document.getElementById(a.dataset.target);if(el)sections.push({el:el,link:a})});
-  function updateActive(){
-    var st=window.scrollY+100;
-    var cur=null;
-    sections.forEach(function(s){if(s.el.offsetTop<=st)cur=s});
-    links.forEach(function(a){a.classList.remove('active')});
-    if(cur)cur.link.classList.add('active');
-  }
-  window.addEventListener('scroll',updateActive,{passive:true});
-  updateActive();
-})();</script>
 </body>
 </html>
