@@ -483,10 +483,18 @@ window.addEventListener('scroll',function(){
 <script>
 function shareReport(){
   var btn=document.getElementById('shareBtn');
-  var el=document.querySelector('.container');
   btn.textContent='⏳';
-  var h=document.querySelector('.report-header .date');
-  var t=document.querySelector('.report-header .time-slot');
+  var wrap=document.createElement('div');
+  wrap.style.cssText='position:fixed;left:-9999px;top:0;width:420px;background:#0d1117;padding:16px;font-family:-apple-system,sans-serif';
+  var skip=['toc-toggle','toc-overlay','toc-sidebar','share-btn','back-to-top','toc-sidebar-panel'];
+  Array.from(document.body.children).forEach(function(c){
+    if(!skip.some(function(s){return c.classList.contains(s)})){
+      wrap.appendChild(c.cloneNode(true));
+    }
+  });
+  document.body.appendChild(wrap);
+  var h=wrap.querySelector('.date');
+  var t=wrap.querySelector('.time-slot');
   var d=h?h.textContent.replace(/[^0-9\/]/g,'').trim():'report';
   var s=t&&t.textContent?'-'+t.textContent:'-report';
   var opt={
@@ -496,9 +504,11 @@ function shareReport(){
     html2canvas:{scale:2,useCORS:true,backgroundColor:'#0d1117',logging:false},
     jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
   };
-  html2pdf().from(el).set(opt).save().then(function(){
+  html2pdf().from(wrap).set(opt).save().then(function(){
+    document.body.removeChild(wrap);
     btn.textContent='📄';
   }).catch(function(){
+    document.body.removeChild(wrap);
     btn.textContent='📄';
   });
 }
