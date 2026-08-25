@@ -15,19 +15,59 @@
       "levelClass": "cold"
     },
     "metrics": [
-      { "label": "涨停/跌停", "html": "<span class=\"snap-up\">46</span> / <span class=\"snap-down\">11</span>" },
-      { "label": "封板率", "value": "74%", "cls": "snap-up" },
-      { "label": "全天成交", "value": "2.02万亿", "cls": "snap-neutral" },
-      { "label": "上证", "value": "3882", "suffix": "-0.59%", "cls": "snap-down" },
-      { "label": "创业板", "value": "3432", "suffix": "-3.21%", "cls": "snap-down" },
-      { "label": "仓位上限", "value": "≤20%", "cls": "snap-down" }
+      {
+        "label": "涨停/跌停",
+        "html": "<span class=\"snap-up\">46</span> / <span class=\"snap-down\">11</span>"
+      },
+      {
+        "label": "封板率",
+        "value": "74%",
+        "cls": "snap-up"
+      },
+      {
+        "label": "全天成交",
+        "value": "2.02万亿",
+        "cls": "snap-neutral"
+      },
+      {
+        "label": "上证",
+        "value": "3882",
+        "suffix": "-0.59%",
+        "cls": "snap-down"
+      },
+      {
+        "label": "创业板",
+        "value": "3432",
+        "suffix": "-3.21%",
+        "cls": "snap-down"
+      },
+      {
+        "label": "仓位上限",
+        "value": "≤20%",
+        "cls": "snap-down"
+      }
     ],
     "tags": [
-      { "text": "🔥 贵金属/黄金", "cls": "hot" },
-      { "text": "🔥 煤炭红利", "cls": "hot" },
-      { "text": "💊 算力崩塌", "cls": "hot" },
-      { "text": "📡 6G政策三箭齐发", "cls": "" },
-      { "text": "💎 医药4板空间龙", "cls": "" }
+      {
+        "text": "🔥 贵金属/黄金",
+        "cls": "hot"
+      },
+      {
+        "text": "🔥 煤炭红利",
+        "cls": "hot"
+      },
+      {
+        "text": "💻 算力崩塌",
+        "cls": "hot"
+      },
+      {
+        "text": "📡 6G政策三箭齐发",
+        "cls": ""
+      },
+      {
+        "text": "💊 医药4板空间龙",
+        "cls": ""
+      }
     ],
     "judge": "情绪退潮期逼近冰点，外围科技股全面杀跌（纳指七连阴+费半暴跌4%），黄金突破4660美元创阶段新高。贵金属+煤炭+银行红利防御线确立，6G政策密集催化或成结构性亮点。汉森制药4板冲击5板决定短线方向，英伟达8/27财报+PCE+杰克逊霍尔三大变量未落地前防御占优。",
     "latestLink": "report-0824-evening.html",
@@ -73,9 +113,21 @@
           "weekday": "周二",
           "today": true,
           "reports": [
-            { "icon": "🌅", "time": "08:00", "url": "report-0825-morning.html" },
-            { "icon": "☀️", "time": "12:00", "pending": true },
-            { "icon": "🌙", "time": "20:30", "pending": true }
+            {
+              "icon": "🌅",
+              "time": "08:00",
+              "url": "report-0825-morning.html"
+            },
+            {
+              "icon": "☀️",
+              "time": "12:00",
+              "pending": true
+            },
+            {
+              "icon": "🌙",
+              "time": "20:30",
+              "pending": true
+            }
           ]
         },
         {
@@ -83,9 +135,21 @@
           "weekday": "周一",
           "today": false,
           "reports": [
-            { "icon": "🌅", "time": "08:00", "url": "report-0824-morning.html" },
-            { "icon": "☀️", "time": "12:00", "url": "report-0824-noon.html" },
-            { "icon": "🌙", "time": "20:30", "url": "report-0824-evening.html" }
+            {
+              "icon": "🌅",
+              "time": "08:00",
+              "url": "report-0824-morning.html"
+            },
+            {
+              "icon": "☀️",
+              "time": "12:00",
+              "url": "report-0824-noon.html"
+            },
+            {
+              "icon": "🌙",
+              "time": "20:30",
+              "url": "report-0824-evening.html"
+            }
           ]
         }
       ]
