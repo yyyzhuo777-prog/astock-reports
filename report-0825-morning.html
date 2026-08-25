@@ -448,8 +448,9 @@ body{max-width:1060px!important;padding:32px 48px;font-size:1.05rem}
   });
 })();
 </script>
-<div class="share-btn" id="shareBtn" onclick="shareReport()">📸</div>
+<div class="share-btn" id="shareBtn" onclick="shareReport()">📄</div>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.min.js"></script>
 <script>
 function shareReport(){
   var btn=document.getElementById('shareBtn');
@@ -465,26 +466,24 @@ function shareReport(){
     scale:2,useCORS:true,backgroundColor:'#0d1117',logging:false
   }).then(function(canvas){
     els.forEach(function(e){e.style.display=''});
-    try{
-      canvas.toBlob(function(blob){
-        var name='A股'+d+s+'.png';
-        if(navigator.share&&blob){
-          navigator.share({files:[new File([blob],name,{type:'image/png'})],title:name}).catch(function(){
-            var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name;a.click();
-          });
-        }else{
-          var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name;a.click();
-        }
-        btn.textContent='📸';
-        setTimeout(function(){btn.textContent='📸'},2000);
-      },'image/png');
-    }catch(e){
-      els.forEach(function(e){e.style.display=''});
-      btn.textContent='📸';
+    var imgData=canvas.toDataURL('image/jpeg',0.92);
+    var pdf=new jsPDF({unit:'mm',format:'a4',orientation:'p'});
+    var pw=pdf.internal.pageSize.getWidth();
+    var ph=pdf.internal.pageSize.getHeight();
+    var iw=canvas.width;
+    var ih=canvas.height;
+    var ratio=pw/iw;
+    var rh=ph/ratio;
+    var pg=Math.ceil(ih/rh);
+    for(var i=0;i<pg;i++){
+      if(i>0)pdf.addPage();
+      pdf.addImage(imgData,'JPEG',0,-(i*rh),iw*ratio,ih*ratio,undefined,'FAST');
     }
+    pdf.save('A股'+d+s+'.pdf');
+    btn.textContent='📄';
   }).catch(function(){
     els.forEach(function(e){e.style.display=''});
-    btn.textContent='📸';
+    btn.textContent='📄';
   });
 }
 </script>
