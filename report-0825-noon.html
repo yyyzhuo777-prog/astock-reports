@@ -470,38 +470,43 @@ body{max-width:1060px!important;padding:32px 48px;font-size:1.05rem}
   });
 })();
 </script>
-<div class="share-btn" id="shareBtn" onclick="shareReport()">📄</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.min.js"></script>
+<div class="share-btn" id="shareBtn" onclick="shareReport()">📸</div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script>
 function shareReport(){
   var btn=document.getElementById('shareBtn');
   btn.textContent='⏳';
-  var wrap=document.createElement('div');
-  wrap.style.cssText='position:fixed;left:-9999px;top:0;width:420px;background:#0d1117;padding:16px;font-family:-apple-system,sans-serif';
-  var skip=['toc-toggle','toc-overlay','toc-sidebar','share-btn','back-to-top','toc-sidebar-panel'];
-  Array.from(document.body.children).forEach(function(c){
-    if(!skip.some(function(s){return c.classList.contains(s)})){
-      wrap.appendChild(c.cloneNode(true));
-    }
-  });
-  document.body.appendChild(wrap);
-  var h=wrap.querySelector('.date');
-  var t=wrap.querySelector('.time-slot');
+  var ui=['toc-toggle','toc-overlay','toc-sidebar','share-btn','back-to-top','toc-sidebar-panel'];
+  var els=ui.map(function(id){return document.querySelector('.'+id)}).filter(Boolean);
+  els.forEach(function(e){e.style.display='none'});
+  var h=document.querySelector('.date');
+  var t=document.querySelector('.time-slot');
   var d=h?h.textContent.replace(/[^0-9\/]/g,'').trim():'report';
-  var s=t&&t.textContent?'-'+t.textContent:'-report';
-  var opt={
-    margin:0,
-    filename:'A股'+d+s+'.pdf',
-    image:{type:'jpeg',quality:0.95},
-    html2canvas:{scale:2,useCORS:true,backgroundColor:'#0d1117',logging:false},
-    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
-  };
-  html2pdf().from(wrap).set(opt).save().then(function(){
-    document.body.removeChild(wrap);
-    btn.textContent='📄';
+  var s=t&&t.textContent?'-'+t.textContent:'';
+  html2canvas(document.body,{
+    scale:2,useCORS:true,backgroundColor:'#0d1117',logging:false
+  }).then(function(canvas){
+    els.forEach(function(e){e.style.display=''});
+    try{
+      canvas.toBlob(function(blob){
+        var name='A股'+d+s+'.png';
+        if(navigator.share&&blob){
+          navigator.share({files:[new File([blob],name,{type:'image/png'})],title:name}).catch(function(){
+            var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name;a.click();
+          });
+        }else{
+          var a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download=name;a.click();
+        }
+        btn.textContent='📸';
+        setTimeout(function(){btn.textContent='📸'},2000);
+      },'image/png');
+    }catch(e){
+      els.forEach(function(e){e.style.display=''});
+      btn.textContent='📸';
+    }
   }).catch(function(){
-    document.body.removeChild(wrap);
-    btn.textContent='📄';
+    els.forEach(function(e){e.style.display=''});
+    btn.textContent='📸';
   });
 }
 </script>
