@@ -482,6 +482,9 @@ function shareReport(){
 }
 </script>
 <script>
+(function(){var btn=document.getElementById('shareBtn');if(btn){window.addEventListener('scroll',function(){if(window.scrollY>200)btn.classList.add('show');else btn.classList.remove('show')})}})();
+</script>
+<script>
 (function(){
   var t=document.getElementById('tocToggle'),s=document.getElementById('tocSidebar'),o=document.getElementById('tocOverlay'),c=document.getElementById('tocClose');
   if(!s)return;
