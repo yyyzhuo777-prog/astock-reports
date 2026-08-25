@@ -26,9 +26,6 @@ body{max-width:1060px!important;padding:32px 48px;font-size:1.05rem}
 .back-to-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
 .back-to-top.show{opacity:1;pointer-events:auto}
 .back-to-top:hover{background:#58a6ff;color:#fff}
-.share-btn{position:fixed;bottom:72px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
-.share-btn.show{opacity:1;pointer-events:auto}
-.share-btn:hover{background:#58a6ff;color:#fff}
 .toc-toggle{position:fixed;left:10px;top:10px;z-index:200;width:34px;height:34px;border-radius:8px;background:rgba(13,17,23,0.9);border:1px solid #30363d;color:#8b949e;font-size:0.95rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .toc-toggle:active{transform:scale(0.92)}
 .toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:201;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -54,7 +51,7 @@ body{max-width:1060px!important;padding:32px 48px;font-size:1.05rem}
 </style>
 
 @media print{
-  .toc-toggle,.toc-overlay,.toc-sidebar,.share-btn,.back-to-top,.toc-sidebar-panel{display:none!important}
+  .toc-toggle,.toc-overlay,.toc-sidebar,.back-to-top,.toc-sidebar-panel{display:none!important}
   body{background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .header,.dashboard,.advice-box,.section,.footer{break-inside:avoid;page-break-inside:avoid}
 }
@@ -476,16 +473,7 @@ body{max-width:1060px!important;padding:32px 48px;font-size:1.05rem}
   });
 })();
 </script>
-<div class="share-btn" id="shareBtn" onclick="shareReport()">📄</div>
 
-<script>
-function shareReport(){
-  window.print();
-}
-</script>
-<script>
-(function(){var btn=document.getElementById('shareBtn');if(btn){window.addEventListener('scroll',function(){if(window.scrollY>200)btn.classList.add('show');else btn.classList.remove('show')})}})();
-</script>
 <script>
 (function(){
   var t=document.getElementById('tocToggle'),s=document.getElementById('tocSidebar'),o=document.getElementById('tocOverlay'),c=document.getElementById('tocClose');

@@ -37,9 +37,6 @@ body{max-width:1400px!important}
 .back-to-top:hover{background:#58a6ff;color:#fff}
 
 /* 分享按钮 */
-.share-btn{position:fixed;bottom:72px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
-.share-btn.show{opacity:1;pointer-events:auto}
-.share-btn:hover{background:#58a6ff;color:#fff}
 
 /* === TOC 目录导航 === */
 .toc-toggle{position:fixed;left:10px;top:10px;z-index:200;width:34px;height:34px;border-radius:8px;background:rgba(13,17,23,0.9);border:1px solid #30363d;color:#8b949e;font-size:0.95rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -67,7 +64,7 @@ body{max-width:1400px!important}
 </style>
 
 @media print{
-  .toc-toggle,.toc-overlay,.toc-sidebar,.share-btn,.back-to-top,.toc-sidebar-panel{display:none!important}
+  .toc-toggle,.toc-overlay,.toc-sidebar,.back-to-top,.toc-sidebar-panel{display:none!important}
   body{background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .header,.dashboard,.advice-box,.section,.footer{break-inside:avoid;page-break-inside:avoid}
 }
@@ -452,15 +449,7 @@ window.addEventListener('scroll',function(){
   if(btn){btn.classList.toggle('show',window.scrollY>300)}var sb=document.getElementById('shareBtn');if(sb){sb.classList.toggle('show',window.scrollY>300)}
 });
 </script>
-<div class="share-btn" id="shareBtn" onclick="shareReport()">📄</div>
 
-<script>
-function shareReport(){
-  window.print();
-}
-</script></script>
-<script>
-(function(){var btn=document.getElementById('shareBtn');if(btn){window.addEventListener('scroll',function(){if(window.scrollY>200)btn.classList.add('show');else btn.classList.remove('show')})}})();
 </script>
 <script>
 (function(){
