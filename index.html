@@ -186,7 +186,8 @@
   }
   .quick-btn:hover { border-color: var(--accent); background: rgba(88,166,255,.08); }
   .quick-btn.disabled { opacity: .35; pointer-events: none; }
-  .quick-btn.pending { opacity: .45; pointer-events: none; border-color: var(--border); color: var(--text2); font-size: 11px; }
+  .quick-btn.pending { opacity: .45; pointer-events: none; border-color: var(--border); color: var(--text2); font-size: 14px; flex-direction: column; gap: 2px; padding: 7px 6px; }
+  .quick-btn.pending .pending-dot { margin-top: 0; }
   .focus-list { display: flex; flex-direction: column; gap: 6px; }
   .focus-item {
     display: flex; align-items: flex-start; gap: 8px;
@@ -510,9 +511,9 @@ function renderRecent(reports) {
   let html = '';
   reports.forEach(r => {
     const active = r.active ? ' active' : '';
-    const mBtn = r.morning && r.morning !== 'pending' ? '<a class="quick-btn" href="' + r.morning + '">🌅 盘前</a>' : (r.morning === 'pending' ? '<span class="quick-btn pending">🌅 待生成</span>' : '');
-    const nBtn = r.noon && r.noon !== 'pending' ? '<a class="quick-btn" href="' + r.noon + '">☀️ 午盘</a>' : (r.noon === 'pending' ? '<span class="quick-btn pending">☀️ 待生成</span>' : '');
-    const eBtn = r.evening && r.evening !== 'pending' ? '<a class="quick-btn" href="' + r.evening + '">🌙 盘后</a>' : (r.evening === 'pending' ? '<span class="quick-btn pending">🌙 待生成</span>' : '');
+    const mBtn = r.morning && r.morning !== 'pending' ? '<a class="quick-btn" href="' + r.morning + '">🌅 盘前</a>' : (r.morning === 'pending' ? '<span class="quick-btn pending">🌅<div class="pending-dot"></div></span>' : '');
+    const nBtn = r.noon && r.noon !== 'pending' ? '<a class="quick-btn" href="' + r.noon + '">☀️ 午盘</a>' : (r.noon === 'pending' ? '<span class="quick-btn pending">☀️<div class="pending-dot"></div></span>' : '');
+    const eBtn = r.evening && r.evening !== 'pending' ? '<a class="quick-btn" href="' + r.evening + '">🌙 盘后</a>' : (r.evening === 'pending' ? '<span class="quick-btn pending">🌙<div class="pending-dot"></div></span>' : '');
     html += '<div class="quick-card' + active + '"><div class="qc-date">' + r.date + ' ' + r.weekday + '</div>'
       + '<div class="qc-summary">' + (r.summary||'') + '</div>'
       + '<div class="quick-actions">' + mBtn + nBtn + eBtn + '</div></div>';
