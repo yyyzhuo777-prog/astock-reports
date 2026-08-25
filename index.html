@@ -186,6 +186,7 @@
   }
   .quick-btn:hover { border-color: var(--accent); background: rgba(88,166,255,.08); }
   .quick-btn.disabled { opacity: .35; pointer-events: none; }
+  .quick-btn.pending { opacity: .45; pointer-events: none; border-color: var(--border); color: var(--text2); font-size: 11px; }
   .focus-list { display: flex; flex-direction: column; gap: 6px; }
   .focus-item {
     display: flex; align-items: flex-start; gap: 8px;
@@ -230,6 +231,9 @@
   .report-link:last-child { border-right: none; }
   .report-link:hover { background: rgba(88,166,255,.08); }
   .report-link.disabled { color: var(--text2); opacity: .4; pointer-events: none; }
+  .report-link.pending { color: var(--text2); opacity: .45; pointer-events: none; }
+  .pending-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: pendingPulse 1.4s ease-in-out infinite; margin-top: 3px; }
+  @keyframes pendingPulse { 0%,100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
   .report-link .time { font-size: 10px; color: var(--text2); display: block; margin-top: 1px; }
   .week-days { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 8px; }
   .footer {
@@ -506,9 +510,9 @@ function renderRecent(reports) {
   let html = '';
   reports.forEach(r => {
     const active = r.active ? ' active' : '';
-    const mBtn = (r.morning && r.morning !== 'pending') ? '<a class="quick-btn" href="' + r.morning + '">🌅 盘前</a>' : '';
-    const nBtn = (r.noon && r.noon !== 'pending') ? '<a class="quick-btn" href="' + r.noon + '">☀️ 午盘</a>' : '';
-    const eBtn = (r.evening && r.evening !== 'pending') ? '<a class="quick-btn" href="' + r.evening + '">🌙 盘后</a>' : '';
+    const mBtn = r.morning && r.morning !== 'pending' ? '<a class="quick-btn" href="' + r.morning + '">🌅 盘前</a>' : (r.morning === 'pending' ? '<span class="quick-btn pending">🌅 待生成</span>' : '');
+    const nBtn = r.noon && r.noon !== 'pending' ? '<a class="quick-btn" href="' + r.noon + '">☀️ 午盘</a>' : (r.noon === 'pending' ? '<span class="quick-btn pending">☀️ 待生成</span>' : '');
+    const eBtn = r.evening && r.evening !== 'pending' ? '<a class="quick-btn" href="' + r.evening + '">🌙 盘后</a>' : (r.evening === 'pending' ? '<span class="quick-btn pending">🌙 待生成</span>' : '');
     html += '<div class="quick-card' + active + '"><div class="qc-date">' + r.date + ' ' + r.weekday + '</div>'
       + '<div class="qc-summary">' + (r.summary||'') + '</div>'
       + '<div class="quick-actions">' + mBtn + nBtn + eBtn + '</div></div>';
@@ -543,6 +547,8 @@ function renderHistory(weeks) {
       (d.reports || []).forEach(r => {
         if (r.url && r.url !== '#') {
           linksHtml += '<a class="report-link" href="' + r.url + '"><div>' + r.icon + '<div class="time">' + (r.time||'') + '</div></div></a>';
+        } else if (r.pending) {
+          linksHtml += '<div class="report-link pending"><div>' + r.icon + '<div class="time">' + (r.time||'') + '</div><div class="pending-dot"></div></div></div>';
         }
       });
       daysHtml += '<div class="date-group"><div class="date-header">📅 ' + d.date + todayBadge + '</div><div class="report-links">' + linksHtml + '</div></div>';
