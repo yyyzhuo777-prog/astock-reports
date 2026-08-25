@@ -1,44 +1,44 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-25T08:00",
-    "nextTime": "今日 12:00",
-    "nextLabel": "午盘"
+    "lastUpdated": "2026-08-25T12:00",
+    "nextTime": "今日 20:30",
+    "nextLabel": "盘后"
   },
   "header": {
-    "subtitle": "8/25 周二 · 盘前数据 · 截至 08:00"
+    "subtitle": "8/25 周二 · 午盘数据 · 截至 12:00"
   },
   "snapshot": {
-    "date": "8/24 周一 盘后",
+    "date": "8/25 周二 午盘",
     "emotion": {
-      "score": 25,
-      "level": "退潮期·逼近冰点",
+      "score": 28,
+      "level": "退潮期·小幅回暖",
       "levelClass": "cold"
     },
     "metrics": [
       {
         "label": "涨停/跌停",
-        "html": "<span class=\"snap-up\">46</span> / <span class=\"snap-down\">11</span>"
+        "html": "<span class=\"snap-up\">48</span> / <span class=\"snap-down\">4</span>"
       },
       {
         "label": "封板率",
-        "value": "74%",
+        "value": "~80%",
         "cls": "snap-up"
       },
       {
-        "label": "全天成交",
-        "value": "2.02万亿",
+        "label": "半日成交",
+        "value": "1.15万亿",
         "cls": "snap-neutral"
       },
       {
         "label": "上证",
-        "value": "3882",
-        "suffix": "-0.59%",
+        "value": "3876",
+        "suffix": "-0.15%",
         "cls": "snap-down"
       },
       {
         "label": "创业板",
-        "value": "3432",
-        "suffix": "-3.21%",
+        "value": "3383",
+        "suffix": "-1.43%",
         "cls": "snap-down"
       },
       {
@@ -49,38 +49,38 @@
     ],
     "tags": [
       {
-        "text": "🔥 贵金属/黄金",
+        "text": "🌾 农业爆发",
         "cls": "hot"
       },
       {
-        "text": "🔥 煤炭红利",
+        "text": "🛍️ 大消费走强",
         "cls": "hot"
       },
       {
-        "text": "💻 算力崩塌",
+        "text": "💊 医药5板确认",
         "cls": "hot"
       },
       {
-        "text": "📡 6G政策三箭齐发",
+        "text": "💎 贵金属崩塌",
         "cls": ""
       },
       {
-        "text": "💊 医药4板空间龙",
+        "text": "💻 算力继续承压",
         "cls": ""
       }
     ],
-    "judge": "情绪退潮期逼近冰点，外围科技股全面杀跌（纳指七连阴+费半暴跌4%），黄金突破4660美元创阶段新高。贵金属+煤炭+银行红利防御线确立，6G政策密集催化或成结构性亮点。汉森制药4板冲击5板决定短线方向，英伟达8/27财报+PCE+杰克逊霍尔三大变量未落地前防御占优。",
-    "latestLink": "report-0824-evening.html",
-    "latestLabel": "盘后"
+    "judge": "上午弱势震荡但个股涨多跌少（3600+涨vs1700跌），缩量好于昨日放量杀跌。贵金属板块集体崩塌(-5.91%)，资金切换至农业(厄尔尼诺催化)+大消费(促内需政策)+数字货币三条新线。汉森制药5连板确认医药主线，午后关注沪指20日均线(3880)能否回收。",
+    "latestLink": "report-0825-noon.html",
+    "latestLabel": "午盘"
   },
   "reports": [
     {
       "date": "8/25",
       "weekday": "周二",
-      "summary": "情绪22·退潮期·外围科技暴跌·黄金4660新高·6G政策·仓位≤20%",
+      "summary": "情绪28·退潮回暖·农业爆发·贵金属崩塌·医药5板·仓位≤20%",
       "active": true,
       "morning": "report-0825-morning.html",
-      "noon": "pending",
+      "noon": "report-0825-noon.html",
       "evening": "pending"
     },
     {
@@ -94,12 +94,13 @@
     }
   ],
   "focus": {
-    "title": "今日关注（8/25）",
+    "title": "午后关注（8/25）",
     "items": [
-      "外围科技暴跌映射：算力/存储/光模块开盘承压确定性强，严禁抄底",
-      "黄金突破4660美元新高：贵金属能否延续，深中华A/湖南白银2连板晋级",
-      "6G政策三箭齐发：国资委+工信部+国常会密集催化，关注开盘承接力度",
-      "汉森制药冲5板：医药主线能否坐实的关键，断板则修复存疑"
+      "沪指20日均线(≈3880)攻防战：午后能否回收决定短期方向",
+      "农业板块持续性：金健米业换手32%极端高位，午后炸板风险大",
+      "汉森制药5连板封单能否维持：断板则医药修复结束",
+      "半导体/算力能否止跌：英伟达8/27财报前资金观望",
+      "量能变化：午后若继续缩量则反弹力度有限"
     ]
   },
   "history": [
@@ -121,7 +122,7 @@
             {
               "icon": "☀️",
               "time": "12:00",
-              "pending": true
+              "url": "report-0825-noon.html"
             },
             {
               "icon": "🌙",
