@@ -1,44 +1,81 @@
 {
   "meta": {
     "lastUpdated": "2026-08-25T21:02:00+08:00",
-    "nextTime": "今日 20:30",
-    "nextLabel": "盘后"
+    "nextTime": "8/26 08:00",
+    "nextLabel": "盘前"
   },
   "header": {
     "subtitle": "8/25 周二 · 盘后数据 · 截至 15:00"
   },
   "snapshot": {
-    "date": "08/25",
-    "weekday": "周二",
+    "date": "8/25 周二 盘后",
     "emotion": {
       "score": 50,
       "level": "弱修复",
-      "class": "neutral"
+      "levelClass": "neutral"
     },
-    "metrics": {
-      "shIndex": {
-        "close": 3889.44,
-        "change": 0.19
+    "metrics": [
+      {
+        "label": "涨停/跌停",
+        "html": "<span class=\"snap-up\">70</span> / <span class=\"snap-down\">4</span>"
       },
-      "cybIndex": {
-        "close": 3397.52,
-        "change": -1.0
+      {
+        "label": "封板率",
+        "value": "75%",
+        "cls": "snap-neutral"
       },
-      "volume": "1.83万亿",
-      "limitUp": 70,
-      "limitDown": 4,
-      "maxBoard": "5板",
-      "sealRate": "75%"
-    },
-    "tags": [
-      "缩量弱修复",
-      "医药农业双线",
-      "贵金属暴跌",
-      "午后V反"
+      {
+        "label": "全天成交",
+        "value": "1.83万亿",
+        "cls": "snap-down"
+      },
+      {
+        "label": "上证",
+        "value": "3889",
+        "suffix": "+0.19%",
+        "cls": "snap-up"
+      },
+      {
+        "label": "创业板",
+        "value": "3398",
+        "suffix": "-1.00%",
+        "cls": "snap-down"
+      },
+      {
+        "label": "仓位上限",
+        "value": "≤20%",
+        "cls": "snap-down"
+      }
     ],
-    "judge": "指数分化个股普涨，成交缩至4个月地量。医药+农业双线领涨，贵金属暴跌-3.83%。缩量反弹成色不足，增量未进场。",
+    "tags": [
+      {
+        "text": "💊 医药5板龙头",
+        "cls": "hot"
+      },
+      {
+        "text": "🌾 农业涨停潮",
+        "cls": "hot"
+      },
+      {
+        "text": "🏠 小家电+8%",
+        "cls": "hot"
+      },
+      {
+        "text": "💎 贵金属暴跌",
+        "cls": ""
+      },
+      {
+        "text": "💻 算力继续承压",
+        "cls": ""
+      },
+      {
+        "text": "📉 缩量至1.83万亿",
+        "cls": ""
+      }
+    ],
+    "judge": "指数分化个股普涨（4234涨vs1246跌），但成交缩至1.83万亿（4个月地量），增量资金未进场。医药（汉森5板）+农业（金健7天5板）双线领涨，贵金属暴跌-3.83%。午后沃什鸽派信号传闻推动亚太V反，但A股力度偏弱。缩量反弹成色不足，等待放量确认。",
     "latestLink": "report-0825-evening.html",
-    "latestLabel": "盘后复盘"
+    "latestLabel": "盘后"
   },
   "reports": [
     {
