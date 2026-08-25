@@ -1,0 +1,106 @@
+# A股报告共享数据池 - 操作规范
+
+> 此文件为盘前/午盘/盘后三个报告工单的共同执行规范，每次执行前必须先读取本文件。
+
+## 1. 共享数据池文件
+- **路径**：`/Coze/Drive/微信clawbot/gh_deploy/shared/daily-data.json`
+- **结构参考**：同目录下 `DATA_SCHEMA.json`
+- **命名规则**：每天覆盖更新，文件名不变
+
+## 2. 读写规则
+
+### 盘前任务（08:00）
+- **采集**：全量采集所有数据（外围隔夜、前日收盘、情绪、题材、核心股、连板、消息、风险）
+- **写入**：采集完成后，将全量数据写入 `daily-data.json`
+  - `overnight`：外围隔夜数据
+  - `previousClose`：前一交易日收盘数据
+  - `themes[]`：题材列表（含 stars/tag/logic/stocks/morningPrediction）
+  - `coreStocks`：人气TOP8 + 避雷名单
+  - `boardChain`：连板梯队
+  - `news[]`：消息列表
+  - `risks`：核心风险 + 次要风险
+  - `advice`：仓位与操作建议
+  - `stockCodeVerification`：所有股票代码验证结果
+  - `generatedBy`：标记为 "morning"
+  - `updatedAt`：当前时间
+
+### 午盘任务（12:00）
+- **读取**：先读取 `daily-data.json`，复用盘前已采集的以下数据：
+  - ✅ `overnight`：外围隔夜数据（直接复用，不重复采集）
+  - ✅ `previousClose`：前日收盘数据（直接复用）
+  - ✅ `themes[].name/tag/stars/stocks`：题材名称和核心标的代码（复用代码，不再重新查询）
+  - ✅ `coreStocks.top8[].code`：人气股代码（复用）
+  - ✅ `boardChain`：连板梯队基础结构（复用）
+  - ✅ `stockCodeVerification`：已验证的代码列表（直接复用）
+- **增量采集**（仅采集上午新数据）：
+  - 三大指数上午表现
+  - 上午涨停/跌停/封板率
+  - 上午走势时间线
+  - 半日情绪诊断
+  - 上午题材表现更新
+  - 上午新消息（追加）
+- **写入**：报告完成后更新 `daily-data.json`
+  - 更新 `themes[].noonUpdate`：午盘题材表现
+  - 更新 `coreStocks`：午间快照数据
+  - 追加 `news[]`：上午新消息
+  - 更新 `generatedBy`：标记为 "morning+noon"
+  - 更新 `updatedAt`
+
+### 盘后任务（20:30）
+- **读取**：先读取 `daily-data.json`，复用盘前+午盘已采集的所有基础数据
+- **增量采集**（仅采集下午/全天新数据）：
+  - 全天收盘数据
+  - 全天涨停/跌停/封板率
+  - 全天情绪诊断
+  - 龙虎榜数据
+  - 全天板块表现
+  - 盘前预判自评（对比当天盘前预测与实际）
+  - 盘后新消息
+- **写入**：报告完成后更新 `daily-data.json`
+  - 更新 `themes[].eveningUpdate`：盘后题材全天总结
+  - 更新 `coreStocks`：收盘终局数据
+  - 更新 `boardChain`：收盘连板梯队
+  - 追加 `news[]`：盘后新消息
+  - 更新 `generatedBy`：标记为 "morning+noon+evening"
+  - 更新 `updatedAt`
+
+## 3. 股票代码验证（强制步骤）
+
+**规则：报告中出现的每一个股票代码，必须通过工具实际验证，禁止凭LLM记忆填写。**
+
+### 验证流程
+1. 在数据采集阶段，对每个要写入报告的公司，使用以下方式之一验证代码：
+   - 方式A：`stock-data-skill` 的 `call quote --param code=xxx` 确认代码有效
+   - 方式B：`search_web` 搜索"公司名 股票代码"交叉确认
+2. 所有代码验证通过后才写入报告
+3. 验证结果记录到 `daily-data.json` 的 `stockCodeVerification` 字段
+
+### 常见易错代码（历史教训）
+- 通宇通讯 → **002792**（深主板，不是300xxx）
+- 广哈通信 → **300711**（创业板，不是301xxx）
+- 中兴通讯 → 000063
+- 中国卫通 → 601698
+
+### 失败处理
+- 如果某个代码无法验证，在报告中标注"代码待确认"
+- 不要猜测或凭记忆填写
+
+## 4. 外围数据日期标注规范
+
+盘前报告中的外围市场数据，必须标注**实际交易日**的收盘日期，而非简单写当天日期。
+- 如果周一盘前生成，外围数据应为上周五收盘
+- 如果周二-周五盘前生成，外围数据应为前一晚收盘
+- 格式示例：`美股（8/22 周五收盘）` 而非 `美股（8/24收盘）`
+- 在 `daily-data.json` 的 `overnight.actualTradingDate` 字段记录实际交易日
+
+## 5. 导航页 pending 处理
+
+`reports-data.json` 中未生成的报告标记为 `"pending"`。
+- 导航页 index.html 的 JS 应过滤 pending 项，不显示占位链接
+- 只有实际生成的报告才在导航页显示对应图标和链接
+
+## 6. 错误处理
+
+- 如果 `daily-data.json` 不存在或读取失败，按原有逻辑全量采集（降级模式）
+- 如果 `daily-data.json` 中的数据日期与当天不匹配，重新全量采集
+- 每次写入前先读取验证文件完整性

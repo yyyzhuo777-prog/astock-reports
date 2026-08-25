@@ -506,9 +506,9 @@ function renderRecent(reports) {
   let html = '';
   reports.forEach(r => {
     const active = r.active ? ' active' : '';
-    const mBtn = r.morning ? '<a class="quick-btn" href="' + r.morning + '">🌅 盘前</a>' : '<span class="quick-btn disabled">🌅 盘前</span>';
-    const nBtn = r.noon ? '<a class="quick-btn" href="' + r.noon + '">☀️ 午盘</a>' : '<span class="quick-btn disabled">☀️ 午盘</span>';
-    const eBtn = r.evening ? '<a class="quick-btn" href="' + r.evening + '">🌙 盘后</a>' : '<span class="quick-btn disabled">🌙 盘后</span>';
+    const mBtn = (r.morning && r.morning !== 'pending') ? '<a class="quick-btn" href="' + r.morning + '">🌅 盘前</a>' : '';
+    const nBtn = (r.noon && r.noon !== 'pending') ? '<a class="quick-btn" href="' + r.noon + '">☀️ 午盘</a>' : '';
+    const eBtn = (r.evening && r.evening !== 'pending') ? '<a class="quick-btn" href="' + r.evening + '">🌙 盘后</a>' : '';
     html += '<div class="quick-card' + active + '"><div class="qc-date">' + r.date + ' ' + r.weekday + '</div>'
       + '<div class="qc-summary">' + (r.summary||'') + '</div>'
       + '<div class="quick-actions">' + mBtn + nBtn + eBtn + '</div></div>';
@@ -543,10 +543,6 @@ function renderHistory(weeks) {
       (d.reports || []).forEach(r => {
         if (r.url && r.url !== '#') {
           linksHtml += '<a class="report-link" href="' + r.url + '"><div>' + r.icon + '<div class="time">' + (r.time||'') + '</div></div></a>';
-        } else if (r.pending) {
-          linksHtml += '<span class="report-link disabled"><div>' + r.icon + '<div class="time" style="color:var(--accent)"><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 1.4s infinite ease-in-out">●</span></div></div></span>';
-        } else {
-          linksHtml += '<span class="report-link disabled"><div>' + r.icon + '<div class="time">' + (r.time||'') + '</div></div></span>';
         }
       });
       daysHtml += '<div class="date-group"><div class="date-header">📅 ' + d.date + todayBadge + '</div><div class="report-links">' + linksHtml + '</div></div>';

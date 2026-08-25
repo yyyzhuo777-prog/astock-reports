@@ -1,0 +1,95 @@
+{
+  "date": "08/25",
+  "weekday": "周二",
+  "generatedBy": "morning",
+  "updatedAt": "2026-08-25T08:00",
+  "overnight": {
+    "_comment": "外围隔夜数据 - 盘前全量采集，午盘/盘后直接复用",
+    "usMarkets": { "dow": "+0.26%", "sp500": "-0.28%", "nasdaq": "-0.76%" },
+    "nvidia": "-2.91%（七连跌）",
+    "soxIndex": "费半-2.70%",
+    "chinaETF": "金龙指数-1.66%报6199",
+    "gold": "+1.05%报4651美元",
+    "usdIndex": "+0.20%报98.93",
+    "cnh": "6.7218",
+    "a50": "夜盘收跌0.20%报14623",
+    "oil": "WTI-2.35%报85.01美元/桶",
+    "usBonds10Y": "4.70%",
+    "actualTradingDate": "8/22(周五)",
+    "_note": "actualTradingDate标注实际交易日，避免日期标注错误"
+  },
+  "previousClose": {
+    "_comment": "前一交易日收盘数据 - 盘前全量采集，午盘/盘后复用做对比基准",
+    "date": "8/24",
+    "shanghai": "3882 -0.59%",
+    "chinext": "-3.21%",
+    "star50": "-3.10%",
+    "volume": "2.02万亿",
+    "limitUp": 46,
+    "limitDown": 11,
+    "sealRate": "74%",
+    "emotion": 25,
+    "emotionLabel": "退潮期·逼近冰点",
+    "riseCount": 1460,
+    "fallCount": 3964,
+    "consecutiveBoard": 10,
+    "maxBoard": 4,
+    "maxBoardStock": "汉森制药",
+    "sectorHighlights": "电子净流出352亿，通信跌5.07%",
+    "defensiveSectors": "贵金属+煤炭+银行逆势"
+  },
+  "themes": [
+    {
+      "_comment": "盘前生成，午盘更新半日表现，盘后更新全天表现",
+      "name": "贵金属/黄金",
+      "stars": 5,
+      "tag": "避险主线",
+      "logic": "...",
+      "stocks": [
+        {"name": "深中华A", "code": "000017", "note": "3连板黄金龙头"},
+        {"name": "湖南白银", "code": "002716", "note": "2连板业绩预增"}
+      ],
+      "morningPrediction": "...",
+      "noonUpdate": "",
+      "eveningUpdate": ""
+    }
+  ],
+  "coreStocks": {
+    "_comment": "人气股TOP8 + 避雷名单",
+    "top8": [
+      {"rank": 1, "name": "C宇树-W", "code": "688836", "tag": "新股·机器人", "note": "大跌10.31%·观望"}
+    ],
+    "avoidList": [
+      {"name": "一鸣食品", "reason": "连续跌停·消费链清算未完"}
+    ]
+  },
+  "boardChain": {
+    "_comment": "连板梯队",
+    "maxBoard": {"name": "汉森制药", "code": "002412", "boards": 4, "sector": "医药中药"},
+    "secondMax": "深中华A/中关村 各3连板",
+    "broken": ["海阳科技", "一鸣食品", "百合花"],
+    "status": "全市场连板10只：4板1/3板2/2板7"
+  },
+  "news": [
+    {"text": "现货黄金突破4660美元创新高", "source": "华尔街见闻/央视财经 8/25"},
+    {"text": "6G政策三箭齐发", "source": "新华社/工信部官网 8/20-24"}
+  ],
+  "risks": {
+    "core": ["外围科技股全面溃退"],
+    "secondary": ["MLF净回笼1000亿"]
+  },
+  "advice": {
+    "position": "≤20%",
+    "strategy": "退潮防守·不接飞刀·保留现金",
+    "stopLoss": "日内亏损超2%立即止损"
+  },
+  "stockCodeVerification": {
+    "_comment": "盘前必须验证所有提到的股票代码正确性，此字段记录验证结果",
+    "verified": true,
+    "verifiedAt": "2026-08-25T08:00",
+    "checkedList": [
+      {"name": "广哈通信", "code": "300711", "verified": true},
+      {"name": "通宇通讯", "code": "002792", "verified": true}
+    ]
+  }
+}
