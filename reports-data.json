@@ -1,11 +1,11 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-25T21:02:00+08:00",
-    "nextTime": "8/26 08:00",
-    "nextLabel": "盘前"
+    "lastUpdated": "2026-08-26T08:00:00+08:00",
+    "nextTime": "8/26 12:00",
+    "nextLabel": "午盘"
   },
   "header": {
-    "subtitle": "8/25 周二 · 盘后数据 · 截至 15:00"
+    "subtitle": "8/26 周三 · 盘前数据 · 截至 08:00"
   },
   "snapshot": {
     "date": "8/25 周二 盘后",
@@ -79,6 +79,15 @@
   },
   "reports": [
     {
+      "date": "8/26",
+      "weekday": "周三",
+      "summary": "情绪50·弱修复·外围偏暖·医药5板·农业厄尔尼诺·液冷业绩拐点·英伟达今晚财报·仓位≤30%",
+      "active": true,
+      "morning": "report-0826-morning.html",
+      "noon": "pending",
+      "evening": "pending"
+    },
+    {
       "date": "8/25",
       "weekday": "周二",
       "summary": "情绪50·弱修复·医药5板·农业爆发·贵金属暴跌·缩量1.83万亿·仓位≤20%",
@@ -98,23 +107,45 @@
     }
   ],
   "focus": {
-    "title": "明日关注",
+    "title": "今日关注",
     "items": [
-      "汉森制药5进6能否扛住分歧",
-      "英维克承接力（章盟主+量化重仓）",
-      "成交能否回升至2万亿"
+      "英伟达今晚财报落地后A股科技股反应",
+      "汉森制药5→6板能否成功",
+      "成交能否回升至1.9万亿+"
     ]
   },
   "history": [
     {
       "weekLabel": "2026 第35周（8/24起）",
-      "count": "6份报告",
+      "count": "9份报告",
       "open": true,
       "days": [
         {
+          "date": "08-26",
+          "weekday": "周三",
+          "today": true,
+          "reports": [
+            {
+              "icon": "🌅",
+              "time": "08:00",
+              "url": "report-0826-morning.html"
+            },
+            {
+              "icon": "☀️",
+              "time": "12:00",
+              "pending": true
+            },
+            {
+              "icon": "🌙",
+              "time": "20:30",
+              "pending": true
+            }
+          ]
+        },
+        {
           "date": "08-25",
           "weekday": "周二",
-          "today": true,
+          "today": false,
           "reports": [
             {
               "icon": "🌅",
@@ -160,6 +191,6 @@
   ],
   "footer": {
     "schedule": "自动报告 · 08:00 盘前 · 12:00 午盘 · 20:30 盘后",
-    "updated": "2026-08-25"
+    "updated": "2026-08-26"
   }
 }
