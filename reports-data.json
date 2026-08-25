@@ -1,87 +1,54 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-25T12:00",
+    "lastUpdated": "2026-08-25T21:02:00+08:00",
     "nextTime": "今日 20:30",
     "nextLabel": "盘后"
   },
   "header": {
-    "subtitle": "8/25 周二 · 午盘数据 · 截至 12:00"
+    "subtitle": "8/25 周二 · 盘后数据 · 截至 15:00"
   },
   "snapshot": {
-    "date": "8/25 周二 午盘",
+    "date": "08/25",
+    "weekday": "周二",
     "emotion": {
-      "score": 28,
-      "level": "退潮期·小幅回暖",
-      "levelClass": "cold"
+      "score": 50,
+      "level": "弱修复",
+      "class": "neutral"
     },
-    "metrics": [
-      {
-        "label": "涨停/跌停",
-        "html": "<span class=\"snap-up\">48</span> / <span class=\"snap-down\">4</span>"
+    "metrics": {
+      "shIndex": {
+        "close": 3889.44,
+        "change": 0.19
       },
-      {
-        "label": "封板率",
-        "value": "~80%",
-        "cls": "snap-up"
+      "cybIndex": {
+        "close": 3397.52,
+        "change": -1.0
       },
-      {
-        "label": "半日成交",
-        "value": "1.15万亿",
-        "cls": "snap-neutral"
-      },
-      {
-        "label": "上证",
-        "value": "3876",
-        "suffix": "-0.15%",
-        "cls": "snap-down"
-      },
-      {
-        "label": "创业板",
-        "value": "3383",
-        "suffix": "-1.43%",
-        "cls": "snap-down"
-      },
-      {
-        "label": "仓位上限",
-        "value": "≤20%",
-        "cls": "snap-down"
-      }
-    ],
+      "volume": "1.83万亿",
+      "limitUp": 70,
+      "limitDown": 4,
+      "maxBoard": "5板",
+      "sealRate": "75%"
+    },
     "tags": [
-      {
-        "text": "🌾 农业爆发",
-        "cls": "hot"
-      },
-      {
-        "text": "🛍️ 大消费走强",
-        "cls": "hot"
-      },
-      {
-        "text": "💊 医药5板确认",
-        "cls": "hot"
-      },
-      {
-        "text": "💎 贵金属崩塌",
-        "cls": ""
-      },
-      {
-        "text": "💻 算力继续承压",
-        "cls": ""
-      }
+      "缩量弱修复",
+      "医药农业双线",
+      "贵金属暴跌",
+      "午后V反"
     ],
-    "judge": "上午弱势震荡但个股涨多跌少（3600+涨vs1700跌），缩量好于昨日放量杀跌。贵金属板块集体崩塌(-5.91%)，资金切换至农业(厄尔尼诺催化)+大消费(促内需政策)+数字货币三条新线。汉森制药5连板确认医药主线，午后关注沪指20日均线(3880)能否回收。",
-    "latestLink": "report-0825-noon.html",
-    "latestLabel": "午盘"
+    "judge": "指数分化个股普涨，成交缩至4个月地量。医药+农业双线领涨，贵金属暴跌-3.83%。缩量反弹成色不足，增量未进场。",
+    "latestLink": "report-0825-evening.html",
+    "latestLabel": "盘后复盘"
   },
   "reports": [
     {
       "date": "8/25",
       "weekday": "周二",
-      "summary": "情绪28·退潮回暖·农业爆发·贵金属崩塌·医药5板·仓位≤20%",
-      "active": true,
+      "summary": "情绪50·弱修复·医药5板·农业爆发·贵金属暴跌·缩量1.83万亿·仓位≤20%",
+      "active": false,
       "morning": "report-0825-morning.html",
       "noon": "report-0825-noon.html",
-      "evening": "pending"
+      "evening": "report-0825-evening.html"
     },
     {
       "date": "8/24",
@@ -94,19 +61,17 @@
     }
   ],
   "focus": {
-    "title": "午后关注（8/25）",
+    "title": "明日关注",
     "items": [
-      "沪指20日均线(≈3880)攻防战：午后能否回收决定短期方向",
-      "农业板块持续性：金健米业换手32%极端高位，午后炸板风险大",
-      "汉森制药5连板封单能否维持：断板则医药修复结束",
-      "半导体/算力能否止跌：英伟达8/27财报前资金观望",
-      "量能变化：午后若继续缩量则反弹力度有限"
+      "汉森制药5进6能否扛住分歧",
+      "英维克承接力（章盟主+量化重仓）",
+      "成交能否回升至2万亿"
     ]
   },
   "history": [
     {
       "weekLabel": "2026 第35周（8/24起）",
-      "count": "5份报告",
+      "count": "7份报告",
       "open": true,
       "days": [
         {
@@ -127,7 +92,7 @@
             {
               "icon": "🌙",
               "time": "20:30",
-              "pending": true
+              "url": "report-0825-evening.html"
             }
           ]
         },
