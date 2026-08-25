@@ -628,6 +628,17 @@ function toggleTheme() {
   }
 })();
 
+// Service Worker 注册
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js').then(function(reg) {
+      console.log('SW registered:', reg.scope);
+    }).catch(function(err) {
+      console.log('SW registration failed:', err);
+    });
+  });
+}
+
 // PWA 原生安装提示
 (function() {
   if (window.matchMedia('(display-mode: standalone)').matches) return;
