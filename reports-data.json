@@ -1,90 +1,90 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-26T08:00:00+08:00",
-    "nextTime": "8/26 12:00",
-    "nextLabel": "午盘"
+    "lastUpdated": "2026-08-26T12:22:00+08:00",
+    "nextTime": "8/26 20:30",
+    "nextLabel": "盘后"
   },
   "header": {
-    "subtitle": "8/26 周三 · 盘前数据 · 截至 08:00"
+    "subtitle": "8/26 周三 · 午盘数据 · 截至 12:00"
   },
   "snapshot": {
-    "date": "8/25 周二 盘后",
+    "date": "8/26 周三 午盘",
     "emotion": {
-      "score": 50,
-      "level": "弱修复",
-      "levelClass": "neutral"
+      "score": 62,
+      "level": "放量反弹",
+      "levelClass": "risk-mid"
     },
     "metrics": [
       {
         "label": "涨停/跌停",
-        "html": "<span class=\"snap-up\">70</span> / <span class=\"snap-down\">4</span>"
+        "html": "<span class=\"snap-up\">51</span> / <span class=\"snap-down\">0</span>"
       },
       {
         "label": "封板率",
-        "value": "75%",
-        "cls": "snap-neutral"
+        "value": "78%",
+        "cls": "snap-up"
       },
       {
-        "label": "全天成交",
-        "value": "1.83万亿",
-        "cls": "snap-down"
+        "label": "半日成交",
+        "value": "1.23万亿",
+        "cls": "snap-up"
       },
       {
         "label": "上证",
-        "value": "3889",
-        "suffix": "+0.19%",
+        "value": "3917",
+        "suffix": "+0.70%",
         "cls": "snap-up"
       },
       {
         "label": "创业板",
-        "value": "3398",
-        "suffix": "-1.00%",
-        "cls": "snap-down"
+        "value": "3444",
+        "suffix": "+1.37%",
+        "cls": "snap-up"
       },
       {
         "label": "仓位上限",
-        "value": "≤20%",
-        "cls": "snap-down"
+        "value": "≤30%",
+        "cls": "snap-neutral"
       }
     ],
     "tags": [
       {
-        "text": "💊 医药5板龙头",
+        "text": "🥇 深中华A 5连板",
         "cls": "hot"
       },
       {
-        "text": "🌾 农业涨停潮",
+        "text": "🔶 有色铜爆发",
         "cls": "hot"
       },
       {
-        "text": "🏠 小家电+8%",
+        "text": "💰 券商集体涨停",
         "cls": "hot"
       },
       {
-        "text": "💎 贵金属暴跌",
+        "text": "💊 汉森炸板",
         "cls": ""
       },
       {
-        "text": "💻 算力继续承压",
-        "cls": ""
+        "text": "📊 放量837亿",
+        "cls": "hot"
       },
       {
-        "text": "📉 缩量至1.83万亿",
+        "text": "⚠️ 今晚英伟达财报",
         "cls": ""
       }
     ],
-    "judge": "指数分化个股普涨（4234涨vs1246跌），但成交缩至1.83万亿（4个月地量），增量资金未进场。医药（汉森5板）+农业（金健7天5板）双线领涨，贵金属暴跌-3.83%。午后沃什鸽派信号传闻推动亚太V反，但A股力度偏弱。缩量反弹成色不足，等待放量确认。",
-    "latestLink": "report-0825-evening.html",
-    "latestLabel": "盘后"
+    "judge": "上午放量837亿反弹，沪指+0.70%报3917，深成指+1.20%，创业板+1.37%，超3500股飘红。有色金属（铜/金/银）+大金融双主线确立，深中华A 5连板取代汉森成最高标。汉森制药炸板→医药高位分歧。成交放量但晚间英伟达财报+PCE+期权到期三重变量未落地，午后以防守为主。",
+    "latestLink": "report-0826-noon.html",
+    "latestLabel": "午盘"
   },
   "reports": [
     {
       "date": "8/26",
       "weekday": "周三",
-      "summary": "情绪50·弱修复·外围偏暖·医药5板·农业厄尔尼诺·液冷业绩拐点·英伟达今晚财报·仓位≤30%",
+      "summary": "情绪62·放量反弹·有色铜爆发·券商涨停·深中华5板·汉森炸板·放量837亿·仓位≤30%",
       "active": true,
       "morning": "report-0826-morning.html",
-      "noon": "pending",
+      "noon": "report-0826-noon.html",
       "evening": "pending"
     },
     {
@@ -107,11 +107,11 @@
     }
   ],
   "focus": {
-    "title": "今日关注",
+    "title": "下午关注",
     "items": [
-      "英伟达今晚财报落地后A股科技股反应",
-      "汉森制药5→6板能否成功",
-      "成交能否回升至1.9万亿+"
+      "20:30 美国7月核心PCE数据",
+      "今晚英伟达FY2027 Q2财报",
+      "有色/券商封单稳定性"
     ]
   },
   "history": [
@@ -133,7 +133,7 @@
             {
               "icon": "☀️",
               "time": "12:00",
-              "pending": true
+              "url": "report-0826-noon.html"
             },
             {
               "icon": "🌙",
