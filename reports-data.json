@@ -1,50 +1,50 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-26T12:22:00+08:00",
-    "nextTime": "8/26 20:30",
-    "nextLabel": "盘后"
+    "lastUpdated": "2026-08-26T20:44:00+08:00",
+    "nextTime": "8/27 08:00",
+    "nextLabel": "盘前"
   },
   "header": {
-    "subtitle": "8/26 周三 · 午盘数据 · 截至 12:00"
+    "subtitle": "8/26 周三 · 盘后数据 · 截至 15:00"
   },
   "snapshot": {
-    "date": "8/26 周三 午盘",
+    "date": "8/26 周三 盘后",
     "emotion": {
-      "score": 62,
-      "level": "放量反弹",
+      "score": 52,
+      "level": "缩量分化",
       "levelClass": "risk-mid"
     },
     "metrics": [
       {
         "label": "涨停/跌停",
-        "html": "<span class=\"snap-up\">51</span> / <span class=\"snap-down\">0</span>"
+        "html": "<span class=\"snap-up\">56</span> / <span class=\"snap-down\">2</span>"
       },
       {
         "label": "封板率",
-        "value": "78%",
-        "cls": "snap-up"
+        "value": "66.67%",
+        "cls": "snap-down"
       },
       {
-        "label": "半日成交",
-        "value": "1.23万亿",
-        "cls": "snap-up"
+        "label": "全天成交",
+        "value": "1.82万亿",
+        "cls": "snap-down"
       },
       {
         "label": "上证",
-        "value": "3917",
-        "suffix": "+0.70%",
+        "value": "3912",
+        "suffix": "+0.59%",
         "cls": "snap-up"
       },
       {
         "label": "创业板",
-        "value": "3444",
-        "suffix": "+1.37%",
+        "value": "3414",
+        "suffix": "+0.51%",
         "cls": "snap-up"
       },
       {
         "label": "仓位上限",
-        "value": "≤30%",
-        "cls": "snap-neutral"
+        "value": "≤25%",
+        "cls": "snap-down"
       }
     ],
     "tags": [
@@ -53,19 +53,19 @@
         "cls": "hot"
       },
       {
-        "text": "🔶 有色铜爆发",
-        "cls": "hot"
-      },
-      {
-        "text": "💰 券商集体涨停",
-        "cls": "hot"
-      },
-      {
-        "text": "💊 汉森炸板",
+        "text": "💊 汉森6板断板",
         "cls": ""
       },
       {
-        "text": "📊 放量837亿",
+        "text": "🔶 有色铜全天最强",
+        "cls": "hot"
+      },
+      {
+        "text": "💰 券商板块+3%",
+        "cls": "hot"
+      },
+      {
+        "text": "⚡ 算电协同新催化",
         "cls": "hot"
       },
       {
@@ -73,19 +73,19 @@
         "cls": ""
       }
     ],
-    "judge": "上午放量837亿反弹，沪指+0.70%报3917，深成指+1.20%，创业板+1.37%，超3500股飘红。有色金属（铜/金/银）+大金融双主线确立，深中华A 5连板取代汉森成最高标。汉森制药炸板→医药高位分歧。成交放量但晚间英伟达财报+PCE+期权到期三重变量未落地，午后以防守为主。",
-    "latestLink": "report-0826-noon.html",
-    "latestLabel": "午盘"
+    "judge": "全天缩量至1.82万亿（连续2日<2万亿），权重护盘但中小票分化。有色铜+大金融双主线（证券+3%居首），汉森制药6板断板→空间龙终结。深中华A 5板接力但属黄金独立线。封板率从午盘78%降至66.67%，午后退潮信号明确。今晚英伟达财报+PCE+沃什讲话三大变量未落地。",
+    "latestLink": "report-0826-evening.html",
+    "latestLabel": "盘后"
   },
   "reports": [
     {
       "date": "8/26",
       "weekday": "周三",
-      "summary": "情绪62·放量反弹·有色铜爆发·券商涨停·深中华5板·汉森炸板·放量837亿·仓位≤30%",
-      "active": true,
+      "summary": "情绪52·缩量分化·有色铜最强·券商+3%·深中华5板·汉森断板·成交1.82万亿·仓位≤25%",
+      "active": false,
       "morning": "report-0826-morning.html",
       "noon": "report-0826-noon.html",
-      "evening": "pending"
+      "evening": "report-0826-evening.html"
     },
     {
       "date": "8/25",
@@ -107,11 +107,11 @@
     }
   ],
   "focus": {
-    "title": "下午关注",
+    "title": "明日关注",
     "items": [
-      "20:30 美国7月核心PCE数据",
-      "今晚英伟达FY2027 Q2财报",
-      "有色/券商封单稳定性"
+      "英伟达财报结果（凌晨）→AI/算力方向",
+      "深中华A 5→6板能否封住",
+      "成交额能否重回2万亿以上"
     ]
   },
   "history": [
@@ -138,7 +138,7 @@
             {
               "icon": "🌙",
               "time": "20:30",
-              "pending": true
+              "url": "report-0826-evening.html"
             }
           ]
         },
