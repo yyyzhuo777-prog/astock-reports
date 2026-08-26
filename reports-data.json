@@ -1,11 +1,11 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-26T20:44:00+08:00",
-    "nextTime": "8/27 08:00",
-    "nextLabel": "盘前"
+    "lastUpdated": "2026-08-27T08:00:00+08:00",
+    "nextTime": "8/27 12:00",
+    "nextLabel": "午盘"
   },
   "header": {
-    "subtitle": "8/26 周三 · 盘后数据 · 截至 15:00"
+    "subtitle": "8/27 周四 · 盘前数据 · 截至 08:00"
   },
   "snapshot": {
     "date": "8/26 周三 盘后",
@@ -79,6 +79,15 @@
   },
   "reports": [
     {
+      "date": "8/27",
+      "weekday": "周四",
+      "summary": "情绪58·英伟达利好·深中华5板·券商+2.77%·缩量1.81万亿·仓位≤35%",
+      "active": true,
+      "morning": "report-0827-morning.html",
+      "noon": "pending",
+      "evening": "pending"
+    },
+    {
       "date": "8/26",
       "weekday": "周三",
       "summary": "情绪52·缩量分化·有色铜最强·券商+3%·深中华5板·汉森断板·成交1.82万亿·仓位≤25%",
@@ -107,23 +116,46 @@
     }
   ],
   "focus": {
-    "title": "明日关注",
+    "title": "今日关注",
     "items": [
-      "英伟达财报结果（凌晨）→AI/算力方向",
-      "深中华A 5→6板能否封住",
-      "成交额能否重回2万亿以上"
+      "英伟达盘后涨4.6%→A股AI算力/光模块开盘反应",
+      "深中华A 5→6板能否封住·决定黄金板块高度",
+      "成交额能否重回1.9万亿以上确认修复",
+      "杰克逊霍尔年会·周五沃什讲话预期"
     ]
   },
   "history": [
     {
       "weekLabel": "2026 第35周（8/24起）",
-      "count": "9份报告",
+      "count": "4天·12份报告",
       "open": true,
       "days": [
         {
+          "date": "08-27",
+          "weekday": "周四",
+          "today": true,
+          "reports": [
+            {
+              "icon": "🌅",
+              "time": "08:00",
+              "url": "report-0827-morning.html"
+            },
+            {
+              "icon": "☀️",
+              "time": "12:00",
+              "pending": true
+            },
+            {
+              "icon": "🌙",
+              "time": "20:30",
+              "pending": true
+            }
+          ]
+        },
+        {
           "date": "08-26",
           "weekday": "周三",
-          "today": true,
+          "today": false,
           "reports": [
             {
               "icon": "🌅",
@@ -191,6 +223,6 @@
   ],
   "footer": {
     "schedule": "自动报告 · 08:00 盘前 · 12:00 午盘 · 20:30 盘后",
-    "updated": "2026-08-26"
+    "updated": "2026-08-27"
   }
 }
