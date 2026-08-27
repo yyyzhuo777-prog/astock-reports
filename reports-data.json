@@ -1,90 +1,90 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-27T08:00:00+08:00",
-    "nextTime": "8/27 12:00",
-    "nextLabel": "午盘"
+    "lastUpdated": "2026-08-27T12:22:00+08:00",
+    "nextTime": "8/27 20:30",
+    "nextLabel": "盘后"
   },
   "header": {
-    "subtitle": "8/27 周四 · 盘前数据 · 截至 08:00"
+    "subtitle": "8/27 周四 · 午盘数据 · 截至 12:00"
   },
   "snapshot": {
-    "date": "8/26 周三 盘后",
+    "date": "8/27 周四 午间",
     "emotion": {
-      "score": 52,
-      "level": "缩量分化",
-      "levelClass": "risk-mid"
+      "score": 72,
+      "level": "放量爆发",
+      "levelClass": "risk-low"
     },
     "metrics": [
       {
         "label": "涨停/跌停",
-        "html": "<span class=\"snap-up\">56</span> / <span class=\"snap-down\">2</span>"
+        "html": "<span class=\"snap-up\">65</span> / <span class=\"snap-down\">3</span>"
       },
       {
         "label": "封板率",
-        "value": "66.67%",
-        "cls": "snap-down"
+        "value": "82%",
+        "cls": "snap-up"
       },
       {
-        "label": "全天成交",
-        "value": "1.82万亿",
-        "cls": "snap-down"
+        "label": "半日成交",
+        "value": "1.35万亿",
+        "cls": "snap-up"
       },
       {
         "label": "上证",
-        "value": "3912",
-        "suffix": "+0.59%",
+        "value": "3936",
+        "suffix": "+0.60%",
         "cls": "snap-up"
       },
       {
         "label": "创业板",
-        "value": "3414",
-        "suffix": "+0.51%",
+        "value": "3466",
+        "suffix": "+1.51%",
         "cls": "snap-up"
       },
       {
         "label": "仓位上限",
-        "value": "≤25%",
-        "cls": "snap-down"
+        "value": "≤40%",
+        "cls": "snap-up"
       }
     ],
     "tags": [
       {
-        "text": "🥇 深中华A 5连板",
+        "text": "🥇 深中华A 6连板",
         "cls": "hot"
       },
       {
-        "text": "💊 汉森6板断板",
+        "text": "💡 神奇制药11天7板",
+        "cls": "hot"
+      },
+      {
+        "text": "💾 半导体算力全线爆发",
+        "cls": "hot"
+      },
+      {
+        "text": "📊 科创50+3.45%",
+        "cls": "hot"
+      },
+      {
+        "text": "⚠️ 阳光电源-11.3%",
         "cls": ""
       },
       {
-        "text": "🔶 有色铜全天最强",
-        "cls": "hot"
-      },
-      {
-        "text": "💰 券商板块+3%",
-        "cls": "hot"
-      },
-      {
-        "text": "⚡ 算电协同新催化",
-        "cls": "hot"
-      },
-      {
-        "text": "⚠️ 今晚英伟达财报",
+        "text": "⚠️ 杰克逊霍尔进行中",
         "cls": ""
       }
     ],
-    "judge": "全天缩量至1.82万亿（连续2日<2万亿），权重护盘但中小票分化。有色铜+大金融双主线（证券+3%居首），汉森制药6板断板→空间龙终结。深中华A 5板接力但属黄金独立线。封板率从午盘78%降至66.67%，午后退潮信号明确。今晚英伟达财报+PCE+沃什讲话三大变量未落地。",
-    "latestLink": "report-0826-evening.html",
-    "latestLabel": "盘后"
+    "judge": "半日放量1.35万亿(较昨日+1208亿)·65涨停/3跌停/封板率82%·英伟达超预期+统计局利润18.5倍+成交放量三重共振·科创50大涨3.45%·资金从防御(银行白酒)向进攻(半导体算力)切换明确。深中华A 6板公司自提示风险·阳光电源-11.3%储能崩塌。午后关键：量能能否维持2.5万亿+。",
+    "latestLink": "report-0827-noon.html",
+    "latestLabel": "午盘"
   },
   "reports": [
     {
       "date": "8/27",
       "weekday": "周四",
-      "summary": "情绪58·英伟达利好·深中华5板·券商+2.77%·缩量1.81万亿·仓位≤35%",
+      "summary": "情绪72·算力爆发·科创50+3.45%·深中华6板·放量1208亿·仓位≤40%",
       "active": true,
       "morning": "report-0827-morning.html",
-      "noon": "pending",
+      "noon": "report-0827-noon.html",
       "evening": "pending"
     },
     {
@@ -116,11 +116,11 @@
     }
   ],
   "focus": {
-    "title": "今日关注",
+    "title": "下午关注",
     "items": [
-      "英伟达盘后涨4.6%→A股AI算力/光模块开盘反应",
-      "深中华A 5→6板能否封住·决定黄金板块高度",
-      "成交额能否重回1.9万亿以上确认修复",
+      "午后量能能否维持→全天2.5万亿+确认反弹延续",
+      "深中华A 6板能否封住→黄金板块高度",
+      "算力/半导体午后分歧→低位PCB/光纤低吸机会",
       "杰克逊霍尔年会·周五沃什讲话预期"
     ]
   },
@@ -143,7 +143,7 @@
             {
               "icon": "☀️",
               "time": "12:00",
-              "pending": true
+              "url": "report-0827-noon.html"
             },
             {
               "icon": "🌙",
