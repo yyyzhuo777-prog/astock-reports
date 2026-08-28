@@ -1,90 +1,90 @@
 {
   "meta": {
-    "lastUpdated": "2026-08-28T08:00:00+08:00",
-    "nextTime": "8/28 12:00",
-    "nextLabel": "午盘"
+    "lastUpdated": "2026-08-28T12:23:00+08:00",
+    "nextTime": "8/28 20:30",
+    "nextLabel": "盘后"
   },
   "header": {
-    "subtitle": "8/28 周五 · 盘前数据 · 截至 08:00"
+    "subtitle": "8/28 周五 · 午盘数据 · 截至 12:00"
   },
   "snapshot": {
-    "date": "8/27 周四 收盘",
+    "date": "8/28 周五 午间",
     "emotion": {
-      "score": 80,
-      "level": "放量普涨",
-      "levelClass": "risk-low"
+      "score": 50,
+      "level": "冲高回落",
+      "levelClass": "risk-mid"
     },
     "metrics": [
       {
         "label": "涨停/跌停",
-        "html": "<span class=\"snap-up\">78</span> / <span class=\"snap-down\">4</span>"
+        "html": "<span class=\"snap-up\">63</span> / <span class=\"snap-down\">2</span>"
       },
       {
         "label": "封板率",
-        "value": "79%",
+        "value": "84%",
         "cls": "snap-up"
       },
       {
-        "label": "全天成交",
-        "value": "2.13万亿",
+        "label": "半日成交",
+        "value": "1.43万亿",
         "cls": "snap-up"
       },
       {
         "label": "上证",
-        "value": "3957",
-        "suffix": "+1.13%",
-        "cls": "snap-up"
+        "value": "3960",
+        "suffix": "+0.08%",
+        "cls": "snap-mid"
       },
       {
         "label": "创业板",
-        "value": "3473",
-        "suffix": "+1.71%",
-        "cls": "snap-up"
+        "value": "3462",
+        "suffix": "-0.32%",
+        "cls": "snap-down"
       },
       {
         "label": "仓位上限",
-        "value": "≤40%",
-        "cls": "snap-up"
+        "value": "≤30%",
+        "cls": "snap-down"
       }
     ],
     "tags": [
       {
-        "text": "🥇 深中华A 6连板",
+        "text": "🥇 深中华A 7连板",
         "cls": "hot"
       },
       {
-        "text": "💡 楚天龙5连板",
+        "text": "💡 海鸥住工/万向德农5板",
         "cls": "hot"
       },
       {
-        "text": "💾 半导体算力全天爆发",
+        "text": "💡 PTFE新风口确认",
         "cls": "hot"
       },
       {
-        "text": "📊 科创50+3.77%",
-        "cls": "hot"
-      },
-      {
-        "text": "⚠️ 大涨后必分化",
+        "text": "📊 半日1.43万亿放量716亿",
         "cls": ""
       },
       {
-        "text": "⚠️ 沃什今晚讲话",
+        "text": "⚠️ 光通信全线分化",
+        "cls": ""
+      },
+      {
+        "text": "⚠️ 沃什今晚22:00讲话",
         "cls": ""
       }
     ],
-    "judge": "全天放量2.13万亿(较昨日+3172亿)·78涨停/4跌停/封板率79%·英伟达超预期+半导体主力净流入176亿共振·科创50暴涨3.77%·资金从防御(银行白酒)向进攻(半导体算力)彻底切换。深中华A 6板独领高度·大涨后次日必分化。今日关键：沃什讲话前谨慎+量能能否维持2万亿+。",
-    "latestLink": "report-0827-evening.html",
-    "latestLabel": "盘后"
+    "judge": "半日成交1.43万亿(放量716亿)·63涨停/2跌停/封板率84%·早盘多线轮动一度涨超1%但10:40后冲高回落·深中华A 7板空间龙确认·但光通信核心(亨通/杭电/长飞)全线回落兑现·热点从硬件→应用→安全→农业轮动过快·沃什今晚22:00讲话前资金趋于谨慎。",
+    "latestLink": "report-0828-noon.html",
+    "latestLabel": "午盘"
   },
   "reports": [
     {
       "date": "8/28",
       "weekday": "周五",
-      "summary": "情绪68·英伟达催化·AI算力主线·深中华6板·放量2.13万亿·仓位≤40%",
+      "summary": "情绪50·冲高回落·深中华7板·光通信分化·PTFE新风口·半日1.43万亿·仓位≤30%",
       "active": true,
       "morning": "report-0828-morning.html",
-      "noon": "pending",
+      "noon": "report-0828-noon.html",
       "evening": "pending"
     },
     {
@@ -125,12 +125,12 @@
     }
   ],
   "focus": {
-    "title": "今日关注",
+    "title": "下午关注",
     "items": [
-      "沃什今晚22:00杰克逊霍尔演讲→全球利率方向关键",
-      "英伟达涨8.74%传导→AI硬件今日高开分化概率大",
-      "深中华A 7板成败→黄金板块情绪风向标",
-      "量能能否维持2万亿+→决定科技主升延续还是冲高回落"
+      "连板梯队午后博弈·深中华A 7板封单强度",
+      "光通信能否企稳·亨通光电下午走向",
+      "PTFE概念扩散持续性·昊华科技2板后表现",
+      "22:00沃什杰克逊霍尔首秀→全球利率方向关键"
     ]
   },
   "history": [
@@ -152,7 +152,7 @@
             {
               "icon": "☀️",
               "time": "12:00",
-              "pending": true
+              "url": "report-0828-noon.html"
             },
             {
               "icon": "🌙",
@@ -254,6 +254,6 @@
   ],
   "footer": {
     "schedule": "自动报告 · 08:00 盘前 · 12:00 午盘 · 20:30 盘后",
-    "updated": "2026-08-28T08:00"
+    "updated": "2026-08-28T12:23"
   }
 }
