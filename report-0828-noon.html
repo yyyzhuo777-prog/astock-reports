@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>A股午盘报告 | 8/28（周五）</title>
+<link rel="stylesheet" href="report-common.css">
+<style>
+  /* 暗色覆盖 */
+  div[style*="fef8f6"],div[style*="fef9ec"],div[style*="f0f7fe"],div[style*="f5f0fe"],div[style*="fbfcfe"],div[style*="fffbe6"]{background:#1c2530!important;color:#e6edf3!important}
+
+/* PC端放大 */
+@media(min-width:1200px){
+body{max-width:1060px!important;padding:32px 48px;font-size:1.05rem}
+.header h1{font-size:2rem}
+.gauge-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+.gauge-item .gauge-value{font-size:2rem}
+.card{padding:20px 24px;margin-bottom:20px}
+.card h2{font-size:1.3rem}
+.stat-row td,.stat-row th{padding:10px 14px;font-size:1.05rem}
+.theme-card{padding:18px 22px}
+.theme-card .theme-name{font-size:1.2rem}
+.msg-item{padding:12px 16px;font-size:1.05rem}
+.warn-box{padding:16px 20px}
+.timeline-item{padding:12px 16px 12px 44px;font-size:1.05rem}
+}
+@media(min-width:1440px){
+body{max-width:1200px!important}
+}
+@media(min-width:1800px){
+body{max-width:1400px!important}
+}
+
+/* 返回顶部 */
+.back-to-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:50%;background:#30363d;border:1px solid #58a6ff;color:#58a6ff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999}
+.back-to-top.show{opacity:1;pointer-events:auto}
+.back-to-top:hover{background:#58a6ff;color:#fff}
+
+/* === TOC 目录导航 === */
+.toc-toggle{position:fixed;left:10px;top:10px;z-index:200;width:34px;height:34px;border-radius:8px;background:rgba(13,17,23,0.9);border:1px solid #30363d;color:#8b949e;font-size:0.95rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.toc-toggle:active{transform:scale(0.92)}
+.toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:201;opacity:0;pointer-events:none;transition:opacity .25s}
+.toc-overlay.active{opacity:1;pointer-events:auto}
+.toc-sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:rgba(13,17,23,0.98);border-right:1px solid #21262d;z-index:202;overflow-y:auto;padding:10px 0;transform:translateX(-100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.toc-sidebar.open{transform:translateX(0)}
+.toc-sidebar .toc-title{padding:10px 14px 8px;font-size:0.78rem;color:#8b949e;font-weight:600;border-bottom:1px solid #21262d;margin-bottom:4px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center}
+.toc-sidebar .toc-close{background:none;border:none;color:#8b949e;font-size:1.1rem;cursor:pointer;padding:2px 6px}
+.toc-sidebar .toc-links{flex:1;overflow-y:auto}
+.toc-sidebar a{display:block;padding:8px 14px;color:rgba(139,148,158,0.9);text-decoration:none;font-size:0.8rem;line-height:1.5;transition:all .15s;border-left:2px solid transparent}
+.toc-sidebar a:hover{color:#e6edf3;background:rgba(48,54,61,0.3)}
+.toc-sidebar a.active{color:#58a6ff;background:rgba(56,139,253,0.08);border-left-color:#58a6ff}
+.toc-sidebar::-webkit-scrollbar{width:3px}
+.toc-sidebar::-webkit-scrollbar-thumb{background:#30363d;border-radius:2px}
+@media(min-width:768px){
+  .toc-toggle{display:none}
+  .toc-overlay{display:none!important}
+  .toc-sidebar{width:160px;transform:translateX(0)}
+  .toc-sidebar .toc-close{display:none}
+  .toc-sidebar a{padding:7px 14px;font-size:0.78rem}
+  body{margin-left:160px!important}
+}
+@media print{
+  .toc-toggle,.toc-overlay,.toc-sidebar,.back-to-top,.toc-sidebar-panel{display:none!important}
+  body{background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .header,.dashboard,.advice-box,.section,.footer{break-inside:avoid;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="toc-toggle" id="tocToggle">☰</div>
+<div class="toc-overlay" id="tocOverlay"></div>
+<nav class="toc-sidebar" id="tocSidebar">
+  <div class="toc-title"><span>📑 目录</span><button class="toc-close" id="tocClose">✕</button></div>
+  <div class="toc-links">
+<a href="#sec-gauge" data-target="sec-gauge">📊 综合评分</a>
+    <a href="#sec-1" data-target="sec-1">📈 上午走势回顾</a>
+    <a href="#sec-2" data-target="sec-2">📊 市场情绪</a>
+    <a href="#sec-3" data-target="sec-3">🔥 主线题材</a>
+    <a href="#sec-4" data-target="sec-4">📌 核心股票</a>
+    <a href="#sec-5" data-target="sec-5">📰 上午重要消息</a>
+    <a href="#sec-6" data-target="sec-6">⚠️ 下午交易风险警告</a>
+    <a href="#sec-7" data-target="sec-7">📅 下午重点关注</a>
+  </div>
+</nav>
+
+<!-- ===== 头部 ===== -->
+<div class="header">
+  <h1>📋 A股午盘报告</h1>
+  <div class="date">8/28（周五）· 数据截至午间收盘 11:30</div>
+  <div class="badge">🤖 AI 自动生成 · 仅供参考</div>
+</div>
+
+<!-- ===== 评分仪表盘 ===== -->
+<!--
+  参数说明：
+  OPPORTUNITY_SCORE / RISK_SCORE / MOOD_SCORE / CONSENSUS_SCORE — 0~100整数
+  *_VS_MORNING — 与盘前对比文案，如 "vs盘前42↑6"
+  *_COLOR — 颜色等级：risk-low(绿) / risk-mid(黄) / risk-high(红) / neutral(蓝)
+-->
+<div class="dashboard" id="sec-gauge">
+  <div class="gauge">
+    <div class="val risk-mid">55 <span class="vs-tag">vs盘前65↓10</span></div>
+    <div class="label">机会评分 /100</div>
+    <div class="bar"><div class="bar-fill bar-risk-mid" data-width="55"></div></div>
+  </div>
+  <div class="gauge">
+    <div class="val risk-high">72 <span class="vs-tag">vs盘前72→</span></div>
+    <div class="label">风险评分 /100</div>
+    <div class="bar"><div class="bar-fill bar-risk-high" data-width="72"></div></div>
+  </div>
+  <div class="gauge">
+    <div class="val risk-mid">50 <span class="vs-tag">vs盘前65↓15</span></div>
+    <div class="label">情绪温度 /100</div>
+    <div class="bar"><div class="bar-fill bar-risk-mid" data-width="50"></div></div>
+  </div>
+  <div class="gauge">
+    <div class="val risk-mid">45 <span class="vs-tag">vs盘前55↓10</span></div>
+    <div class="label">资金共识度 /100</div>
+    <div class="bar"><div class="bar-fill bar-risk-mid" data-width="45"></div></div>
+  </div>
+</div>
+
+<!-- ===== 综合建议 ===== -->
+<!--
+  参数说明：
+  ADVICE — 综合建议文字
+  POSITION_LIMIT — 仓位上限，如 "≤ 30%"
+  POSITION_NOTE — 仓位调整说明
+  CORE_LOGIC — 核心逻辑段落
+-->
+<div class="advice-box" id="sec-0">
+  <strong>📌 综合建议：</strong>上午冲高回落信号明确，昨日核心标的今日高位分化，下午以防守为主，严控仓位。<br>
+  <strong>🎯 仓位上限：</strong>≤30%（较盘前40%下调10%，沃什讲话前控制敞口）<br>
+  <strong>📝 核心逻辑：</strong>早盘受AI应用端/农业/PTFE多线轮动带动一度涨超1%，但10:40后持续回落。昨日光通信龙头亨通光电-1.92%、杭电股份炸板，高位分歧加大。下午关注深中华A 7板封单强度，若尾盘炸板则情绪退潮信号确认。沃什今晚22:00讲话是最大外部变量，讲话前不宜重仓博弈。
+</div>
+
+<!-- ===== 上午走势回顾（v2.0 新增） ===== -->
+<!--
+  参数说明：
+  TIMELINE_ITEMS — 时间线节点列表，每个节点包含：
+    - time: 时间标签，如 "9:30 小幅高开"
+    - event: 事件描述
+    - color: red=利好(红)/green=利空(绿)/yellow=中性/空(灰色)
+    注意：A股红涨绿跌，利好用red，利空用green
+  
+  HTML格式示例（重复多行）：
+    <div class="timeline-item red">
+      <div class="tl-time">9:30 小幅高开</div>
+      <div class="tl-event">三大指数微幅高开，上证+0.15%，创业板+0.35%</div>
+    </div>
+    <div class="timeline-item green">
+      <div class="tl-time">10:00 断板回落</div>
+      <div class="tl-event">科森科技冲板失败，回落-2.1%</div>
+    </div>
+-->
+<div class="section" id="sec-1">
+  <div class="section-title">📈 上午走势回顾</div>
+  <div class="card">
+    <div class="timeline">
+    <div class="timeline-item green">
+      <div class="tl-time">9:30 集体低开</div>
+      <div class="tl-event">三大指数低开，上证-0.16%、深证-0.21%、创业板-0.56%，高开预期落空</div>
+    </div>
+    <div class="timeline-item red">
+      <div class="tl-time">9:35 快速翻红</div>
+      <div class="tl-event">深中华A竞价高开7.4%秒封涨停，带动黄金/农业板块拉升，指数快速翻红</div>
+    </div>
+    <div class="timeline-item red">
+      <div class="tl-time">9:39 空间龙确认</div>
+      <div class="tl-event">深中华A封死7连板，海鸥住工5板跟随，连板梯队全面晋级</div>
+    </div>
+    <div class="timeline-item red">
+      <div class="tl-time">10:00 AI应用端补涨</div>
+      <div class="tl-event">赛富时财报+21%催化，鼎捷数智20cm涨停、天娱数科一字板，网络安全板块拉升（麒麟信安20cm/中安科/天融信涨停）</div>
+    </div>
+    <div class="timeline-item red">
+      <div class="tl-time">10:31 量能破万亿</div>
+      <div class="tl-event">沪深两市成交突破1万亿，较昨日同期放量，市场交投活跃</div>
+    </div>
+    <div class="timeline-item red">
+      <div class="tl-time">10:40 阶段高点</div>
+      <div class="tl-event">创业板指盘中涨超1%，上证触及3970高点，PTFE/农业/超节点多线开花</div>
+    </div>
+    <div class="timeline-item green">
+      <div class="tl-time">11:00 冲高回落</div>
+      <div class="tl-event">创业板率先下挫，亨通光电-1.92%/杭电股份炸板，光通信全线回落</div>
+    </div>
+    <div class="timeline-item green">
+      <div class="tl-time">11:15 医药杀跌</div>
+      <div class="tl-event">CRO/疫苗/生物制品板块集体走低，键凯科技/万邦医药大跌，医药板块拖累指数</div>
+    </div>
+    <div class="timeline-item yellow">
+      <div class="tl-time">11:30 午间收盘</div>
+      <div class="tl-event">沪指+0.08%，深证-0.14%，创业板-0.32%。半日1.43万亿，涨跌比3197:2196，63涨停/2跌停</div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 模块一：市场情绪 ===== -->
+<!--
+  参数说明：
+  LIMIT_UP / LIMIT_DOWN / SEAL_RATE — 涨停家数/跌停家数/封板率
+  MAX_BOARD / PROMOTE_RATE / HALF_VOLUME — 最高连板/1进2晋级率/半日成交
+  情绪诊断7行（重复格式）：
+    - DIAGNOSIS_1_LABEL ~ DIAGNOSIS_7_LABEL — 诊断项名称
+    - DIAGNOSIS_1_VALUE ~ DIAGNOSIS_7_VALUE — 诊断值
+    - DIAGNOSIS_1_COLOR — up/down/mid
+  
+  半日收盘指数（重复多行）：
+    INDEX_ROWS — 格式如：
+    <div class="row"><span>上证综指</span><span class="up">3305.28 +0.21%</span></div>
+-->
+<div class="section" id="sec-2">
+  <div class="section-title">📊 市场情绪 · 半日终局</div>
+  
+  <div class="stat-grid">
+    <div class="stat-item">
+      <div class="num up">63</div>
+      <div class="desc">涨停家数</div>
+    </div>
+    <div class="stat-item">
+      <div class="num down">2</div>
+      <div class="desc">跌停家数</div>
+    </div>
+    <div class="stat-item">
+      <div class="num mid">84%</div>
+      <div class="desc">封板率</div>
+    </div>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-item">
+      <div class="num up">7板</div>
+      <div class="desc">最高连板</div>
+    </div>
+    <div class="stat-item">
+      <div class="num down">~50%</div>
+      <div class="desc">1进2晋级率</div>
+    </div>
+    <div class="stat-item">
+      <div class="num" style="color:#d29922">1.43万亿</div>
+      <div class="desc">半日成交</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💡 半日情绪诊断</div>
+    <div class="row"><span>涨停家数</span><span class="mid">63只（vs昨日78↓15）封板率84%↑</span></div>
+    <div class="row"><span>跌停家数</span><span class="up">2只（vs昨日4↓）恐慌减轻</span></div>
+    <div class="row"><span>连板高度</span><span class="up">深中华A 7板·空间龙晋级</span></div>
+    <div class="row"><span>赚钱效应</span><span class="mid">59.28%（vs昨日58.6%持平）</span></div>
+    <div class="row"><span>量能</span><span class="up">1.43万亿·放量716亿·积极</span></div>
+    <div class="row"><span>热点集中度</span><span class="down">分散·硬件→应用→安全→农业轮动过快</span></div>
+    <div class="row"><span>高位分歧</span><span class="down">亨通-1.92%/杭电炸板/长飞-0.53%·昨日核心今日分化</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 半日收盘指数</div>
+    <div class="row"><span>上证综指</span><span class="up">3959.64 +0.08%</span></div>
+    <div class="row"><span>深证成指</span><span class="down">14029.83 -0.14%</span></div>
+    <div class="row"><span>创业板指</span><span class="down">3462.07 -0.32%</span></div>
+    <div class="row"><span>北证50</span><span class="down">1070.09 -0.45%</span></div>
+  </div>
+</div>
+
+<!-- ===== 模块二：主线题材 ===== -->
+<!--
+  参数说明：
+  THEME_CARDS — 5-6个题材卡片，每个格式：
+    <div class="card">
+      <div class="card-title">
+        <span>① 题材名称</span>
+        <span class="tag tag-hot">标签</span>
+      </div>
+      <div class="theme-block">
+        <div class="theme-logic"><strong>半日表现：</strong>表现描述</div>
+        <div class="theme-stocks"><strong>核心标的：</strong><span>股票名 代码</span>（涨跌幅）</div>
+        <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐~⭐⭐⭐⭐⭐ 判断</div>
+      </div>
+    </div>
+  
+  标签可选：tag-hot(红) / tag-new(绿) / tag-warn(黄) / tag-info(蓝) / tag-up(绿) / tag-down(红)
+-->
+<div class="section" id="sec-3">
+  <div class="section-title">🔥 主线题材 · 半日表现</div>
+
+  <div class="card">
+    <div class="card-title">
+      <span>① AI算力/光通信</span>
+      <span class="tag tag-warn">高位分化</span>
+    </div>
+    <div class="theme-block">
+      <div class="theme-logic"><strong>半日表现：</strong>低开后快速拉升，10:40后全线回落。亨通光电-1.92%、长飞光纤-0.53%、杭电股份炸板+3.56%。英伟达利好兑现+获利盘兑现。</div>
+      <div class="theme-stocks"><strong>核心标的：</strong><span>亨通光电 600487</span>（-1.92%）、<span>杭电股份 603618</span>（+3.56%炸板）、<span>长飞光纤 601869</span>（-0.53%）</div>
+      <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐⭐⭐ 产业逻辑未变但短期兑现压力大，下午看亨通能否企稳翻红</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span>② PTFE/氟化工</span>
+      <span class="tag tag-hot">新风口</span>
+    </div>
+    <div class="theme-block">
+      <div class="theme-logic"><strong>半日表现：</strong>英伟达下一代服务器确定PTFE为正交背板选材，昊华科技涨停2连板（国内市占超90%），沃特股份同步涨停。从概念走向确认。</div>
+      <div class="theme-stocks"><strong>核心标的：</strong><span>昊华科技 600378</span>（+10.01%涨停）、<span>沃特股份 002886</span>（涨停）</div>
+      <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐⭐⭐⭐ 产业逻辑硬+业绩兑现，新风口确认，但昊华2板后下午需防分歧</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span>③ 农业种植/粮食安全</span>
+      <span class="tag tag-hot">反复活跃</span>
+    </div>
+    <div class="theme-block">
+      <div class="theme-logic"><strong>半日表现：</strong>万向德农9天6板涨停封死，金健米业+7.05%（公司发异动公告提示风险），新赛股份2连板。超强厄尔尼诺预期持续发酵。</div>
+      <div class="theme-stocks"><strong>核心标的：</strong><span>万向德农 600371</span>（+10.01%涨停）、<span>金健米业 600127</span>（+7.05%）、<span>新赛股份 600540</span>（2连板）</div>
+      <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐⭐⭐⭐ 梯队完整但金健米业异动公告后分歧加大</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span>④ 黄金/贵金属</span>
+      <span class="tag tag-info">空间龙</span>
+    </div>
+    <div class="theme-block">
+      <div class="theme-logic"><strong>半日表现：</strong>深中华A竞价高开7.4%秒封，7连板空间龙确认。湖南黄金/莱绅通灵跟随。COMEX黄金4664美元支撑。</div>
+      <div class="theme-stocks"><strong>核心标的：</strong><span>深中华A 000017</span>（+9.99%涨停7连板）、<span>湖南黄金 002155</span>（跟随）</div>
+      <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐⭐⭐⭐ 7板是情绪风向标，封单强度决定下午做多信心</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span>⑤ 网络安全</span>
+      <span class="tag tag-new">CrowdStrike催化</span>
+    </div>
+    <div class="theme-block">
+      <div class="theme-logic"><strong>半日表现：</strong>美股CrowdStrike财报超预期+20.5%，AI攻防升级催化。麒麟信安20cm涨停，中安科/天融信涨停。</div>
+      <div class="theme-stocks"><strong>核心标的：</strong><span>麒麟信安 688152</span>（20cm涨停）、<span>中安科 600654</span>（+10%）、<span>天融信 002212</span>（+10%）</div>
+      <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐⭐⭐ AI安全逻辑硬，但A股网安标的弹性偏弱，持续性待观察</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span>⑥ AI应用端</span>
+      <span class="tag tag-new">赛富时催化</span>
+    </div>
+    <div class="theme-block">
+      <div class="theme-logic"><strong>半日表现：</strong>赛富时财报超预期+21%，AI应用端补涨。鼎捷数智20cm涨停，天娱数科一字板。硬件→应用的轮动启动。</div>
+      <div class="theme-stocks"><strong>核心标的：</strong><span>鼎捷数智 300378</span>（+19.99%涨停）、<span>天娱数科 002354</span>（一字涨停）</div>
+      <div class="theme-stocks" style="margin-top:4px"><strong>午后预判：</strong>⭐⭐⭐ 补涨逻辑+中信建投看好AI办公赛道，但A股应用端弹性不如硬件</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 模块三：核心股票 ===== -->
+<!--
+  参数说明：
+  TOP8_ROWS — TOP8人气股行列表，每行格式：
+    <div class="row">
+      <div><span class="name">① 股票名</span><br><span class="code">代码 · 简介</span></div>
+      <div class="right"><span class="up/down">涨跌幅</span><br><span style="font-size:.72rem;color:#8b949e">备注</span></div>
+    </div>
+  
+  LADDER_ROWS — 连板梯队行列表
+  
+  OPERATION_BLOCKS — 按主线分类操作思路，每块格式：
+    <div style="margin-bottom:10px">
+      <div style="font-weight:700;color:#f85149;font-size:.84rem;margin-bottom:4px">▸ 板块名 — 策略</div>
+      <div class="row"><span>股票名 代码</span><span class="up/down/mid">操作建议</span></div>
+    </div>
+  
+  AVOID_ROWS — 避雷名单行列表
+-->
+<div class="section" id="sec-4">
+  <div class="section-title">📌 核心股票 · 午间快照</div>
+
+  <div class="card">
+    <div class="card-title">🏆 人气股 TOP 8<span class="tag tag-info" style="margin-left:auto">东财/同花顺</span></div>
+    <div class="row">
+      <div><span class="name">① 深中华A</span><br><span class="code">000017 · 黄金珠宝空间龙</span></div>
+      <div class="right"><span class="up">+9.99% 涨停</span><br><span style="font-size:.72rem;color:#8b949e">7连板·封单强</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">② 昊华科技</span><br><span class="code">600378 · PTFE龙头</span></div>
+      <div class="right"><span class="up">+10.01% 涨停</span><br><span style="font-size:.72rem;color:#8b949e">2连板·国内市占90%+</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">③ 鼎捷数智</span><br><span class="code">300378 · AI应用端</span></div>
+      <div class="right"><span class="up">+19.99% 涨停</span><br><span style="font-size:.72rem;color:#8b949e">20cm·赛富时催化</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">④ 万向德农</span><br><span class="code">600371 · 种业龙头</span></div>
+      <div class="right"><span class="up">+10.01% 涨停</span><br><span style="font-size:.72rem;color:#8b949e">9天6板·强势</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">⑤ 海鸥住工</span><br><span class="code">002084 · 控制权变更</span></div>
+      <div class="right"><span class="up">+10.06% 涨停</span><br><span style="font-size:.72rem;color:#8b949e">5连板</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">⑥ 星网锐捷</span><br><span class="code">002396 · 超节点</span></div>
+      <div class="right"><span class="up">+10.01% 涨停</span><br><span style="font-size:.72rem;color:#8b949e">2连板</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">⑦ 杭电股份</span><br><span class="code">603618 · 光通信</span></div>
+      <div class="right"><span class="mid">+3.56% 炸板</span><br><span style="font-size:.72rem;color:#8b949e">触及涨停后回落</span></div>
+    </div>
+    <div class="row">
+      <div><span class="name">⑧ 亨通光电</span><br><span class="code">600487 · 光通信龙头</span></div>
+      <div class="right"><span class="down">-1.92%</span><br><span style="font-size:.72rem;color:#8b949e">冲高回落·兑现压力</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔗 午间连板梯队</div>
+    <div class="row">
+      <div><span class="name">🥇 7连板</span></div>
+      <div class="right">深中华A 000017（黄金有色）</div>
+    </div>
+    <div class="row">
+      <div><span class="name">🥈 5连板</span></div>
+      <div class="right">海鸥住工 002084 / 万向德农 600371</div>
+    </div>
+    <div class="row">
+      <div><span class="name">3连板</span></div>
+      <div class="right">捷荣技术 002855（消费电子）</div>
+    </div>
+    <div class="row">
+      <div><span class="name">2连板</span></div>
+      <div class="right">昊华科技/星网锐捷/新农股份/锦龙股份/千金药业/新赛股份</div>
+    </div>
+    <div class="row">
+      <div><span class="name">⚠ 炸板观察</span></div>
+      <div class="right"><span class="down">杭电股份（3板失败）/青山纸业（4板失败）/楚天龙（6板失败）</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎯 下午操作思路</div>
+    <div style="margin-bottom:10px">
+      <div style="font-weight:700;color:#f85149;font-size:.84rem;margin-bottom:4px">▸ 光通信 — 高位兑现，不追</div>
+      <div class="row"><span>亨通光电 600487</span><span class="down">-1.92%·兑现压力·下午看能否企稳</span></div>
+      <div class="row"><span>杭电股份 603618</span><span class="down">炸板+3.56%·3连板失败·短线出局</span></div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-weight:700;color:#f85149;font-size:.84rem;margin-bottom:4px">▸ PTFE — 新风口确认，低位可参与</div>
+      <div class="row"><span>昊华科技 600378</span><span class="up">2板涨停·龙头·下午防分歧</span></div>
+      <div class="row"><span>沃特股份 002886</span><span class="up">涨停跟随·弹性标的</span></div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-weight:700;color:#f85149;font-size:.84rem;margin-bottom:4px">▸ 农业 — 梯队强但分歧加大</div>
+      <div class="row"><span>万向德农 600371</span><span class="up">9天6板涨停·强·但金健发异动公告</span></div>
+      <div class="row"><span>金健米业 600127</span><span class="mid">+7.05%但未封板·高位分歧</span></div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-weight:700;color:#f85149;font-size:.84rem;margin-bottom:4px">▸ 黄金 — 深中华A是风向标</div>
+      <div class="row"><span>深中华A 000017</span><span class="up">7板封单强度=下午情绪方向</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#f8514944">
+    <div class="card-title">🚫 避雷名单 · 午间更新</div>
+    <div class="row"><span>阳光电源 300274</span><span class="down">光伏资金持续出逃·远离</span></div>
+    <div class="row"><span>中际旭创 300308</span><span class="down">CPO高位兑现压力</span></div>
+    <div class="row"><span>通宇通讯 002792</span><span class="down">中报由盈转亏·基本面恶化</span></div>
+    <div class="row"><span>信维通信 300136</span><span class="down">-2.19%·MLCC概念退潮</span></div>
+    <div class="row"><span>楚天龙 003040</span><span class="down">-2.03%·5连板炸板·情绪退潮信号</span></div>
+  </div>
+</div>
+
+<!-- ===== 上午重要消息（v2.0 位置调整：模块三后、模块四前） ===== -->
+<!--
+  参数说明：
+  NEWS_ITEMS — 消息列表，每条格式：
+    <li>🏛️ <strong>标题：</strong>内容
+      <span class="src">来源：来源名</span></li>
+-->
+<div class="section" id="sec-5">
+  <div class="section-title">📰 上午重要消息</div>
+  <div class="card">
+    <ul class="msg-list">
+      <li>🏛️ <strong>发改委：全链条推动集成电路关键核心技术攻关取得决定性突破</strong> — 上半年已披露财报上市公司营收同比+12.8%，净利润+99%。晶圆代工产能利用率90%以上。
+        <span class="src">来源：发改委 8/28</span></li>
+      <li>🏛️ <strong>发改委：加快投放资金，推动"六张网""两重"建设</strong> — 聚焦算力网/新型电网/新一代通信网三网融合，建立"2+3+N"协调机制。
+        <span class="src">来源：发改委 8/28</span></li>
+      <li>💰 <strong>赛富时（Salesforce）财报超预期涨超21%</strong> — AI应用端催化，A股鼎捷数智/天娱数科受益。
+        <span class="src">来源：财联社 8/28</span></li>
+      <li>💰 <strong>CrowdStrike财报超预期涨20.5%</strong> — AI攻防升级驱动网络安全需求，A股麒麟信安/中安科/天融信受益。
+        <span class="src">来源：第一财经 8/28</span></li>
+      <li>⚠️ <strong>金健米业异动公告：超强厄尔尼诺对实际经营影响存在较大不确定性</strong> — 提示投资者理性看待。
+        <span class="src">来源：金健米业公告 8/28</span></li>
+      <li>⛽ <strong>国内成品油24时调价窗口开启</strong> — 预计汽柴油价格上调360元/吨，92号汽油+0.28元/升。
+        <span class="src">来源：卓创资讯 8/28</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== 模块四：交易风险警告 ===== -->
+<!--
+  参数说明：
+  HIGH_RISK_ITEMS — 🔴高位风险列表
+  WATCH_ITEMS — 🟡午后关注列表
+  SCHEDULE_ITEMS — 🟡本周不确定性列表（可选，有则显示）
+  POSITION_ROWS — 仓位纪律行列表
+-->
+<div class="section" id="sec-6">
+  <div class="section-title">⚠️ 下午交易风险警告</div>
+  
+  <div class="warn-card">
+    <div class="warn-title">🔴 高位风险</div>
+    <ul>
+      <li>深中华A 7板→若下午炸板则情绪退潮确认，连板梯队全线承压</li>
+      <li>光通信全线分化（亨通-1.92%/杭电炸板），昨日核心今日兑现，下午可能加剧</li>
+      <li>沃什今晚22:00杰克逊霍尔首秀→9月加息预期44%，偏鹰则全球风险资产承压</li>
+      <li>连续放量大涨后获利盘巨大（昨日2.13万亿），冲高回落若延续则下午加速调整</li>
+    </ul>
+  </div>
+
+  <div class="warn-card">
+    <div class="warn-title">🟡 午后关注</div>
+    <ul>
+      <li>下午量能：半日1.43万亿，全天预计2.8万亿左右，若缩量至2.5万亿以下需警惕</li>
+      <li>深中华A封单变化：若封单持续减少→短线资金犹豫→情绪降温</li>
+      <li>PTFE概念下午能否扩散：昊华科技/沃特股份是否持续走强</li>
+      <li>农业板块金健米业能否回封：异动公告后的市场态度</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-color:#d2992244">
+    <div class="card-title" style="color:#d29922">📋 下午仓位与操作纪律</div>
+    <div class="row"><span>总仓位</span><span class="down">≤30%（较盘前40%下调）</span></div>
+    <div class="row"><span>连板股</span><span class="down">≤10%·不接力3板以上</span></div>
+    <div class="row"><span>止损</span><span class="down">日内亏损超2%立即止损</span></div>
+    <div class="row"><span>策略</span><span class="mid">沃什讲话前防守优先·只做确定性低位1进2</span></div>
+  </div>
+</div>
+
+<!-- ===== 下午重点关注 ===== -->
+<!--
+  参数说明：
+  FOCUS_ROWS — 下午关注日程行列表，每行格式：
+    <div class="row"><span>时间段</span><span class="up/mid/down">事项描述</span></div>
+-->
+<div class="section" id="sec-7">
+  <div class="section-title">📅 下午重点关注</div>
+  <div class="card">
+    <div class="row"><span>13:00-13:30</span><span class="mid">连板梯队午后开盘博弈·深中华A 7板封单</span></div>
+    <div class="row"><span>14:00-14:30</span><span class="mid">量能观测·半日1.43万亿能否延续</span></div>
+    <div class="row"><span>14:30-15:00</span><span class="mid">尾盘资金动向·机构是否减仓过周末</span></div>
+    <div class="row"><span>22:00</span><span class="down">美联储主席沃什杰克逊霍尔首秀·全球利率方向关键</span></div>
+    <div class="row"><span>24:00</span><span class="mid">国内成品油调价落地·预计上调360元/吨</span></div>
+  </div>
+</div>
+
+<!-- ===== 尾部 ===== -->
+<div class="footer">
+  <p>📊 数据来源：stock-data-skill（腾讯行情）· 财联社 · 同花顺 · 东方财富 · 第一财经 · 证券时报 · 发改委</p>
+  <p>⏰ 数据截至：8/2811:30午间收盘</p>
+  <p style="margin-top:8px;color:#f85149">⚠️ 免责声明：本报告由AI根据公开信息自动生成，仅供学习参考，不构成任何投资建议。股市有风险，入市需谨慎。</p>
+  <p style="margin-top:6px">🤖 clawbot noon report v2.0</p>
+  <p style="margin-top:10px"><a href="index.html" style="display:inline-block;padding:8px 20px;background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid rgba(88,166,255,.3);border-radius:18px;font-size:.82rem;font-weight:600;text-decoration:none">← 返回导航页</a></p>
+</div>
+
+<!-- 返回顶部按钮 -->
+<div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+// 仪表盘入场动画
+(function(){
+  setTimeout(function(){
+    document.querySelectorAll('.gauge .bar-fill[data-width]').forEach(function(b){b.style.width=b.dataset.width+'%'});
+    document.querySelectorAll('.gauge .val').forEach(function(v){
+      if(v.innerHTML!==v.textContent)return;
+      var t=parseInt(v.textContent);if(isNaN(t))return;v.textContent='0';
+      var s=performance.now();
+      (function a(n){var p=Math.min((n-s)/900,1);var e=1-Math.pow(1-p,3);v.textContent=Math.round(t*e);if(p<1)requestAnimationFrame(a)})(s);
+    });
+  },300);
+})();
+// 返回顶部按钮显隐
+(function(){
+  var btn=document.getElementById('backToTop');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>300){btn.classList.add('show')}else{btn.classList.remove('show')}
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var t=document.getElementById('tocToggle'),s=document.getElementById('tocSidebar'),o=document.getElementById('tocOverlay'),c=document.getElementById('tocClose');
+  if(!s)return;
+  function op(){s.classList.add('open');o.classList.add('active')}
+  function cl(){s.classList.remove('open');o.classList.remove('active')}
+  if(t)t.addEventListener('click',function(){s.classList.contains('open')?cl():op()});
+  if(c)c.addEventListener('click',cl);
+  if(o)o.addEventListener('click',cl);
+  s.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(innerWidth<768)cl()})});
+  var ls=s.querySelectorAll('a[data-target]'),ss=[];
+  ls.forEach(function(a){var e=document.getElementById(a.dataset.target);if(e)ss.push({e:e,a:a})});
+  function up(){var y=scrollY+80,cur=null;ss.forEach(function(x){if(x.e.offsetTop<=y)cur=x});ls.forEach(function(a){a.classList.remove('active')});if(cur){cur.a.classList.add('active');cur.a.scrollIntoView&&cur.a.scrollIntoView({block:'nearest'})}}
+  addEventListener('scroll',up,{passive:true});up();
+})();
+</script>
+</body>
+</html>
